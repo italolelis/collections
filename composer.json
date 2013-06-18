@@ -1,0 +1,23 @@
+{
+    "name": "easyframework/collections",
+    "description": "Easy Framework Collection Component",
+    "type": "library",
+    "license": "MIT",
+    "keywords": ["framework", "easy", "generics", "collection"],
+    "homepage": "http://easyframework.net/",
+    "authors": [
+        {
+            "name": "Ítalo Lelis de Vietro",
+            "email": "italolelis@lellysinformatica.com"
+        }
+    ],
+    "require": {
+        "php": ">=5.3.14",
+        "easyframework/generics": "2.1.*"
+    },
+    "autoload": {
+        "psr-0": {
+            "Easy\\Collections": ""
+        }
+    }
+}
