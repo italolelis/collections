@@ -40,7 +40,7 @@ Lets continue with the exemple above and count how many elements we have!
 
     echo $colletion->count();
 
-Great, now we now how to run through a collection and how to count it, but these are pretty simple things to do, so lets sort them:
+Great, now we know how to run through a collection and how to count it, but these are pretty simple things to do, so lets sort them:
 
     $collection->sort(); //by default the sort is by the keys
     
