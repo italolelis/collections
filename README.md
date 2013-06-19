@@ -3,7 +3,7 @@ Collections
 
 Collections Abstraction library for PHP
 
-What it is?
+What is it?
 ----------
 The Collection library is one of the most useful things that many modern languages has, but for some reason PHP doesn't has a built in collection layer.
 
@@ -40,7 +40,7 @@ Lets continue with the exemple above and count how many elements we have!
 
     echo $colletion->count();
 
-Great, now we now how to run through a collection and how to count it, but these are pretty simple things to do, so lets sort them:
+Great, now we know how to run through a collection and how to count it, but these are pretty simple things to do, so lets sort them:
 
     $collection->sort(); //by default the sort is by the keys
     
