@@ -23,7 +23,7 @@ abstract class CollectionBase extends Enumerable implements CollectionInterface,
     }
 
     /**
-     * @{inheritdoc}
+     * {@inheritdoc}
      */
     public function count()
     {
@@ -31,7 +31,7 @@ abstract class CollectionBase extends Enumerable implements CollectionInterface,
     }
 
     /**
-     * @{inheritdoc}
+     * {@inheritdoc}
      */
     public function clear()
     {
@@ -39,7 +39,7 @@ abstract class CollectionBase extends Enumerable implements CollectionInterface,
     }
 
     /**
-     * @{inheritdoc}
+     * {@inheritdoc}
      */
     public function contains($item)
     {
@@ -47,7 +47,7 @@ abstract class CollectionBase extends Enumerable implements CollectionInterface,
     }
 
     /**
-     * @{inheritdoc}
+     * {@inheritdoc}
      */
     public function IsEmpty()
     {
@@ -75,7 +75,7 @@ abstract class CollectionBase extends Enumerable implements CollectionInterface,
     }
 
     /**
-     * @{inheritdoc}
+     * {@inheritdoc}
      */
     public function exists(Closure $p)
     {
@@ -88,7 +88,7 @@ abstract class CollectionBase extends Enumerable implements CollectionInterface,
     }
 
     /**
-     * @{inheritdoc}
+     * {@inheritdoc}
      */
     public function filter(Closure $p)
     {
@@ -96,7 +96,7 @@ abstract class CollectionBase extends Enumerable implements CollectionInterface,
     }
 
     /**
-     * @{inheritdoc}
+     * {@inheritdoc}
      */
     public function forAll(Closure $p)
     {
@@ -110,7 +110,7 @@ abstract class CollectionBase extends Enumerable implements CollectionInterface,
     }
 
     /**
-     * @{inheritdoc}
+     * {@inheritdoc}
      */
     public function map(Closure $func)
     {
@@ -118,7 +118,7 @@ abstract class CollectionBase extends Enumerable implements CollectionInterface,
     }
 
     /**
-     * @{inheritdoc}
+     * {@inheritdoc}
      */
     public function partition(Closure $p)
     {
@@ -134,7 +134,7 @@ abstract class CollectionBase extends Enumerable implements CollectionInterface,
     }
 
     /**
-     * @{inheritdoc}
+     * {@inheritdoc}
      */
     public function matching(Criteria $criteria)
     {

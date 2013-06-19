@@ -17,8 +17,15 @@ use OutOfRangeException;
 class Collection extends CollectionBase implements ListInterface
 {
 
+    /**
+     * @var ComparerInterface
+     */
     private $defaultComparer;
 
+    /**
+     * Gets the default comparer for this collection
+     * @return ComparerInterface
+     */
     public function getDefaultComparer()
     {
         if ($this->defaultComparer === null) {
@@ -27,14 +34,19 @@ class Collection extends CollectionBase implements ListInterface
         return $this->defaultComparer;
     }
 
-    public function setDefaultComparer($defaultComparer)
+    /**
+     * Sets the default comparer for this collection
+     * @param ComparerInterface $defaultComparer
+     * @return \Easy\Collections\Collection
+     */
+    public function setDefaultComparer(ComparerInterface $defaultComparer)
     {
         $this->defaultComparer = $defaultComparer;
         return $this;
     }
 
     /**
-     * @{inheritdoc}
+     * {@inheritdoc}
      */
     public function offsetExists($offset)
     {
@@ -48,7 +60,7 @@ class Collection extends CollectionBase implements ListInterface
     }
 
     /**
-     * @{inheritdoc}
+     * {@inheritdoc}
      */
     public function offsetGet($offset)
     {
@@ -56,7 +68,7 @@ class Collection extends CollectionBase implements ListInterface
     }
 
     /**
-     * @{inheritdoc}
+     * {@inheritdoc}
      */
     public function offsetSet($offset, $value)
     {
@@ -70,7 +82,7 @@ class Collection extends CollectionBase implements ListInterface
     }
 
     /**
-     * @{inheritdoc}
+     * {@inheritdoc}
      */
     public function offsetUnset($offset)
     {
@@ -78,7 +90,7 @@ class Collection extends CollectionBase implements ListInterface
     }
 
     /**
-     * @{inheritdoc}
+     * {@inheritdoc}
      */
     public function add($item)
     {
@@ -86,7 +98,7 @@ class Collection extends CollectionBase implements ListInterface
     }
 
     /**
-     * @{inheritdoc}
+     * {@inheritdoc}
      */
     public function addRange($items)
     {
@@ -94,7 +106,7 @@ class Collection extends CollectionBase implements ListInterface
     }
 
     /**
-     * @{inheritdoc}
+     * {@inheritdoc}
      */
     public function IndexOf($item, $start = null, $length = null)
     {
@@ -102,7 +114,7 @@ class Collection extends CollectionBase implements ListInterface
     }
 
     /**
-     * @{inheritdoc}
+     * {@inheritdoc}
      */
     public function LastIndexOf($item, $start = null, $length = null)
     {
@@ -110,7 +122,7 @@ class Collection extends CollectionBase implements ListInterface
     }
 
     /**
-     * @{inheritdoc}
+     * {@inheritdoc}
      */
     public function Insert($index, $item)
     {
@@ -129,7 +141,7 @@ class Collection extends CollectionBase implements ListInterface
     }
 
     /**
-     * @{inheritdoc}
+     * {@inheritdoc}
      */
     public function remove($item)
     {
@@ -141,7 +153,7 @@ class Collection extends CollectionBase implements ListInterface
     }
 
     /**
-     * @{inheritdoc}
+     * {@inheritdoc}
      */
     public function removeAt($index)
     {
@@ -160,7 +172,7 @@ class Collection extends CollectionBase implements ListInterface
     }
 
     /**
-     * @{inheritdoc}
+     * {@inheritdoc}
      */
     public function allIndexesOf($item)
     {
@@ -168,7 +180,7 @@ class Collection extends CollectionBase implements ListInterface
     }
 
     /**
-     * @{inheritdoc}
+     * {@inheritdoc}
      */
     public function elementAt($index)
     {

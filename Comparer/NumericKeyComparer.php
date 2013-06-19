@@ -6,9 +6,15 @@ namespace Easy\Collections\Comparer;
 
 use Easy\Collections\Generic\ComparerInterface;
 
+/**
+ * Represents a numeric key comparison operation that uses specific case and culture-based or ordinal comparison rules.
+ */
 class NumericKeyComparer implements ComparerInterface
 {
 
+    /**
+     * {@inheritdoc}
+     */
     public function compare($x, $y)
     {
         if ($x < $y) {

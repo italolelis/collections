@@ -7,11 +7,14 @@ namespace Easy\Collections;
 use Easy\Collections\Generic\ComparerInterface;
 use InvalidArgumentException;
 
+/**
+ * Represents a collection of keys and values.
+ */
 class Dictionary extends CollectionBase implements DictionaryInterface
 {
 
     /**
-     * @{inheritdoc}
+     * {@inheritdoc}
      */
     public function offsetExists($offset)
     {
@@ -19,7 +22,7 @@ class Dictionary extends CollectionBase implements DictionaryInterface
     }
 
     /**
-     * @{inheritdoc}
+     * {@inheritdoc}
      */
     public function offsetGet($offset)
     {
@@ -30,7 +33,7 @@ class Dictionary extends CollectionBase implements DictionaryInterface
     }
 
     /**
-     * @{inheritdoc}
+     * {@inheritdoc}
      */
     public function offsetSet($offset, $value)
     {
@@ -38,7 +41,7 @@ class Dictionary extends CollectionBase implements DictionaryInterface
     }
 
     /**
-     * @{inheritdoc}
+     * {@inheritdoc}
      */
     public function offsetUnset($offset)
     {
@@ -46,7 +49,7 @@ class Dictionary extends CollectionBase implements DictionaryInterface
     }
 
     /**
-     * @{inheritdoc}
+     * {@inheritdoc}
      */
     public function add($key, $value)
     {
@@ -65,7 +68,7 @@ class Dictionary extends CollectionBase implements DictionaryInterface
     }
 
     /**
-     * @{inheritdoc}
+     * {@inheritdoc}
      */
     public function remove($key)
     {
@@ -76,7 +79,7 @@ class Dictionary extends CollectionBase implements DictionaryInterface
     }
 
     /**
-     * @{inheritdoc}
+     * {@inheritdoc}
      */
     public function keys()
     {
@@ -84,7 +87,7 @@ class Dictionary extends CollectionBase implements DictionaryInterface
     }
 
     /**
-     * @{inheritdoc}
+     * {@inheritdoc}
      */
     public function values()
     {
@@ -92,7 +95,7 @@ class Dictionary extends CollectionBase implements DictionaryInterface
     }
 
     /**
-     * @{inheritdoc}
+     * {@inheritdoc}
      */
     public function getItem($key)
     {
