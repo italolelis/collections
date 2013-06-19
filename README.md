@@ -3,7 +3,7 @@ Collections
 
 Collections Abstraction library for PHP
 
-What it is?
+What is it?
 ----------
 The Collection library is one of the most useful things that many modern languages has, but for some reason PHP doesn't has a built in collection layer.
 
