@@ -11,6 +11,9 @@ use Easy\Generics\EquatableInterface;
 use InvalidArgumentException;
 use OutOfRangeException;
 
+/**
+ * Represents a strongly typed list of objects that can be accessed by index. Provides methods to search, sort, and manipulate lists.
+ */
 class Collection extends CollectionBase implements ListInterface
 {
 
@@ -31,7 +34,7 @@ class Collection extends CollectionBase implements ListInterface
     }
 
     /**
-     * @inheritdoc
+     * @{inheritdoc}
      */
     public function offsetExists($offset)
     {
@@ -45,7 +48,7 @@ class Collection extends CollectionBase implements ListInterface
     }
 
     /**
-     * @inheritdoc
+     * @{inheritdoc}
      */
     public function offsetGet($offset)
     {
@@ -53,7 +56,7 @@ class Collection extends CollectionBase implements ListInterface
     }
 
     /**
-     * @inheritdoc
+     * @{inheritdoc}
      */
     public function offsetSet($offset, $value)
     {
@@ -67,7 +70,7 @@ class Collection extends CollectionBase implements ListInterface
     }
 
     /**
-     * @inheritdoc
+     * @{inheritdoc}
      */
     public function offsetUnset($offset)
     {
@@ -75,7 +78,7 @@ class Collection extends CollectionBase implements ListInterface
     }
 
     /**
-     * @inheritdoc
+     * @{inheritdoc}
      */
     public function add($item)
     {
@@ -83,7 +86,7 @@ class Collection extends CollectionBase implements ListInterface
     }
 
     /**
-     * @inheritdoc
+     * @{inheritdoc}
      */
     public function addRange($items)
     {
@@ -91,7 +94,7 @@ class Collection extends CollectionBase implements ListInterface
     }
 
     /**
-     * @inheritdoc
+     * @{inheritdoc}
      */
     public function IndexOf($item, $start = null, $length = null)
     {
@@ -99,7 +102,7 @@ class Collection extends CollectionBase implements ListInterface
     }
 
     /**
-     * @inheritdoc
+     * @{inheritdoc}
      */
     public function LastIndexOf($item, $start = null, $length = null)
     {
@@ -107,7 +110,7 @@ class Collection extends CollectionBase implements ListInterface
     }
 
     /**
-     * @inheritdoc
+     * @{inheritdoc}
      */
     public function Insert($index, $item)
     {
@@ -126,7 +129,7 @@ class Collection extends CollectionBase implements ListInterface
     }
 
     /**
-     * @inheritdoc
+     * @{inheritdoc}
      */
     public function remove($item)
     {
@@ -138,7 +141,7 @@ class Collection extends CollectionBase implements ListInterface
     }
 
     /**
-     * @inheritdoc
+     * @{inheritdoc}
      */
     public function removeAt($index)
     {
@@ -157,7 +160,7 @@ class Collection extends CollectionBase implements ListInterface
     }
 
     /**
-     * @inheritdoc
+     * @{inheritdoc}
      */
     public function allIndexesOf($item)
     {
@@ -165,7 +168,7 @@ class Collection extends CollectionBase implements ListInterface
     }
 
     /**
-     * @inheritdoc
+     * @{inheritdoc}
      */
     public function elementAt($index)
     {

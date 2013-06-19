@@ -13,7 +13,7 @@ abstract class Enumerable implements EnumerableInterface
     protected $array = array();
 
     /**
-     * @inheritdoc
+     * @{inheritdoc}
      */
     public function getArray()
     {
@@ -21,7 +21,7 @@ abstract class Enumerable implements EnumerableInterface
     }
 
     /**
-     * @inheritdoc
+     * @{inheritdoc}
      */
     public function getIterator()
     {
@@ -57,7 +57,7 @@ abstract class Enumerable implements EnumerableInterface
     }
 
     /**
-     * @inheritdoc
+     * @{inheritdoc}
      */
     public function serialize()
     {
@@ -65,7 +65,7 @@ abstract class Enumerable implements EnumerableInterface
     }
 
     /**
-     * @inheritdoc
+     * @{inheritdoc}
      */
     public function unserialize($serialized)
     {
