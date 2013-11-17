@@ -16,7 +16,7 @@ Take a look and see what we're talking about!!
 Installation
 ----------
 
-  `require: { "easyframework/collections": "2.1.*" }`
+  `require: { "easyframework/collections": "1.0.*" }`
   
   `$ composer install`
 
@@ -27,7 +27,7 @@ Usage
 
 The Collection represents the List in .NET language or simply non-associative arrays in php:
 
-    $collection = new \Easy\Collections\Collection();
+    $collection = new \Easy\Collections\ArrayList();
     $collection->add('John');
     $collection->add('Maria');
     $collection->add('Anderson');
@@ -79,7 +79,7 @@ The Dictionary class is something like associative arrays in PHP, or Hash tables
 When one key is inserted we can't insert the same key again, if we want to change its value we need to use the method set()
 Here is an exemple of how we can get some item based on the key;
 
-    print_r ($dictionary->getItem('person1')); //returns array('name' => John, 'age' => 20)
+    print_r ($dictionary->get('person1')); //returns array('name' => John, 'age' => 20)
     
 All Collection methods are also avaliable in Dictionary class, just remember to use each one in correct case, this will help you keep organization in your project.
 
@@ -87,7 +87,7 @@ All Collection methods are also avaliable in Dictionary class, just remember to 
 
 To our last exemple we'll use objects in our collection.
 
-    $collection = new \Easy\Collections\Collection();
+    $collection = new \Easy\Collections\ArrayList();
     $collection->add(new Person('John', 20));
     $collection->add(new Person('Peter', 20));
     $collection->add(new Person('Sophie', 21));
@@ -103,7 +103,7 @@ Pretty simple, but the reason I wanted to show you objects is because of Express
 Lets seek everyone with age 20.
 
     $criteria = new \Easy\Collections\Criteria();
-    $expr = $criteria->expr()->eq("age", 20);
+    $expr = $criteria->createExpression()->eq("age", 20);
     $criteria->where($expr);
     $collection = $collection->matching($criteria);
     
@@ -115,7 +115,7 @@ Lets seek everyone with age 20.
 Now we want everyone where the name starts with 'A'
 
     $criteria = new \Easy\Collections\Criteria();
-    $expr = $criteria->expr()->contains("name", "A");
+    $expr = $criteria->createExpression()->contains("name", "A");
     $criteria->where($expr);
     $collection = $collection->matching($criteria);
     
