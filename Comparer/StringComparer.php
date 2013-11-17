@@ -4,12 +4,12 @@
 
 namespace Easy\Collections\Comparer;
 
-use Easy\Collections\Generic\ComparerInterface;
+use Easy\Collections\Generic\IComparer;
 
 /**
  * Represents a string comparison operation that uses specific case and culture-based or ordinal comparison rules.
  */
-class StringComparer implements ComparerInterface
+class StringComparer implements IComparer
 {
 
     /**

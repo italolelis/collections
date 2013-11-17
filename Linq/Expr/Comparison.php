@@ -2,7 +2,7 @@
 
 // Copyright (c) Lellys Informática. All rights reserved. See License.txt in the project root for license information.
 
-namespace Easy\Collections\Expr;
+namespace Easy\Collections\Linq\Expr;
 
 /**
  * Comparison of a field with a value by the given operator.

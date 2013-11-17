@@ -5,12 +5,12 @@
 namespace Easy\Collections;
 
 use BadFunctionCallException;
-use Easy\Collections\CollectionBase;
+use Easy\Collections\CollectionArray;
 
 /**
  * Represents a simple last-in-first-out (LIFO) non-generic collection of objects.
  */
-class Stack extends CollectionBase
+class Stack extends CollectionArray implements StackInterface
 {
 
     /**
@@ -38,7 +38,7 @@ class Stack extends CollectionBase
      */
     public function pop()
     {
-        if ($this->IsEmpty()) {
+        if ($this->isEmpty()) {
             throw new BadFunctionCallException(__('Cannot use method Pop on an empty Stack'));
         }
         return array_pop($this->array);
@@ -51,31 +51,11 @@ class Stack extends CollectionBase
      */
     public function peek()
     {
-        if ($this->IsEmpty()) {
+        if ($this->isEmpty()) {
             throw new BadFunctionCallException(__('Cannot use method Peek on an empty Stack'));
         }
 
         return end($this->array);
-    }
-
-    public function offsetExists($offset)
-    {
-        
-    }
-
-    public function offsetGet($offset)
-    {
-        
-    }
-
-    public function offsetSet($offset, $value)
-    {
-        
-    }
-
-    public function offsetUnset($offset)
-    {
-        
     }
 
 }

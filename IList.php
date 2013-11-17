@@ -4,10 +4,12 @@
 
 namespace Easy\Collections;
 
-/*
+use ArrayAccess;
+
+/**
  * Represents a non-generic collection of objects that can be individually accessed by index.
  */
-interface ListInterface extends CollectionInterface
+interface IList extends ICollection, ArrayAccess
 {
 
     /**
@@ -18,15 +20,9 @@ interface ListInterface extends CollectionInterface
 
     /**
      * Adds the elements of the specified collection to the end of the IList.
-     * @param CollectionInterface|array $items The collection whose elements should be added to the end of the IList.
+     * @param ICollection|array $items The collection whose elements should be added to the end of the IList.
      */
-    public function addRange($items);
-
-    /**
-     * Removes the element with the specified key from the IDictionary object.
-     * @param mixed $key The key of the element to remove.
-     */
-    public function remove($key);
+    public function addAll($items);
 
     /**
      * Inserts an item to the IList at the specified index.
@@ -38,20 +34,6 @@ interface ListInterface extends CollectionInterface
     /**
      * Determines the index of a specific item in the IList.
      * @param mixed $item The object to locate in the IList.
-     * @param int $start
-     * @param int $length
      */
-    public function indexOf($item, $start = null, $length = null);
-
-    public function lastIndexOf($item, $start = null, $length = null);
-
-    public function allIndexesOf($item);
-
-    /**
-     * Removes the IList item at the specified index.
-     * @param int $index The zero-based index of the item to remove.
-     */
-    public function removeAt($index);
-
-    public function elementAt($index);
+    public function indexOf($item);
 }

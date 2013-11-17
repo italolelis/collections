@@ -2,10 +2,10 @@
 
 // Copyright (c) Lellys Informática. All rights reserved. See License.txt in the project root for license information.
 
-namespace Easy\Collections;
+namespace Easy\Collections\Linq;
 
-use Easy\Collections\Expr\CompositeExpression;
-use Easy\Collections\Expr\Expression;
+use Easy\Collections\Linq\Expr\CompositeExpression;
+use Easy\Collections\Linq\Expr\Expression;
 
 /**
  * Criteria for filtering Selectable collections.
@@ -15,10 +15,10 @@ use Easy\Collections\Expr\Expression;
  */
 class Criteria
 {
+
     /**
      * @var string
      */
-
     const ASC = 'ASC';
 
     /**
@@ -66,7 +66,7 @@ class Criteria
      *
      * @return ExpressionBuilder
      */
-    public static function expr()
+    public static function createExpression()
     {
         if (self::$expressionBuilder === null) {
             self::$expressionBuilder = new ExpressionBuilder();

@@ -5,57 +5,36 @@
 namespace Easy\Collections;
 
 use BadFunctionCallException;
-use Easy\Collections\CollectionArray;
 
 /**
- * Represents a first-in, first-out collection of objects.
+ * Provides functionality to evaluate queries against a specific data source wherein the type of the data is not specified.
  */
-class Queue extends CollectionArray implements QueueInterface
+interface QueueInterface extends ICollection
 {
 
     /**
      * Adds an object to the end of the Queue.
      * @param mixed $item The object to add to the Queue. The value can be null.
      */
-    public function enqueue($item)
-    {
-        array_push($this->array, $item);
-    }
+    public function enqueue($item);
 
     /**
      * Adds multiples objects to the end of the Queue.
      * @param ICollection|array $items The objects to add to the Queue. The value can be null.
      */
-    public function enqueueMultiple($items)
-    {
-        $this->addMultiple($items);
-    }
+    public function enqueueMultiple($items);
 
     /**
      * Removes and returns the object at the beginning of the Queue.
      * @return mixed The object that is removed from the beginning of the Queue.
      * @throws BadFunctionCallException
      */
-    public function dequeue()
-    {
-        if ($this->isEmpty()) {
-            throw new BadFunctionCallException(_('Cannot use method Dequeue on an empty Queue'));
-        }
-        return array_shift($this->array);
-    }
+    public function dequeue();
 
     /**
      * Returns the object at the beginning of the Queue without removing it.
      * @return mixed The object at the beginning of the Queue.
      * @throws BadFunctionCallException
      */
-    public function peek()
-    {
-        if ($this->isEmpty()) {
-            throw new BadFunctionCallException(__('Cannot use method Peek on an empty Queue'));
-        }
-
-        return $this->array[0];
-    }
-
+    public function peek();
 }

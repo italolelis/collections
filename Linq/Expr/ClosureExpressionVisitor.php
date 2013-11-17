@@ -2,7 +2,7 @@
 
 // Copyright (c) Lellys Informática. All rights reserved. See License.txt in the project root for license information.
 
-namespace Easy\Collections\Expr;
+namespace Easy\Collections\Linq\Expr;
 
 /**
  * Walks an expression graph and turns it into a PHP closure.
@@ -67,20 +67,20 @@ class ClosureExpressionVisitor extends ExpressionVisitor
     {
         if (!$next) {
             $next = function() {
-                        return 0;
-                    };
+                return 0;
+            };
         }
 
         return function ($a, $b) use ($name, $next, $orientation) {
-                    $aValue = ClosureExpressionVisitor::getObjectFieldValue($a, $name);
-                    $bValue = ClosureExpressionVisitor::getObjectFieldValue($b, $name);
+            $aValue = ClosureExpressionVisitor::getObjectFieldValue($a, $name);
+            $bValue = ClosureExpressionVisitor::getObjectFieldValue($b, $name);
 
-                    if ($aValue === $bValue) {
-                        return $next($a, $b);
-                    }
+            if ($aValue === $bValue) {
+                return $next($a, $b);
+            }
 
-                    return (($aValue > $bValue) ? 1 : -1) * $orientation;
-                };
+            return (($aValue > $bValue) ? 1 : -1) * $orientation;
+        };
     }
 
     /**
@@ -94,48 +94,48 @@ class ClosureExpressionVisitor extends ExpressionVisitor
         switch ($comparison->getOperator()) {
             case Comparison::EQ:
                 return function ($object) use ($field, $value) {
-                            return ClosureExpressionVisitor::getObjectFieldValue($object, $field) === $value;
-                        };
+                    return ClosureExpressionVisitor::getObjectFieldValue($object, $field) === $value;
+                };
 
             case Comparison::NEQ:
                 return function ($object) use ($field, $value) {
-                            return ClosureExpressionVisitor::getObjectFieldValue($object, $field) !== $value;
-                        };
+                    return ClosureExpressionVisitor::getObjectFieldValue($object, $field) !== $value;
+                };
 
             case Comparison::LT:
                 return function ($object) use ($field, $value) {
-                            return ClosureExpressionVisitor::getObjectFieldValue($object, $field) < $value;
-                        };
+                    return ClosureExpressionVisitor::getObjectFieldValue($object, $field) < $value;
+                };
 
             case Comparison::LTE:
                 return function ($object) use ($field, $value) {
-                            return ClosureExpressionVisitor::getObjectFieldValue($object, $field) <= $value;
-                        };
+                    return ClosureExpressionVisitor::getObjectFieldValue($object, $field) <= $value;
+                };
 
             case Comparison::GT:
                 return function ($object) use ($field, $value) {
-                            return ClosureExpressionVisitor::getObjectFieldValue($object, $field) > $value;
-                        };
+                    return ClosureExpressionVisitor::getObjectFieldValue($object, $field) > $value;
+                };
 
             case Comparison::GTE:
                 return function ($object) use ($field, $value) {
-                            return ClosureExpressionVisitor::getObjectFieldValue($object, $field) >= $value;
-                        };
+                    return ClosureExpressionVisitor::getObjectFieldValue($object, $field) >= $value;
+                };
 
             case Comparison::IN:
                 return function ($object) use ($field, $value) {
-                            return in_array(ClosureExpressionVisitor::getObjectFieldValue($object, $field), $value);
-                        };
+                    return in_array(ClosureExpressionVisitor::getObjectFieldValue($object, $field), $value);
+                };
 
             case Comparison::NIN:
                 return function ($object) use ($field, $value) {
-                            return !in_array(ClosureExpressionVisitor::getObjectFieldValue($object, $field), $value);
-                        };
+                    return !in_array(ClosureExpressionVisitor::getObjectFieldValue($object, $field), $value);
+                };
 
             case Comparison::CONTAINS:
                 return function ($object) use ($field, $value) {
-                            return false !== strpos(ClosureExpressionVisitor::getObjectFieldValue($object, $field), $value);
-                        };
+                    return false !== strpos(ClosureExpressionVisitor::getObjectFieldValue($object, $field), $value);
+                };
 
             default:
                 throw new \RuntimeException("Unknown comparison operator: " . $comparison->getOperator());
@@ -181,13 +181,13 @@ class ClosureExpressionVisitor extends ExpressionVisitor
     private function andExpressions($expressions)
     {
         return function ($object) use ($expressions) {
-                    foreach ($expressions as $expression) {
-                        if (!$expression($object)) {
-                            return false;
-                        }
-                    }
-                    return true;
-                };
+            foreach ($expressions as $expression) {
+                if (!$expression($object)) {
+                    return false;
+                }
+            }
+            return true;
+        };
     }
 
     /**
@@ -198,13 +198,13 @@ class ClosureExpressionVisitor extends ExpressionVisitor
     private function orExpressions($expressions)
     {
         return function ($object) use ($expressions) {
-                    foreach ($expressions as $expression) {
-                        if ($expression($object)) {
-                            return true;
-                        }
-                    }
-                    return false;
-                };
+            foreach ($expressions as $expression) {
+                if ($expression($object)) {
+                    return true;
+                }
+            }
+            return false;
+        };
     }
 
 }

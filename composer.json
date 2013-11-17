@@ -13,7 +13,10 @@
     ],
     "require": {
         "php": ">=5.3.14",
-        "easyframework/generics": "2.1.*"
+        "easyframework/generics": "1.0.*"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "3.7.*"
     },
     "autoload": {
         "psr-0": {
@@ -24,7 +27,7 @@
     "minimum-stability": "dev",
     "extra": {
         "branch-alias": {
-            "dev-master": "2.1-dev"
+            "dev-master": "1.0-dev"
         }
     }
 }

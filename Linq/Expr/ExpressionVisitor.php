@@ -2,7 +2,7 @@
 
 // Copyright (c) Lellys Informática. All rights reserved. See License.txt in the project root for license information.
 
-namespace Easy\Collections\Expr;
+namespace Easy\Collections\Linq\Expr;
 
 /**
  * An Expression visitor walks a graph of expressions and turns them into a

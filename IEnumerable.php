@@ -4,18 +4,17 @@
 
 namespace Easy\Collections;
 
-use ArrayAccess;
 use IteratorAggregate;
 use Serializable;
 
 /**
  * Exposes the enumerator, which supports a simple iteration over a non-generic collection.
  */
-interface EnumerableInterface extends IteratorAggregate, ArrayAccess, Serializable
+interface IEnumerable extends IteratorAggregate, Serializable
 {
 
     /**
      * Gets the elements for IEnumerable object
      */
-    public function getArray();
+    public function toArray();
 }
