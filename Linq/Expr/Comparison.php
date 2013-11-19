@@ -23,6 +23,8 @@ class Comparison implements Expression
     const IN = 'IN';
     const NIN = 'NIN';
     const CONTAINS = 'CONTAINS';
+    const STARTS_WITH = 'STARTS_WITH';
+    const ENDS_WITH = 'ENDS_WITH';
 
     /**
      * @var string
