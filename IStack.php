@@ -9,7 +9,7 @@ use BadFunctionCallException;
 /**
  * Provides functionality to evaluate queries against a specific data source wherein the type of the data is not specified.
  */
-interface StackInterface extends ICollection
+interface IStack extends ICollection
 {
 
     /**

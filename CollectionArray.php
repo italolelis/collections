@@ -290,7 +290,7 @@ IEnumerable, ICollection, IQueryable, ISelectable, IEquatable
      */
     public function __toString()
     {
-        return get_class();
+        return get_class($this);
     }
 
     public function equals($obj)

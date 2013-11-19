@@ -10,7 +10,7 @@ use Easy\Collections\CollectionArray;
 /**
  * Represents a simple last-in-first-out (LIFO) non-generic collection of objects.
  */
-class Stack extends CollectionArray implements StackInterface
+class Stack extends CollectionArray implements IStack
 {
 
     /**
