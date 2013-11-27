@@ -133,6 +133,18 @@ IEnumerable, ICollection, IQueryable, ISelectable, IEquatable
     /**
      * {@inheritdoc}
      */
+    public function tryGet($index)
+    {
+        if ($this->offsetExists($index) === false) {
+            return null;
+        }
+
+        return $this->get($index);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function isEmpty()
     {
         return $this->count() < 1;

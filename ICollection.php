@@ -40,6 +40,15 @@ interface ICollection extends IEnumerable, Countable
     public function get($key);
 
     /**
+     * Gets the value associated with the specified key.
+     * @param mixed $index The key of the value to get.
+     * @return When this method returns, contains the value associated with the 
+     * specified key, if the key is found; otherwise, the default value for the 
+     * type of the value parameter. This parameter is passed uninitialized.
+     */
+    public function tryGet($index);
+
+    /**
      * Removes the IList item at the specified index.
      * @param int $element The zero-based index of the item to remove.
      */

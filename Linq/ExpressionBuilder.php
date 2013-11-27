@@ -136,6 +136,8 @@ class ExpressionBuilder
     }
 
     /**
+     * Returns a value indicating whether a specified substring occurs within this string.
+     * 
      * @param string $field
      * @param mixed  $value
      *
@@ -147,6 +149,7 @@ class ExpressionBuilder
     }
 
     /**
+     * Determines whether the beginning of this string instance matches a specified string.
      * @param string $field
      * @param mixed  $value
      *
@@ -158,6 +161,7 @@ class ExpressionBuilder
     }
 
     /**
+     * Determines whether the end of this string instance matches a specified string.
      * @param string $field
      * @param mixed  $value
      *
