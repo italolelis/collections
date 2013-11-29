@@ -66,6 +66,27 @@ class DictionaryTest extends CollectionsTestCase
         $this->coll->set(null, 'testing');
     }
 
+    public function testTryGetSuccess()
+    {
+        $this->coll->add('key', 'testing');
+        $value = $this->coll->tryGet('key');
+        $this->assertEquals('testing', $value);
+    }
+
+    public function testTryGetError()
+    {
+        $this->coll->add('key', 'testing');
+        $value = $this->coll->tryGet('key2');
+        $this->assertNull($value);
+    }
+
+    public function testTryGetDefaultValue()
+    {
+        $this->coll->add('key', 'testing');
+        $value = $this->coll->tryGet('key2', 'testingValue');
+        $this->assertEquals('testingValue', $value);
+    }
+
     /**
      * @expectedException \InvalidArgumentException
      */

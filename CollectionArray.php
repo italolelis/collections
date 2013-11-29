@@ -133,10 +133,10 @@ IEnumerable, ICollection, IQueryable, ISelectable, IEquatable
     /**
      * {@inheritdoc}
      */
-    public function tryGet($index)
+    public function tryGet($index, $default = null)
     {
         if ($this->offsetExists($index) === false) {
-            return null;
+            return $default;
         }
 
         return $this->get($index);
