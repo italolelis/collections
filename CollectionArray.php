@@ -165,7 +165,7 @@ IEnumerable, ICollection, IQueryable, ISelectable, IEquatable
             }
         }
         if (empty($array) == false) {
-            $this->array = array_merge($this->array, $array);
+            $this->array = $this->array + $array;
         }
     }
 
