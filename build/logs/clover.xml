@@ -1,0 +1,666 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<coverage generated="1394680980">
+  <project timestamp="1394680980">
+    <package name="Easy\Collections">
+      <file name="/var/www/collections/src/Easy/Collections/ArrayList.php">
+        <class name="ArrayList" namespace="Easy\Collections">
+          <metrics methods="8" coveredmethods="7" conditionals="0" coveredconditionals="0" statements="29" coveredstatements="14" elements="37" coveredelements="21"/>
+        </class>
+        <line num="19" type="method" name="add" crap="1" count="11"/>
+        <line num="21" type="stmt" count="11"/>
+        <line num="22" type="stmt" count="11"/>
+        <line num="28" type="method" name="addAll" crap="1.12" count="5"/>
+        <line num="30" type="stmt" count="5"/>
+        <line num="31" type="stmt" count="0"/>
+        <line num="37" type="method" name="indexOf" crap="1" count="1"/>
+        <line num="39" type="stmt" count="1"/>
+        <line num="45" type="method" name="insert" crap="30" count="0"/>
+        <line num="47" type="stmt" count="0"/>
+        <line num="48" type="stmt" count="0"/>
+        <line num="50" type="stmt" count="0"/>
+        <line num="51" type="stmt" count="0"/>
+        <line num="54" type="stmt" count="0"/>
+        <line num="55" type="stmt" count="0"/>
+        <line num="56" type="stmt" count="0"/>
+        <line num="57" type="stmt" count="0"/>
+        <line num="58" type="stmt" count="0"/>
+        <line num="60" type="stmt" count="0"/>
+        <line num="66" type="method" name="offsetExists" crap="3.58" count="1"/>
+        <line num="68" type="stmt" count="1"/>
+        <line num="69" type="stmt" count="0"/>
+        <line num="71" type="stmt" count="1"/>
+        <line num="72" type="stmt" count="0"/>
+        <line num="74" type="stmt" count="1"/>
+        <line num="80" type="method" name="offsetGet" crap="1" count="1"/>
+        <line num="82" type="stmt" count="1"/>
+        <line num="88" type="method" name="offsetSet" crap="3.33" count="4"/>
+        <line num="90" type="stmt" count="4"/>
+        <line num="91" type="stmt" count="0"/>
+        <line num="93" type="stmt" count="4"/>
+        <line num="94" type="stmt" count="0"/>
+        <line num="96" type="stmt" count="4"/>
+        <line num="97" type="stmt" count="4"/>
+        <line num="102" type="method" name="offsetUnset" crap="1" count="1"/>
+        <line num="104" type="stmt" count="1"/>
+        <line num="105" type="stmt" count="1"/>
+        <line num="108" type="stmt" count="1"/>
+        <metrics loc="107" ncloc="78" classes="1" methods="8" coveredmethods="4" conditionals="0" coveredconditionals="0" statements="29" coveredstatements="14" elements="37" coveredelements="18"/>
+      </file>
+      <file name="/var/www/collections/src/Easy/Collections/CollectionArray.php">
+        <class name="CollectionArray" namespace="Easy\Collections">
+          <metrics methods="25" coveredmethods="24" conditionals="0" coveredconditionals="0" statements="101" coveredstatements="71" elements="126" coveredelements="95"/>
+        </class>
+        <line num="0" type="stmt" count="1"/>
+        <line num="33" type="method" name="__construct" crap="3" count="49"/>
+        <line num="35" type="stmt" count="49"/>
+        <line num="36" type="stmt" count="12"/>
+        <line num="37" type="stmt" count="12"/>
+        <line num="38" type="stmt" count="49"/>
+        <line num="43" type="method" name="toArray" crap="1" count="7"/>
+        <line num="45" type="stmt" count="7"/>
+        <line num="51" type="method" name="getIterator" crap="1" count="1"/>
+        <line num="53" type="stmt" count="1"/>
+        <line num="60" type="method" name="getDefaultComparer" crap="2" count="2"/>
+        <line num="62" type="stmt" count="2"/>
+        <line num="63" type="stmt" count="2"/>
+        <line num="64" type="stmt" count="2"/>
+        <line num="65" type="stmt" count="2"/>
+        <line num="73" type="method" name="setDefaultComparer" crap="1" count="1"/>
+        <line num="75" type="stmt" count="1"/>
+        <line num="76" type="stmt" count="1"/>
+        <line num="82" type="method" name="count" crap="1" count="4"/>
+        <line num="84" type="stmt" count="4"/>
+        <line num="90" type="method" name="clear" crap="1" count="1"/>
+        <line num="92" type="stmt" count="1"/>
+        <line num="93" type="stmt" count="1"/>
+        <line num="99" type="method" name="contains" crap="1" count="20"/>
+        <line num="101" type="stmt" count="20"/>
+        <line num="107" type="method" name="get" crap="2" count="7"/>
+        <line num="109" type="stmt" count="7"/>
+        <line num="110" type="stmt" count="1"/>
+        <line num="113" type="stmt" count="6"/>
+        <line num="119" type="method" name="tryGet" crap="2" count="6"/>
+        <line num="121" type="stmt" count="6"/>
+        <line num="122" type="stmt" count="4"/>
+        <line num="125" type="stmt" count="2"/>
+        <line num="131" type="method" name="isEmpty" crap="1" count="1"/>
+        <line num="133" type="stmt" count="1"/>
+        <line num="136" type="method" name="addMultiple" crap="10.37" count="6"/>
+        <line num="138" type="stmt" count="6"/>
+        <line num="139" type="stmt" count="5"/>
+        <line num="141" type="stmt" count="1"/>
+        <line num="142" type="stmt" count="0"/>
+        <line num="143" type="stmt" count="1"/>
+        <line num="144" type="stmt" count="1"/>
+        <line num="145" type="stmt" count="1"/>
+        <line num="146" type="stmt" count="0"/>
+        <line num="147" type="stmt" count="0"/>
+        <line num="148" type="stmt" count="0"/>
+        <line num="149" type="stmt" count="0"/>
+        <line num="150" type="stmt" count="1"/>
+        <line num="151" type="stmt" count="1"/>
+        <line num="152" type="stmt" count="1"/>
+        <line num="153" type="stmt" count="1"/>
+        <line num="155" type="method" name="itemExists" crap="6.81" count="20"/>
+        <line num="157" type="stmt" count="20"/>
+        <line num="158" type="stmt" count="20"/>
+        <line num="159" type="stmt" count="0"/>
+        <line num="160" type="stmt" count="0"/>
+        <line num="161" type="stmt" count="0"/>
+        <line num="162" type="stmt" count="0"/>
+        <line num="164" type="stmt" count="0"/>
+        <line num="165" type="stmt" count="20"/>
+        <line num="166" type="stmt" count="1"/>
+        <line num="167" type="stmt" count="1"/>
+        <line num="168" type="stmt" count="20"/>
+        <line num="170" type="stmt" count="20"/>
+        <line num="176" type="method" name="exists" crap="3" count="1"/>
+        <line num="178" type="stmt" count="1"/>
+        <line num="179" type="stmt" count="1"/>
+        <line num="180" type="stmt" count="1"/>
+        <line num="182" type="stmt" count="1"/>
+        <line num="183" type="stmt" count="1"/>
+        <line num="189" type="method" name="filter" crap="1" count="1"/>
+        <line num="191" type="stmt" count="1"/>
+        <line num="197" type="method" name="matching" crap="56" count="0"/>
+        <line num="199" type="stmt" count="0"/>
+        <line num="200" type="stmt" count="0"/>
+        <line num="202" type="stmt" count="0"/>
+        <line num="203" type="stmt" count="0"/>
+        <line num="204" type="stmt" count="0"/>
+        <line num="205" type="stmt" count="0"/>
+        <line num="206" type="stmt" count="0"/>
+        <line num="208" type="stmt" count="0"/>
+        <line num="209" type="stmt" count="0"/>
+        <line num="210" type="stmt" count="0"/>
+        <line num="211" type="stmt" count="0"/>
+        <line num="212" type="stmt" count="0"/>
+        <line num="214" type="stmt" count="0"/>
+        <line num="215" type="stmt" count="0"/>
+        <line num="217" type="stmt" count="0"/>
+        <line num="218" type="stmt" count="0"/>
+        <line num="220" type="stmt" count="0"/>
+        <line num="221" type="stmt" count="0"/>
+        <line num="222" type="stmt" count="0"/>
+        <line num="224" type="stmt" count="0"/>
+        <line num="231" type="method" name="sort" crap="2" count="1"/>
+        <line num="233" type="stmt" count="1"/>
+        <line num="234" type="stmt" count="1"/>
+        <line num="235" type="stmt" count="1"/>
+        <line num="236" type="stmt" count="1"/>
+        <line num="237" type="stmt" count="1"/>
+        <line num="244" type="method" name="sortByKey" crap="2" count="1"/>
+        <line num="246" type="stmt" count="1"/>
+        <line num="247" type="stmt" count="1"/>
+        <line num="248" type="stmt" count="1"/>
+        <line num="249" type="stmt" count="1"/>
+        <line num="250" type="stmt" count="1"/>
+        <line num="256" type="method" name="remove" crap="2" count="5"/>
+        <line num="258" type="stmt" count="5"/>
+        <line num="259" type="stmt" count="3"/>
+        <line num="261" type="stmt" count="2"/>
+        <line num="262" type="stmt" count="2"/>
+        <line num="268" type="method" name="removeValue" crap="2" count="2"/>
+        <line num="270" type="stmt" count="2"/>
+        <line num="272" type="stmt" count="2"/>
+        <line num="273" type="stmt" count="1"/>
+        <line num="274" type="stmt" count="1"/>
+        <line num="277" type="stmt" count="1"/>
+        <line num="283" type="method" name="values" crap="1" count="1"/>
+        <line num="285" type="stmt" count="1"/>
+        <line num="291" type="method" name="serialize" crap="1" count="2"/>
+        <line num="293" type="stmt" count="2"/>
+        <line num="299" type="method" name="unserialize" crap="1" count="1"/>
+        <line num="301" type="stmt" count="1"/>
+        <line num="302" type="stmt" count="1"/>
+        <line num="308" type="method" name="__toString" crap="1" count="5"/>
+        <line num="310" type="stmt" count="5"/>
+        <line num="313" type="method" name="equals" crap="1" count="2"/>
+        <line num="315" type="stmt" count="2"/>
+        <line num="319" type="stmt" count="1"/>
+        <metrics loc="318" ncloc="242" classes="1" methods="25" coveredmethods="22" conditionals="0" coveredconditionals="0" statements="101" coveredstatements="71" elements="126" coveredelements="93"/>
+      </file>
+      <file name="/var/www/collections/src/Easy/Collections/Dictionary.php">
+        <class name="Dictionary" namespace="Easy\Collections">
+          <metrics methods="7" coveredmethods="7" conditionals="0" coveredconditionals="0" statements="15" coveredstatements="15" elements="22" coveredelements="22"/>
+        </class>
+        <line num="18" type="method" name="add" crap="2" count="11"/>
+        <line num="20" type="stmt" count="11"/>
+        <line num="21" type="stmt" count="2"/>
+        <line num="23" type="stmt" count="11"/>
+        <line num="25" type="stmt" count="11"/>
+        <line num="28" type="method" name="set" crap="2" count="19"/>
+        <line num="30" type="stmt" count="19"/>
+        <line num="31" type="stmt" count="2"/>
+        <line num="33" type="stmt" count="17"/>
+        <line num="35" type="stmt" count="17"/>
+        <line num="41" type="method" name="keys" crap="1" count="1"/>
+        <line num="43" type="stmt" count="1"/>
+        <line num="49" type="method" name="offsetExists" crap="1" count="10"/>
+        <line num="51" type="stmt" count="10"/>
+        <line num="57" type="method" name="offsetGet" crap="1" count="1"/>
+        <line num="59" type="stmt" count="1"/>
+        <line num="65" type="method" name="offsetSet" crap="1" count="1"/>
+        <line num="67" type="stmt" count="1"/>
+        <line num="68" type="stmt" count="1"/>
+        <line num="73" type="method" name="offsetUnset" crap="1" count="1"/>
+        <line num="75" type="stmt" count="1"/>
+        <line num="76" type="stmt" count="1"/>
+        <line num="79" type="stmt" count="1"/>
+        <metrics loc="78" ncloc="55" classes="1" methods="7" coveredmethods="7" conditionals="0" coveredconditionals="0" statements="15" coveredstatements="15" elements="22" coveredelements="22"/>
+      </file>
+      <file name="/var/www/collections/src/Easy/Collections/Queue.php">
+        <class name="Queue" namespace="Easy\Collections">
+          <metrics methods="4" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="24" coveredstatements="0" elements="28" coveredelements="0"/>
+        </class>
+        <line num="20" type="method" name="enqueue" crap="2" count="0"/>
+        <line num="21" type="stmt" count="0"/>
+        <line num="22" type="stmt" count="0"/>
+        <line num="23" type="stmt" count="0"/>
+        <line num="24" type="stmt" count="0"/>
+        <line num="30" type="method" name="enqueueMultiple" crap="2" count="0"/>
+        <line num="31" type="stmt" count="0"/>
+        <line num="32" type="stmt" count="0"/>
+        <line num="33" type="stmt" count="0"/>
+        <line num="34" type="stmt" count="0"/>
+        <line num="41" type="method" name="dequeue" crap="6" count="0"/>
+        <line num="42" type="stmt" count="0"/>
+        <line num="43" type="stmt" count="0"/>
+        <line num="44" type="stmt" count="0"/>
+        <line num="45" type="stmt" count="0"/>
+        <line num="46" type="stmt" count="0"/>
+        <line num="47" type="stmt" count="0"/>
+        <line num="54" type="method" name="peek" crap="6" count="0"/>
+        <line num="55" type="stmt" count="0"/>
+        <line num="56" type="stmt" count="0"/>
+        <line num="57" type="stmt" count="0"/>
+        <line num="58" type="stmt" count="0"/>
+        <line num="60" type="stmt" count="0"/>
+        <line num="61" type="stmt" count="0"/>
+        <metrics loc="63" ncloc="40" classes="1" methods="4" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="24" coveredstatements="0" elements="28" coveredelements="0"/>
+      </file>
+      <file name="/var/www/collections/src/Easy/Collections/RecursiveDictionary.php">
+        <class name="RecursiveDictionary" namespace="Easy\Collections">
+          <metrics methods="2" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="28" coveredstatements="14" elements="30" coveredelements="15"/>
+        </class>
+        <line num="15" type="method" name="addMultiple" crap="12.70" count="11"/>
+        <line num="17" type="stmt" count="11"/>
+        <line num="18" type="stmt" count="0"/>
+        <line num="20" type="stmt" count="11"/>
+        <line num="21" type="stmt" count="0"/>
+        <line num="22" type="stmt" count="11"/>
+        <line num="23" type="stmt" count="11"/>
+        <line num="24" type="stmt" count="11"/>
+        <line num="25" type="stmt" count="11"/>
+        <line num="26" type="stmt" count="11"/>
+        <line num="27" type="stmt" count="11"/>
+        <line num="29" type="stmt" count="11"/>
+        <line num="30" type="stmt" count="11"/>
+        <line num="31" type="stmt" count="0"/>
+        <line num="32" type="stmt" count="0"/>
+        <line num="33" type="stmt" count="0"/>
+        <line num="34" type="stmt" count="0"/>
+        <line num="35" type="stmt" count="11"/>
+        <line num="36" type="stmt" count="11"/>
+        <line num="37" type="stmt" count="11"/>
+        <line num="38" type="stmt" count="11"/>
+        <line num="40" type="method" name="toArray" crap="12" count="0"/>
+        <line num="42" type="stmt" count="0"/>
+        <line num="43" type="stmt" count="0"/>
+        <line num="44" type="stmt" count="0"/>
+        <line num="45" type="stmt" count="0"/>
+        <line num="46" type="stmt" count="0"/>
+        <line num="47" type="stmt" count="0"/>
+        <line num="49" type="stmt" count="0"/>
+        <line num="50" type="stmt" count="0"/>
+        <line num="54" type="stmt" count="1"/>
+        <metrics loc="53" ncloc="48" classes="1" methods="2" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="28" coveredstatements="14" elements="30" coveredelements="14"/>
+      </file>
+      <file name="/var/www/collections/src/Easy/Collections/Stack.php">
+        <class name="Stack" namespace="Easy\Collections">
+          <metrics methods="4" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="24" coveredstatements="0" elements="28" coveredelements="0"/>
+        </class>
+        <line num="20" type="method" name="push" crap="2" count="0"/>
+        <line num="21" type="stmt" count="0"/>
+        <line num="22" type="stmt" count="0"/>
+        <line num="23" type="stmt" count="0"/>
+        <line num="24" type="stmt" count="0"/>
+        <line num="30" type="method" name="pushMultiple" crap="2" count="0"/>
+        <line num="31" type="stmt" count="0"/>
+        <line num="32" type="stmt" count="0"/>
+        <line num="33" type="stmt" count="0"/>
+        <line num="34" type="stmt" count="0"/>
+        <line num="41" type="method" name="pop" crap="6" count="0"/>
+        <line num="42" type="stmt" count="0"/>
+        <line num="43" type="stmt" count="0"/>
+        <line num="44" type="stmt" count="0"/>
+        <line num="45" type="stmt" count="0"/>
+        <line num="46" type="stmt" count="0"/>
+        <line num="47" type="stmt" count="0"/>
+        <line num="54" type="method" name="peek" crap="6" count="0"/>
+        <line num="55" type="stmt" count="0"/>
+        <line num="56" type="stmt" count="0"/>
+        <line num="57" type="stmt" count="0"/>
+        <line num="58" type="stmt" count="0"/>
+        <line num="60" type="stmt" count="0"/>
+        <line num="61" type="stmt" count="0"/>
+        <metrics loc="63" ncloc="40" classes="1" methods="4" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="24" coveredstatements="0" elements="28" coveredelements="0"/>
+      </file>
+    </package>
+    <package name="Easy\Collections\Comparer">
+      <file name="/var/www/collections/src/Easy/Collections/Comparer/NumericKeyComparer.php">
+        <class name="NumericKeyComparer" namespace="Easy\Collections\Comparer">
+          <metrics methods="1" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="5" coveredstatements="0" elements="6" coveredelements="0"/>
+        </class>
+        <line num="18" type="method" name="compare" crap="12" count="0"/>
+        <line num="20" type="stmt" count="0"/>
+        <line num="21" type="stmt" count="0"/>
+        <line num="22" type="stmt" count="0"/>
+        <line num="23" type="stmt" count="0"/>
+        <line num="25" type="stmt" count="0"/>
+        <metrics loc="28" ncloc="20" classes="1" methods="1" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="5" coveredstatements="0" elements="6" coveredelements="0"/>
+      </file>
+      <file name="/var/www/collections/src/Easy/Collections/Comparer/StringComparer.php">
+        <class name="StringComparer" namespace="Easy\Collections\Comparer">
+          <metrics methods="1" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="1" coveredstatements="0" elements="2" coveredelements="0"/>
+        </class>
+        <line num="18" type="method" name="compare" crap="2" count="0"/>
+        <line num="20" type="stmt" count="0"/>
+        <metrics loc="22" ncloc="14" classes="1" methods="1" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="1" coveredstatements="0" elements="2" coveredelements="0"/>
+      </file>
+    </package>
+    <file name="/var/www/collections/src/Easy/Collections/Generic/IComparer.php">
+      <line num="24" type="stmt" count="1"/>
+      <metrics loc="23" ncloc="9" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
+    </file>
+    <file name="/var/www/collections/src/Easy/Collections/ICollection.php">
+      <line num="63" type="stmt" count="1"/>
+      <metrics loc="62" ncloc="25" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
+    </file>
+    <file name="/var/www/collections/src/Easy/Collections/IDictionary.php">
+      <line num="27" type="stmt" count="1"/>
+      <metrics loc="26" ncloc="13" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
+    </file>
+    <file name="/var/www/collections/src/Easy/Collections/IEnumerable.php">
+      <line num="21" type="stmt" count="1"/>
+      <metrics loc="20" ncloc="12" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
+    </file>
+    <file name="/var/www/collections/src/Easy/Collections/IList.php">
+      <line num="40" type="stmt" count="1"/>
+      <metrics loc="39" ncloc="17" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
+    </file>
+    <file name="/var/www/collections/src/Easy/Collections/IQueue.php">
+      <metrics loc="40" ncloc="17" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
+    </file>
+    <file name="/var/www/collections/src/Easy/Collections/IStack.php">
+      <metrics loc="40" ncloc="17" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
+    </file>
+    <package name="Easy\Collections\Linq">
+      <file name="/var/www/collections/src/Easy/Collections/Linq/Criteria.php">
+        <class name="Criteria" namespace="Easy\Collections\Linq">
+          <metrics methods="13" coveredmethods="11" conditionals="0" coveredconditionals="0" statements="34" coveredstatements="28" elements="47" coveredelements="39"/>
+        </class>
+        <line num="59" type="method" name="create" crap="1" count="2"/>
+        <line num="61" type="stmt" count="2"/>
+        <line num="69" type="method" name="createExpression" crap="2" count="1"/>
+        <line num="71" type="stmt" count="1"/>
+        <line num="72" type="stmt" count="1"/>
+        <line num="73" type="stmt" count="1"/>
+        <line num="74" type="stmt" count="1"/>
+        <line num="85" type="method" name="__construct" crap="1" count="6"/>
+        <line num="87" type="stmt" count="6"/>
+        <line num="88" type="stmt" count="6"/>
+        <line num="89" type="stmt" count="6"/>
+        <line num="90" type="stmt" count="6"/>
+        <line num="91" type="stmt" count="6"/>
+        <line num="100" type="method" name="where" crap="1" count="3"/>
+        <line num="102" type="stmt" count="3"/>
+        <line num="103" type="stmt" count="3"/>
+        <line num="114" type="method" name="andWhere" crap="2.02" count="1"/>
+        <line num="116" type="stmt" count="1"/>
+        <line num="117" type="stmt" count="0"/>
+        <line num="120" type="stmt" count="1"/>
+        <line num="121" type="stmt" count="1"/>
+        <line num="122" type="stmt" count="1"/>
+        <line num="124" type="stmt" count="1"/>
+        <line num="135" type="method" name="orWhere" crap="2.02" count="1"/>
+        <line num="137" type="stmt" count="1"/>
+        <line num="138" type="stmt" count="0"/>
+        <line num="141" type="stmt" count="1"/>
+        <line num="142" type="stmt" count="1"/>
+        <line num="143" type="stmt" count="1"/>
+        <line num="145" type="stmt" count="1"/>
+        <line num="153" type="method" name="getWhereExpression" crap="1" count="4"/>
+        <line num="155" type="stmt" count="4"/>
+        <line num="163" type="method" name="getOrderings" crap="1" count="2"/>
+        <line num="165" type="stmt" count="2"/>
+        <line num="180" type="method" name="orderBy" crap="1" count="1"/>
+        <line num="182" type="stmt" count="1"/>
+        <line num="183" type="stmt" count="1"/>
+        <line num="191" type="method" name="getFirstResult" crap="1" count="1"/>
+        <line num="193" type="stmt" count="1"/>
+        <line num="203" type="method" name="setFirstResult" crap="2" count="0"/>
+        <line num="205" type="stmt" count="0"/>
+        <line num="206" type="stmt" count="0"/>
+        <line num="214" type="method" name="getMaxResults" crap="1" count="1"/>
+        <line num="216" type="stmt" count="1"/>
+        <line num="226" type="method" name="setMaxResults" crap="2" count="0"/>
+        <line num="228" type="stmt" count="0"/>
+        <line num="229" type="stmt" count="0"/>
+        <line num="233" type="stmt" count="1"/>
+        <metrics loc="232" ncloc="116" classes="1" methods="13" coveredmethods="9" conditionals="0" coveredconditionals="0" statements="34" coveredstatements="28" elements="47" coveredelements="37"/>
+      </file>
+      <file name="/var/www/collections/src/Easy/Collections/Linq/ExpressionBuilder.php">
+        <class name="ExpressionBuilder" namespace="Easy\Collections\Linq">
+          <metrics methods="14" coveredmethods="12" conditionals="0" coveredconditionals="0" statements="14" coveredstatements="12" elements="28" coveredelements="24"/>
+        </class>
+        <line num="25" type="method" name="andX" crap="1" count="2"/>
+        <line num="27" type="stmt" count="2"/>
+        <line num="35" type="method" name="orX" crap="1" count="1"/>
+        <line num="37" type="stmt" count="1"/>
+        <line num="46" type="method" name="eq" crap="1" count="3"/>
+        <line num="48" type="stmt" count="3"/>
+        <line num="57" type="method" name="gt" crap="1" count="1"/>
+        <line num="59" type="stmt" count="1"/>
+        <line num="68" type="method" name="lt" crap="1" count="1"/>
+        <line num="70" type="stmt" count="1"/>
+        <line num="79" type="method" name="gte" crap="1" count="1"/>
+        <line num="81" type="stmt" count="1"/>
+        <line num="90" type="method" name="lte" crap="1" count="1"/>
+        <line num="92" type="stmt" count="1"/>
+        <line num="101" type="method" name="neq" crap="1" count="1"/>
+        <line num="103" type="stmt" count="1"/>
+        <line num="111" type="method" name="isNull" crap="1" count="1"/>
+        <line num="113" type="stmt" count="1"/>
+        <line num="122" type="method" name="in" crap="1" count="1"/>
+        <line num="124" type="stmt" count="1"/>
+        <line num="133" type="method" name="notIn" crap="1" count="1"/>
+        <line num="135" type="stmt" count="1"/>
+        <line num="146" type="method" name="contains" crap="1" count="1"/>
+        <line num="148" type="stmt" count="1"/>
+        <line num="158" type="method" name="startsWith" crap="2" count="0"/>
+        <line num="160" type="stmt" count="0"/>
+        <line num="170" type="method" name="endsWith" crap="2" count="0"/>
+        <line num="172" type="stmt" count="0"/>
+        <line num="176" type="stmt" count="1"/>
+        <metrics loc="175" ncloc="82" classes="1" methods="14" coveredmethods="12" conditionals="0" coveredconditionals="0" statements="14" coveredstatements="12" elements="28" coveredelements="24"/>
+      </file>
+    </package>
+    <package name="Easy\Collections\Linq\Expr">
+      <file name="/var/www/collections/src/Easy/Collections/Linq/Expr/ClosureExpressionVisitor.php">
+        <class name="ClosureExpressionVisitor" namespace="Easy\Collections\Linq\Expr">
+          <metrics methods="8" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="123" coveredstatements="0" elements="131" coveredelements="0"/>
+        </class>
+        <line num="29" type="method" name="getObjectFieldValue" crap="42" count="0"/>
+        <line num="30" type="stmt" count="0"/>
+        <line num="31" type="stmt" count="0"/>
+        <line num="33" type="stmt" count="0"/>
+        <line num="34" type="stmt" count="0"/>
+        <line num="36" type="stmt" count="0"/>
+        <line num="37" type="stmt" count="0"/>
+        <line num="38" type="stmt" count="0"/>
+        <line num="40" type="stmt" count="0"/>
+        <line num="41" type="stmt" count="0"/>
+        <line num="44" type="stmt" count="0"/>
+        <line num="46" type="stmt" count="0"/>
+        <line num="47" type="stmt" count="0"/>
+        <line num="48" type="stmt" count="0"/>
+        <line num="50" type="stmt" count="0"/>
+        <line num="51" type="stmt" count="0"/>
+        <line num="52" type="stmt" count="0"/>
+        <line num="54" type="stmt" count="0"/>
+        <line num="55" type="stmt" count="0"/>
+        <line num="66" type="method" name="sortByField" crap="20" count="0"/>
+        <line num="67" type="stmt" count="0"/>
+        <line num="68" type="stmt" count="0"/>
+        <line num="69" type="stmt" count="0"/>
+        <line num="70" type="stmt" count="0"/>
+        <line num="71" type="stmt" count="0"/>
+        <line num="72" type="stmt" count="0"/>
+        <line num="75" type="stmt" count="0"/>
+        <line num="76" type="stmt" count="0"/>
+        <line num="78" type="stmt" count="0"/>
+        <line num="79" type="stmt" count="0"/>
+        <line num="80" type="stmt" count="0"/>
+        <line num="82" type="stmt" count="0"/>
+        <line num="83" type="stmt" count="0"/>
+        <line num="84" type="stmt" count="0"/>
+        <line num="89" type="method" name="walkComparison" crap="156" count="0"/>
+        <line num="90" type="stmt" count="0"/>
+        <line num="91" type="stmt" count="0"/>
+        <line num="92" type="stmt" count="0"/>
+        <line num="94" type="stmt" count="0"/>
+        <line num="95" type="stmt" count="0"/>
+        <line num="97" type="stmt" count="0"/>
+        <line num="98" type="stmt" count="0"/>
+        <line num="100" type="stmt" count="0"/>
+        <line num="102" type="stmt" count="0"/>
+        <line num="103" type="stmt" count="0"/>
+        <line num="105" type="stmt" count="0"/>
+        <line num="107" type="stmt" count="0"/>
+        <line num="108" type="stmt" count="0"/>
+        <line num="110" type="stmt" count="0"/>
+        <line num="112" type="stmt" count="0"/>
+        <line num="113" type="stmt" count="0"/>
+        <line num="115" type="stmt" count="0"/>
+        <line num="117" type="stmt" count="0"/>
+        <line num="118" type="stmt" count="0"/>
+        <line num="120" type="stmt" count="0"/>
+        <line num="122" type="stmt" count="0"/>
+        <line num="123" type="stmt" count="0"/>
+        <line num="125" type="stmt" count="0"/>
+        <line num="127" type="stmt" count="0"/>
+        <line num="128" type="stmt" count="0"/>
+        <line num="130" type="stmt" count="0"/>
+        <line num="132" type="stmt" count="0"/>
+        <line num="133" type="stmt" count="0"/>
+        <line num="135" type="stmt" count="0"/>
+        <line num="137" type="stmt" count="0"/>
+        <line num="138" type="stmt" count="0"/>
+        <line num="140" type="stmt" count="0"/>
+        <line num="142" type="stmt" count="0"/>
+        <line num="143" type="stmt" count="0"/>
+        <line num="145" type="stmt" count="0"/>
+        <line num="147" type="stmt" count="0"/>
+        <line num="148" type="stmt" count="0"/>
+        <line num="149" type="stmt" count="0"/>
+        <line num="151" type="stmt" count="0"/>
+        <line num="152" type="stmt" count="0"/>
+        <line num="153" type="stmt" count="0"/>
+        <line num="154" type="stmt" count="0"/>
+        <line num="159" type="method" name="walkValue" crap="2" count="0"/>
+        <line num="160" type="stmt" count="0"/>
+        <line num="161" type="stmt" count="0"/>
+        <line num="162" type="stmt" count="0"/>
+        <line num="167" type="method" name="walkCompositeExpression" crap="20" count="0"/>
+        <line num="168" type="stmt" count="0"/>
+        <line num="169" type="stmt" count="0"/>
+        <line num="171" type="stmt" count="0"/>
+        <line num="172" type="stmt" count="0"/>
+        <line num="173" type="stmt" count="0"/>
+        <line num="175" type="stmt" count="0"/>
+        <line num="176" type="stmt" count="0"/>
+        <line num="177" type="stmt" count="0"/>
+        <line num="179" type="stmt" count="0"/>
+        <line num="180" type="stmt" count="0"/>
+        <line num="182" type="stmt" count="0"/>
+        <line num="183" type="stmt" count="0"/>
+        <line num="184" type="stmt" count="0"/>
+        <line num="185" type="stmt" count="0"/>
+        <line num="192" type="method" name="andExpressions" crap="12" count="0"/>
+        <line num="193" type="stmt" count="0"/>
+        <line num="195" type="stmt" count="0"/>
+        <line num="196" type="stmt" count="0"/>
+        <line num="197" type="stmt" count="0"/>
+        <line num="198" type="stmt" count="0"/>
+        <line num="199" type="stmt" count="0"/>
+        <line num="200" type="stmt" count="0"/>
+        <line num="201" type="stmt" count="0"/>
+        <line num="202" type="stmt" count="0"/>
+        <line num="209" type="method" name="orExpressions" crap="12" count="0"/>
+        <line num="210" type="stmt" count="0"/>
+        <line num="212" type="stmt" count="0"/>
+        <line num="213" type="stmt" count="0"/>
+        <line num="214" type="stmt" count="0"/>
+        <line num="215" type="stmt" count="0"/>
+        <line num="216" type="stmt" count="0"/>
+        <line num="217" type="stmt" count="0"/>
+        <line num="218" type="stmt" count="0"/>
+        <line num="219" type="stmt" count="0"/>
+        <metrics loc="221" ncloc="168" classes="1" methods="8" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="116" coveredstatements="0" elements="124" coveredelements="0"/>
+      </file>
+      <file name="/var/www/collections/src/Easy/Collections/Linq/Expr/Comparison.php">
+        <class name="Comparison" namespace="Easy\Collections\Linq\Expr">
+          <metrics methods="5" coveredmethods="2" conditionals="0" coveredconditionals="0" statements="11" coveredstatements="8" elements="16" coveredelements="10"/>
+        </class>
+        <line num="49" type="method" name="__construct" crap="2" count="16"/>
+        <line num="51" type="stmt" count="16"/>
+        <line num="52" type="stmt" count="4"/>
+        <line num="53" type="stmt" count="4"/>
+        <line num="55" type="stmt" count="16"/>
+        <line num="56" type="stmt" count="16"/>
+        <line num="57" type="stmt" count="16"/>
+        <line num="58" type="stmt" count="16"/>
+        <line num="63" type="method" name="getField" crap="2" count="0"/>
+        <line num="65" type="stmt" count="0"/>
+        <line num="71" type="method" name="getValue" crap="2" count="0"/>
+        <line num="73" type="stmt" count="0"/>
+        <line num="79" type="method" name="getOperator" crap="1" count="10"/>
+        <line num="81" type="stmt" count="10"/>
+        <line num="87" type="method" name="visit" crap="2" count="0"/>
+        <line num="89" type="stmt" count="0"/>
+        <line num="93" type="stmt" count="1"/>
+        <metrics loc="92" ncloc="56" classes="1" methods="5" coveredmethods="2" conditionals="0" coveredconditionals="0" statements="11" coveredstatements="8" elements="16" coveredelements="10"/>
+      </file>
+      <file name="/var/www/collections/src/Easy/Collections/Linq/Expr/CompositeExpression.php">
+        <class name="CompositeExpression" namespace="Easy\Collections\Linq\Expr">
+          <metrics methods="4" coveredmethods="3" conditionals="0" coveredconditionals="0" statements="12" coveredstatements="10" elements="16" coveredelements="13"/>
+        </class>
+        <line num="35" type="method" name="__construct" crap="4.02" count="5"/>
+        <line num="37" type="stmt" count="5"/>
+        <line num="39" type="stmt" count="5"/>
+        <line num="40" type="stmt" count="5"/>
+        <line num="41" type="stmt" count="0"/>
+        <line num="43" type="stmt" count="5"/>
+        <line num="44" type="stmt" count="1"/>
+        <line num="47" type="stmt" count="4"/>
+        <line num="48" type="stmt" count="4"/>
+        <line num="49" type="stmt" count="4"/>
+        <line num="56" type="method" name="getExpressionList" crap="1" count="2"/>
+        <line num="58" type="stmt" count="2"/>
+        <line num="64" type="method" name="getType" crap="1" count="4"/>
+        <line num="66" type="stmt" count="4"/>
+        <line num="72" type="method" name="visit" crap="2" count="0"/>
+        <line num="74" type="stmt" count="0"/>
+        <metrics loc="76" ncloc="45" classes="1" methods="4" coveredmethods="2" conditionals="0" coveredconditionals="0" statements="12" coveredstatements="10" elements="16" coveredelements="12"/>
+      </file>
+      <file name="/var/www/collections/src/Easy/Collections/Linq/Expr/ExpressionVisitor.php">
+        <class name="ExpressionVisitor" namespace="Easy\Collections\Linq\Expr">
+          <metrics methods="4" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="16" coveredstatements="0" elements="20" coveredelements="0"/>
+        </class>
+        <line num="23" type="method" name="walkComparison" crap="2" count="0"/>
+        <line num="32" type="method" name="walkValue" crap="2" count="0"/>
+        <line num="41" type="method" name="walkCompositeExpression" crap="2" count="0"/>
+        <line num="52" type="method" name="dispatch" crap="20" count="0"/>
+        <line num="53" type="stmt" count="0"/>
+        <line num="54" type="stmt" count="0"/>
+        <line num="55" type="stmt" count="0"/>
+        <line num="56" type="stmt" count="0"/>
+        <line num="58" type="stmt" count="0"/>
+        <line num="59" type="stmt" count="0"/>
+        <line num="61" type="stmt" count="0"/>
+        <line num="62" type="stmt" count="0"/>
+        <line num="64" type="stmt" count="0"/>
+        <line num="65" type="stmt" count="0"/>
+        <line num="66" type="stmt" count="0"/>
+        <line num="67" type="stmt" count="0"/>
+        <metrics loc="68" ncloc="30" classes="1" methods="4" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="16" coveredstatements="0" elements="20" coveredelements="0"/>
+      </file>
+      <file name="/var/www/collections/src/Easy/Collections/Linq/Expr/Value.php">
+        <class name="Value" namespace="Easy\Collections\Linq\Expr">
+          <metrics methods="3" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="4" coveredstatements="2" elements="7" coveredelements="3"/>
+        </class>
+        <line num="18" type="method" name="__construct" crap="1" count="16"/>
+        <line num="20" type="stmt" count="16"/>
+        <line num="21" type="stmt" count="16"/>
+        <line num="26" type="method" name="getValue" crap="2" count="0"/>
+        <line num="28" type="stmt" count="0"/>
+        <line num="34" type="method" name="visit" crap="2" count="0"/>
+        <line num="36" type="stmt" count="0"/>
+        <metrics loc="38" ncloc="24" classes="1" methods="3" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="4" coveredstatements="2" elements="7" coveredelements="3"/>
+      </file>
+    </package>
+    <file name="/var/www/collections/src/Easy/Collections/Linq/Expr/Expression.php">
+      <metrics loc="20" ncloc="8" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
+    </file>
+    <file name="/var/www/collections/src/Easy/Collections/Linq/IQueryable.php">
+      <line num="34" type="stmt" count="1"/>
+      <metrics loc="33" ncloc="13" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
+    </file>
+    <file name="/var/www/collections/src/Easy/Collections/Linq/ISelectable.php">
+      <line num="25" type="stmt" count="1"/>
+      <metrics loc="24" ncloc="11" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
+    </file>
+    <metrics files="25" loc="1961" ncloc="1200" classes="15" methods="103" coveredmethods="59" conditionals="0" coveredconditionals="0" statements="434" coveredstatements="174" elements="537" coveredelements="233"/>
+  </project>
+</coverage>

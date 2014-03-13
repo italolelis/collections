@@ -20,6 +20,7 @@ class Stack extends CollectionArray implements IStack
     public function push($item)
     {
         array_push($this->array, $item);
+        return $this;
     }
 
     /**
@@ -29,6 +30,7 @@ class Stack extends CollectionArray implements IStack
     public function pushMultiple($items)
     {
         $this->addMultiple($items);
+        return $this;
     }
 
     /**

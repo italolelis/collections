@@ -19,6 +19,7 @@ class ArrayList extends CollectionArray implements IList
     public function add($item)
     {
         array_push($this->array, $item);
+        return $this;
     }
 
     /**
@@ -27,6 +28,7 @@ class ArrayList extends CollectionArray implements IList
     public function addAll($items)
     {
         $this->addMultiple($items);
+        return $this;
     }
 
     /**
@@ -54,6 +56,8 @@ class ArrayList extends CollectionArray implements IList
             $this->array[$current + 1] = $this->array[$current];
         }
         $this->array[$index] = $item;
+
+        return $this;
     }
 
     /**

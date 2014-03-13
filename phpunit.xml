@@ -13,7 +13,7 @@
 >
     <testsuites>
         <testsuite name="Suite de Testes do Collections">
-            <directory>./Tests</directory>
+            <directory>./src/Easy/Collections/Test</directory>
         </testsuite>
     </testsuites>
 
@@ -21,9 +21,14 @@
         <whitelist>
             <directory>./</directory>
             <exclude>
-                <directory>./Tests</directory>
+                <directory>./src/Easy/Collections/Test</directory>
                 <directory>./vendor</directory>
             </exclude>
         </whitelist>
     </filter>
+    
+    <logging>
+        <log type="coverage-html" target="build/coverage" title="Collection Coverage" charset="UTF-8" yui="true" highlight="true" />
+        <log type="coverage-clover" target="build/logs/clover.xml"/>
+    </logging>
 </phpunit>

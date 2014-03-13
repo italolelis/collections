@@ -15,12 +15,12 @@ use Easy\Collections\Linq\ISelectable;
 use Easy\Generics\IEquatable;
 use InvalidArgumentException;
 use IteratorAggregate;
+use OutOfBoundsException;
 
 /**
  * Provides the abstract base class for a strongly typed collection.
  */
-abstract class CollectionArray implements
-IEnumerable, ICollection, IQueryable, ISelectable, IEquatable
+abstract class CollectionArray implements IEnumerable, ICollection, IQueryable, ISelectable, IEquatable
 {
 
     protected $array = array();
@@ -53,24 +53,6 @@ IEnumerable, ICollection, IQueryable, ISelectable, IEquatable
         return new ArrayIterator($this->array);
     }
 
-    protected function itemExists($item, $array)
-    {
-        $result = false;
-        if ($item instanceof EquatableInterface) {
-            foreach ($array as $v) {
-                if ($item->equals($v)) {
-                    $result = true;
-                    break;
-                }
-            }
-        } elseif (in_array($item, $array, true)) {
-            $result = in_array($item, $array);
-        } else {
-            $result = isset($array[$item]);
-        }
-        return $result;
-    }
-
     /**
      * Gets the default comparer for this collection
      * @return IComparer
@@ -86,7 +68,7 @@ IEnumerable, ICollection, IQueryable, ISelectable, IEquatable
     /**
      * Sets the default comparer for this collection
      * @param IComparer $defaultComparer
-     * @return List
+     * @return ArrayList
      */
     public function setDefaultComparer(IComparer $defaultComparer)
     {
@@ -108,6 +90,7 @@ IEnumerable, ICollection, IQueryable, ISelectable, IEquatable
     public function clear()
     {
         $this->array = array();
+        return $this;
     }
 
     /**
@@ -167,6 +150,24 @@ IEnumerable, ICollection, IQueryable, ISelectable, IEquatable
         if (empty($array) == false) {
             $this->array = $this->array + $array;
         }
+    }
+
+    protected function itemExists($item, $array)
+    {
+        $result = false;
+        if ($item instanceof EquatableInterface) {
+            foreach ($array as $v) {
+                if ($item->equals($v)) {
+                    $result = true;
+                    break;
+                }
+            }
+        } elseif (in_array($item, $array, true)) {
+            $result = in_array($item, $array);
+        } else {
+            $result = isset($array[$item]);
+        }
+        return $result;
     }
 
     /**
@@ -233,6 +234,7 @@ IEnumerable, ICollection, IQueryable, ISelectable, IEquatable
             $comparer = $this->getDefaultComparer();
         }
         usort($this->array, array($comparer, 'compare'));
+        return $this;
     }
 
     /**
@@ -244,7 +246,8 @@ IEnumerable, ICollection, IQueryable, ISelectable, IEquatable
         if ($comparer === null) {
             $comparer = $this->getDefaultComparer();
         }
-        ukort($this->array, array($comparer, 'compare'));
+        uksort($this->array, array($comparer, 'compare'));
+        return $this;
     }
 
     /**
@@ -256,6 +259,7 @@ IEnumerable, ICollection, IQueryable, ISelectable, IEquatable
             throw new InvalidArgumentException('The key is not present in the dictionary');
         }
         unset($this->array[$index]);
+        return $this;
     }
 
     /**
@@ -295,6 +299,7 @@ IEnumerable, ICollection, IQueryable, ISelectable, IEquatable
     public function unserialize($serialized)
     {
         $this->array = unserialize($serialized);
+        return $this->array;
     }
 
     /**

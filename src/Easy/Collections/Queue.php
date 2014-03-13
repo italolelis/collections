@@ -20,6 +20,7 @@ class Queue extends CollectionArray implements IQueue
     public function enqueue($item)
     {
         array_push($this->array, $item);
+        return $this;
     }
 
     /**
@@ -29,6 +30,7 @@ class Queue extends CollectionArray implements IQueue
     public function enqueueMultiple($items)
     {
         $this->addMultiple($items);
+        return $this;
     }
 
     /**

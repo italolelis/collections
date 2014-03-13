@@ -19,14 +19,14 @@
     },
     "autoload": {
         "psr-0": {
-            "Easy\\Collections": ""
+            "": "src/"
         }
     },
     "target-dir": "Easy/Collections",
     "minimum-stability": "dev",
     "extra": {
         "branch-alias": {
-            "dev-master": "1.0-dev"
+            "dev-master": "1.2-dev"
         }
     }
 }

@@ -15,4 +15,14 @@ namespace Easy\Collections\Test;
  */
 abstract class CollectionsTestCase extends \PHPUnit_Framework_TestCase
 {
+
+    /**
+     * @expectedException \InvalidArgumentException
+     */
+    public function testInvalidElementsToInstanciate()
+    {
+        $coll = new \Easy\Collections\ArrayList();
+        $coll->addAll('string');
+    }
+
 }

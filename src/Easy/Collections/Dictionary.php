@@ -21,6 +21,8 @@ class Dictionary extends CollectionArray implements IDictionary
             throw new InvalidArgumentException('That key already exists!');
         }
         $this->set($key, $value);
+
+        return $this;
     }
 
     public function set($key, $value)
@@ -29,6 +31,8 @@ class Dictionary extends CollectionArray implements IDictionary
             throw new InvalidArgumentException("Can't use 'null' as key!");
         }
         $this->array[$key] = $value;
+
+        return $this;
     }
 
     /**
@@ -52,9 +56,6 @@ class Dictionary extends CollectionArray implements IDictionary
      */
     public function offsetGet($offset)
     {
-        if ($this->offsetExists($offset) == false) {
-            throw new InvalidArgumentException('The key is not present in the dictionary');
-        }
         return $this->get($offset);
     }
 

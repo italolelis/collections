@@ -13,17 +13,26 @@ namespace Easy\Collections\Test;
  *
  * @author italo
  */
-class DictionaryTest extends CollectionsTestCase
+class RecursiveDictionaryTest extends CollectionsTestCase
 {
 
     /**
-     * @var \Easy\Collections\Dictionary
+     * @var \Easy\Collections\RecursiveDictionary
      */
     private $coll;
 
     protected function setUp()
     {
-        $this->coll = new \Easy\Collections\Dictionary();
+        $this->coll = new \Easy\Collections\RecursiveDictionary(array(
+            'test1' => 'testeValue1',
+            'test2' => array(
+                'test2.1' => 'testeValue2.1',
+                'test2.2' => 'testeValue2.2',
+                'test2.3' => array(
+                    'test2.3.1' => 'testeValue2.3.1'
+                )
+            )
+        ));
     }
 
     public function testNewInstance()
@@ -93,18 +102,6 @@ class DictionaryTest extends CollectionsTestCase
     public function testRemovingNonExistentEntryReturnsNull()
     {
         $this->assertEquals(null, $this->coll->remove('testing_does_not_exist'));
-    }
-
-    public function testArrayAccess()
-    {
-        $this->coll['keyOne'] = 'one';
-        $this->coll['keyTwo'] = 'two';
-
-        $this->assertEquals($this->coll['keyOne'], 'one');
-        $this->assertEquals($this->coll['keyTwo'], 'two');
-
-        unset($this->coll['keyOne']);
-        $this->assertEquals($this->coll->count(), 1);
     }
 
 }
