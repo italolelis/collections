@@ -1,6 +1,10 @@
 Collections
 ===========
 
+[![Build Status](https://travis-ci.org/LellysInformatica/collections.png?branch=master)](https://travis-ci.org/LellysInformatica/collections)
+[![Latest Stable Version](https://poser.pugx.org/umbrella/boleto/v/stable.png)](https://packagist.org/packages/easyframework/collections)
+[![Latest Unstable Version](https://poser.pugx.org/umbrella/boleto/v/unstable.png)](https://packagist.org/packages/easyframework/collections)
+
 Collections Abstraction library for PHP
 
 What is it?
