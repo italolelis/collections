@@ -22,7 +22,6 @@
             "": "src/"
         }
     },
-    "target-dir": "Easy/Collections",
     "minimum-stability": "dev",
     "extra": {
         "branch-alias": {
