@@ -138,7 +138,8 @@ abstract class CollectionArray implements IEnumerable, ICollection, IQueryable, 
         if (!is_array($items) && !($items instanceof IteratorAggregate)) {
             throw new InvalidArgumentException('Items must be either a Collection or an array');
         }
-        if ($items instanceof Enumerable) {
+        $array = array();
+        if ($items instanceof IEnumerable) {
             $array = array_values($items->toArray());
         } else if (is_array($items)) {
             $array = $items;
@@ -155,7 +156,7 @@ abstract class CollectionArray implements IEnumerable, ICollection, IQueryable, 
     protected function itemExists($item, $array)
     {
         $result = false;
-        if ($item instanceof EquatableInterface) {
+        if ($item instanceof IEquatable) {
             foreach ($array as $v) {
                 if ($item->equals($v)) {
                     $result = true;
@@ -209,6 +210,10 @@ abstract class CollectionArray implements IEnumerable, ICollection, IQueryable, 
             $next = null;
             foreach (array_reverse($orderings) as $field => $ordering) {
                 $next = ClosureExpressionVisitor::sortByField($field, $ordering == 'DESC' ? -1 : 1, $next);
+            }
+
+            if ($next === null) {
+                throw new InvalidArgumentException("The next value needs to be a callable function");
             }
 
             usort($filtered, $next);
