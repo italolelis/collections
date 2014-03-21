@@ -14,17 +14,20 @@ interface ICollection extends IEnumerable, Countable
 
     /**
      * Removes all elements from the ICollection object.
+     * @return CollectionArray
      */
     public function clear();
 
     /**
      * Verifies whether a colletion is empty
+     * @return boolean
      */
     public function isEmpty();
 
     /**
      * Determines whether the IDictionary object contains an element with the specified key.
      * @param mixed $item The key to locate in the IDictionary object.
+     * @return boolean
      */
     public function contains($item);
 
@@ -51,12 +54,14 @@ interface ICollection extends IEnumerable, Countable
     /**
      * Removes the IList item at the specified index.
      * @param int $element The zero-based index of the item to remove.
+     * @return boolean
      */
     public function removeValue($element);
 
     /**
      * Removes the element with the specified key from the IList object.
      * @param mixed $index The key of the element to remove.
+     * @return CollectionArray
      */
     public function remove($index);
 }

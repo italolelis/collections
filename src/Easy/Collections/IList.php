@@ -15,12 +15,14 @@ interface IList extends ICollection, ArrayAccess
     /**
      * Adds an item to the IList.
      * @param mixed $item The object to add to the IList.
+     * @return ArrayList
      */
     public function add($item);
 
     /**
      * Adds the elements of the specified collection to the end of the IList.
      * @param ICollection|array $items The collection whose elements should be added to the end of the IList.
+     * @return ArrayList
      */
     public function addAll($items);
 
@@ -28,6 +30,7 @@ interface IList extends ICollection, ArrayAccess
      * Inserts an item to the IList at the specified index.
      * @param int $index The zero-based index at which value should be inserted.
      * @param mixed $item The object to insert into the IList.
+     * @return ArrayList
      */
     public function insert($index, $item);
 

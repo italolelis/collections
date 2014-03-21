@@ -187,7 +187,7 @@ class ClosureExpressionVisitor extends ExpressionVisitor
     /**
      * @param array $expressions
      *
-     * @return callable
+     * @return \Closure
      */
     private function andExpressions($expressions)
     {
@@ -204,7 +204,7 @@ class ClosureExpressionVisitor extends ExpressionVisitor
     /**
      * @param array $expressions
      *
-     * @return callable
+     * @return \Closure
      */
     private function orExpressions($expressions)
     {

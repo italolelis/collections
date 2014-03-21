@@ -45,7 +45,7 @@ abstract class ExpressionVisitor
      *
      * @param Expression $expr
      *
-     * @return mixed
+     * @return null|callable
      *
      * @throws \RuntimeException
      */

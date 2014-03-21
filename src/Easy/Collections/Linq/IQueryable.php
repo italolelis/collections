@@ -27,7 +27,7 @@ interface IQueryable
      *
      * @param Closure $p The predicate used for filtering.
      *
-     * @return Collection A collection with the results of the filter operation.
+     * @return \Easy\Collections\CollectionArray A collection with the results of the filter operation.
      */
     public function filter(Closure $p);
 }

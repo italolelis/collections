@@ -15,12 +15,14 @@ interface IStack extends ICollection
     /**
      * Inserts an object at the top of the Stack.
      * @param type $item The Object to push onto the Stack. The value <b>can</b> be null.
+     * @return Stack
      */
     public function push($item);
 
     /**
      * Inserts multiples objects at the top of the Stack.
-     * @param  ICollection|array $item The Objects to push onto the Stack. The value <b>can</b> be null.
+     * @param  ICollection|array $items The Objects to push onto the Stack. The value <b>can</b> be null.
+     * @return Stack
      */
     public function pushMultiple($items);
 
