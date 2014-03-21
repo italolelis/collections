@@ -25,7 +25,7 @@ class Stack extends CollectionArray implements IStack
 
     /**
      * Inserts multiples objects at the top of the Stack.
-     * @param type $item The Objects to push onto the Stack. The value <b>can</b> be null.
+     * @param type $items The Objects to push onto the Stack. The value <b>can</b> be null.
      */
     public function pushMultiple($items)
     {

@@ -15,12 +15,14 @@ interface IQueue extends ICollection
     /**
      * Adds an object to the end of the Queue.
      * @param mixed $item The object to add to the Queue. The value can be null.
+     * @return Queue
      */
     public function enqueue($item);
 
     /**
      * Adds multiples objects to the end of the Queue.
      * @param ICollection|array $items The objects to add to the Queue. The value can be null.
+     * @return Queue
      */
     public function enqueueMultiple($items);
 

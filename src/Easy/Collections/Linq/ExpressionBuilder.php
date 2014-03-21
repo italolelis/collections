@@ -28,7 +28,7 @@ class ExpressionBuilder
     }
 
     /**
-     * @param mixed $x
+     * @param Comparison $x
      *
      * @return CompositeExpression
      */
@@ -39,7 +39,7 @@ class ExpressionBuilder
 
     /**
      * @param string $field
-     * @param mixed  $value
+     * @param string  $value
      *
      * @return Comparison
      */
@@ -50,7 +50,7 @@ class ExpressionBuilder
 
     /**
      * @param string $field
-     * @param mixed  $value
+     * @param string  $value
      *
      * @return Comparison
      */
@@ -61,7 +61,7 @@ class ExpressionBuilder
 
     /**
      * @param string $field
-     * @param mixed  $value
+     * @param string  $value
      *
      * @return Comparison
      */
@@ -72,7 +72,7 @@ class ExpressionBuilder
 
     /**
      * @param string $field
-     * @param mixed  $value
+     * @param string  $value
      *
      * @return Comparison
      */
@@ -83,7 +83,7 @@ class ExpressionBuilder
 
     /**
      * @param string $field
-     * @param mixed  $value
+     * @param string  $value
      *
      * @return Comparison
      */
@@ -94,7 +94,7 @@ class ExpressionBuilder
 
     /**
      * @param string $field
-     * @param mixed  $value
+     * @param string  $value
      *
      * @return Comparison
      */
@@ -115,7 +115,7 @@ class ExpressionBuilder
 
     /**
      * @param string $field
-     * @param mixed  $values
+     * @param string[]  $values
      *
      * @return Comparison
      */
@@ -126,7 +126,7 @@ class ExpressionBuilder
 
     /**
      * @param string $field
-     * @param mixed  $values
+     * @param string[]  $values
      *
      * @return Comparison
      */
@@ -139,7 +139,7 @@ class ExpressionBuilder
      * Returns a value indicating whether a specified substring occurs within this string.
      * 
      * @param string $field
-     * @param mixed  $value
+     * @param string  $value
      *
      * @return Comparison
      */

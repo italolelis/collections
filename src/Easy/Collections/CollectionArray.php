@@ -115,6 +115,7 @@ abstract class CollectionArray implements IEnumerable, ICollection, IQueryable, 
 
     /**
      * {@inheritdoc}
+     * @param string $default
      */
     public function tryGet($index, $default = null)
     {
