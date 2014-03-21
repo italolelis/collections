@@ -4,13 +4,13 @@ php:
   - 5.3
   - 5.4
   - 5.5
-  
-matrix:
-  allow_failures:
-    - php: 5.5
 
 before_install:
   - composer install --dev
 
 script:
  - phpunit --log-junit /tmp/nb-phpunit-log.xml --configuration ./phpunit.xml ./src/Easy/Collections/Test
+
+after_script:
+ - wget https://scrutinizer-ci.com/ocular.phar
+ - php ocular.phar code-coverage:upload --format=php-clover coverage.clover
