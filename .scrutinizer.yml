@@ -1,0 +1,32 @@
+before_commands:
+    - "composer install --dev --prefer-source"
+
+tools:
+    php_code_sniffer:
+        enabled: true
+        config:
+            standard: PSR2
+        filter:
+            paths: ["src/*"]
+    php_cpd:
+        enabled: true
+        excluded_dirs: ["/src/Umbrella/Ya/Boleto/Tests/", "vendor"]
+    php_cs_fixer:
+        enabled: false
+        config:
+            level: all
+        filter:
+            paths: ["src/*", "/src/Umbrella/Ya/Boleto/Tests/*"]
+    php_loc:
+        enabled: true
+    php_mess_detector:
+        enabled: true
+        filter:
+            paths: ["/src/Umbrella/Ya/Boleto/Tests/*"]
+    php_pdepend:
+        enabled: true
+        excluded_dirs: ["/src/Umbrella/Ya/Boleto/Tests/", "vendor"]
+    php_analyzer:
+        filter:
+            paths: ["src/*", "/src/Umbrella/Ya/Boleto/Tests/*"]
+    sensiolabs_security_checker: true
