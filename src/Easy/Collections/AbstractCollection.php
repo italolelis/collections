@@ -23,8 +23,6 @@ abstract class AbstractCollection implements ICollection, ICollectionConvertable
 
     protected $array = array();
 
-    public abstract static function getFromArray($arr);
-
     /**
      * @var IComparer
      */

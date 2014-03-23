@@ -15,6 +15,8 @@ use OutOfBoundsException;
 abstract class CollectionArray extends AbstractCollection implements IIndexAccess, IConstIndexAccess
 {
 
+    public abstract static function getFromArray($arr);
+
     /**
      * {@inheritdoc}
      */
