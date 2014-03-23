@@ -29,6 +29,15 @@ class ArrayListTest extends CollectionsTestCase
         $this->coll = new ArrayList();
     }
 
+    /**
+     * @expectedException \InvalidArgumentException
+     */
+    public function testInvalidElementsToInstanciate()
+    {
+        $coll = new \Easy\Collections\ArrayList();
+        $coll->addAll('string');
+    }
+
     public function testNewInstanceWithArray()
     {
         $this->assertNotNull(new ArrayList(array(

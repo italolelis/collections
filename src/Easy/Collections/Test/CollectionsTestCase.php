@@ -21,13 +21,4 @@ abstract class CollectionsTestCase extends \PHPUnit_Framework_TestCase
         date_default_timezone_set('America/Recife');
     }
 
-    /**
-     * @expectedException \InvalidArgumentException
-     */
-    public function testInvalidElementsToInstanciate()
-    {
-        $coll = new \Easy\Collections\ArrayList();
-        $coll->addAll('string');
-    }
-
 }

@@ -40,7 +40,7 @@ class Stack extends AbstractCollection implements IStack
     public function pop()
     {
         if ($this->isEmpty()) {
-            throw new BadFunctionCallException(__('Cannot use method Pop on an empty Stack'));
+            throw new BadFunctionCallException(_('Cannot use method Pop on an empty Stack'));
         }
         return array_pop($this->array);
     }
@@ -53,7 +53,7 @@ class Stack extends AbstractCollection implements IStack
     public function peek()
     {
         if ($this->isEmpty()) {
-            throw new BadFunctionCallException(__('Cannot use method Peek on an empty Stack'));
+            throw new BadFunctionCallException(_('Cannot use method Peek on an empty Stack'));
         }
 
         return end($this->array);

@@ -5,7 +5,9 @@
 namespace Easy\Collections;
 
 use Easy\Generics\IEquatable;
+use InvalidArgumentException;
 use OutOfBoundsException;
+use Traversable;
 
 /**
  * Represents a strongly typed list of objects that can be accessed by index. Provides methods to search, sort, and manipulate lists.
@@ -13,16 +15,28 @@ use OutOfBoundsException;
 class ImmutableVector extends AbstractCollection implements IConstIndexAccess
 {
 
-    public function __construct(Traversable $items = null)
+    public function __construct($items = null)
     {
+        if (!is_array($items) && !$items instanceof Traversable) {
+            throw new InvalidArgumentException('The items must be an array or Traversable');
+        }
+
         if ($items !== null) {
             foreach ($items as $item) {
                 if (is_array($item)) {
                     $item = ImmutableVector::fromArray($item);
                 }
-                $this->add($item);
+                $this->array[] = $item;
             }
         }
+    }
+
+    /**
+     * @expectedException \InvalidArgumentException
+     */
+    public function testInvalidElementsToInstanciate()
+    {
+        $coll = new \Easy\Collections\ImmutableVector('string');
     }
 
     /**
@@ -75,6 +89,22 @@ class ImmutableVector extends AbstractCollection implements IConstIndexAccess
     public static function getFromArray($arr)
     {
         return ImmutableVector::fromArray($arr);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public static function fromArray(array $arr)
+    {
+        $vector = array();
+        foreach ($arr as $v) {
+            if (is_array($v)) {
+                $vector[] = new ImmutableVector($v);
+            } else {
+                $vector[] = $v;
+            }
+        }
+        return new ImmutableVector($vector);
     }
 
 }

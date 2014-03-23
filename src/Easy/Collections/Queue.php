@@ -53,7 +53,7 @@ class Queue extends AbstractCollection implements IQueue
     public function peek()
     {
         if ($this->isEmpty()) {
-            throw new BadFunctionCallException(__('Cannot use method Peek on an empty Queue'));
+            throw new BadFunctionCallException(_('Cannot use method Peek on an empty Queue'));
         }
 
         return $this->array[0];
