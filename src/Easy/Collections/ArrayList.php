@@ -4,7 +4,10 @@
 
 namespace Easy\Collections;
 
+use Closure;
 use Easy\Collections\CollectionArray;
+use Easy\Collections\Linq\Criteria;
+use Easy\Collections\Linq\Expr\ClosureExpressionVisitor;
 use InvalidArgumentException;
 use Traversable;
 
@@ -163,14 +166,6 @@ class ArrayList extends CollectionArray implements IVector, IVectorConvertable
     /**
      * {@inheritdoc}
      */
-    public static function getFromArray($arr)
-    {
-        return ArrayList::fromArray($arr);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     public function reverse()
     {
         array_reverse($this->array);
@@ -198,6 +193,51 @@ class ArrayList extends CollectionArray implements IVector, IVectorConvertable
     public function splice($offset, $length = null)
     {
         array_splice($this->array, $offset, $length);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function filter(Closure $p)
+    {
+        return ArrayList::fromArray(array_filter($this->array, $p));
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function matching(Criteria $criteria)
+    {
+        $expr = $criteria->getWhereExpression();
+        $filtered = $this->array;
+
+        if ($expr) {
+            $visitor = new ClosureExpressionVisitor();
+            $filter = $visitor->dispatch($expr);
+            $filtered = array_filter($filtered, $filter);
+        }
+
+        if ($orderings = $criteria->getOrderings()) {
+            $next = null;
+            foreach (array_reverse($orderings) as $field => $ordering) {
+                $next = ClosureExpressionVisitor::sortByField($field, $ordering == 'DESC' ? -1 : 1, $next);
+            }
+
+            if ($next === null) {
+                throw new InvalidArgumentException("The next value needs to be a callable function");
+            }
+
+            usort($filtered, $next);
+        }
+
+        $offset = $criteria->getFirstResult();
+        $length = $criteria->getMaxResults();
+
+        if ($offset || $length) {
+            $filtered = array_slice($filtered, (int) $offset, $length);
+        }
+
+        return ArrayList::fromArray($filtered);
     }
 
 }

@@ -5,20 +5,14 @@
 namespace Easy\Collections;
 
 use ArrayIterator;
-use Closure;
 use Easy\Collections\Comparer\NumericKeyComparer;
 use Easy\Collections\Generic\IComparer;
-use Easy\Collections\Linq\Criteria;
-use Easy\Collections\Linq\Expr\ClosureExpressionVisitor;
-use Easy\Collections\Linq\IQueryable;
-use Easy\Collections\Linq\ISelectable;
 use Easy\Generics\IEquatable;
-use InvalidArgumentException;
 
 /**
  * Provides the abstract base class for a strongly typed collection.
  */
-abstract class AbstractCollection implements ICollection, ICollectionConvertable, IQueryable, ISelectable, IEquatable
+abstract class AbstractCollection implements ICollection, ICollectionConvertable, IEquatable
 {
 
     protected $array = array();
@@ -79,64 +73,6 @@ abstract class AbstractCollection implements ICollection, ICollectionConvertable
     public function isEmpty()
     {
         return $this->count() < 1;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function exists(Closure $p)
-    {
-        foreach ($this->array as $key => $element) {
-            if ($p($key, $element)) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function filter(Closure $p)
-    {
-        return static::getFromArray(array_filter($this->array, $p));
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function matching(Criteria $criteria)
-    {
-        $expr = $criteria->getWhereExpression();
-        $filtered = $this->array;
-
-        if ($expr) {
-            $visitor = new ClosureExpressionVisitor();
-            $filter = $visitor->dispatch($expr);
-            $filtered = array_filter($filtered, $filter);
-        }
-
-        if ($orderings = $criteria->getOrderings()) {
-            $next = null;
-            foreach (array_reverse($orderings) as $field => $ordering) {
-                $next = ClosureExpressionVisitor::sortByField($field, $ordering == 'DESC' ? -1 : 1, $next);
-            }
-
-            if ($next === null) {
-                throw new InvalidArgumentException("The next value needs to be a callable function");
-            }
-
-            usort($filtered, $next);
-        }
-
-        $offset = $criteria->getFirstResult();
-        $length = $criteria->getMaxResults();
-
-        if ($offset || $length) {
-            $filtered = array_slice($filtered, (int) $offset, $length);
-        }
-
-        return static::getFromArray($filtered);
     }
 
     /**

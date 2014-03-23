@@ -4,7 +4,10 @@
 
 namespace Easy\Collections;
 
+use Closure;
 use Easy\Collections\Generic\IComparer;
+use Easy\Collections\Linq\IQueryable;
+use Easy\Collections\Linq\ISelectable;
 use Easy\Generics\IEquatable;
 use InvalidArgumentException;
 use OutOfBoundsException;
@@ -12,10 +15,8 @@ use OutOfBoundsException;
 /**
  * Provides the abstract base class for a strongly typed collection.
  */
-abstract class CollectionArray extends AbstractCollection implements IIndexAccess, IConstIndexAccess
+abstract class CollectionArray extends AbstractCollection implements IIndexAccess, IConstIndexAccess, IQueryable, ISelectable
 {
-
-    public abstract static function getFromArray($arr);
 
     /**
      * {@inheritdoc}
@@ -114,6 +115,19 @@ abstract class CollectionArray extends AbstractCollection implements IIndexAcces
             return true;
         }
 
+        return false;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function exists(Closure $p)
+    {
+        foreach ($this->array as $key => $element) {
+            if ($p($key, $element)) {
+                return true;
+            }
+        }
         return false;
     }
 
