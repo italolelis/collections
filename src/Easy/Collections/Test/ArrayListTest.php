@@ -77,6 +77,12 @@ class ArrayListTest extends CollectionsTestCase
                 ), $arrayList->toArray());
     }
 
+    public function testSlice()
+    {
+        $this->coll->addAll(array(1, 2, 3, 4));
+        $this->assertTrue(is_string((string) $this->coll));
+    }
+
     public function testToString()
     {
         $this->coll->add('testing');

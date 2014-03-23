@@ -16,7 +16,7 @@ use Traversable;
 class Dictionary extends CollectionArray implements IMap, IMapConvertable
 {
 
-    public function __construct(Traversable $array = null)
+    public function __construct($array = null)
     {
         if ($array !== null) {
             $this->addAll($array);
