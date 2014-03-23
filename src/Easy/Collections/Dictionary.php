@@ -10,7 +10,7 @@ use Traversable;
 /**
  * Represents a collection of keys and values.
  */
-class Dictionary extends CollectionArray implements IDictionary, IDictionaryConvertable
+class Dictionary extends CollectionArray implements IMap, IMapConvertable
 {
 
     public function __construct(Traversable $array = null)

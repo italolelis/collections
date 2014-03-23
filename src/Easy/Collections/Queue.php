@@ -5,12 +5,11 @@
 namespace Easy\Collections;
 
 use BadFunctionCallException;
-use Easy\Collections\CollectionArray;
 
 /**
  * Represents a first-in, first-out collection of objects.
  */
-class Queue extends CollectionArray implements IQueue
+class Queue extends AbstractCollection implements IQueue
 {
 
     /**

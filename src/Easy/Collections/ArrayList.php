@@ -11,7 +11,7 @@ use Traversable;
 /**
  * Represents a strongly typed list of objects that can be accessed by index. Provides methods to search, sort, and manipulate lists.
  */
-class ArrayList extends CollectionArray implements IList, IListConvertable
+class ArrayList extends CollectionArray implements IVector, IVectorConvertable
 {
 
     public function __construct($items = null)

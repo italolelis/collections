@@ -9,7 +9,7 @@ use Traversable;
 /**
  * Represents a nongeneric collection of key/value pairs.
  */
-interface IDictionary extends ICollection, IIndexAccess, IConstIndexAccess
+interface IMap extends ICollection, IIndexAccess, IConstIndexAccess
 {
 
     /**
@@ -23,7 +23,7 @@ interface IDictionary extends ICollection, IIndexAccess, IConstIndexAccess
     /**
      * Adds all the key/value Pairs from the Traversable to the IDictionary.
      * @param Traversable $items The collection whose elements should be added to the end of the IDictionary.
-     * @return IDictionary
+     * @return IMap
      */
     public function addAll($items);
 }

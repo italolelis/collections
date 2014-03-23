@@ -9,7 +9,7 @@ use Traversable;
 /**
  * Represents a non-generic collection of objects that can be individually accessed by index.
  */
-interface IList extends ICollection, IIndexAccess, IConstIndexAccess
+interface IVector extends ICollection, IIndexAccess, IConstIndexAccess
 {
 
     /**
@@ -22,7 +22,7 @@ interface IList extends ICollection, IIndexAccess, IConstIndexAccess
     /**
      * Adds all the key/value Pairs from the Traversable to the IList.
      * @param Traversable $items The collection whose elements should be added to the end of the IList.
-     * @return IList
+     * @return IVector
      */
     public function addAll($items);
 

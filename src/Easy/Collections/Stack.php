@@ -5,12 +5,11 @@
 namespace Easy\Collections;
 
 use BadFunctionCallException;
-use Easy\Collections\CollectionArray;
 
 /**
  * Represents a simple last-in-first-out (LIFO) non-generic collection of objects.
  */
-class Stack extends CollectionArray implements IStack
+class Stack extends AbstractCollection implements IStack
 {
 
     /**
