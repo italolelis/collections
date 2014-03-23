@@ -29,9 +29,46 @@ class ArrayListTest extends CollectionsTestCase
         $this->coll = new ArrayList();
     }
 
+    /**
+     * @expectedException \PHPUnit_Framework_Error
+     */
+    public function testNewInstanceWithArray()
+    {
+        $this->assertNotNull(new ArrayList(array(
+            1, 2, 3, 4
+        )));
+    }
+
+    public function testNewInstanceWithTraversable()
+    {
+        $traversable = new \ArrayObject(array(
+            1, 2, 3, 4
+        ));
+        $this->assertNotNull(new ArrayList($traversable));
+    }
+
     public function testNewInstance()
     {
         $this->assertNotNull($this->coll);
+    }
+
+    public function testAddAllWithSomeValues()
+    {
+        $arrayList = new ArrayList();
+        $arrayList->add(1)
+                ->add(2);
+
+        $secoundArrayList = new ArrayList();
+        $secoundArrayList->add(3)
+                ->add(4);
+
+        $arrayList->addAll($secoundArrayList);
+        $this->assertEquals(array(
+            0 => 1,
+            1 => 2,
+            2 => 3,
+            3 => 4
+                ), $arrayList->toArray());
     }
 
     public function testToString()
@@ -148,8 +185,7 @@ class ArrayListTest extends CollectionsTestCase
         $res = $this->coll->filter(function($e) {
             return is_numeric($e);
         });
-
-        $this->assertEquals(array(0 => 1, 2 => 3), $res->toArray());
+        $this->assertEquals(array(0 => 1, 1 => 3), $res->toArray());
     }
 
     public function testArrayAccess()

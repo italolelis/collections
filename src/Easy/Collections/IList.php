@@ -4,12 +4,12 @@
 
 namespace Easy\Collections;
 
-use ArrayAccess;
+use Traversable;
 
 /**
  * Represents a non-generic collection of objects that can be individually accessed by index.
  */
-interface IList extends ICollection, ArrayAccess
+interface IList extends ICollection, IIndexAccess, IConstIndexAccess
 {
 
     /**
@@ -20,11 +20,11 @@ interface IList extends ICollection, ArrayAccess
     public function add($item);
 
     /**
-     * Adds the elements of the specified collection to the end of the IList.
-     * @param ICollection|array $items The collection whose elements should be added to the end of the IList.
-     * @return ArrayList
+     * Adds all the key/value Pairs from the Traversable to the IList.
+     * @param Traversable $items The collection whose elements should be added to the end of the IList.
+     * @return IList
      */
-    public function addAll($items);
+    public function addAll(Traversable $items);
 
     /**
      * Inserts an item to the IList at the specified index.
@@ -39,4 +39,28 @@ interface IList extends ICollection, ArrayAccess
      * @param mixed $item The object to locate in the IList.
      */
     public function indexOf($item);
+
+    /**
+     * Reverses the elements of this Vector in place
+     */
+    public function shuffle();
+
+    /**
+     * Splice the Vector in place. This function provides the functional equivalent of array_splice(), but for Vectors.
+     * @param int $offset
+     * @param int $length
+     */
+    public function splice($offset, $length = null);
+
+    /**
+     * Slice the elements of this Vector in place
+     * @param int $offset
+     * @param int $length
+     */
+    public function slice($offset, $length = null);
+
+    /**
+     * Reverses the elements of this Vector in place
+     */
+    public function reverse();
 }

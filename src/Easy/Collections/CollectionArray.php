@@ -4,101 +4,37 @@
 
 namespace Easy\Collections;
 
-use ArrayIterator;
-use Closure;
-use Easy\Collections\Comparer\NumericKeyComparer;
 use Easy\Collections\Generic\IComparer;
-use Easy\Collections\Linq\Criteria;
-use Easy\Collections\Linq\Expr\ClosureExpressionVisitor;
-use Easy\Collections\Linq\IQueryable;
-use Easy\Collections\Linq\ISelectable;
 use Easy\Generics\IEquatable;
 use InvalidArgumentException;
-use IteratorAggregate;
 use OutOfBoundsException;
 
 /**
  * Provides the abstract base class for a strongly typed collection.
  */
-abstract class CollectionArray implements IEnumerable, ICollection, IQueryable, ISelectable, IEquatable
+abstract class CollectionArray extends AbstractCollection implements IIndexAccess, IConstIndexAccess
 {
-
-    protected $array = array();
-
-    /**
-     * @var IComparer
-     */
-    private $defaultComparer;
-
-    public function __construct($array = null)
-    {
-        if (is_array($array) || $array instanceof IteratorAggregate) {
-            $this->addMultiple($array);
-        }
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function toArray()
-    {
-        return $this->array;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getIterator()
-    {
-        return new ArrayIterator($this->array);
-    }
-
-    /**
-     * Gets the default comparer for this collection
-     * @return IComparer
-     */
-    public function getDefaultComparer()
-    {
-        if ($this->defaultComparer === null) {
-            $this->defaultComparer = new NumericKeyComparer();
-        }
-        return $this->defaultComparer;
-    }
-
-    /**
-     * Sets the default comparer for this collection
-     * @param IComparer $defaultComparer
-     * @return ArrayList
-     */
-    public function setDefaultComparer(IComparer $defaultComparer)
-    {
-        $this->defaultComparer = $defaultComparer;
-        return $this;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function count()
-    {
-        return count($this->toArray());
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function clear()
-    {
-        $this->array = array();
-        return $this;
-    }
 
     /**
      * {@inheritdoc}
      */
     public function contains($item)
     {
-        return $this->itemExists($item, $this->array);
+        $result = false;
+        $array = $this->array;
+        if ($item instanceof IEquatable) {
+            foreach ($array as $v) {
+                if ($item->equals($v)) {
+                    $result = true;
+                    break;
+                }
+            }
+        } elseif (in_array($item, $array, true)) {
+            $result = in_array($item, $array);
+        } else {
+            $result = isset($array[$item]);
+        }
+        return $result;
     }
 
     /**
@@ -124,110 +60,6 @@ abstract class CollectionArray implements IEnumerable, ICollection, IQueryable, 
         }
 
         return $this->get($index);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function isEmpty()
-    {
-        return $this->count() < 1;
-    }
-
-    protected function addMultiple($items)
-    {
-        if (!is_array($items) && !($items instanceof IteratorAggregate)) {
-            throw new InvalidArgumentException('Items must be either a Collection or an array');
-        }
-        $array = array();
-        if ($items instanceof IEnumerable) {
-            $array = array_values($items->toArray());
-        } else if (is_array($items)) {
-            $array = $items;
-        } else if ($items instanceof IteratorAggregate) {
-            foreach ($items as $k => $v) {
-                $array[$k] = $v;
-            }
-        }
-        if (empty($array) == false) {
-            $this->array = $this->array + $array;
-        }
-    }
-
-    protected function itemExists($item, $array)
-    {
-        $result = false;
-        if ($item instanceof IEquatable) {
-            foreach ($array as $v) {
-                if ($item->equals($v)) {
-                    $result = true;
-                    break;
-                }
-            }
-        } elseif (in_array($item, $array, true)) {
-            $result = in_array($item, $array);
-        } else {
-            $result = isset($array[$item]);
-        }
-        return $result;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function exists(Closure $p)
-    {
-        foreach ($this->array as $key => $element) {
-            if ($p($key, $element)) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function filter(Closure $p)
-    {
-        return new static(array_filter($this->array, $p));
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function matching(Criteria $criteria)
-    {
-        $expr = $criteria->getWhereExpression();
-        $filtered = $this->array;
-
-        if ($expr) {
-            $visitor = new ClosureExpressionVisitor();
-            $filter = $visitor->dispatch($expr);
-            $filtered = array_filter($filtered, $filter);
-        }
-
-        if ($orderings = $criteria->getOrderings()) {
-            $next = null;
-            foreach (array_reverse($orderings) as $field => $ordering) {
-                $next = ClosureExpressionVisitor::sortByField($field, $ordering == 'DESC' ? -1 : 1, $next);
-            }
-
-            if ($next === null) {
-                throw new InvalidArgumentException("The next value needs to be a callable function");
-            }
-
-            usort($filtered, $next);
-        }
-
-        $offset = $criteria->getFirstResult();
-        $length = $criteria->getMaxResults();
-
-        if ($offset || $length) {
-            $filtered = array_slice($filtered, (int) $offset, $length);
-        }
-
-        return new static($filtered);
     }
 
     /**
@@ -281,44 +113,6 @@ abstract class CollectionArray implements IEnumerable, ICollection, IQueryable, 
         }
 
         return false;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function values()
-    {
-        return array_values($this->array);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function serialize()
-    {
-        return serialize($this->array);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function unserialize($serialized)
-    {
-        $this->array = unserialize($serialized);
-        return $this->array;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function __toString()
-    {
-        return get_class($this);
-    }
-
-    public function equals($obj)
-    {
-        return ($obj === $this);
     }
 
 }

@@ -6,12 +6,20 @@ namespace Easy\Collections;
 
 use Easy\Collections\CollectionArray;
 use InvalidArgumentException;
+use Traversable;
 
 /**
  * Represents a strongly typed list of objects that can be accessed by index. Provides methods to search, sort, and manipulate lists.
  */
-class ArrayList extends CollectionArray implements IList
+class ArrayList extends CollectionArray implements IList, IListConvertable
 {
+
+    public function __construct(Traversable $items = null)
+    {
+        if ($items !== null) {
+            $this->addAll($items);
+        }
+    }
 
     /**
      * {@inheritdoc}
@@ -25,10 +33,14 @@ class ArrayList extends CollectionArray implements IList
     /**
      * {@inheritdoc}
      */
-    public function addAll($items)
+    public function addAll(Traversable $items)
     {
-        $this->addMultiple($items);
-        return $this;
+        foreach ($items as $item) {
+            if (is_array($item)) {
+                $item = ArrayList::fromArray($item);
+            }
+            $this->add($item);
+        }
     }
 
     /**
@@ -102,6 +114,86 @@ class ArrayList extends CollectionArray implements IList
     public function offsetUnset($offset)
     {
         $this->remove($offset);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function toList()
+    {
+        return new ArrayList($this->array);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function toMap()
+    {
+        return new Dictionary($this->array);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public static function fromArray(array $arr)
+    {
+        $map = new ArrayList();
+        foreach ($arr as $v) {
+            if (is_array($v)) {
+                $map->add(new ArrayList($v));
+            } else {
+                $map->add($v);
+            }
+        }
+        return $map;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public static function fromItems(Traversable $items)
+    {
+        return new ArrayList($items);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public static function getFromArray($arr)
+    {
+        return ArrayList::fromArray($arr);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function reverse()
+    {
+        array_reverse($this->array);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function shuffle()
+    {
+        shuffle($this->array);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function slice($offset, $length = null)
+    {
+        array_slice($this->array, $offset, $length);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function splice($offset, $length = null)
+    {
+        array_splice($this->array, $offset, $length);
     }
 
 }

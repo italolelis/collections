@@ -16,8 +16,13 @@ namespace Easy\Collections\Test;
 abstract class CollectionsTestCase extends \PHPUnit_Framework_TestCase
 {
 
+    protected function setUp()
+    {
+        date_default_timezone_set('America/Recife');
+    }
+
     /**
-     * @expectedException \InvalidArgumentException
+     * @expectedException \PHPUnit_Framework_Error
      */
     public function testInvalidElementsToInstanciate()
     {

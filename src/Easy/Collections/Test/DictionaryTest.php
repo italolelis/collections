@@ -8,6 +8,12 @@
 
 namespace Easy\Collections\Test;
 
+use ArrayObject;
+use Easy\Collections\ArrayList;
+use Easy\Collections\Dictionary;
+use InvalidArgumentException;
+use OutOfBoundsException;
+
 /**
  * Description of CollectionTest
  *
@@ -17,18 +23,61 @@ class DictionaryTest extends CollectionsTestCase
 {
 
     /**
-     * @var \Easy\Collections\Dictionary
+     * @var Dictionary
      */
     private $coll;
 
     protected function setUp()
     {
-        $this->coll = new \Easy\Collections\Dictionary();
+        $this->coll = new Dictionary();
+    }
+
+    /**
+     * @expectedException \PHPUnit_Framework_Error
+     */
+    public function testNewInstanceWithArray()
+    {
+        $this->assertNotNull(new Dictionary(array(
+            'key1' => 'value1',
+            'key2' => 'value2',
+            'key3' => 'value3',
+            'key4' => 'value4'
+        )));
+    }
+
+    public function testNewInstanceWithTraversable()
+    {
+        $traversable = new ArrayObject(array(
+            'key1' => 'value1',
+            'key2' => 'value2',
+            'key3' => 'value3',
+            'key4' => 'value4'
+        ));
+        $this->assertNotNull(new Dictionary($traversable));
     }
 
     public function testNewInstance()
     {
         $this->assertNotNull($this->coll);
+    }
+
+    public function testAddAllWithSomeValues()
+    {
+        $arrayList = new Dictionary();
+        $arrayList->add('key1', 'value1')
+                ->add('key2', 'value2');
+
+        $secoundArrayList = new Dictionary();
+        $secoundArrayList->add('key3', 'value3')
+                ->add('key4', 'value4');
+
+        $arrayList->addAll($secoundArrayList);
+        $this->assertEquals(array(
+            'key1' => 'value1',
+            'key2' => 'value2',
+            'key3' => 'value3',
+            'key4' => 'value4'
+                ), $arrayList->toArray());
     }
 
     public function testAddItem()
@@ -38,7 +87,7 @@ class DictionaryTest extends CollectionsTestCase
     }
 
     /**
-     * @expectedException \InvalidArgumentException
+     * @expectedException InvalidArgumentException
      */
     public function testAddDuplicateKey()
     {
@@ -59,7 +108,7 @@ class DictionaryTest extends CollectionsTestCase
     }
 
     /**
-     * @expectedException \OutOfBoundsException
+     * @expectedException OutOfBoundsException
      */
     public function testGetInvalidItem()
     {
@@ -73,11 +122,11 @@ class DictionaryTest extends CollectionsTestCase
         $this->coll->add('keyTwo', 'testing2');
         $this->coll->add('keyThree', 'testing3');
 
-        $this->assertEquals(array('keyOne', 'keyTwo', 'keyThree'), $this->coll->keys());
+        $this->assertEquals(array('keyOne', 'keyTwo', 'keyThree'), $this->coll->toKeysArrays());
     }
 
     /**
-     * @expectedException \InvalidArgumentException
+     * @expectedException InvalidArgumentException
      */
     public function testSetNullKey()
     {
@@ -106,7 +155,7 @@ class DictionaryTest extends CollectionsTestCase
     }
 
     /**
-     * @expectedException \InvalidArgumentException
+     * @expectedException InvalidArgumentException
      */
     public function testRemovingNonExistentEntryReturnsNull()
     {

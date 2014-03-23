@@ -4,12 +4,12 @@
 
 namespace Easy\Collections;
 
-use ArrayAccess;
+use Traversable;
 
 /**
  * Represents a nongeneric collection of key/value pairs.
  */
-interface IDictionary extends ICollection, ArrayAccess
+interface IDictionary extends ICollection, IIndexAccess, IConstIndexAccess
 {
 
     /**
@@ -21,7 +21,9 @@ interface IDictionary extends ICollection, ArrayAccess
     public function add($key, $value);
 
     /**
-     * Gets an ICollection object containing the keys of the IDictionary object.
+     * Adds all the key/value Pairs from the Traversable to the IDictionary.
+     * @param Traversable $items The collection whose elements should be added to the end of the IDictionary.
+     * @return IDictionary
      */
-    public function keys();
+    public function addAll(Traversable $items);
 }

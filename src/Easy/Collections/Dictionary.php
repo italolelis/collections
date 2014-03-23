@@ -5,12 +5,20 @@
 namespace Easy\Collections;
 
 use InvalidArgumentException;
+use Traversable;
 
 /**
  * Represents a collection of keys and values.
  */
-class Dictionary extends CollectionArray implements IDictionary
+class Dictionary extends CollectionArray implements IDictionary, IDictionaryConvertable
 {
+
+    public function __construct(Traversable $array = null)
+    {
+        if ($array !== null) {
+            $this->addAll($array);
+        }
+    }
 
     /**
      * {@inheritdoc}
@@ -25,6 +33,19 @@ class Dictionary extends CollectionArray implements IDictionary
         return $this;
     }
 
+    /**
+     * {@inheritdoc}
+     */
+    public function addAll(Traversable $items)
+    {
+        foreach ($items as $key => $value) {
+            if (is_array($value)) {
+                $value = Dictionary::fromArray($value);
+            }
+            $this->add($key, $value);
+        }
+    }
+
     public function set($key, $value)
     {
         if ($key === null) {
@@ -33,14 +54,6 @@ class Dictionary extends CollectionArray implements IDictionary
         $this->array[$key] = $value;
 
         return $this;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function keys()
-    {
-        return array_keys($this->array);
     }
 
     /**
@@ -73,6 +86,43 @@ class Dictionary extends CollectionArray implements IDictionary
     public function offsetUnset($offset)
     {
         $this->remove($offset);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function toList()
+    {
+        return new ArrayList($this->array);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public static function fromArray(array $arr)
+    {
+        $map = new Dictionary();
+        foreach ($arr as $k => $v) {
+            if (is_array($v)) {
+                $map->add($k, new ArrayList($v));
+            } else {
+                $map->add($map, $v);
+            }
+        }
+        return $map;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public static function fromItems(Traversable $items)
+    {
+        return new ArrayList($items);
+    }
+
+    public static function getFromArray($arr)
+    {
+        return Dictionary::fromArray($arr);
     }
 
 }
