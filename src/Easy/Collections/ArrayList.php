@@ -14,7 +14,7 @@ use Traversable;
 class ArrayList extends CollectionArray implements IList, IListConvertable
 {
 
-    public function __construct(Traversable $items = null)
+    public function __construct($items = null)
     {
         if ($items !== null) {
             $this->addAll($items);
@@ -33,8 +33,12 @@ class ArrayList extends CollectionArray implements IList, IListConvertable
     /**
      * {@inheritdoc}
      */
-    public function addAll(Traversable $items)
+    public function addAll($items)
     {
+        if (!is_array($items) && !$items instanceof Traversable) {
+            throw new \InvalidArgumentException('The items must be an array or Traversable');
+        }
+
         foreach ($items as $item) {
             if (is_array($item)) {
                 $item = ArrayList::fromArray($item);

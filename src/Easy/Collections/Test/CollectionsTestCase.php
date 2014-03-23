@@ -22,7 +22,7 @@ abstract class CollectionsTestCase extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException \PHPUnit_Framework_Error
+     * @expectedException \InvalidArgumentException
      */
     public function testInvalidElementsToInstanciate()
     {

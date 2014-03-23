@@ -29,9 +29,6 @@ class ArrayListTest extends CollectionsTestCase
         $this->coll = new ArrayList();
     }
 
-    /**
-     * @expectedException \PHPUnit_Framework_Error
-     */
     public function testNewInstanceWithArray()
     {
         $this->assertNotNull(new ArrayList(array(

@@ -36,8 +36,12 @@ class Dictionary extends CollectionArray implements IDictionary, IDictionaryConv
     /**
      * {@inheritdoc}
      */
-    public function addAll(Traversable $items)
+    public function addAll($items)
     {
+        if (!is_array($items) && !$items instanceof Traversable) {
+            throw new \InvalidArgumentException('The items must be an array or Traversable');
+        }
+        
         foreach ($items as $key => $value) {
             if (is_array($value)) {
                 $value = Dictionary::fromArray($value);

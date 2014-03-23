@@ -24,7 +24,7 @@ interface IList extends ICollection, IIndexAccess, IConstIndexAccess
      * @param Traversable $items The collection whose elements should be added to the end of the IList.
      * @return IList
      */
-    public function addAll(Traversable $items);
+    public function addAll($items);
 
     /**
      * Inserts an item to the IList at the specified index.
