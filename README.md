@@ -2,6 +2,8 @@ Collections
 ===========
 
 [![Build Status](https://travis-ci.org/LellysInformatica/collections.png?branch=master)](https://travis-ci.org/LellysInformatica/collections)
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/LellysInformatica/collections/badges/quality-score.png?s=0bdaef0d3ed9e37348e610c6a41908fd505d6328)](https://scrutinizer-ci.com/g/LellysInformatica/collections/)
+[![Code Coverage](https://scrutinizer-ci.com/g/LellysInformatica/collections/badges/coverage.png?s=fbbb73d61336e5247035682fed9a9c5969001103)](https://scrutinizer-ci.com/g/LellysInformatica/collections/)
 [![Latest Stable Version](https://poser.pugx.org/easyframework/collections/v/stable.png)](https://packagist.org/packages/easyframework/collections)
 [![Latest Unstable Version](https://poser.pugx.org/easyframework/collections/v/unstable.png)](https://packagist.org/packages/easyframework/collections)
 
