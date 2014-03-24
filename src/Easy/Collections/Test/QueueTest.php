@@ -38,6 +38,12 @@ class QueueTest extends CollectionsTestCase
         $this->assertTrue(is_string((string) $this->coll));
     }
 
+    public function testEnqueueMultiple()
+    {
+        $this->coll->enqueueMultiple(array(1, 2, 3, 4));
+        $this->assertTrue(is_string((string) $this->coll));
+    }
+
     /**
      * @expectedException BadFunctionCallException
      */

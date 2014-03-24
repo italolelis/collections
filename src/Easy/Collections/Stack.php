@@ -28,7 +28,9 @@ class Stack extends AbstractCollection implements IStack
      */
     public function pushMultiple($items)
     {
-        $this->addMultiple($items);
+        foreach ($items as $item) {
+            $this->push($item);
+        }
         return $this;
     }
 

@@ -36,7 +36,12 @@ class DictionaryTest extends CollectionsTestCase
     {
         $this->assertNotNull(new Dictionary(array(
             'key1' => 'value1',
-            'key2' => 'value2',
+            'key2' => array(
+                'key21' => 'value21',
+                'key22' => array(
+                    'key221' => 'value221',
+                )
+            ),
             'key3' => 'value3',
             'key4' => 'value4'
         )));
@@ -56,6 +61,15 @@ class DictionaryTest extends CollectionsTestCase
     public function testNewInstance()
     {
         $this->assertNotNull($this->coll);
+    }
+
+    /**
+     * @expectedException \InvalidArgumentException
+     */
+    public function testInvalidElementsToInstanciate()
+    {
+        $coll = new \Easy\Collections\Dictionary();
+        $coll->addAll('string');
     }
 
     public function testAddAllWithSomeValues()
@@ -169,6 +183,16 @@ class DictionaryTest extends CollectionsTestCase
 
         unset($this->coll['keyOne']);
         $this->assertEquals($this->coll->count(), 1);
+
+        $this->assertTrue(isset($this->coll['keyTwo']));
+    }
+
+    public function testToList()
+    {
+        $this->coll->addAll(array(1, 2, 3, 4));
+        $map = $this->coll->toList();
+
+        $this->assertInstanceOf('Easy\\Collections\\ArrayList', $map);
     }
 
 }

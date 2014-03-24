@@ -41,7 +41,11 @@ class ArrayListTest extends CollectionsTestCase
     public function testNewInstanceWithArray()
     {
         $this->assertNotNull(new ArrayList(array(
-            1, 2, 3, 4
+            1, 2 => array(
+                21, 22 => array(
+                    221, 222
+                )
+            ), 3, 4
         )));
     }
 
@@ -66,14 +70,16 @@ class ArrayListTest extends CollectionsTestCase
 
         $secoundArrayList = new ArrayList();
         $secoundArrayList->add(3)
-                ->add(4);
+                ->add(new ArrayList(array(31)));
 
         $arrayList->addAll($secoundArrayList);
         $this->assertEquals(array(
             0 => 1,
             1 => 2,
             2 => 3,
-            3 => 4
+            3 => array(
+                0 => 31
+            )
                 ), $arrayList->toArray());
     }
 
@@ -204,6 +210,41 @@ class ArrayListTest extends CollectionsTestCase
 
         unset($this->coll[0]);
         $this->assertEquals($this->coll->count(), 1);
+        $this->assertTrue(isset($this->coll[1]));
+    }
+
+    /**
+     * @expectedException \InvalidArgumentException
+     */
+    public function testInvalidOffsetExists()
+    {
+        $this->coll[1] = 'one';
+        $this->assertFalse(isset($this->coll['string']));
+    }
+
+    /**
+     * @expectedException \InvalidArgumentException
+     */
+    public function testNegativeOffsetExists()
+    {
+        $this->coll[1] = 'one';
+        $this->assertFalse(isset($this->coll[-1]));
+    }
+
+    /**
+     * @expectedException \InvalidArgumentException
+     */
+    public function testInvalidOffsetSet()
+    {
+        $this->coll['string'] = 'one';
+    }
+
+    /**
+     * @expectedException \InvalidArgumentException
+     */
+    public function testNegativeOffsetSet()
+    {
+        $this->coll[-1] = 'one';
     }
 
     public function testSearch()
@@ -236,12 +277,20 @@ class ArrayListTest extends CollectionsTestCase
         $this->assertEquals(array(0 => 3, 1 => 4), $slice->toArray());
     }
 
-    public function testSplice()
+//    public function testSplice()
+//    {
+//        $this->coll->addAll(array(1, 2, 3, 4));
+//        $splice = $this->coll->splice(2);
+//
+//        $this->assertEquals(array(0 => 1, 1 => 2), $splice->toArray());
+//    }
+
+    public function testToMap()
     {
         $this->coll->addAll(array(1, 2, 3, 4));
-        $splice = $this->coll->splice(2);
+        $map = $this->coll->toMap();
 
-        $this->assertEquals(array(0 => 1, 1 => 2), $splice->toArray());
+        $this->assertInstanceOf('Easy\\Collections\\Dictionary', $map);
     }
 
 }

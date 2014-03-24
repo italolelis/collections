@@ -18,6 +18,15 @@ interface IConstIndexAccess
     public function contains($item);
 
     /**
+     * Checks whether the collection contains an element with the specified key/index.
+     *
+     * @param string|integer $key The key/index to check for.
+     * @return boolean TRUE if the collection contains an element with the specified key/index,
+     *                 FALSE otherwise.
+     */
+    public function containsKey($key);
+
+    /**
      * Gets or sets the element with the specified key.
      * @param mixed $key The key of the element to get or set.
      */

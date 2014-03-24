@@ -8,7 +8,6 @@ use Closure;
 use Easy\Collections\Generic\IComparer;
 use Easy\Collections\Linq\IQueryable;
 use Easy\Collections\Linq\ISelectable;
-use Easy\Generics\IEquatable;
 use InvalidArgumentException;
 use OutOfBoundsException;
 
@@ -21,23 +20,17 @@ abstract class CollectionArray extends AbstractCollection implements IIndexAcces
     /**
      * {@inheritdoc}
      */
-    public function contains($item)
+    public function containsKey($key)
     {
-        $result = false;
-        $array = $this->array;
-        if ($item instanceof IEquatable) {
-            foreach ($array as $v) {
-                if ($item->equals($v)) {
-                    $result = true;
-                    break;
-                }
-            }
-        } elseif (in_array($item, $array, true)) {
-            $result = in_array($item, $array);
-        } else {
-            $result = isset($array[$item]);
-        }
-        return $result;
+        return isset($this->array[$key]) || array_key_exists($key, $this->array);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function contains($element)
+    {
+        return in_array($element, $this->array, true);
     }
 
     /**
@@ -45,7 +38,7 @@ abstract class CollectionArray extends AbstractCollection implements IIndexAcces
      */
     public function get($index)
     {
-        if ($this->offsetExists($index) === false) {
+        if ($this->containsKey($index) === false) {
             throw new OutOfBoundsException('No element at position ' . $index);
         }
 
@@ -58,7 +51,7 @@ abstract class CollectionArray extends AbstractCollection implements IIndexAcces
      */
     public function tryGet($index, $default = null)
     {
-        if ($this->offsetExists($index) === false) {
+        if ($this->containsKey($index) === false) {
             return $default;
         }
 
@@ -96,8 +89,8 @@ abstract class CollectionArray extends AbstractCollection implements IIndexAcces
      */
     public function remove($index)
     {
-        if ($this->contains($index) == false) {
-            throw new InvalidArgumentException('The key is not present in the dictionary');
+        if ($this->containsKey($index) == false) {
+            throw new InvalidArgumentException('The key ' . $index . ' is not present in the dictionary');
         }
         unset($this->array[$index]);
         return $this;

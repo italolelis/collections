@@ -4,12 +4,16 @@
 
 namespace Easy\Collections;
 
+use Closure;
 use Easy\Collections\AbstractCollection;
 use Easy\Collections\IConstIndexAccess;
 use Easy\Collections\ImmutableVector;
 use Easy\Collections\Linq\Criteria;
 use Easy\Collections\Linq\Expr\ClosureExpressionVisitor;
 use Easy\Generics\IEquatable;
+use InvalidArgumentException;
+use OutOfBoundsException;
+use Traversable;
 
 /**
  * Represents a strongly typed list of objects that can be accessed by index. Provides methods to search, sort, and manipulate lists.
@@ -24,43 +28,24 @@ class ImmutableVector extends AbstractCollection implements IConstIndexAccess
         }
 
         if ($items !== null) {
-            foreach ($items as $item) {
-                if (is_array($item)) {
-                    $item = ImmutableVector::fromArray($item);
-                }
-                $this->array[] = $item;
-            }
+            $this->array = static::convertFromArray($items);
         }
-    }
-
-    /**
-     * @expectedException InvalidArgumentException
-     */
-    public function testInvalidElementsToInstanciate()
-    {
-        $coll = new ImmutableVector('string');
     }
 
     /**
      * {@inheritdoc}
      */
-    public function contains($item)
+    public function containsKey($key)
     {
-        $result = false;
-        $array = $this->array;
-        if ($item instanceof IEquatable) {
-            foreach ($array as $v) {
-                if ($item->equals($v)) {
-                    $result = true;
-                    break;
-                }
-            }
-        } elseif (in_array($item, $array, true)) {
-            $result = in_array($item, $array);
-        } else {
-            $result = isset($array[$item]);
-        }
-        return $result;
+        return isset($this->array[$key]) || array_key_exists($key, $this->array);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function contains($element)
+    {
+        return in_array($element, $this->array, true);
     }
 
     /**
@@ -68,7 +53,7 @@ class ImmutableVector extends AbstractCollection implements IConstIndexAccess
      */
     public function get($index)
     {
-        if ($this->contains($index) === false) {
+        if ($this->containsKey($index) === false) {
             throw new OutOfBoundsException(_('No element at position ') . $index);
         }
 
@@ -81,7 +66,7 @@ class ImmutableVector extends AbstractCollection implements IConstIndexAccess
      */
     public function tryGet($index, $default = null)
     {
-        if ($this->contains($index) === false) {
+        if ($this->containsKey($index) === false) {
             return $default;
         }
 
@@ -93,6 +78,11 @@ class ImmutableVector extends AbstractCollection implements IConstIndexAccess
      */
     public static function fromArray(array $arr)
     {
+        return new ImmutableVector(static::convertFromArray($arr));
+    }
+
+    protected static function convertFromArray($arr)
+    {
         $vector = array();
         foreach ($arr as $v) {
             if (is_array($v)) {
@@ -101,7 +91,7 @@ class ImmutableVector extends AbstractCollection implements IConstIndexAccess
                 $vector[] = $v;
             }
         }
-        return new ImmutableVector($vector);
+        return $vector;
     }
 
     /**

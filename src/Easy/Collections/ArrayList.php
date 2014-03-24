@@ -126,14 +126,6 @@ class ArrayList extends CollectionArray implements IVector, IVectorConvertable
     /**
      * {@inheritdoc}
      */
-    public function toList()
-    {
-        return new ArrayList($this->array);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     public function toMap()
     {
         return new Dictionary($this->array);

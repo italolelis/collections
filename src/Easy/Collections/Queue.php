@@ -28,7 +28,9 @@ class Queue extends AbstractCollection implements IQueue
      */
     public function enqueueMultiple($items)
     {
-        $this->addMultiple($items);
+        foreach ($items as $item) {
+            $this->enqueue($item);
+        }
         return $this;
     }
 

@@ -28,8 +28,8 @@ class Dictionary extends CollectionArray implements IMap, IMapConvertable
      */
     public function add($key, $value)
     {
-        if ($this->contains($key)) {
-            throw new InvalidArgumentException('That key already exists!');
+        if ($this->containsKey($key)) {
+            throw new InvalidArgumentException('The key ' . $key . ' already exists!');
         }
         $this->set($key, $value);
 
@@ -68,7 +68,7 @@ class Dictionary extends CollectionArray implements IMap, IMapConvertable
      */
     public function offsetExists($offset)
     {
-        return $this->contains($offset);
+        return $this->containsKey($offset);
     }
 
     /**
@@ -111,9 +111,9 @@ class Dictionary extends CollectionArray implements IMap, IMapConvertable
         $map = new Dictionary();
         foreach ($arr as $k => $v) {
             if (is_array($v)) {
-                $map->add($k, new ArrayList($v));
+                $map->add($k, new Dictionary($v));
             } else {
-                $map->add($map, $v);
+                $map->add($k, $v);
             }
         }
         return $map;
@@ -125,11 +125,6 @@ class Dictionary extends CollectionArray implements IMap, IMapConvertable
     public static function fromItems(Traversable $items)
     {
         return new ArrayList($items);
-    }
-
-    public static function getFromArray($arr)
-    {
-        return Dictionary::fromArray($arr);
     }
 
     /**

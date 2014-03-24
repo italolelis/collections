@@ -18,12 +18,6 @@ interface IVectorConvertable
     public function toMap();
 
     /**
-     * Returns another ICollection based on this ICollection.
-     * @return IVector
-     */
-    public function toList();
-
-    /**
      * Returns a Vector containing the key/value pairs from the specified array.
      * @return IMap Returns a Map containing the key/value pairs from the specified array.
      */

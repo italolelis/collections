@@ -34,6 +34,25 @@ class ImmutableVectorTest extends CollectionsTestCase
         $this->assertNotNull($this->coll);
     }
 
+    /**
+     * @expectedException \InvalidArgumentException
+     */
+    public function testInvalidElementsToInstanciate()
+    {
+        $coll = new \Easy\Collections\ImmutableVector('string');
+    }
+
+    public function testNewInstanceWithArray()
+    {
+        $this->assertNotNull(new ImmutableVector(array(
+            1, 2 => array(
+                21, 22 => array(
+                    221, 222
+                )
+            ), 3, 4
+        )));
+    }
+
     public function testCount()
     {
         $this->assertEquals(4, $this->coll->count());
@@ -52,13 +71,13 @@ class ImmutableVectorTest extends CollectionsTestCase
         $this->assertEquals(2, $this->coll->get(1));
     }
 
-//    /**
-//     * @expectedException OutOfBoundsException
-//     */
-//    public function testGetInvalidItem()
-//    {
-//        $this->coll->get(10);
-//    }
+    /**
+     * @expectedException \OutOfBoundsException
+     */
+    public function testGetInvalidItem()
+    {
+        $this->coll->get(10);
+    }
 
     public function testTryGetSuccess()
     {
