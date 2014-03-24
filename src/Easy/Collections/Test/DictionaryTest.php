@@ -32,9 +32,6 @@ class DictionaryTest extends CollectionsTestCase
         $this->coll = new Dictionary();
     }
 
-    /**
-     * @expectedException \PHPUnit_Framework_Error
-     */
     public function testNewInstanceWithArray()
     {
         $this->assertNotNull(new Dictionary(array(

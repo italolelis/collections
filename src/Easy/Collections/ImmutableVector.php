@@ -1,15 +1,15 @@
 <?php
 
+// Copyright (c) Lellys Informática. All rights reserved. See License.txt in the project root for license information.
+
+namespace Easy\Collections;
+
 use Easy\Collections\AbstractCollection;
 use Easy\Collections\IConstIndexAccess;
 use Easy\Collections\ImmutableVector;
 use Easy\Collections\Linq\Criteria;
 use Easy\Collections\Linq\Expr\ClosureExpressionVisitor;
 use Easy\Generics\IEquatable;
-
-// Copyright (c) Lellys Informática. All rights reserved. See License.txt in the project root for license information.
-
-namespace Easy\Collections;
 
 /**
  * Represents a strongly typed list of objects that can be accessed by index. Provides methods to search, sort, and manipulate lists.

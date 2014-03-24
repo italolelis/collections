@@ -77,12 +77,6 @@ class ArrayListTest extends CollectionsTestCase
                 ), $arrayList->toArray());
     }
 
-    public function testSlice()
-    {
-        $this->coll->addAll(array(1, 2, 3, 4));
-        $this->assertTrue(is_string((string) $this->coll));
-    }
-
     public function testToString()
     {
         $this->coll->add('testing');
@@ -232,6 +226,22 @@ class ArrayListTest extends CollectionsTestCase
         $this->coll[1] = 'two';
         $this->coll->clear();
         $this->assertEquals($this->coll->isEmpty(), true);
+    }
+
+    public function testSlice()
+    {
+        $this->coll->addAll(array(1, 2, 3, 4));
+        $slice = $this->coll->slice(2);
+
+        $this->assertEquals(array(0 => 3, 1 => 4), $slice->toArray());
+    }
+
+    public function testSplice()
+    {
+        $this->coll->addAll(array(1, 2, 3, 4));
+        $splice = $this->coll->splice(2);
+
+        $this->assertEquals(array(0 => 1, 1 => 2), $splice->toArray());
     }
 
 }

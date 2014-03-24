@@ -184,7 +184,7 @@ class ArrayList extends CollectionArray implements IVector, IVectorConvertable
      */
     public function slice($offset, $length = null)
     {
-        array_slice($this->array, $offset, $length);
+        return ArrayList::fromArray(array_slice($this->array, $offset, $length));
     }
 
     /**
@@ -192,7 +192,7 @@ class ArrayList extends CollectionArray implements IVector, IVectorConvertable
      */
     public function splice($offset, $length = null)
     {
-        array_splice($this->array, $offset, $length);
+        return ArrayList::fromArray(array_splice($this->array, $offset, $length));
     }
 
     /**
