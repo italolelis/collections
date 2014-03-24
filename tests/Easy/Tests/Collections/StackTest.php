@@ -6,7 +6,7 @@
  * and open the template in the editor.
  */
 
-namespace Easy\Collections\Test;
+namespace Easy\Tests\Collections;
 
 use BadFunctionCallException;
 use Easy\Collections\Stack;

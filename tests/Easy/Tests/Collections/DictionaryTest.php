@@ -6,10 +6,9 @@
  * and open the template in the editor.
  */
 
-namespace Easy\Collections\Test;
+namespace Easy\Tests\Collections;
 
 use ArrayObject;
-use Easy\Collections\ArrayList;
 use Easy\Collections\Dictionary;
 use InvalidArgumentException;
 use OutOfBoundsException;
@@ -64,11 +63,11 @@ class DictionaryTest extends CollectionsTestCase
     }
 
     /**
-     * @expectedException \InvalidArgumentException
+     * @expectedException InvalidArgumentException
      */
     public function testInvalidElementsToInstanciate()
     {
-        $coll = new \Easy\Collections\Dictionary();
+        $coll = new Dictionary();
         $coll->addAll('string');
     }
 

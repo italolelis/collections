@@ -1,26 +1,17 @@
 <?php
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+namespace Easy\Tests\Collections;
 
-namespace Easy\Collections\Test;
-
+use ArrayObject;
 use Easy\Collections\ArrayList;
+use Easy\Collections\Comparer\StringComparer;
 use InvalidArgumentException;
 
-/**
- * Description of CollectionTest
- *
- * @author italo
- */
 class ArrayListTest extends CollectionsTestCase
 {
 
     /**
-     * @var \Easy\Collections\ArrayList
+     * @var ArrayList
      */
     private $coll;
 
@@ -30,11 +21,11 @@ class ArrayListTest extends CollectionsTestCase
     }
 
     /**
-     * @expectedException \InvalidArgumentException
+     * @expectedException InvalidArgumentException
      */
     public function testInvalidElementsToInstanciate()
     {
-        $coll = new \Easy\Collections\ArrayList();
+        $coll = new ArrayList();
         $coll->addAll('string');
     }
 
@@ -51,7 +42,7 @@ class ArrayListTest extends CollectionsTestCase
 
     public function testNewInstanceWithTraversable()
     {
-        $traversable = new \ArrayObject(array(
+        $traversable = new ArrayObject(array(
             1, 2, 3, 4
         ));
         $this->assertNotNull(new ArrayList($traversable));
@@ -162,7 +153,7 @@ class ArrayListTest extends CollectionsTestCase
 
     public function testSetComparer()
     {
-        $this->assertNotNull($this->coll->setDefaultComparer(new \Easy\Collections\Comparer\StringComparer()));
+        $this->assertNotNull($this->coll->setDefaultComparer(new StringComparer()));
     }
 
     public function testContains()
@@ -214,7 +205,7 @@ class ArrayListTest extends CollectionsTestCase
     }
 
     /**
-     * @expectedException \InvalidArgumentException
+     * @expectedException InvalidArgumentException
      */
     public function testInvalidOffsetExists()
     {
@@ -223,7 +214,7 @@ class ArrayListTest extends CollectionsTestCase
     }
 
     /**
-     * @expectedException \InvalidArgumentException
+     * @expectedException InvalidArgumentException
      */
     public function testNegativeOffsetExists()
     {
@@ -232,7 +223,7 @@ class ArrayListTest extends CollectionsTestCase
     }
 
     /**
-     * @expectedException \InvalidArgumentException
+     * @expectedException InvalidArgumentException
      */
     public function testInvalidOffsetSet()
     {
@@ -240,7 +231,7 @@ class ArrayListTest extends CollectionsTestCase
     }
 
     /**
-     * @expectedException \InvalidArgumentException
+     * @expectedException InvalidArgumentException
      */
     public function testNegativeOffsetSet()
     {

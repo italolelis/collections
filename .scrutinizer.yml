@@ -11,23 +11,23 @@ tools:
             paths: ["src/*"]
     php_cpd:
         enabled: true
-        excluded_dirs: ["/src/Umbrella/Ya/Boleto/Tests/", "vendor"]
+        excluded_dirs: ["/tests/", "vendor"]
     php_cs_fixer:
         enabled: false
         config:
             level: all
         filter:
-            paths: ["src/*", "/src/Umbrella/Ya/Boleto/Tests/*"]
+            paths: ["src/*", "/tests/*"]
     php_loc:
         enabled: true
     php_mess_detector:
         enabled: true
         filter:
-            paths: ["/src/Umbrella/Ya/Boleto/Tests/*"]
+            paths: ["/tests/*"]
     php_pdepend:
         enabled: true
-        excluded_dirs: ["/src/Umbrella/Ya/Boleto/Tests/", "vendor"]
+        excluded_dirs: ["/tests/", "vendor"]
     php_analyzer:
         filter:
-            paths: ["src/*", "/src/Umbrella/Ya/Boleto/Tests/*"]
+            paths: ["src/*", "/tests/*"]
     sensiolabs_security_checker: true

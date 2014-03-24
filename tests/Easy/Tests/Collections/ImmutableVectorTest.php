@@ -6,9 +6,10 @@
  * and open the template in the editor.
  */
 
-namespace Easy\Collections\Test;
+namespace Easy\Tests\Collections;
 
 use Easy\Collections\ImmutableVector;
+use InvalidArgumentException;
 use OutOfBoundsException;
 
 /**
@@ -35,11 +36,11 @@ class ImmutableVectorTest extends CollectionsTestCase
     }
 
     /**
-     * @expectedException \InvalidArgumentException
+     * @expectedException InvalidArgumentException
      */
     public function testInvalidElementsToInstanciate()
     {
-        $coll = new \Easy\Collections\ImmutableVector('string');
+        $coll = new ImmutableVector('string');
     }
 
     public function testNewInstanceWithArray()

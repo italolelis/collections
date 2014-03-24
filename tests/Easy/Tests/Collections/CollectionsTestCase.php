@@ -6,14 +6,16 @@
  * and open the template in the editor.
  */
 
-namespace Easy\Collections\Test;
+namespace Easy\Tests\Collections;
+
+use PHPUnit_Framework_TestCase;
 
 /**
  * Description of Collection
  *
  * @author italo
  */
-abstract class CollectionsTestCase extends \PHPUnit_Framework_TestCase
+abstract class CollectionsTestCase extends PHPUnit_Framework_TestCase
 {
 
     protected function setUp()

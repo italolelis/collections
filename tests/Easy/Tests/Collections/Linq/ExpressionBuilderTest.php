@@ -6,16 +6,15 @@
  * and open the template in the editor.
  */
 
-namespace Easy\Collections\Test;
+namespace Easy\Tests\Collections\Linq;
 
 use Easy\Collections\Linq\Expr\Comparison;
 use Easy\Collections\Linq\Expr\CompositeExpression;
 use Easy\Collections\Linq\ExpressionBuilder;
+use Easy\Tests\Collections\CollectionsTestCase;
 
 /**
- * Description of Collection
- *
- * @author italo
+ * @author Ítalo Lelis de Vietro <italolelis@lellysinformatica.com>
  */
 class ExpressionBuilderTest extends CollectionsTestCase
 {

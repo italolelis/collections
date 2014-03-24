@@ -6,11 +6,12 @@
  * and open the template in the editor.
  */
 
-namespace Easy\Collections\Test;
+namespace Easy\Tests\Collections\Linq;
 
 use Easy\Collections\Linq\Criteria;
 use Easy\Collections\Linq\Expr\Comparison;
 use Easy\Collections\Linq\Expr\CompositeExpression;
+use Easy\Tests\Collections\CollectionsTestCase;
 
 /**
  * Description of CriteiraTest
