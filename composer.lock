@@ -3,7 +3,7 @@
         "This file locks the dependencies of your project to a known state",
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
     ],
-    "hash": "15a9a213a749a3e6df803e3cef903fe0",
+    "hash": "fb8968b247d4748812129cdbd00aa337",
     "packages": [
         {
             "name": "easyframework/generics",
