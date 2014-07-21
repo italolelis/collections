@@ -17,3 +17,7 @@ test:
         allow_failures: true
     php_cpd:
         allow_failures: true
+        
+failure:
+  email:
+    committer: true
