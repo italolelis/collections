@@ -1,0 +1,30 @@
+{
+    "name": "easyframework/collections",
+    "description": "Easy Framework Collection Component",
+    "type": "library",
+    "license": "MIT",
+    "keywords": ["framework", "easy", "generics", "collection"],
+    "homepage": "https://github.com/LellysInformatica/collections",
+    "authors": [
+        {
+            "name": "Ítalo Lelis de Vietro",
+            "email": "italolelis@lellysinformatica.com"
+        }
+    ],
+    "require": {
+        "easyframework/generics": "1.0.*"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "3.7.*"
+    },
+    "autoload": {
+        "psr-0": {
+            "": "src/"
+        }
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "2.1-dev"
+        }
+    }
+}
