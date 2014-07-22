@@ -19,5 +19,4 @@ class StringComparer implements IComparer
     {
         return strcmp($x, $y);
     }
-
 }
