@@ -1,16 +1,11 @@
 <?php
 
 // Copyright (c) Lellys Informática. All rights reserved. See License.txt in the project root for license information.
-
 namespace Easy\Collections;
 
-use Closure;
 use Easy\Collections\AbstractCollection;
 use Easy\Collections\IConstIndexAccess;
 use Easy\Collections\ImmutableVector;
-use Easy\Collections\Linq\Criteria;
-use Easy\Collections\Linq\Expr\ClosureExpressionVisitor;
-use Easy\Generics\IEquatable;
 use InvalidArgumentException;
 use OutOfBoundsException;
 use Traversable;
@@ -93,50 +88,4 @@ class ImmutableVector extends AbstractCollection implements IConstIndexAccess
         }
         return $vector;
     }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function filter(Closure $p)
-    {
-        return ImmutableVector::fromArray(array_filter($this->array, $p));
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function matching(Criteria $criteria)
-    {
-        $expr = $criteria->getWhereExpression();
-        $filtered = $this->array;
-
-        if ($expr) {
-            $visitor = new ClosureExpressionVisitor();
-            $filter = $visitor->dispatch($expr);
-            $filtered = array_filter($filtered, $filter);
-        }
-
-        if ($orderings = $criteria->getOrderings()) {
-            $next = null;
-            foreach (array_reverse($orderings) as $field => $ordering) {
-                $next = ClosureExpressionVisitor::sortByField($field, $ordering == 'DESC' ? -1 : 1, $next);
-            }
-
-            if ($next === null) {
-                throw new InvalidArgumentException("The next value needs to be a callable function");
-            }
-
-            usort($filtered, $next);
-        }
-
-        $offset = $criteria->getFirstResult();
-        $length = $criteria->getMaxResults();
-
-        if ($offset || $length) {
-            $filtered = array_slice($filtered, (int) $offset, $length);
-        }
-
-        return ImmutableVector::fromArray($filtered);
-    }
-
 }

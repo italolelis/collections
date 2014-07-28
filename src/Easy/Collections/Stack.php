@@ -1,7 +1,6 @@
 <?php
 
 // Copyright (c) Lellys Informática. All rights reserved. See License.txt in the project root for license information.
-
 namespace Easy\Collections;
 
 use BadFunctionCallException;
@@ -61,4 +60,16 @@ class Stack extends AbstractCollection implements IStack
         return end($this->array);
     }
 
+    public static function fromArray(array $arr)
+    {
+        $collection = new Stack();
+        foreach ($arr as $v) {
+            if (is_array($v)) {
+                $collection->push(static::fromArray($v));
+            } else {
+                $collection->push($v);
+            }
+        }
+        return $collection;
+    }
 }

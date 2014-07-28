@@ -142,24 +142,6 @@ abstract class CollectionArray extends AbstractCollection
     /**
      * {@inheritdoc}
      */
-    public function concat(ICollectionConvertable $collection)
-    {
-        $this->array = array_merge_recursive($this->array,
-                                             $collection->toArray());
-        return $this;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public static function fromItems(Traversable $items)
-    {
-        return new static($items);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     public function filter(Closure $p)
     {
         return static::fromArray(array_filter($this->array, $p));

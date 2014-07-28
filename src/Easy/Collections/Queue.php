@@ -60,18 +60,16 @@ class Queue extends AbstractCollection implements IQueue
         return $this->array[0];
     }
 
-    public function concat(ICollectionConvertable $collection)
-    {
-        
-    }
-
     public static function fromArray(array $arr)
     {
-        
-    }
-
-    public static function fromItems(\Traversable $items)
-    {
-        
+        $collection = new Queue();
+        foreach ($arr as $v) {
+            if (is_array($v)) {
+                $collection->enqueue(static::fromArray($v));
+            } else {
+                $collection->enqueue($v);
+            }
+        }
+        return $collection;
     }
 }
