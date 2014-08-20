@@ -23,7 +23,7 @@ Installation
 ----------
 
 ```shell
-  require: { "easyframework/collections": "2.1.*" }
+  require: { "easyframework/collections": "2.2.*" }
   
   $ composer install
 ``` 
