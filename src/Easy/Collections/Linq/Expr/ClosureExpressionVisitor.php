@@ -148,6 +148,12 @@ class ClosureExpressionVisitor extends ExpressionVisitor
                     return strpos($haystack, $value) + strlen($value) === strlen($haystack);
                 };
 
+            case Comparison::REGEX:
+                return function ($object) use ($field, $value) {
+                    $haystack = ClosureExpressionVisitor::getObjectFieldValue($object, $field);
+                    return preg_match($value, $haystack);
+                };
+
             default:
                 throw new \RuntimeException("Unknown comparison operator: " . $comparison->getOperator());
         }

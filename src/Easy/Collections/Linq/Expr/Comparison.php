@@ -25,6 +25,7 @@ class Comparison implements Expression
     const CONTAINS = 'CONTAINS';
     const STARTS_WITH = 'STARTS_WITH';
     const ENDS_WITH = 'ENDS_WITH';
+    const REGEX = 'REGEX';
 
     /**
      * @var string

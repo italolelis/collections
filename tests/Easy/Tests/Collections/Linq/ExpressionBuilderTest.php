@@ -127,5 +127,13 @@ class ExpressionBuilderTest extends CollectionsTestCase
         $this->assertInstanceOf("Easy\Collections\Linq\Expr\Comparison", $expr);
         $this->assertEquals(Comparison::CONTAINS, $expr->getOperator());
     }
+    
+    public function testRegex()
+    {
+        $expr = $this->builder->regex('asda', '#a$#');
+
+        $this->assertInstanceOf("Easy\Collections\Linq\Expr\Comparison", $expr);
+        $this->assertEquals(Comparison::REGEX, $expr->getOperator());
+    }
 
 }

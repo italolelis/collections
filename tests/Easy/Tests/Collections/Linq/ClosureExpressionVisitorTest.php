@@ -185,6 +185,56 @@ class ClosureExpressionVisitorTest extends PHPUnit_Framework_TestCase
         $this->assertTrue($closure(array('foo' => 42)));
     }
 
+    public function testWalkRegexComparison()
+    {
+        $closure = $this->visitor->walkComparison($this->builder->regex('foo', '#a$#'));
+
+        $this->assertTrue((bool) $closure(new TestObject('asdasda')));
+        $this->assertFalse((bool) $closure(new TestObject('world')));
+        
+        $closure = $this->visitor->walkComparison($this->builder->regex('foo', '#[a-z]{7}#'));
+
+        $this->assertTrue((bool) $closure(new TestObject('asdasda')));
+        $this->assertFalse((bool) $closure(new TestObject('Wsdasda')));
+        
+        $closure = $this->visitor->walkComparison($this->builder->regex('foo', '#[A-Z]{3}[0-9]{1,5}$#'));
+
+        $this->assertTrue((bool) $closure(new TestObject('ALP1')));
+        $this->assertTrue((bool) $closure(new TestObject('ALP12')));
+        $this->assertTrue((bool) $closure(new TestObject('ALP123')));
+        $this->assertFalse((bool) $closure(new TestObject('Wsdasda')));
+        $this->assertFalse((bool) $closure(new TestObject('AL123456')));
+        $this->assertFalse((bool) $closure(new TestObject('ALP7123456')));
+        
+        $closure = $this->visitor->walkComparison($this->builder->regex('foo', '#^a.+a$#i'));
+
+        $this->assertTrue((bool) $closure(new TestObject('angela')));
+        $this->assertTrue((bool) $closure(new TestObject('AngelA')));
+        $this->assertTrue((bool) $closure(new TestObject('Angela')));
+        $this->assertTrue((bool) $closure(new TestObject('angelA')));
+        $this->assertFalse((bool) $closure(new TestObject('angela ')));
+        
+        $closure = $this->visitor->walkComparison($this->builder->regex('foo', '#^a.+a$#'));
+
+        $this->assertTrue((bool) $closure(new TestObject('angela')));
+        $this->assertFalse((bool) $closure(new TestObject('angela ')));
+        $this->assertFalse((bool) $closure(new TestObject('AngelA')));
+        $this->assertFalse((bool) $closure(new TestObject('Angela')));
+        $this->assertFalse((bool) $closure(new TestObject('angelA')));
+        
+        $closure = $this->visitor->walkComparison($this->builder->regex('foo', '#^\([0-9]{2}\)\s[0-9]{4}\-[0-9]{4,5}$#'));
+
+        $this->assertTrue((bool) $closure(new TestObject('(83) 8822-5566')));
+        $this->assertTrue((bool) $closure(new TestObject('(83) 8822-55669')));
+        $this->assertFalse((bool) $closure(new TestObject('(83) 8822-5566 ')));
+        $this->assertFalse((bool) $closure(new TestObject('(83) 8822-55669 ')));
+        $this->assertFalse((bool) $closure(new TestObject('(83)8822-55669')));
+        $this->assertFalse((bool) $closure(new TestObject('(83) 8822-556699')));
+        $this->assertFalse((bool) $closure(new TestObject('(83) 882255669')));
+        $this->assertFalse((bool) $closure(new TestObject('83 882255669')));
+        $this->assertFalse((bool) $closure(new TestObject('83882255669')));
+        
+    }
 }
 
 class TestObject
