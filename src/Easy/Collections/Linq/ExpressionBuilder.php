@@ -171,5 +171,16 @@ class ExpressionBuilder
     {
         return new Comparison($field, Comparison::ENDS_WITH, new Value($value));
     }
+    
+    /**
+     * Determines whether the regular expression pattern string has a specified string.
+     * @param string $field
+     * @param mixed $value
+     * @return Comparison
+     */
+    public function regex($field, $value)
+    {
+        return new Comparison($field, Comparison::REGEX, new Value($value));
+    }
 
 }
