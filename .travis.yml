@@ -4,9 +4,12 @@ php:
   - 5.3
   - 5.4
   - 5.5
+  - 5.6
+  - hhvm
+  - hhvm-nightly
 
 before_install:
-  - composer install --dev
+  - composer --prefer-source --dev install
 
 script:
  - phpunit --coverage-clover=coverage.clover --configuration ./phpunit.xml ./tests
