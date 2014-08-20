@@ -151,16 +151,17 @@ Now we want everyone where the name starts with 'A'
 
 Lets filter a collection with regex which will filter  string where starts with letter **A** and ends with letter **A**.
 
-    $criteria = new \Easy\Collections\Criteria();
-    $expr = $criteria->createExpression()->regex("name", "#^a.+a$#i");
-    $criteria->where($expr);
-    $collection = $collection->matching($criteria);
-    
-    //only going to list Angela
-    foreach($collection as $item){
-        echo $item->getName() . "-" . $item->getAge();
-    }
-    
+```php
+  $criteria = new \Easy\Collections\Criteria();
+  $expr = $criteria->createExpression()->regex("name", "#^a.+a$#i");
+  $criteria->where($expr);
+  $collection = $collection->matching($criteria);
+  
+  //only going to list Angela
+  foreach($collection as $item){
+      echo $item->getName() . "-" . $item->getAge();
+  }
+``` 
 
 ### Conclusion ###
 
