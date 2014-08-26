@@ -10,7 +10,7 @@ use Serializable;
 /**
  * Provides functionality to evaluate queries against a specific data source wherein the type of the data is not specified.
  */
-interface ICollection extends Countable, Serializable, IteratorAggregate
+interface CollectionInterface extends Countable, Serializable, IteratorAggregate
 {
 
     /**
@@ -32,8 +32,8 @@ interface ICollection extends Countable, Serializable, IteratorAggregate
 
     /**
      * Merge the elements of this Collection into another
-     * @param ICollectionConvertable $collection
-     * @return ICollection
+     * @param CollectionConvertableInterface $collection
+     * @return CollectionInterface
      */
-    public function concat(ICollectionConvertable $collection);
+    public function concat(CollectionConvertableInterface $collection);
 }

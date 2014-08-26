@@ -4,12 +4,12 @@
 namespace Easy\Collections\Linq;
 
 use Closure;
-use Easy\Collections\ICollection;
+use Easy\Collections\CollectionInterface;
 
 /**
  * Provides functionality to evaluate queries against a specific data source wherein the type of the data is not specified.
  */
-interface IQueryable
+interface QueryableInterface
 {
 
     /**
@@ -27,7 +27,7 @@ interface IQueryable
      *
      * @param Closure $p The predicate used for filtering.
      *
-     * @return ICollection A collection with the results of the filter operation.
+     * @return CollectionInterface A collection with the results of the filter operation.
      */
     public function filter(Closure $p);
 
@@ -37,7 +37,7 @@ interface IQueryable
      *
      * @param callable $p The predicate used for filtering.
      *
-     * @return ICollection A collection with the results of the filter operation.
+     * @return CollectionInterface A collection with the results of the filter operation.
      */
     public function map($p);
 }

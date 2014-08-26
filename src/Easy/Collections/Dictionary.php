@@ -9,7 +9,7 @@ use Traversable;
 /**
  * Represents a collection of keys and values.
  */
-class Dictionary extends CollectionArray implements IMap, IMapConvertable
+class Dictionary extends CollectionArray implements MapInterface, MapConvertableInterface
 {
 
     public function __construct($array = null)

@@ -8,7 +8,7 @@ use BadFunctionCallException;
 /**
  * Represents a first-in, first-out collection of objects.
  */
-class Queue extends AbstractCollection implements IQueue
+class Queue extends AbstractCollection implements QueueInterface
 {
 
     /**
@@ -23,7 +23,7 @@ class Queue extends AbstractCollection implements IQueue
 
     /**
      * Adds multiples objects to the end of the Queue.
-     * @param ICollection|array $items The objects to add to the Queue. The value can be null.
+     * @param CollectionInterface|array $items The objects to add to the Queue. The value can be null.
      */
     public function enqueueMultiple($items)
     {

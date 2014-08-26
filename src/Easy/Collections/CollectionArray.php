@@ -4,20 +4,19 @@
 namespace Easy\Collections;
 
 use Closure;
-use Easy\Collections\Generic\IComparer;
+use Easy\Collections\Generic\ComparerInterface;
 use Easy\Collections\Linq\Criteria;
 use Easy\Collections\Linq\Expr\ClosureExpressionVisitor;
-use Easy\Collections\Linq\IQueryable;
-use Easy\Collections\Linq\ISelectable;
+use Easy\Collections\Linq\QueryableInterface;
+use Easy\Collections\Linq\SelectableInterface;
 use InvalidArgumentException;
 use OutOfBoundsException;
-use Traversable;
 
 /**
  * Provides the abstract base class for a strongly typed collection.
  */
-abstract class CollectionArray extends AbstractCollection
-    implements IIndexAccess, IConstIndexAccess, IQueryable, ISelectable, ICollectionConvertable
+abstract class CollectionArray extends AbstractCollection implements IndexAccessInterface, ConstIndexAccessInterface, QueryableInterface, SelectableInterface,
+    CollectionConvertableInterface
 {
 
     /**
@@ -63,9 +62,9 @@ abstract class CollectionArray extends AbstractCollection
 
     /**
      * Sorts the elements in the entire Collection<T> using the specified comparer.
-     * @param IComparer $comparer The ComparerInterface implementation to use when comparing elements, or null to use the default comparer Comparer<T>.Default.
+     * @param ComparerInterface $comparer The ComparerInterface implementation to use when comparing elements, or null to use the default comparer Comparer<T>.Default.
      */
-    public function sort(IComparer $comparer = null)
+    public function sort(ComparerInterface $comparer = null)
     {
         if ($comparer === null) {
             $comparer = $this->getDefaultComparer();
@@ -76,9 +75,9 @@ abstract class CollectionArray extends AbstractCollection
 
     /**
      * Sorts the keys in the entire Collection<T> using the specified comparer.
-     * @param IComparer $comparer The ComparerInterface implementation to use when comparing elements, or null to use the default comparer Comparer<T>.Default.
+     * @param ComparerInterface $comparer The ComparerInterface implementation to use when comparing elements, or null to use the default comparer Comparer<T>.Default.
      */
-    public function sortByKey(IComparer $comparer = null)
+    public function sortByKey(ComparerInterface $comparer = null)
     {
         if ($comparer === null) {
             $comparer = $this->getDefaultComparer();
@@ -164,9 +163,7 @@ abstract class CollectionArray extends AbstractCollection
         if ($orderings = $criteria->getOrderings()) {
             $next = null;
             foreach (array_reverse($orderings) as $field => $ordering) {
-                $next = ClosureExpressionVisitor::sortByField($field,
-                                                              $ordering == 'DESC' ? -1 : 1,
-                                                              $next);
+                $next = ClosureExpressionVisitor::sortByField($field, $ordering == 'DESC' ? -1 : 1, $next);
             }
 
             if ($next === null) {

@@ -9,7 +9,7 @@ use BadFunctionCallException;
 /**
  * Provides functionality to evaluate queries against a specific data source wherein the type of the data is not specified.
  */
-interface IQueue extends ICollection
+interface QueueInterface extends CollectionInterface
 {
 
     /**
@@ -21,7 +21,7 @@ interface IQueue extends ICollection
 
     /**
      * Adds multiples objects to the end of the Queue.
-     * @param ICollection|array $items The objects to add to the Queue. The value can be null.
+     * @param CollectionInterface|array $items The objects to add to the Queue. The value can be null.
      * @return Queue
      */
     public function enqueueMultiple($items);

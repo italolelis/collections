@@ -9,7 +9,7 @@ use ArrayAccess;
 /**
  * Allows for access key-based collections with methods such as indexOf().
  */
-interface IIndexAccess extends ArrayAccess
+interface IndexAccessInterface extends ArrayAccess
 {
 
     /**

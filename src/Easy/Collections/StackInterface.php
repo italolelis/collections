@@ -9,7 +9,7 @@ use BadFunctionCallException;
 /**
  * Provides functionality to evaluate queries against a specific data source wherein the type of the data is not specified.
  */
-interface IStack extends ICollection
+interface StackInterface extends CollectionInterface
 {
 
     /**
@@ -21,7 +21,7 @@ interface IStack extends ICollection
 
     /**
      * Inserts multiples objects at the top of the Stack.
-     * @param  ICollection|array $items The Objects to push onto the Stack. The value <b>can</b> be null.
+     * @param  CollectionInterface|array $items The Objects to push onto the Stack. The value <b>can</b> be null.
      * @return Stack
      */
     public function pushMultiple($items);

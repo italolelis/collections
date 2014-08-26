@@ -6,13 +6,13 @@ namespace Easy\Collections;
 /**
  * Provides functionality to convert the collection into any IList
  */
-interface IVectorConvertable extends ICollectionConvertable
+interface VectorConvertableInterface extends CollectionConvertableInterface
 {
 
     /**
      * Returns a Map of the ICollection, with the integer indicies of the 
      * ICollection as the keys and the values of the ICollection as the values.
-     * @return IMap
+     * @return MapInterface
      */
     public function toMap();
 }

@@ -5,20 +5,19 @@ namespace Easy\Collections;
 
 use ArrayIterator;
 use Easy\Collections\Comparer\NumericKeyComparer;
-use Easy\Collections\Generic\IComparer;
-use Easy\Generics\IEquatable;
+use Easy\Collections\Generic\ComparerInterface;
+use Easy\Generics\EquatableInterface;
 use Traversable;
 
 /**
  * Provides the abstract base class for a strongly typed collection.
  */
-abstract class AbstractCollection implements ICollection, ICollectionConvertable,
-    IEquatable
+abstract class AbstractCollection implements CollectionInterface, CollectionConvertableInterface, EquatableInterface
 {
     protected $array = array();
 
     /**
-     * @var IComparer
+     * @var ComparerInterface
      */
     private $defaultComparer;
 
@@ -29,7 +28,7 @@ abstract class AbstractCollection implements ICollection, ICollectionConvertable
 
     /**
      * Gets the default comparer for this collection
-     * @return IComparer
+     * @return ComparerInterface
      */
     public function getDefaultComparer()
     {
@@ -41,10 +40,10 @@ abstract class AbstractCollection implements ICollection, ICollectionConvertable
 
     /**
      * Sets the default comparer for this collection
-     * @param IComparer $defaultComparer
+     * @param ComparerInterface $defaultComparer
      * @return ArrayList
      */
-    public function setDefaultComparer(IComparer $defaultComparer)
+    public function setDefaultComparer(ComparerInterface $defaultComparer)
     {
         $this->defaultComparer = $defaultComparer;
         return $this;
@@ -120,7 +119,7 @@ abstract class AbstractCollection implements ICollection, ICollectionConvertable
     {
         $array = array();
         foreach ($this->array as $key => $value) {
-            if ($value instanceof ICollection) {
+            if ($value instanceof CollectionInterface) {
                 $array[$key] = $value->toArray();
             } else {
                 $array[$key] = $value;
@@ -140,10 +139,9 @@ abstract class AbstractCollection implements ICollection, ICollectionConvertable
     /**
      * {@inheritdoc}
      */
-    public function concat(ICollectionConvertable $collection)
+    public function concat(CollectionConvertableInterface $collection)
     {
-        $this->array = array_merge_recursive($this->array,
-                                             $collection->toArray());
+        $this->array = array_merge_recursive($this->array, $collection->toArray());
         return $this;
     }
 

@@ -1,8 +1,11 @@
 <?php
 
 // Copyright (c) Lellys Informática. All rights reserved. See License.txt in the project root for license information.
-
 namespace Easy\Collections\Linq\Expr;
+
+use ArrayAccess;
+use Closure;
+use RuntimeException;
 
 /**
  * Walks an expression graph and turns it into a PHP closure.
@@ -47,7 +50,7 @@ class ClosureExpressionVisitor extends ExpressionVisitor
             return $object->$accessor();
         }
 
-        if ($object instanceof \ArrayAccess || is_array($object)) {
+        if ($object instanceof ArrayAccess || is_array($object)) {
             return $object[$field];
         }
 
@@ -59,11 +62,11 @@ class ClosureExpressionVisitor extends ExpressionVisitor
      *
      * @param string   $name
      * @param int      $orientation
-     * @param \Closure $next
+     * @param Closure $next
      *
-     * @return \Closure
+     * @return Closure
      */
-    public static function sortByField($name, $orientation = 1, \Closure $next = null)
+    public static function sortByField($name, $orientation = 1, Closure $next = null)
     {
         if (!$next) {
             $next = function() {
@@ -155,7 +158,7 @@ class ClosureExpressionVisitor extends ExpressionVisitor
                 };
 
             default:
-                throw new \RuntimeException("Unknown comparison operator: " . $comparison->getOperator());
+                throw new RuntimeException("Unknown comparison operator: " . $comparison->getOperator());
         }
     }
 
@@ -186,14 +189,14 @@ class ClosureExpressionVisitor extends ExpressionVisitor
                 return $this->orExpressions($expressionList);
 
             default:
-                throw new \RuntimeException("Unknown composite " . $expr->getType());
+                throw new RuntimeException("Unknown composite " . $expr->getType());
         }
     }
 
     /**
      * @param array $expressions
      *
-     * @return \Closure
+     * @return Closure
      */
     private function andExpressions($expressions)
     {
@@ -210,7 +213,7 @@ class ClosureExpressionVisitor extends ExpressionVisitor
     /**
      * @param array $expressions
      *
-     * @return \Closure
+     * @return Closure
      */
     private function orExpressions($expressions)
     {
@@ -223,5 +226,4 @@ class ClosureExpressionVisitor extends ExpressionVisitor
             return false;
         };
     }
-
 }

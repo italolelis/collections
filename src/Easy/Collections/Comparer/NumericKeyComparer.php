@@ -4,12 +4,12 @@
 
 namespace Easy\Collections\Comparer;
 
-use Easy\Collections\Generic\IComparer;
+use Easy\Collections\Generic\ComparerInterface;
 
 /**
  * Represents a numeric key comparison operation that uses specific case and culture-based or ordinal comparison rules.
  */
-class NumericKeyComparer implements IComparer
+class NumericKeyComparer implements ComparerInterface
 {
 
     /**

@@ -4,7 +4,7 @@
 namespace Easy\Collections;
 
 use Easy\Collections\AbstractCollection;
-use Easy\Collections\IConstIndexAccess;
+use Easy\Collections\ConstIndexAccessInterface;
 use Easy\Collections\ImmutableVector;
 use InvalidArgumentException;
 use OutOfBoundsException;
@@ -13,7 +13,7 @@ use Traversable;
 /**
  * Represents a strongly typed list of objects that can be accessed by index. Provides methods to search, sort, and manipulate lists.
  */
-class ImmutableVector extends AbstractCollection implements IConstIndexAccess
+class ImmutableVector extends AbstractCollection implements ConstIndexAccessInterface
 {
 
     public function __construct($items = null)

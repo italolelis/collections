@@ -10,7 +10,7 @@ namespace Easy\Collections\Generic;
  * @since 2.1.0
  * @author Ítalo Lelis de Vietro <italolelis@lellysinformatica.com>
  */
-interface IComparer
+interface ComparerInterface
 {
 
     /**

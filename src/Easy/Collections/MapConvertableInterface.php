@@ -6,12 +6,12 @@ namespace Easy\Collections;
 /**
  * Provides functionality to convert the collection into any IDictionary
  */
-interface IMapConvertable extends ICollectionConvertable
+interface MapConvertableInterface extends CollectionConvertableInterface
 {
 
     /**
      * Returns another ICollection based on this ICollection.
-     * @return IVector
+     * @return VectorInterface
      */
     public function toList();
 }
