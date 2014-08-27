@@ -9,7 +9,6 @@ use InvalidArgumentException;
 
 class ArrayListTest extends CollectionsTestCase
 {
-
     /**
      * @var ArrayList
      */
@@ -57,11 +56,11 @@ class ArrayListTest extends CollectionsTestCase
     {
         $arrayList = new ArrayList();
         $arrayList->add(1)
-                ->add(2);
+            ->add(2);
 
         $secoundArrayList = new ArrayList();
         $secoundArrayList->add(3)
-                ->add(new ArrayList(array(31)));
+            ->add(new ArrayList(array(31)));
 
         $arrayList->addAll($secoundArrayList);
         $this->assertEquals(array(
@@ -71,7 +70,7 @@ class ArrayListTest extends CollectionsTestCase
             3 => array(
                 0 => 31
             )
-                ), $arrayList->toArray());
+            ), $arrayList->toArray());
     }
 
     public function testToString()
@@ -200,7 +199,7 @@ class ArrayListTest extends CollectionsTestCase
         $this->assertEquals($this->coll[1], 'two');
 
         unset($this->coll[0]);
-        $this->assertEquals($this->coll->count(), 1);
+        $this->assertEquals(1, $this->coll->count());
         $this->assertTrue(isset($this->coll[1]));
     }
 
@@ -283,5 +282,4 @@ class ArrayListTest extends CollectionsTestCase
 
         $this->assertInstanceOf('Easy\\Collections\\Dictionary', $map);
     }
-
 }

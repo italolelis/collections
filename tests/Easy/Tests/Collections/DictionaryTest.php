@@ -5,13 +5,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 namespace Easy\Tests\Collections;
 
 use ArrayObject;
 use Easy\Collections\Dictionary;
 use InvalidArgumentException;
-use OutOfBoundsException;
+use PHPUnit_Framework_Error_Notice;
+use stdClass;
 
 /**
  * Description of CollectionTest
@@ -20,7 +20,6 @@ use OutOfBoundsException;
  */
 class DictionaryTest extends CollectionsTestCase
 {
-
     /**
      * @var Dictionary
      */
@@ -75,11 +74,11 @@ class DictionaryTest extends CollectionsTestCase
     {
         $arrayList = new Dictionary();
         $arrayList->add('key1', 'value1')
-                ->add('key2', 'value2');
+            ->add('key2', 'value2');
 
         $secoundArrayList = new Dictionary();
         $secoundArrayList->add('key3', 'value3')
-                ->add('key4', 'value4');
+            ->add('key4', 'value4');
 
         $arrayList->addAll($secoundArrayList);
         $this->assertEquals(array(
@@ -87,7 +86,7 @@ class DictionaryTest extends CollectionsTestCase
             'key2' => 'value2',
             'key3' => 'value3',
             'key4' => 'value4'
-                ), $arrayList->toArray());
+            ), $arrayList->toArray());
     }
 
     public function testAddItem()
@@ -118,7 +117,7 @@ class DictionaryTest extends CollectionsTestCase
     }
 
     /**
-     * @expectedException OutOfBoundsException
+     * @expectedException PHPUnit_Framework_Error_Notice
      */
     public function testGetInvalidItem()
     {
@@ -194,4 +193,11 @@ class DictionaryTest extends CollectionsTestCase
         $this->assertInstanceOf('Easy\\Collections\\ArrayList', $map);
     }
 
+    public function testSetObjectKey()
+    {
+        $class = new stdClass();
+        $this->coll->set($class, 'testing');
+
+        $this->assertEquals($this->coll->get($class), 'testing');
+    }
 }

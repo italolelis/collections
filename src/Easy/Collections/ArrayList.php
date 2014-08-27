@@ -5,6 +5,7 @@ namespace Easy\Collections;
 
 use Easy\Collections\CollectionArray;
 use InvalidArgumentException;
+use OutOfBoundsException;
 use Traversable;
 
 /**
@@ -94,7 +95,11 @@ class ArrayList extends CollectionArray implements VectorInterface, VectorConver
      */
     public function offsetGet($offset)
     {
-        return $this->get($offset);
+        if ($this->containsKey($offset) === false) {
+            throw new OutOfBoundsException('No element at position ' . $index);
+        }
+
+        return $this->array[$offset];
     }
 
     /**
@@ -116,7 +121,11 @@ class ArrayList extends CollectionArray implements VectorInterface, VectorConver
      */
     public function offsetUnset($offset)
     {
-        $this->remove($offset);
+        if ($this->containsKey($offset) == false) {
+            throw new InvalidArgumentException('The key ' . $offset . ' is not present in the dictionary');
+        }
+
+        unset($this->array[$offset]);
     }
 
     /**

@@ -10,13 +10,12 @@ use Easy\Collections\Linq\Expr\ClosureExpressionVisitor;
 use Easy\Collections\Linq\QueryableInterface;
 use Easy\Collections\Linq\SelectableInterface;
 use InvalidArgumentException;
-use OutOfBoundsException;
 
 /**
  * Provides the abstract base class for a strongly typed collection.
  */
-abstract class CollectionArray extends AbstractCollection implements IndexAccessInterface, ConstIndexAccessInterface, QueryableInterface, SelectableInterface,
-    CollectionConvertableInterface
+abstract class CollectionArray extends AbstractCollection implements IndexAccessInterface, ConstIndexAccessInterface, QueryableInterface,
+    SelectableInterface, CollectionConvertableInterface
 {
 
     /**
@@ -24,7 +23,7 @@ abstract class CollectionArray extends AbstractCollection implements IndexAccess
      */
     public function containsKey($key)
     {
-        return isset($this->array[$key]) || array_key_exists($key, $this->array);
+        return $this->offsetExists($key);
     }
 
     /**
@@ -40,11 +39,7 @@ abstract class CollectionArray extends AbstractCollection implements IndexAccess
      */
     public function get($index)
     {
-        if ($this->containsKey($index) === false) {
-            throw new OutOfBoundsException('No element at position ' . $index);
-        }
-
-        return $this->array[$index];
+        return $this->offsetGet($index);
     }
 
     /**
@@ -91,10 +86,7 @@ abstract class CollectionArray extends AbstractCollection implements IndexAccess
      */
     public function remove($index)
     {
-        if ($this->containsKey($index) == false) {
-            throw new InvalidArgumentException('The key ' . $index . ' is not present in the dictionary');
-        }
-        unset($this->array[$index]);
+        $this->offsetUnset($index);
         return $this;
     }
 
@@ -106,7 +98,7 @@ abstract class CollectionArray extends AbstractCollection implements IndexAccess
         $key = array_search($element, $this->array, true);
 
         if ($key !== false) {
-            unset($this->array[$key]);
+            $this->offsetUnset($key);
             return true;
         }
 

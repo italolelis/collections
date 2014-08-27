@@ -4,6 +4,7 @@
 namespace Easy\Collections;
 
 use InvalidArgumentException;
+use OutOfBoundsException;
 use Traversable;
 
 /**
@@ -17,6 +18,11 @@ class Dictionary extends CollectionArray implements MapInterface, MapConvertable
         if ($array !== null) {
             $this->addAll($array);
         }
+    }
+
+    public function hashCode($object)
+    {
+        return spl_object_hash($object);
     }
 
     /**
@@ -54,8 +60,8 @@ class Dictionary extends CollectionArray implements MapInterface, MapConvertable
         if ($key === null) {
             throw new InvalidArgumentException("Can't use 'null' as key!");
         }
-        $this->array[$key] = $value;
 
+        $this->offsetSet($key, $value);
         return $this;
     }
 
@@ -64,7 +70,11 @@ class Dictionary extends CollectionArray implements MapInterface, MapConvertable
      */
     public function offsetExists($offset)
     {
-        return $this->containsKey($offset);
+        if (is_object($offset)) {
+            $offset = $this->hashCode($offset);
+        }
+
+        return isset($this->array[$offset]) || array_key_exists($offset, $this->array);
     }
 
     /**
@@ -72,7 +82,15 @@ class Dictionary extends CollectionArray implements MapInterface, MapConvertable
      */
     public function offsetGet($offset)
     {
-        return $this->get($offset);
+        if ($this->containsKey($offset) === false) {
+            throw new OutOfBoundsException('No element at position ' . $index);
+        }
+
+        if (is_object($offset)) {
+            $offset = $this->hashCode($offset);
+        }
+
+        return $this->array[$offset];
     }
 
     /**
@@ -80,7 +98,11 @@ class Dictionary extends CollectionArray implements MapInterface, MapConvertable
      */
     public function offsetSet($offset, $value)
     {
-        $this->set($offset, $value);
+        if (is_object($offset)) {
+            $offset = $this->hashCode($offset);
+        }
+
+        $this->array[$offset] = $value;
     }
 
     /**
@@ -88,7 +110,11 @@ class Dictionary extends CollectionArray implements MapInterface, MapConvertable
      */
     public function offsetUnset($offset)
     {
-        $this->remove($offset);
+        if ($this->containsKey($offset) == false) {
+            throw new InvalidArgumentException('The key ' . $offset . ' is not present in the dictionary');
+        }
+
+        unset($this->array[$offset]);
     }
 
     /**

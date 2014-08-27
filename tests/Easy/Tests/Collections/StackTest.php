@@ -5,18 +5,16 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 namespace Easy\Tests\Collections;
 
-use BadFunctionCallException;
 use Easy\Collections\Stack;
+use RuntimeException;
 
 /**
  * @author italo
  */
 class StackTest extends CollectionsTestCase
 {
-
     /**
      * @var Stack
      */
@@ -45,7 +43,7 @@ class StackTest extends CollectionsTestCase
     }
 
     /**
-     * @expectedException BadFunctionCallException
+     * @expectedException RuntimeException
      */
     public function testDequeueEmptyQueue()
     {
@@ -53,7 +51,7 @@ class StackTest extends CollectionsTestCase
     }
 
     /**
-     * @expectedException BadFunctionCallException
+     * @expectedException RuntimeException
      */
     public function testPeekEmptyQueue()
     {
@@ -85,5 +83,4 @@ class StackTest extends CollectionsTestCase
 
         $this->assertEquals(array('testing1', 'testing2'), $this->coll->toArray());
     }
-
 }

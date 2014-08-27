@@ -1,7 +1,6 @@
 <?php
 
 // Copyright (c) Lellys Informática. All rights reserved. See License.txt in the project root for license information.
-
 namespace Easy\Collections;
 
 use BadFunctionCallException;
@@ -9,7 +8,7 @@ use BadFunctionCallException;
 /**
  * Provides functionality to evaluate queries against a specific data source wherein the type of the data is not specified.
  */
-interface QueueInterface extends CollectionInterface
+interface QueueInterface
 {
 
     /**

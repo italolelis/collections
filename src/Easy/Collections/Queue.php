@@ -3,23 +3,14 @@
 // Copyright (c) Lellys Informática. All rights reserved. See License.txt in the project root for license information.
 namespace Easy\Collections;
 
-use BadFunctionCallException;
+use RuntimeException;
+use SplQueue;
 
 /**
  * Represents a first-in, first-out collection of objects.
  */
-class Queue extends AbstractCollection implements QueueInterface
+class Queue extends SplQueue implements QueueInterface
 {
-
-    /**
-     * Adds an object to the end of the Queue.
-     * @param mixed $item The object to add to the Queue. The value can be null.
-     */
-    public function enqueue($item)
-    {
-        array_push($this->array, $item);
-        return $this;
-    }
 
     /**
      * Adds multiples objects to the end of the Queue.
@@ -34,30 +25,17 @@ class Queue extends AbstractCollection implements QueueInterface
     }
 
     /**
-     * Removes and returns the object at the beginning of the Queue.
-     * @return mixed The object that is removed from the beginning of the Queue.
-     * @throws BadFunctionCallException
-     */
-    public function dequeue()
-    {
-        if ($this->isEmpty()) {
-            throw new BadFunctionCallException(_('Cannot use method Dequeue on an empty Queue'));
-        }
-        return array_shift($this->array);
-    }
-
-    /**
      * Returns the object at the beginning of the Queue without removing it.
      * @return mixed The object at the beginning of the Queue.
-     * @throws BadFunctionCallException
+     * @throws RuntimeException
      */
     public function peek()
     {
         if ($this->isEmpty()) {
-            throw new BadFunctionCallException(_('Cannot use method Peek on an empty Queue'));
+            throw new RuntimeException(_('Cannot use method Peek on an empty Queue'));
         }
 
-        return $this->array[0];
+        return $this->offsetGet(0);
     }
 
     public static function fromArray(array $arr)
@@ -71,5 +49,29 @@ class Queue extends AbstractCollection implements QueueInterface
             }
         }
         return $collection;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function toArray()
+    {
+        $array = array();
+        foreach ($this as $key => $value) {
+            if ($value instanceof CollectionInterface) {
+                $array[$key] = $value->toArray();
+            } else {
+                $array[$key] = $value;
+            }
+        }
+        return $array;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function __toString()
+    {
+        return get_class($this);
     }
 }
