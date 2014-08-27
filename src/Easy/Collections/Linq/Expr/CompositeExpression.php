@@ -10,7 +10,7 @@ namespace Easy\Collections\Linq\Expr;
  * @author Benjamin Eberlei <kontakt@beberlei.de>
  * @since  2.3
  */
-class CompositeExpression implements Expression
+class CompositeExpression implements ExpressionInterface
 {
 
     const TYPE_AND = 'AND';
@@ -22,7 +22,7 @@ class CompositeExpression implements Expression
     private $type;
 
     /**
-     * @var Expression[]
+     * @var ExpressionInterface[]
      */
     private $expressions = array();
 
@@ -40,7 +40,7 @@ class CompositeExpression implements Expression
             if ($expr instanceof Value) {
                 throw new \RuntimeException("Values are not supported expressions as children of and/or expressions.");
             }
-            if (!($expr instanceof Expression)) {
+            if (!($expr instanceof ExpressionInterface)) {
                 throw new \RuntimeException("No expression given to CompositeExpression.");
             }
 
@@ -51,7 +51,7 @@ class CompositeExpression implements Expression
     /**
      * Returns the list of expressions nested in this composite.
      *
-     * @return Expression[]
+     * @return ExpressionInterface[]
      */
     public function getExpressionList()
     {

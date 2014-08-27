@@ -5,7 +5,7 @@
 namespace Easy\Collections\Linq;
 
 use Easy\Collections\Linq\Expr\CompositeExpression;
-use Easy\Collections\Linq\Expr\Expression;
+use Easy\Collections\Linq\Expr\ExpressionInterface;
 
 /**
  * Criteria for filtering Selectable collections.
@@ -32,7 +32,7 @@ class Criteria
     private static $expressionBuilder;
 
     /**
-     * @var Expression|null
+     * @var ExpressionInterface|null
      */
     private $expression;
 
@@ -77,12 +77,12 @@ class Criteria
     /**
      * Construct a new Criteria.
      *
-     * @param Expression $expression
+     * @param ExpressionInterface $expression
      * @param array|null $orderings
      * @param int|null   $firstResult
      * @param int|null   $maxResults
      */
-    public function __construct(Expression $expression = null, array $orderings = null, $firstResult = null, $maxResults = null)
+    public function __construct(ExpressionInterface $expression = null, array $orderings = null, $firstResult = null, $maxResults = null)
     {
         $this->expression = $expression;
         $this->orderings = $orderings;
@@ -93,11 +93,11 @@ class Criteria
     /**
      * Sets the where expression to evaluate when this Criteria is searched for.
      *
-     * @param Expression $expression
+     * @param ExpressionInterface $expression
      *
      * @return Criteria
      */
-    public function where(Expression $expression)
+    public function where(ExpressionInterface $expression)
     {
         $this->expression = $expression;
         return $this;
@@ -107,11 +107,11 @@ class Criteria
      * Appends the where expression to evaluate when this Criteria is searched for
      * using an AND with previous expression.
      *
-     * @param Expression $expression
+     * @param ExpressionInterface $expression
      *
      * @return Criteria
      */
-    public function andWhere(Expression $expression)
+    public function andWhere(ExpressionInterface $expression)
     {
         if ($this->expression === null) {
             return $this->where($expression);
@@ -128,11 +128,11 @@ class Criteria
      * Appends the where expression to evaluate when this Criteria is searched for
      * using an OR with previous expression.
      *
-     * @param Expression $expression
+     * @param ExpressionInterface $expression
      *
      * @return Criteria
      */
-    public function orWhere(Expression $expression)
+    public function orWhere(ExpressionInterface $expression)
     {
         if ($this->expression === null) {
             return $this->where($expression);
@@ -148,7 +148,7 @@ class Criteria
     /**
      * Gets the expression attached to this Criteria.
      *
-     * @return Expression|null
+     * @return ExpressionInterface|null
      */
     public function getWhereExpression()
     {

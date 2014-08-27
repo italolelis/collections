@@ -4,7 +4,7 @@
 
 namespace Easy\Collections\Linq\Expr;
 
-class Value implements Expression
+class Value implements ExpressionInterface
 {
 
     /**

@@ -10,7 +10,7 @@ namespace Easy\Collections\Linq\Expr;
  * @author Benjamin Eberlei <kontakt@beberlei.de>
  * @since  2.3
  */
-class Comparison implements Expression
+class Comparison implements ExpressionInterface
 {
 
     const EQ = '=';

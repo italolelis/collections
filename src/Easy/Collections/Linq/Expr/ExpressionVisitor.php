@@ -43,13 +43,13 @@ abstract class ExpressionVisitor
     /**
      * Dispatches walking an expression to the appropriate handler.
      *
-     * @param Expression $expr
+     * @param ExpressionInterface $expr
      *
      * @return null|callable
      *
      * @throws \RuntimeException
      */
-    public function dispatch(Expression $expr)
+    public function dispatch(ExpressionInterface $expr)
     {
         switch (true) {
             case ($expr instanceof Comparison):
