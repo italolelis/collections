@@ -1,7 +1,6 @@
 <?php
 
 // Copyright (c) Lellys Informática. All rights reserved. See License.txt in the project root for license information.
-
 namespace Easy\Collections\Linq\Expr;
 
 /**
@@ -12,7 +11,6 @@ namespace Easy\Collections\Linq\Expr;
  */
 class CompositeExpression implements ExpressionInterface
 {
-
     const TYPE_AND = 'AND';
     const TYPE_OR = 'OR';
 
@@ -73,5 +71,4 @@ class CompositeExpression implements ExpressionInterface
     {
         return $visitor->walkCompositeExpression($this);
     }
-
 }

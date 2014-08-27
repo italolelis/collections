@@ -1,12 +1,10 @@
 <?php
 
 // Copyright (c) Lellys Informática. All rights reserved. See License.txt in the project root for license information.
-
 namespace Easy\Collections\Linq\Expr;
 
 class Value implements ExpressionInterface
 {
-
     /**
      * @var mixed
      */
@@ -35,5 +33,4 @@ class Value implements ExpressionInterface
     {
         return $visitor->walkValue($this);
     }
-
 }

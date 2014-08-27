@@ -1,7 +1,6 @@
 <?php
 
 // Copyright (c) Lellys Informática. All rights reserved. See License.txt in the project root for license information.
-
 namespace Easy\Collections\Linq;
 
 use Easy\Collections\Linq\Expr\CompositeExpression;
@@ -15,7 +14,6 @@ use Easy\Collections\Linq\Expr\ExpressionInterface;
  */
 class Criteria
 {
-
     /**
      * @var string
      */
@@ -82,7 +80,8 @@ class Criteria
      * @param int|null   $firstResult
      * @param int|null   $maxResults
      */
-    public function __construct(ExpressionInterface $expression = null, array $orderings = null, $firstResult = null, $maxResults = null)
+    public function __construct(ExpressionInterface $expression = null, array $orderings = null, $firstResult = null,
+                                $maxResults = null)
     {
         $this->expression = $expression;
         $this->orderings = $orderings;
@@ -117,7 +116,8 @@ class Criteria
             return $this->where($expression);
         }
 
-        $this->expression = new CompositeExpression(CompositeExpression::TYPE_AND, array(
+        $this->expression = new CompositeExpression(CompositeExpression::TYPE_AND,
+                                                    array(
             $this->expression, $expression
         ));
 
@@ -138,7 +138,8 @@ class Criteria
             return $this->where($expression);
         }
 
-        $this->expression = new CompositeExpression(CompositeExpression::TYPE_OR, array(
+        $this->expression = new CompositeExpression(CompositeExpression::TYPE_OR,
+                                                    array(
             $this->expression, $expression
         ));
 
@@ -228,5 +229,4 @@ class Criteria
         $this->maxResults = $maxResults;
         return $this;
     }
-
 }

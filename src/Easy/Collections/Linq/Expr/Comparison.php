@@ -1,7 +1,6 @@
 <?php
 
 // Copyright (c) Lellys Informática. All rights reserved. See License.txt in the project root for license information.
-
 namespace Easy\Collections\Linq\Expr;
 
 /**
@@ -12,7 +11,6 @@ namespace Easy\Collections\Linq\Expr;
  */
 class Comparison implements ExpressionInterface
 {
-
     const EQ = '=';
     const NEQ = '<>';
     const LT = '<';
@@ -89,5 +87,4 @@ class Comparison implements ExpressionInterface
     {
         return $visitor->walkComparison($this);
     }
-
 }
