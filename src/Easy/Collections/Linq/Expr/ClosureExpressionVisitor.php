@@ -10,8 +10,7 @@ use RuntimeException;
 /**
  * Walks an expression graph and turns it into a PHP closure.
  *
- * This closure can be used with {@Collection#filter()} and is used internally
- * by {@ArrayCollection#select()}.
+ * This closure can be used with \Easy\Collections\Linq\QueryableInterface::filter().
  *
  * @author Benjamin Eberlei <kontakt@beberlei.de>
  * @since  2.3
