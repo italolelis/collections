@@ -21,9 +21,25 @@ abstract class AbstractCollection implements CollectionInterface, CollectionConv
      */
     private $defaultComparer;
 
+    /**
+     *
+     * @var \Iterator
+     */
+    private $iterator;
+
     public function getIterator()
     {
-        return new ArrayIterator($this->array);
+        if (!$this->iterator) {
+            $this->iterator = new ArrayIterator($this->array);
+        }
+
+        return $this->iterator;
+    }
+
+    public function setIterator(\Iterator $iterator)
+    {
+        $this->iterator = $iterator;
+        return $this;
     }
 
     /**
