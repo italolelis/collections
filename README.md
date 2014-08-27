@@ -7,6 +7,8 @@ Collections
 [![Latest Stable Version](https://poser.pugx.org/easyframework/collections/v/stable.png)](https://packagist.org/packages/easyframework/collections)
 [![Latest Unstable Version](https://poser.pugx.org/easyframework/collections/v/unstable.png)](https://packagist.org/packages/easyframework/collections)
 
+[![Latest Unstable Version](https://insight.sensiolabs.com/projects/1f67b9bd-f120-43d5-9f02-f73aa6132d86/big.png)](https://insight.sensiolabs.com/projects/1f67b9bd-f120-43d5-9f02-f73aa6132d86)
+
 Collections Abstraction library for PHP
 
 What is it?
