@@ -14,7 +14,7 @@ interface VectorInterface extends CollectionInterface, IndexAccessInterface, Con
     /**
      * Adds an item to the IList.
      * @param mixed $item The object to add to the IList.
-     * @return ArrayList
+     * @return VectorInterface
      */
     public function add($item);
 
@@ -29,7 +29,7 @@ interface VectorInterface extends CollectionInterface, IndexAccessInterface, Con
      * Inserts an item to the IList at the specified index.
      * @param int $index The zero-based index at which value should be inserted.
      * @param mixed $item The object to insert into the IList.
-     * @return ArrayList
+     * @return VectorInterface
      */
     public function insert($index, $item);
 
@@ -41,6 +41,7 @@ interface VectorInterface extends CollectionInterface, IndexAccessInterface, Con
 
     /**
      * Reverses the elements of this Vector in place
+     * @return void
      */
     public function shuffle();
 
@@ -48,6 +49,7 @@ interface VectorInterface extends CollectionInterface, IndexAccessInterface, Con
      * Splice the Vector in place. This function provides the functional equivalent of array_splice(), but for Vectors.
      * @param int $offset
      * @param int $length
+     * @return VectorInterface
      */
     public function splice($offset, $length = null);
 
@@ -55,11 +57,13 @@ interface VectorInterface extends CollectionInterface, IndexAccessInterface, Con
      * Slice the elements of this Vector in place
      * @param int $offset
      * @param int $length
+     * @return VectorInterface
      */
     public function slice($offset, $length = null);
 
     /**
      * Reverses the elements of this Vector in place
+     * @return void
      */
     public function reverse();
 }

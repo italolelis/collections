@@ -43,7 +43,7 @@ class Comparison implements ExpressionInterface
     /**
      * @param string $field
      * @param string $operator
-     * @param mixed  $value
+     * @param Value  $value
      */
     public function __construct($field, $operator, $value)
     {
