@@ -28,10 +28,4 @@ interface CollectionConvertableInterface
      * @return MapInterface Returns a Map containing the key/value pairs from the specified array.
      */
     public static function fromArray(array $arr);
-
-    /**
-     * Returns a Map containing the key/value pairs from the specified Traversable.
-     * @return MapInterface Returns a Map containing the key/value pairs from the specified Traversable.
-     */
-    public static function fromItems(Traversable $items);
 }

@@ -19,6 +19,6 @@ class StringComparer implements ComparerInterface
      */
     public function compare($x, $y)
     {
-        return strcmp($x, $y);
+        return (bool) strcmp($x, $y);
     }
 }

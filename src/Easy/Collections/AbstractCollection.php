@@ -26,13 +26,6 @@ abstract class AbstractCollection implements CollectionInterface, CollectionConv
      */
     private $iterator;
 
-    public function __construct($array = null)
-    {
-        if ($array !== null) {
-            $this->addAll($array);
-        }
-    }
-
     /**
      * Gets the collection's iterator
      * @return \Iterator
@@ -174,13 +167,5 @@ abstract class AbstractCollection implements CollectionInterface, CollectionConv
     {
         $this->array = array_merge_recursive($this->array, $collection->toArray());
         return $this;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public static function fromItems(Traversable $items)
-    {
-        return new static($items);
     }
 }
