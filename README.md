@@ -160,7 +160,7 @@ Now we want everyone where the name starts with 'A'
   }
 ```  
 
-Lets filter a collection with regex which will filter  string where starts with letter **A** and ends with letter **A**.
+Let's filter a collection with regex which will filter a string where starts with letter **A** and ends with letter **A**.
 
 ```php
   $criteria = new \Easy\Collections\Criteria();
