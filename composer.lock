@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "2ff20677a79b9fedfaf987868f99d75f",
+    "hash": "39e252531809c78e35195ed8a89c502e",
     "packages": [
         {
             "name": "easyframework/generics",

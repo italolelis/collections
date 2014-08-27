@@ -3,8 +3,6 @@
 // Copyright (c) Lellys Informática. All rights reserved. See License.txt in the project root for license information.
 namespace Easy\Collections;
 
-use Traversable;
-
 /**
  * Provides functionality to convert the collection into any ICollection
  */

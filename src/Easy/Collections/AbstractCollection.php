@@ -7,7 +7,6 @@ use ArrayIterator;
 use Easy\Collections\Comparer\NumericKeyComparer;
 use Easy\Collections\Generic\ComparerInterface;
 use Easy\Generics\EquatableInterface;
-use Traversable;
 
 /**
  * Provides the abstract base class for a strongly typed collection.
