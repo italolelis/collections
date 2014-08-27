@@ -14,13 +14,6 @@ use Traversable;
 class ArrayList extends CollectionArray implements VectorInterface, VectorConvertableInterface
 {
 
-    public function __construct($items = null)
-    {
-        if ($items !== null) {
-            $this->addAll($items);
-        }
-    }
-
     /**
      * {@inheritdoc}
      */

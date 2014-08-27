@@ -14,8 +14,8 @@ use InvalidArgumentException;
 /**
  * Provides the abstract base class for a strongly typed collection.
  */
-abstract class CollectionArray extends AbstractCollection implements IndexAccessInterface, ConstIndexAccessInterface, QueryableInterface,
-    SelectableInterface, CollectionConvertableInterface
+abstract class CollectionArray extends AbstractCollection implements
+IndexAccessInterface, ConstIndexAccessInterface, QueryableInterface, SelectableInterface, CollectionConvertableInterface
 {
 
     /**

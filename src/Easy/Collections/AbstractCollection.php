@@ -22,11 +22,21 @@ abstract class AbstractCollection implements CollectionInterface, CollectionConv
     private $defaultComparer;
 
     /**
-     *
      * @var \Iterator
      */
     private $iterator;
 
+    public function __construct($array = null)
+    {
+        if ($array !== null) {
+            $this->addAll($array);
+        }
+    }
+
+    /**
+     * Gets the collection's iterator
+     * @return \Iterator
+     */
     public function getIterator()
     {
         if (!$this->iterator) {
@@ -36,6 +46,11 @@ abstract class AbstractCollection implements CollectionInterface, CollectionConv
         return $this->iterator;
     }
 
+    /**
+     * Sets the collection's iterator
+     * @param \Iterator $iterator
+     * @return CollectionInterface
+     */
     public function setIterator(\Iterator $iterator)
     {
         $this->iterator = $iterator;
@@ -57,7 +72,7 @@ abstract class AbstractCollection implements CollectionInterface, CollectionConv
     /**
      * Sets the default comparer for this collection
      * @param ComparerInterface $defaultComparer
-     * @return ArrayList
+     * @return CollectionInterface
      */
     public function setDefaultComparer(ComparerInterface $defaultComparer)
     {

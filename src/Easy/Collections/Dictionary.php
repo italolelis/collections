@@ -13,13 +13,6 @@ use Traversable;
 class Dictionary extends CollectionArray implements MapInterface, MapConvertableInterface
 {
 
-    public function __construct($array = null)
-    {
-        if ($array !== null) {
-            $this->addAll($array);
-        }
-    }
-
     public function hashCode($object)
     {
         return spl_object_hash($object);

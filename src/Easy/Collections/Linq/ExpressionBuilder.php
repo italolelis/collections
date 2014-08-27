@@ -1,7 +1,6 @@
 <?php
 
 // Copyright (c) Lellys Informática. All rights reserved. See License.txt in the project root for license information.
-
 namespace Easy\Collections\Linq;
 
 use Easy\Collections\Linq\Expr\Comparison;
@@ -18,21 +17,17 @@ class ExpressionBuilder
 {
 
     /**
-     * @param mixed $x
-     *
      * @return CompositeExpression
      */
-    public function andX($x = null)
+    public function andX()
     {
         return new CompositeExpression(CompositeExpression::TYPE_AND, func_get_args());
     }
 
     /**
-     * @param Comparison $x
-     *
      * @return CompositeExpression
      */
-    public function orX($x = null)
+    public function orX()
     {
         return new CompositeExpression(CompositeExpression::TYPE_OR, func_get_args());
     }
@@ -171,7 +166,7 @@ class ExpressionBuilder
     {
         return new Comparison($field, Comparison::ENDS_WITH, new Value($value));
     }
-    
+
     /**
      * Determines whether the regular expression pattern string has a specified string.
      * @param string $field
@@ -182,5 +177,4 @@ class ExpressionBuilder
     {
         return new Comparison($field, Comparison::REGEX, new Value($value));
     }
-
 }
