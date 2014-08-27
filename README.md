@@ -23,7 +23,7 @@ Installation
 ----------
 
 ```shell
-  require: { "easyframework/collections": "3.0.*" }
+  require: { "easyframework/collections": "3.1.*" }
   
   $ composer install
 ``` 
@@ -56,9 +56,9 @@ Great, now we know how to run through a collection and how to count it, but thes
 ```php
   $collection->sort(); //by default the sort is by the keys
   
-  $colletion->sort(new \Easy\Collections\Comparer\StringComparer()); //this will sort by alfabethic order
+  $colletion->sort(new \Easy\Collections\Comparer\StringComparer()); //this will sort by alfabetic order
   
-  $collection->sort(new YourCustomComaparer()); //you can create your own custom comparer to sort your collection
+  $collection->sort(new YourCustomComparer()); //you can create your own custom comparer to sort your collection
 ```
 
 Yeah that is great, isn't it? But we can do much more things, now lets search for someone in the collection.
@@ -93,8 +93,19 @@ The Dictionary class is something like associative arrays in PHP, or Hash tables
   }
 ```
 
+We can use object as keys too.
+
+```php
+    $dictionary = new \Easy\Collections\Dictionary();
+    
+    $object = new \stdClass();
+    $dictionary->add($object, 'value');
+
+    echo $dictionary->get($object); //prints 'value'
+```
+
 When one key is inserted we can't insert the same key again, if we want to change its value we need to use the method set()
-Here is an exemple of how we can get some item based on the key;
+Here is an example of how we can get some item based on the key;
 
 ```php
   print_r ($dictionary->get('person1')); //returns array('name' => John, 'age' => 20)
@@ -165,6 +176,6 @@ Lets filter a collection with regex which will filter  string where starts with 
 
 ### Conclusion ###
 
-Hope you've enjoy it our tour through the Collection library, if you want to see all the avaliables methods and others collections (like Stack, Queue) check our [API][1].
+Hope you've enjoy it our tour through the Collection library, if you want to see all the availables methods and others collections (like Stack, Queue) check our [API][1].
 
 [1]: http://easyframework.net/collections/api
