@@ -117,7 +117,7 @@ class DictionaryTest extends CollectionsTestCase
     }
 
     /**
-     * @expectedException PHPUnit_Framework_Error_Notice
+     * @expectedException OutOfBoundsException
      */
     public function testGetInvalidItem()
     {
