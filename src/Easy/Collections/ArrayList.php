@@ -96,7 +96,7 @@ class ArrayList extends CollectionArray implements VectorInterface, VectorConver
     public function offsetGet($offset)
     {
         if ($this->containsKey($offset) === false) {
-            throw new OutOfBoundsException('No element at position ' . $index);
+            throw new OutOfBoundsException('No element at position ' . $offset);
         }
 
         return $this->array[$offset];

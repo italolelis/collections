@@ -83,7 +83,7 @@ class Dictionary extends CollectionArray implements MapInterface, MapConvertable
     public function offsetGet($offset)
     {
         if ($this->containsKey($offset) === false) {
-            throw new OutOfBoundsException('No element at position ' . $index);
+            throw new OutOfBoundsException('No element at position ' . $offset);
         }
 
         if (is_object($offset)) {

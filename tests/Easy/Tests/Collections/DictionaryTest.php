@@ -10,7 +10,7 @@ namespace Easy\Tests\Collections;
 use ArrayObject;
 use Easy\Collections\Dictionary;
 use InvalidArgumentException;
-use PHPUnit_Framework_Error_Notice;
+use OutOfBoundsException;
 use stdClass;
 
 /**
@@ -117,7 +117,7 @@ class DictionaryTest extends CollectionsTestCase
     }
 
     /**
-     * @expectedException PHPUnit_Framework_Error_Notice
+     * @expectedException OutOfBoundsException
      */
     public function testGetInvalidItem()
     {
