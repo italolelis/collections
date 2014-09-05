@@ -152,7 +152,8 @@ IndexAccessInterface, ConstIndexAccessInterface, QueryableInterface, SelectableI
             $filtered = array_filter($filtered, $filter);
         }
 
-        if ($orderings = $criteria->getOrderings()) {
+        $orderings = $criteria->getOrderings();
+        if ($orderings) {
             $next = null;
             foreach (array_reverse($orderings) as $field => $ordering) {
                 $next = ClosureExpressionVisitor::sortByField($field, $ordering == 'DESC' ? -1 : 1, $next);
