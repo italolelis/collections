@@ -164,7 +164,7 @@ abstract class AbstractCollection implements CollectionInterface, CollectionConv
      */
     public function concat(CollectionConvertableInterface $collection)
     {
-        $this->array = array_merge_recursive($this->array, $collection->toArray());
+        $this->array = array_merge($this->array, $collection->toArray());
         return $this;
     }
 }
