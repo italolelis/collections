@@ -12,8 +12,8 @@
          bootstrap="./tests/bootstrap.php"
 >
     <testsuites>
-        <testsuite name="Suite de Testes do Collections">
-            <directory>./tests/Easy/</directory>
+        <testsuite name="Collections Test Suites">
+            <directory>./tests/</directory>
         </testsuite>
     </testsuites>
 
@@ -21,7 +21,7 @@
         <whitelist>
             <directory>./</directory>
             <exclude>
-                <directory>./tests/Easy/</directory>
+                <directory>./tests/</directory>
                 <directory>./vendor</directory>
             </exclude>
         </whitelist>
