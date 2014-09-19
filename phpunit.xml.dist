@@ -9,7 +9,7 @@
          processIsolation="false"
          stopOnFailure="false"
          syntaxCheck="false"
-         bootstrap="./tests/Easy/Tests/TestInit.php"
+         bootstrap="./tests/bootstrap.php"
 >
     <testsuites>
         <testsuite name="Suite de Testes do Collections">
