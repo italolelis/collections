@@ -1,10 +1,10 @@
 # Collections
 
-[![Build Status](https://travis-ci.org/LellysInformatica/collections.png?branch=master)](https://travis-ci.org/LellysInformatica/collections)
-[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/LellysInformatica/collections/badges/quality-score.png?s=0bdaef0d3ed9e37348e610c6a41908fd505d6328)](https://scrutinizer-ci.com/g/LellysInformatica/collections/)
-[![Code Coverage](https://scrutinizer-ci.com/g/LellysInformatica/collections/badges/coverage.png?s=fbbb73d61336e5247035682fed9a9c5969001103)](https://scrutinizer-ci.com/g/LellysInformatica/collections/)
-[![Latest Stable Version](https://poser.pugx.org/easyframework/collections/v/stable.png)](https://packagist.org/packages/easyframework/collections)
-[![Latest Unstable Version](https://poser.pugx.org/easyframework/collections/v/unstable.png)](https://packagist.org/packages/easyframework/collections)
+[![Build Status](http://img.shields.io/travis/LellysInformatica/collections.svg?style=flat-square)](https://travis-ci.org/LellysInformatica/collections)
+[![Scrutinizer Code Quality](http://img.shields.io/scrutinizer/g/LellysInformatica/collections.svg?style=flat-square)](https://scrutinizer-ci.com/g/LellysInformatica/collections/)
+[![Code Coverage](http://img.shields.io/scrutinizer/coverage/g/LellysInformatica/collections.svg?style=flat-square)](https://scrutinizer-ci.com/g/LellysInformatica/collections/)
+[![Latest Stable Version](http://img.shields.io/packagist/v/easyframework/collections.svg?style=flat-square)](https://packagist.org/packages/easyframework/collections)
+[![Downloads](https://img.shields.io/packagist/dt/easyframework/collections.svg?style=flat-square)](https://packagist.org/packages/easyframework/collections)
 
 [![SensioLabsInsight](https://insight.sensiolabs.com/projects/1f67b9bd-f120-43d5-9f02-f73aa6132d86/small.png)](https://insight.sensiolabs.com/projects/1f67b9bd-f120-43d5-9f02-f73aa6132d86)
 
