@@ -1,5 +1,4 @@
-Collections
-===========
+# Collections
 
 [![Build Status](https://travis-ci.org/LellysInformatica/collections.png?branch=master)](https://travis-ci.org/LellysInformatica/collections)
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/LellysInformatica/collections/badges/quality-score.png?s=0bdaef0d3ed9e37348e610c6a41908fd505d6328)](https://scrutinizer-ci.com/g/LellysInformatica/collections/)
@@ -11,8 +10,6 @@ Collections
 
 Collections Abstraction library for PHP
 
-What is it?
-----------
 The Collection library is one of the most useful things that many modern languages has, but for some reason PHP doesn't has a built in collection layer.
 
 For that reason we created Collections, an incredible library that gathers the best of .NET's and Java's collections patterns and
@@ -20,20 +17,19 @@ unify it with PHP array power.
 
 Take a look and see what we're talking about!!
 
+## Install
 
-Installation
-----------
+``` json
+{
+    "require": {
+        "easyframework/collections": "~3.2"
+    }
+}
+```
 
-```shell
-  require: { "easyframework/collections": "3.1.*" }
-  
-  $ composer install
-``` 
+## Usage
 
-Usage
-----------
-
-### The Collection Class ###
+### The Collection Class
 
 The Collection represents the List in .NET language or simply non-associative arrays in php:
 
@@ -71,7 +67,7 @@ Yeah that is great, isn't it? But we can do much more things, now lets search fo
 
 Ok now we learned many things of collections, we can do even more, but I'll show you other type of collection called Dictionary.
 
-### The Dictionary Class ###
+### The Dictionary Class
 
 The Dictionary class is something like associative arrays in PHP, or Hash tables in other languages.
 
@@ -115,7 +111,7 @@ Here is an example of how we can get some item based on the key;
 
 All Collection methods are also avaliable in Dictionary class, just remember to use each one in correct case, this will help you keep organization in your project.
 
-### Working with objects ###
+### Working with objects
 
 To our last exemple we'll use objects in our collection.
 
@@ -175,9 +171,24 @@ Let's filter a collection with regex which will filter a string where starts wit
       echo $item->getName() . "-" . $item->getAge();
   }
 ``` 
+## Testing
 
-### Conclusion ###
+``` bash
+$ phpunit
+```
 
-Hope you've enjoy it our tour through the Collection library, if you want to see all the availables methods and others collections (like Stack, Queue) check our [API][1].
+## Contributing
 
-[1]: http://easyframework.net/collections/api
+Please see [CONTRIBUTING](https://github.com/LellysInformatica/collections/blob/master/CONTRIBUTING.md) for details.
+
+## Credits
+
+- [italolelis](https://github.com/italolelis)
+- [philipe](https://github.com/philipe)
+- [AyrtonRicardo](https://github.com/AyrtonRicardo)
+- [All Contributors](https://github.com/LellysInformatica/collections/contributors)
+
+
+## License
+
+The MIT License (MIT). Please see [License File](https://github.com/LellysInformatica/collections/blob/master/LICENSE) for more information.
