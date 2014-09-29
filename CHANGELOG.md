@@ -3,6 +3,7 @@ All notable changes to this project will be documented in this file.
 
 ## Next - unreleased
 
+- Add Reactive Extensions.
 - Adding new data structure BinaryTree.
 - Adding new data structure AvlTree.
 - Adding new data structure SplayTree.

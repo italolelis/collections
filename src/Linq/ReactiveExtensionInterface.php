@@ -9,7 +9,7 @@ use Easy\Collections\CollectionInterface;
 /**
  * Provides functionality to evaluate queries against a specific data source wherein the type of the data is not specified.
  */
-interface QueryableInterface
+interface ReactiveExtensionInterface
 {
 
     /**
@@ -35,9 +35,18 @@ interface QueryableInterface
      * Returns all the elements of this collection that satisfy the predicate p.
      * The order of the elements is preserved.
      *
-     * @param callable $p The predicate used for filtering.
+     * @param callable $p The predicate used for map.
      *
      * @return CollectionInterface A collection with the results of the filter operation.
      */
     public function map($p);
+
+    /**
+     * Iteratively reduce the collection to a single value using a callback function.
+     *
+     * @param callable $p The predicate used for reduce.
+     * @param int $initial If the optional initial is available, it will be used at the beginning of the process, or as a final result in case the array is empty.
+     * @return CollectionInterface A collection with the results of the filter operation.
+     */
+    public function reduce($p, $initial = null);
 }

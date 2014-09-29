@@ -7,7 +7,7 @@ use Closure;
 use Easy\Collections\Generic\ComparerInterface;
 use Easy\Collections\Linq\Criteria;
 use Easy\Collections\Linq\Expr\ClosureExpressionVisitor;
-use Easy\Collections\Linq\QueryableInterface;
+use Easy\Collections\Linq\ReactiveExtensionInterface;
 use Easy\Collections\Linq\SelectableInterface;
 use InvalidArgumentException;
 
@@ -15,7 +15,7 @@ use InvalidArgumentException;
  * Provides the abstract base class for a strongly typed collection.
  */
 abstract class CollectionArray extends AbstractCollection implements
-IndexAccessInterface, ConstIndexAccessInterface, QueryableInterface, SelectableInterface, CollectionConvertableInterface
+IndexAccessInterface, ConstIndexAccessInterface, ReactiveExtensionInterface, SelectableInterface, CollectionConvertableInterface
 {
 
     /**
@@ -136,6 +136,11 @@ IndexAccessInterface, ConstIndexAccessInterface, QueryableInterface, SelectableI
     public function filter(Closure $p)
     {
         return static::fromArray(array_filter($this->array, $p));
+    }
+
+    public function reduce($p, $initial = null)
+    {
+        return static::fromArray(array_reduce($this->array, $p, $initial));
     }
 
     /**
