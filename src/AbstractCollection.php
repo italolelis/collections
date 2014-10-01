@@ -11,9 +11,17 @@ use Easy\Generics\EquatableInterface;
 /**
  * Provides the abstract base class for a strongly typed collection.
  */
-abstract class AbstractCollection implements CollectionInterface, CollectionConvertableInterface, EquatableInterface
+abstract class AbstractCollection implements CollectionInterface, CollectionConvertableInterface, EquatableInterface, Rx\ObservableInterface
 {
+    /**
+     * @var array 
+     */
     protected $array = array();
+
+    /**
+     * @var array 
+     */
+    protected $subscribers = array();
 
     /**
      * @var ComparerInterface
@@ -165,6 +173,19 @@ abstract class AbstractCollection implements CollectionInterface, CollectionConv
     public function concat(CollectionConvertableInterface $collection)
     {
         $this->array = array_merge($this->array, $collection->toArray());
+        return $this;
+    }
+
+    public function subscribe(\Closure $onNext, \Closure $onError = null, \Closure $onCompleted = null)
+    {
+        $callbackObserver = new Rx\CallbackObserver($onCompleted, $onError, $onNext);
+        $this->subscribeObject($callbackObserver);
+        return $this;
+    }
+
+    public function subscribeObject(Rx\ObserverInterface $observer)
+    {
+        $this->subscribers[] = $observer;
         return $this;
     }
 }

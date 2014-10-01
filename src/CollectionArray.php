@@ -7,8 +7,8 @@ use Closure;
 use Easy\Collections\Generic\ComparerInterface;
 use Easy\Collections\Linq\Criteria;
 use Easy\Collections\Linq\Expr\ClosureExpressionVisitor;
-use Easy\Collections\Linq\ReactiveExtensionInterface;
 use Easy\Collections\Linq\SelectableInterface;
+use Easy\Collections\Rx\ReactiveExtensionInterface;
 use InvalidArgumentException;
 
 /**
@@ -141,6 +141,21 @@ IndexAccessInterface, ConstIndexAccessInterface, ReactiveExtensionInterface, Sel
     public function reduce($p, $initial = null)
     {
         return static::fromArray(array_reduce($this->array, $p, $initial));
+    }
+
+    public function first(Closure $p = null)
+    {
+        
+    }
+
+    public function last(Closure $p = null)
+    {
+        
+    }
+
+    public function take(Closure $p = null)
+    {
+        
     }
 
     /**
