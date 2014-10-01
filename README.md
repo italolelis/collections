@@ -22,7 +22,7 @@ Take a look and see what we're talking about!!
 ``` json
 {
     "require": {
-        "easyframework/collections": "~3.2"
+        "easyframework/collections": "~3.1"
     }
 }
 ```
@@ -39,9 +39,10 @@ The Collection represents the List in .NET language or simply non-associative ar
   $collection->add('Maria');
   $collection->add('Anderson');
   
-  foreach($collection as $item){
-      echo $item;
-  }
+  $collection->map(function($item){
+        echo $item;
+  });
+
 ```    
 Lets continue with the exemple above and count how many elements we have!
 
@@ -86,9 +87,10 @@ The Dictionary class is something like associative arrays in PHP, or Hash tables
       'age' => 25
   ));
 
-  foreach ($dictionary as $key => $item) {
-      echo $key . ": " . $item['name'] . "-" . $item['age'];
-  }
+  $collection->map(function($item){
+        echo $key . ": " . $item['name'] . "-" . $item['age'];
+  });
+  
 ```
 
 We can use object as keys too.
@@ -123,10 +125,10 @@ To our last exemple we'll use objects in our collection.
   $collection->add(new Person('Angela', 29));
   $collection->add(new Person('Maria', 19));
   $collection->add(new Person('Anderson', 25));
-  
-  foreach($collection as $item){
-      echo $item->getName();
-  }
+
+  $collection->map(function($item){
+        echo $item->getName();
+  });
 ```  
 
 Pretty simple, but the reason I wanted to show you objects is because of Expression search, something like Linq for .NET
@@ -139,9 +141,9 @@ Lets seek everyone with age 20.
   $collection = $collection->matching($criteria);
   
   //only going to list John and Peter wich has 20 years
-  foreach($collection as $item){
-      echo $item->getName() . "-" . $item->getAge();
-  }
+  $collection->map(function($item){
+        echo $item->getName() . "-" . $item->getAge();
+  });
 ``` 
 
 Now we want everyone where the name starts with 'A'
@@ -152,10 +154,9 @@ Now we want everyone where the name starts with 'A'
   $criteria->where($expr);
   $collection = $collection->matching($criteria);
   
-  //only going to list Angela and Anderson
-  foreach($collection as $item){
-      echo $item->getName() . "-" . $item->getAge();
-  }
+  $collection->map(function($item){
+        echo $item->getName() . "-" . $item->getAge();
+  });
 ```  
 
 Let's filter a collection with regex which will filter a string where starts with letter **A** and ends with letter **A**.
@@ -167,9 +168,9 @@ Let's filter a collection with regex which will filter a string where starts wit
   $collection = $collection->matching($criteria);
   
   //only going to list Angela
-  foreach($collection as $item){
-      echo $item->getName() . "-" . $item->getAge();
-  }
+  $collection->map(function($item){
+        echo $item->getName() . "-" . $item->getAge();
+  });
 ``` 
 ## Testing
 
