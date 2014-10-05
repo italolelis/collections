@@ -110,7 +110,7 @@ class Dictionary extends CollectionArray implements MapInterface, MapConvertable
      */
     public function offsetUnset($offset)
     {
-        if ($this->containsKey($offset) == false) {
+        if ($this->containsKey($offset) === false) {
             throw new InvalidArgumentException('The key ' . $offset . ' is not present in the dictionary');
         }
 
