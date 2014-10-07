@@ -59,7 +59,7 @@ interface FilterInterface
     /**
      * Returns a specified number of contiguous elements from the start of an observable sequence, using the specified scheduler for the edge case of take(0).
      *
-     * @param $count The number of elements to take.
+     * @param integer $count The number of elements to take.
      *
      * @return CollectionInterface A collection with the results of the filter operation.
      */
