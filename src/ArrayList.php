@@ -3,7 +3,6 @@
 // Copyright (c) Lellys Informática. All rights reserved. See License.txt in the project root for license information.
 namespace Easy\Collections;
 
-use Easy\Collections\CollectionArray;
 use InvalidArgumentException;
 use OutOfBoundsException;
 use Traversable;
@@ -87,7 +86,7 @@ class ArrayList extends CollectionArray implements VectorInterface, VectorConver
         if ($offset < 0) {
             throw new InvalidArgumentException('The option value must be a number > 0');
         }
-        return array_key_exists((int) $offset, $this->array);
+        return array_key_exists((int)$offset, $this->array);
     }
 
     /**
@@ -113,7 +112,7 @@ class ArrayList extends CollectionArray implements VectorInterface, VectorConver
         if ($offset < 0) {
             throw new InvalidArgumentException('The option value must be a number > 0');
         }
-        $this->array[(int) $offset] = $value;
+        $this->array[(int)$offset] = $value;
     }
 
     /**
@@ -166,14 +165,6 @@ class ArrayList extends CollectionArray implements VectorInterface, VectorConver
     public function shuffle()
     {
         shuffle($this->array);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function slice($offset, $length = null)
-    {
-        return ArrayList::fromArray(array_slice($this->array, $offset, $length));
     }
 
     /**

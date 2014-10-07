@@ -54,14 +54,6 @@ interface VectorInterface extends CollectionInterface, IndexAccessInterface, Con
     public function splice($offset, $length = null);
 
     /**
-     * Slice the elements of this Vector in place
-     * @param int $offset
-     * @param int $length
-     * @return VectorInterface
-     */
-    public function slice($offset, $length = null);
-
-    /**
      * Reverses the elements of this Vector in place
      * @return void
      */

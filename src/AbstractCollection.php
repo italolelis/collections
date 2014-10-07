@@ -11,7 +11,7 @@ use Easy\Generics\EquatableInterface;
 /**
  * Provides the abstract base class for a strongly typed collection.
  */
-abstract class AbstractCollection implements CollectionInterface, CollectionConvertableInterface, EquatableInterface, Rx\ObservableInterface
+abstract class AbstractCollection implements CollectionInterface, CollectionConvertableInterface, EquatableInterface
 {
     /**
      * @var array 
@@ -176,16 +176,4 @@ abstract class AbstractCollection implements CollectionInterface, CollectionConv
         return $this;
     }
 
-    public function subscribe(\Closure $onNext, \Closure $onError = null, \Closure $onCompleted = null)
-    {
-        $callbackObserver = new Rx\CallbackObserver($onCompleted, $onError, $onNext);
-        $this->subscribeObject($callbackObserver);
-        return $this;
-    }
-
-    public function subscribeObject(Rx\ObserverInterface $observer)
-    {
-        $this->subscribers[] = $observer;
-        return $this;
-    }
 }

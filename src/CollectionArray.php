@@ -15,7 +15,7 @@ use InvalidArgumentException;
  * Provides the abstract base class for a strongly typed collection.
  */
 abstract class CollectionArray extends AbstractCollection implements
-IndexAccessInterface, ConstIndexAccessInterface, ReactiveExtensionInterface, SelectableInterface, CollectionConvertableInterface
+    IndexAccessInterface, ConstIndexAccessInterface, ReactiveExtensionInterface, SelectableInterface, CollectionConvertableInterface
 {
 
     /**
@@ -58,6 +58,7 @@ IndexAccessInterface, ConstIndexAccessInterface, ReactiveExtensionInterface, Sel
     /**
      * Sorts the elements in the entire Collection<T> using the specified comparer.
      * @param ComparerInterface $comparer The ComparerInterface implementation to use when comparing elements, or null to use the default comparer Comparer<T>.Default.
+     * @return $this
      */
     public function sort(ComparerInterface $comparer = null)
     {
@@ -71,6 +72,7 @@ IndexAccessInterface, ConstIndexAccessInterface, ReactiveExtensionInterface, Sel
     /**
      * Sorts the keys in the entire Collection<T> using the specified comparer.
      * @param ComparerInterface $comparer The ComparerInterface implementation to use when comparing elements, or null to use the default comparer Comparer<T>.Default.
+     * @return $this
      */
     public function sortByKey(ComparerInterface $comparer = null)
     {
@@ -131,6 +133,25 @@ IndexAccessInterface, ConstIndexAccessInterface, ReactiveExtensionInterface, Sel
     }
 
     /**
+     * Returns all the elements of this collection that satisfy the predicate p.
+     * The order of the elements is preserved.
+     *
+     * @param callable $p The predicate used for map.
+     *
+     * @return CollectionInterface A collection with the results of the filter operation.
+     */
+    public function flatMap($p)
+    {
+        $collection = call_user_func_array(array($this, "map"), array($p));
+
+        $flattenData = iterator_to_array(new \RecursiveIteratorIterator(
+            new \RecursiveArrayIterator($collection->toArray())), false);
+
+        return static::fromArray($flattenData);
+    }
+
+
+    /**
      * {@inheritdoc}
      */
     public function filter(Closure $p)
@@ -138,24 +159,58 @@ IndexAccessInterface, ConstIndexAccessInterface, ReactiveExtensionInterface, Sel
         return static::fromArray(array_filter($this->array, $p));
     }
 
+    /**
+     * Iteratively reduce the collection to a single value using a callback function.
+     *
+     * @param callable $p The predicate used for reduce.
+     * @param int $initial If the optional initial is available, it will be used at the beginning of the process, or as a final result in case the array is empty.
+     * @return CollectionInterface A collection with the results of the filter operation.
+     */
     public function reduce($p, $initial = null)
     {
         return static::fromArray(array_reduce($this->array, $p, $initial));
     }
 
-    public function first(Closure $p = null)
+
+    /**
+     * Returns the first element of an observable sequence that satisfies the condition in the predicate if present else the first item in the sequence.
+     *
+     * @return CollectionInterface A collection with the results of the filter operation.
+     */
+    public function first()
     {
-        
+        return array_shift($this->array);
     }
 
-    public function last(Closure $p = null)
+    /**
+     * Returns the last element of an observable sequence that satisfies the condition in the predicate if specified, else the last element.
+     *
+     * @return CollectionInterface A collection with the results of the filter operation.
+     */
+    public function last()
     {
-        
+        return array_pop($this->array);
     }
 
-    public function take(Closure $p = null)
+    /**
+     * Returns a specified number of contiguous elements from the start of an observable sequence, using the specified scheduler for the edge case of take(0).
+     *
+     * @param integer $count The number of elements to take.
+     *
+     * @return CollectionInterface A collection with the results of the filter operation.
+     */
+    public function take($count)
     {
-        
+        return $this->slice(0, $count);
+    }
+
+    /**
+     * {@inheritdoc}
+     * @deprecated
+     */
+    public function slice($offset, $length = null)
+    {
+        return ArrayList::fromArray(array_slice($this->array, $offset, $length));
     }
 
     /**
@@ -190,7 +245,7 @@ IndexAccessInterface, ConstIndexAccessInterface, ReactiveExtensionInterface, Sel
         $length = $criteria->getMaxResults();
 
         if ($offset || $length) {
-            $filtered = array_slice($filtered, (int) $offset, $length);
+            $filtered = array_slice($filtered, (int)$offset, $length);
         }
 
         return static::fromArray($filtered);

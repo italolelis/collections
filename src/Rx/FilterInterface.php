@@ -33,29 +33,44 @@ interface FilterInterface
     public function map($p);
 
     /**
-     * Returns the first element of an observable sequence that satisfies the condition in the predicate if present else the first item in the sequence.
-     * 
-     * @param Closure $p The predicate used for filtering.
-     * 
+     * Returns all the elements of this collection that satisfy the predicate p.
+     * The order of the elements is preserved.
+     *
+     * @param callable $p The predicate used for map.
+     *
      * @return CollectionInterface A collection with the results of the filter operation.
      */
-    public function first(Closure $p = null);
+    public function flatMap($p);
+
+    /**
+     * Returns the first element of an observable sequence that satisfies the condition in the predicate if present else the first item in the sequence.
+     *
+     * @return CollectionInterface A collection with the results of the filter operation.
+     */
+    public function first();
 
     /**
      * Returns the last element of an observable sequence that satisfies the condition in the predicate if specified, else the last element.
-     * 
-     * @param Closure $p The predicate used for filtering.
-     * 
+     *
      * @return CollectionInterface A collection with the results of the filter operation.
      */
-    public function last(Closure $p = null);
+    public function last();
 
     /**
      * Returns a specified number of contiguous elements from the start of an observable sequence, using the specified scheduler for the edge case of take(0).
-     * 
-     * @param Closure $p The predicate used for filtering.
-     * 
+     *
+     * @param $count The number of elements to take.
+     *
      * @return CollectionInterface A collection with the results of the filter operation.
      */
-    public function take(Closure $p = null);
+    public function take($count);
+
+    /**
+     * Slice the elements of this Collection in place
+     * @param int $offset
+     * @param int $length
+     * @return CollectionInterface
+     * @deprecated
+     */
+    public function slice($offset, $length = null);
 }
