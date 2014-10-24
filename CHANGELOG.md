@@ -14,7 +14,8 @@ All notable changes to this project will be documented in this file.
 
 ### Changed
 - The default Queue implementation uses Doubly Linked List.
-- The default Queue implementation uses Doubly Linked List.
+- The default Stack implementation uses Doubly Linked List.
+
 ### Deprecated
 - Deprecated *slice* method, now we can use the *take*, this is part of the Reactive Extensions initiative.
 
