@@ -5,15 +5,16 @@ All notable changes to this project will be documented in this file.
 
 - Decouple LINQ interface from Collections.
 - Reactive Extensions initiative.
-- Adding new data structure BinaryTree.
-- Adding new data structure AvlTree.
-- Adding new data structure SplayTree.
-- Adding new data structures LinkedQueue, LinkedStack, LinkedList and LinkedDictionary. 
+- Adding new data structure TreeMap.
+- Adding new data structures LinkedList and LinkedDictionary. 
 
 ## 3.2.0 - Unreleased
 ### Add
 - Added flatMap method, just like the Scala and Javascript implementation.
 
+### Changed
+- The default Queue implementation uses Doubly Linked List.
+- The default Queue implementation uses Doubly Linked List.
 ### Deprecated
 - Deprecated *slice* method, now we can use the *take*, this is part of the Reactive Extensions initiative.
 
