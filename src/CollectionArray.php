@@ -129,7 +129,7 @@ abstract class CollectionArray extends AbstractCollection implements
             throw new InvalidArgumentException('The parameter must be a callable');
         }
 
-        return static::fromArray(array_map($p, $this->array));
+        return static::fromArray(array_map($p, $this->array, array_keys($this->array)));
     }
 
     /**
