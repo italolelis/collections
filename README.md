@@ -1,8 +1,8 @@
 # Collections
 
 [![Build Status](https://travis-ci.org/italolelis/collections.svg?style=flat-square)](https://travis-ci.org/italolelis/collections)
-[![Scrutinizer Code Quality](http://img.shields.io/scrutinizer/g/LellysInformatica/collections.svg?style=flat-square)](https://scrutinizer-ci.com/g/LellysInformatica/collections/)
-[![Code Coverage](http://img.shields.io/scrutinizer/coverage/g/LellysInformatica/collections.svg?style=flat-square)](https://scrutinizer-ci.com/g/LellysInformatica/collections/)
+[![Scrutinizer Code Quality](http://img.shields.io/scrutinizer/g/italolelis/collections.svg?style=flat-square)](https://scrutinizer-ci.com/g/italolelis/collections/)
+[![Code Coverage](http://img.shields.io/scrutinizer/coverage/g/italolelis/collections.svg?style=flat-square)](https://scrutinizer-ci.com/g/italolelis/collections/)
 [![Latest Stable Version](http://img.shields.io/packagist/v/easyframework/collections.svg?style=flat-square)](https://packagist.org/packages/easyframework/collections)
 [![Downloads](https://img.shields.io/packagist/dt/easyframework/collections.svg?style=flat-square)](https://packagist.org/packages/easyframework/collections)
 
