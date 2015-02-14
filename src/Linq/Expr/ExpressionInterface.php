@@ -7,6 +7,7 @@ namespace Easy\Collections\Linq\Expr;
  * Expression for the {@link Selectable} interface.
  *
  * @author Benjamin Eberlei <kontakt@beberlei.de>
+ * @deprecated
  */
 interface ExpressionInterface
 {

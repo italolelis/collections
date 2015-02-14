@@ -12,6 +12,7 @@ use Easy\Collections\Linq\Expr\Value;
  *
  * @author Benjamin Eberlei <kontakt@beberlei.de>
  * @since  2.1
+ * @deprecated
  */
 class ExpressionBuilder
 {

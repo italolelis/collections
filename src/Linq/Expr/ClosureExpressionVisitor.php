@@ -14,6 +14,7 @@ use RuntimeException;
  *
  * @author Benjamin Eberlei <kontakt@beberlei.de>
  * @since  2.3
+ * @deprecated
  */
 class ClosureExpressionVisitor extends ExpressionVisitor
 {

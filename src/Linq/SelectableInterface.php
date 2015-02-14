@@ -7,6 +7,7 @@ use Easy\Collections\ArrayList;
 
 /**
  * Represents a non-generic collection of objects that can be individually accessed by index.
+ * @deprecated
  */
 interface SelectableInterface
 {

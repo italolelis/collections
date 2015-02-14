@@ -11,6 +11,7 @@ use Easy\Collections\Linq\Expr\ExpressionInterface;
  *
  * @author Benjamin Eberlei <kontakt@beberlei.de>
  * @since 2.1
+ * @deprecated
  */
 class Criteria
 {

@@ -8,6 +8,7 @@ namespace Easy\Collections\Linq\Expr;
  * query for the underlying implementation.
  *
  * @author Benjamin Eberlei <kontakt@beberlei.de>
+ * @deprecated
  */
 abstract class ExpressionVisitor
 {
