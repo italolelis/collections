@@ -8,7 +8,7 @@ All notable changes to this project will be documented in this file.
 - Adding new data structure TreeMap.
 - Adding new data structures LinkedList and LinkedDictionary. 
 
-## 3.2.0 - Unreleased
+## 3.2.0 - 2015-02-14
 ### Add
 - Added flatMap method, just like the Scala and Javascript implementation.
 
@@ -18,6 +18,7 @@ All notable changes to this project will be documented in this file.
 
 ### Deprecated
 - Deprecated *slice* method, now we can use the *take*, this is part of the Reactive Extensions initiative.
+- Deprecated Expression search API
 
 ## 3.1.2 - 2014-09-08 
 ### Changed
