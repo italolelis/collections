@@ -162,14 +162,6 @@ class ArrayList extends CollectionArray implements VectorInterface, VectorConver
     /**
      * {@inheritdoc}
      */
-    public function shuffle()
-    {
-        shuffle($this->array);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     public function splice($offset, $length = null)
     {
         return ArrayList::fromArray(array_splice($this->array, $offset, $length));

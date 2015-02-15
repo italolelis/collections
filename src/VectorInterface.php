@@ -40,12 +40,6 @@ interface VectorInterface extends CollectionInterface, IndexAccessInterface, Con
     public function indexOf($item);
 
     /**
-     * Reverses the elements of this Vector in place
-     * @return void
-     */
-    public function shuffle();
-
-    /**
      * Splice the Vector in place. This function provides the functional equivalent of array_splice(), but for Vectors.
      * @param int $offset
      * @param int $length

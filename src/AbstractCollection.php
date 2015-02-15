@@ -19,11 +19,6 @@ abstract class AbstractCollection implements CollectionInterface, CollectionConv
     protected $array = array();
 
     /**
-     * @var array 
-     */
-    protected $subscribers = array();
-
-    /**
      * @var ComparerInterface
      */
     private $defaultComparer;

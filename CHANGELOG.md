@@ -3,10 +3,26 @@ All notable changes to this project will be documented in this file.
 
 ## Next - unreleased
 
-- Decouple LINQ interface from Collections.
 - Reactive Extensions initiative.
 - Adding new data structure TreeMap.
 - Adding new data structures LinkedList and LinkedDictionary. 
+
+## 4.0.0 - unreleased
+### Add
+- Added each method, just like the Scala and Javascript implementation.
+- Added extract method, using cakephp collection implementation.
+- Added sample method, using cakephp collection implementation.
+- Added firstMatch method, using cakephp collection implementation.
+- Added reject method, using cakephp collection implementation.
+- Added every method, using cakephp collection implementation.
+- Added some method, using cakephp collection implementation.
+- Added unfold method, almost like flatMap.
+
+### Changed
+- The match method now don't receive a Criteria object but uses a callable instead.
+
+## Removed
+- Removed the Expression Search API
 
 ## 3.2.0 - 2015-02-14
 ### Add
