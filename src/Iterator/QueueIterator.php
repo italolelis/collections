@@ -2,7 +2,7 @@
 
 namespace Collections\Iterator;
 
-interface QueueIterator extends CountableIterator, \Iterator
+interface QueueIterator extends CountableIterator
 {
 
 }

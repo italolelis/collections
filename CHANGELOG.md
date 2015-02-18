@@ -17,9 +17,13 @@ All notable changes to this project will be documented in this file.
 - Added every method, using cakephp collection implementation.
 - Added some method, using cakephp collection implementation.
 - Added unfold method, almost like flatMap.
+- Added BinaryTree data structure.
+- Added AvlTree data structure.
 
 ### Changed
 - The match method now don't receive a Criteria object but uses a callable instead.
+- Now dictionary act as a HashMap, which can accept any type of key.
+- The *toKeysArray* method now is only available in MapInterface.
 
 ## Removed
 - Removed the Expression Search API

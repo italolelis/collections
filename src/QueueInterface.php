@@ -3,12 +3,10 @@
 // Copyright (c) Lellys Informática. All rights reserved. See License.txt in the project root for license information.
 namespace Collections;
 
-use BadFunctionCallException;
-
 /**
  * Provides functionality to evaluate queries against a specific data source wherein the type of the data is not specified.
  */
-interface QueueInterface
+interface QueueInterface extends \IteratorAggregate
 {
 
     /**
@@ -31,11 +29,4 @@ interface QueueInterface
      * @throws StateException if the Queue is empty.
      */
     public function dequeue();
-
-    /**
-     * Returns the object at the beginning of the Queue without removing it.
-     * @return mixed The object at the beginning of the Queue.
-     * @throws BadFunctionCallException
-     */
-    public function peek();
 }

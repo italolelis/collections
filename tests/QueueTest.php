@@ -50,20 +50,6 @@ class QueueTest extends CollectionsTestCase
         $this->coll->dequeue();
     }
 
-    /**
-     * @expectedException RuntimeException
-     */
-    public function testPeekEmptyQueue()
-    {
-        $this->coll->peek();
-    }
-
-    public function testPeekItem()
-    {
-        $this->coll->enqueue('testing');
-        $this->assertEquals('testing', $this->coll->peek());
-    }
-
     public function testEnqueueToArray()
     {
         $this->coll->enqueue('testing1');

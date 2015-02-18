@@ -53,5 +53,4 @@ abstract class AbstractCollection implements CollectionInterface, EquatableInter
     {
         return ($obj === $this);
     }
-
 }

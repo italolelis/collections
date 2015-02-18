@@ -3,6 +3,7 @@
 namespace Collections;
 
 use Collections\Iterator\IteratorCollectionTrait;
+use Collections\Iterator\LinkedStackIterator;
 
 class LinkedStack implements StackInterface
 {
@@ -10,7 +11,7 @@ class LinkedStack implements StackInterface
     use GuardTrait;
     use IteratorCollectionTrait;
 
-    /**
+    /**s
      * @var Pair
      */
     private $top;
@@ -45,7 +46,6 @@ class LinkedStack implements StackInterface
     {
         return $this->size;
     }
-
 
     /**
      * @param mixed $object

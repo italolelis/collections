@@ -20,7 +20,7 @@ class Dictionary extends AbstractCollectionArray implements MapInterface, MapCon
         return new HashMapIterator($this->storage);
     }
 
-    public function hashCode($item)
+    private function hashCode($item)
     {
         if (is_object($item)) {
             return spl_object_hash($item);

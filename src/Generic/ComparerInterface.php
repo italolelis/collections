@@ -5,7 +5,7 @@ namespace Collections\Generic;
 
 /**
  * The IComparer<T> type exposes the following members.
- * 
+ *
  * @since 2.1.0
  * @author Ítalo Lelis de Vietro <italolelis@lellysinformatica.com>
  */

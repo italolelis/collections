@@ -3,13 +3,22 @@
 // Copyright (c) Lellys Informática. All rights reserved. See License.txt in the project root for license information.
 namespace Collections;
 
+use Collections\Iterator\LinkedStackIterator;
 use SplStack;
 
 /**
  * Represents a simple last-in-first-out (LIFO) non-generic collection of objects.
  */
-class Stack extends SplStack implements StackInterface
+class Stack extends SplStack
 {
+    /**
+     * @link http://php.net/manual/en/iteratoraggregate.getiterator.php
+     * @return StackIterator
+     */
+    public function getIterator()
+    {
+        return new LinkedStackIterator($this->count(), $this->top());
+    }
 
     /**
      * Inserts multiples objects at the top of the Stack.

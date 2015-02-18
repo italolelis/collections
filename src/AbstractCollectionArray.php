@@ -173,5 +173,4 @@ abstract class AbstractCollectionArray extends AbstractCollection implements
         }
         return false;
     }
-
 }

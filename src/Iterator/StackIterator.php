@@ -2,7 +2,7 @@
 
 namespace Collections\Iterator;
 
-interface StackIterator extends CountableIterator, \Iterator
+interface StackIterator extends CountableIterator
 {
 
 }
