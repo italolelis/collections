@@ -54,7 +54,7 @@ class StackTest extends CollectionsTestCase
     {
         $this->coll->push('testing1');
         $this->coll->push('testing2');
-        $this->coll->push('testings3');
+        $this->coll->push('testing3');
 
         $this->assertEquals(array('testing1', 'testing2', 'testing3'), $this->coll->toArray());
     }
