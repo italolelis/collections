@@ -6,9 +6,9 @@
  * and open the template in the editor.
  */
 
-namespace Easy\Tests\Collections;
+namespace Tests\Collections;
 
-use Easy\Collections\ImmutableVector;
+use Collections\ImmutableVector;
 use InvalidArgumentException;
 use OutOfBoundsException;
 

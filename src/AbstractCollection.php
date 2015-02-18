@@ -1,20 +1,20 @@
 <?php
 
 // Copyright (c) Lellys Informática. All rights reserved. See License.txt in the project root for license information.
-namespace Easy\Collections;
+namespace Collections;
 
 use ArrayIterator;
-use Easy\Collections\Comparer\NumericKeyComparer;
-use Easy\Collections\Generic\ComparerInterface;
+use Collections\Comparer\NumericKeyComparer;
+use Collections\Generic\ComparerInterface;
 use Easy\Generics\EquatableInterface;
 
 /**
  * Provides the abstract base class for a strongly typed collection.
  */
-abstract class AbstractCollection implements CollectionInterface, CollectionConvertableInterface, EquatableInterface
+abstract class AbstractCollection implements CollectionInterface, EquatableInterface
 {
     /**
-     * @var array 
+     * @var array
      */
     protected $array = array();
 
@@ -80,7 +80,7 @@ abstract class AbstractCollection implements CollectionInterface, CollectionConv
      */
     public function count()
     {
-        return count($this->toArray());
+        return count($this->array);
     }
 
     /**
@@ -88,7 +88,7 @@ abstract class AbstractCollection implements CollectionInterface, CollectionConv
      */
     public function clear()
     {
-        $this->array = array();
+        $this->array = [];
         return $this;
     }
 
@@ -136,30 +136,6 @@ abstract class AbstractCollection implements CollectionInterface, CollectionConv
     public function equals($obj)
     {
         return ($obj === $this);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function toArray()
-    {
-        $array = array();
-        foreach ($this->array as $key => $value) {
-            if ($value instanceof CollectionInterface) {
-                $array[$key] = $value->toArray();
-            } else {
-                $array[$key] = $value;
-            }
-        }
-        return $array;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function toKeysArrays()
-    {
-        return array_keys($this->array);
     }
 
     /**

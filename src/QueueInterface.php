@@ -1,7 +1,7 @@
 <?php
 
 // Copyright (c) Lellys Informática. All rights reserved. See License.txt in the project root for license information.
-namespace Easy\Collections;
+namespace Collections;
 
 use BadFunctionCallException;
 
@@ -28,7 +28,7 @@ interface QueueInterface
     /**
      * Removes and returns the object at the beginning of the Queue.
      * @return mixed The object that is removed from the beginning of the Queue.
-     * @throws BadFunctionCallException
+     * @throws StateException if the Queue is empty.
      */
     public function dequeue();
 

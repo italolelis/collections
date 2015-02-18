@@ -1,6 +1,6 @@
 <?php
 
-namespace Easy\Tests;
+namespace Tests;
 
 error_reporting(E_ALL | E_STRICT);
 

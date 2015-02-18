@@ -1,7 +1,7 @@
 <?php
 
 // Copyright (c) Lellys Informática. All rights reserved. See License.txt in the project root for license information.
-namespace Easy\Collections;
+namespace Collections;
 
 use BadFunctionCallException;
 
@@ -32,10 +32,4 @@ interface StackInterface
      */
     public function pop();
 
-    /**
-     * Returns the object at the top of the Stack without removing it.
-     * @return mixed The Object at the top of the Stack.
-     * @throws BadFunctionCallException
-     */
-    public function peek();
 }

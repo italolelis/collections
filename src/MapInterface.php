@@ -1,9 +1,7 @@
 <?php
 
 // Copyright (c) Lellys Informática. All rights reserved. See License.txt in the project root for license information.
-namespace Easy\Collections;
-
-use Traversable;
+namespace Collections;
 
 /**
  * Represents a nongeneric collection of key/value pairs.
@@ -20,9 +18,12 @@ interface MapInterface extends CollectionInterface, IndexAccessInterface, ConstI
     public function add($key, $value);
 
     /**
-     * Adds all the key/value Pairs from the Traversable to the IDictionary.
-     * @param Traversable $items The collection whose elements should be added to the end of the IDictionary.
-     * @return MapInterface
+     * Store a value into the Map with the specified key, overwriting a previous value if already present.
+     *
+     * @param $key
+     * @param mixed $value
+     *
+     * @return void
      */
-    public function addAll($items);
+    public function set($key, $value);
 }

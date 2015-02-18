@@ -1,10 +1,10 @@
 <?php
 
-namespace Easy\Tests\Collections;
+namespace Tests\Collections;
 
 use ArrayObject;
-use Easy\Collections\ArrayList;
-use Easy\Collections\Comparer\StringComparer;
+use Collections\ArrayList;
+use Collections\Comparer\StringComparer;
 use InvalidArgumentException;
 
 class ArrayListTest extends CollectionsTestCase
@@ -107,9 +107,9 @@ class ArrayListTest extends CollectionsTestCase
     }
 
     /**
-     * @expectedException InvalidArgumentException
+     * @expectedException \Collections\Exception\TypeException
      */
-    public function testRemovingNonExistentEntryReturnsNull()
+    public function testRemovingWrongType()
     {
         $this->assertEquals(null, $this->coll->remove('testing_does_not_exist'));
     }
@@ -204,7 +204,7 @@ class ArrayListTest extends CollectionsTestCase
     }
 
     /**
-     * @expectedException InvalidArgumentException
+     * @expectedException \Collections\Exception\TypeException
      */
     public function testInvalidOffsetExists()
     {
@@ -213,16 +213,7 @@ class ArrayListTest extends CollectionsTestCase
     }
 
     /**
-     * @expectedException InvalidArgumentException
-     */
-    public function testNegativeOffsetExists()
-    {
-        $this->coll[1] = 'one';
-        $this->assertFalse(isset($this->coll[-1]));
-    }
-
-    /**
-     * @expectedException InvalidArgumentException
+     * @expectedException \Collections\Exception\TypeException
      */
     public function testInvalidOffsetSet()
     {
@@ -230,7 +221,7 @@ class ArrayListTest extends CollectionsTestCase
     }
 
     /**
-     * @expectedException InvalidArgumentException
+     * @expectedException \InvalidArgumentException
      */
     public function testNegativeOffsetSet()
     {
@@ -264,6 +255,6 @@ class ArrayListTest extends CollectionsTestCase
         $this->coll->addAll(array(1, 2, 3, 4));
         $map = $this->coll->toMap();
 
-        $this->assertInstanceOf('Easy\\Collections\\Dictionary', $map);
+        $this->assertInstanceOf('\Collections\\Dictionary', $map);
     }
 }

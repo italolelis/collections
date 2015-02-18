@@ -1,11 +1,11 @@
 <?php
 
 // Copyright (c) Lellys Informática. All rights reserved. See License.txt in the project root for license information.
-namespace Easy\Collections;
+namespace Collections;
 
 use Closure;
-use Easy\Collections\Rx\ReactiveExtensionInterface;
-use Easy\Collections\Rx\RxTrait;
+use Collections\Rx\ReactiveExtensionInterface;
+use Collections\Rx\RxTrait;
 
 /**
  * Provides the abstract base class for a strongly typed collection.
@@ -19,6 +19,13 @@ abstract class CollectionArray extends AbstractCollection implements
 
     use RxTrait,
         SortTrait;
+
+    public function __construct($array = null)
+    {
+        if ($array !== null) {
+            $this->addAll($array);
+        }
+    }
 
     /**
      * {@inheritdoc}

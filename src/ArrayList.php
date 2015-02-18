@@ -1,10 +1,9 @@
 <?php
 
 // Copyright (c) Lellys Informática. All rights reserved. See License.txt in the project root for license information.
-namespace Easy\Collections;
+namespace Collections;
 
 use InvalidArgumentException;
-use OutOfBoundsException;
 use Traversable;
 
 /**
@@ -12,20 +11,14 @@ use Traversable;
  */
 class ArrayList extends CollectionArray implements VectorInterface, VectorConvertableInterface
 {
-
-    public function __construct($array = null)
-    {
-        if ($array !== null) {
-            $this->addAll($array);
-        }
-    }
+    use GuardTrait;
 
     /**
      * {@inheritdoc}
      */
     public function add($item)
     {
-        array_push($this->array, $item);
+        $this->array[] = $item;
         return $this;
     }
 
@@ -40,7 +33,7 @@ class ArrayList extends CollectionArray implements VectorInterface, VectorConver
 
         foreach ($items as $item) {
             if (is_array($item)) {
-                $item = ArrayList::fromArray($item);
+                $item = static::fromArray($item);
             }
             $this->add($item);
         }
@@ -80,12 +73,7 @@ class ArrayList extends CollectionArray implements VectorInterface, VectorConver
      */
     public function offsetExists($offset)
     {
-        if (!is_numeric($offset)) {
-            throw new InvalidArgumentException('The offset value must be numeric');
-        }
-        if ($offset < 0) {
-            throw new InvalidArgumentException('The option value must be a number > 0');
-        }
+        $offset = $this->intGuard($offset);
         return array_key_exists((int)$offset, $this->array);
     }
 
@@ -94,10 +82,7 @@ class ArrayList extends CollectionArray implements VectorInterface, VectorConver
      */
     public function offsetGet($offset)
     {
-        if ($this->containsKey($offset) === false) {
-            throw new OutOfBoundsException('No element at position ' . $offset);
-        }
-
+        $offset = $this->existsGuard($this->intGuard($offset));
         return $this->array[$offset];
     }
 
@@ -106,9 +91,7 @@ class ArrayList extends CollectionArray implements VectorInterface, VectorConver
      */
     public function offsetSet($offset, $value)
     {
-        if (!is_numeric($offset)) {
-            throw new InvalidArgumentException('The offset value must be numeric');
-        }
+        $offset = $this->intGuard($offset);
         if ($offset < 0) {
             throw new InvalidArgumentException('The option value must be a number > 0');
         }
@@ -120,8 +103,9 @@ class ArrayList extends CollectionArray implements VectorInterface, VectorConver
      */
     public function offsetUnset($offset)
     {
+        $offset = $this->intGuard($offset);
         if ($this->containsKey($offset) === false) {
-            throw new InvalidArgumentException('The key ' . $offset . ' is not present in the dictionary');
+            throw new InvalidArgumentException('The key ' . $offset . ' is not present in the collection');
         }
 
         unset($this->array[$offset]);
@@ -164,6 +148,22 @@ class ArrayList extends CollectionArray implements VectorInterface, VectorConver
      */
     public function splice($offset, $length = null)
     {
-        return ArrayList::fromArray(array_splice($this->array, $offset, $length));
+        return static::fromArray(array_splice($this->array, $offset, $length));
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function toArray()
+    {
+        $array = array();
+        foreach ($this->array as $key => $value) {
+            if ($value instanceof CollectionInterface) {
+                $array[$key] = $value->toArray();
+            } else {
+                $array[$key] = $value;
+            }
+        }
+        return $array;
     }
 }

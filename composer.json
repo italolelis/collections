@@ -27,12 +27,12 @@
   },
   "autoload": {
     "psr-4": {
-      "Easy\\Collections\\": "src/"
+      "Collections\\": "src/"
     }
   },
   "autoload-dev": {
     "psr-4": {
-      "Easy\\Tests\\Collections\\": "tests/"
+      "Tests\\Collections\\": "tests/"
     }
   },
   "extra": {

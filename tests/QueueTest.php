@@ -5,9 +5,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-namespace Easy\Tests\Collections;
+namespace Tests\Collections;
 
-use Easy\Collections\Queue;
+use Collections\Queue;
 use RuntimeException;
 
 /**

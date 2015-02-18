@@ -1,8 +1,10 @@
 <?php
 
 // Copyright (c) Lellys Informática. All rights reserved. See License.txt in the project root for license information.
-namespace Easy\Collections;
+namespace Collections;
 
+use Collections\Exception\KeyException;
+use Collections\Iterator\HashMapIterator;
 use InvalidArgumentException;
 use OutOfBoundsException;
 use Traversable;
@@ -13,16 +15,26 @@ use Traversable;
 class Dictionary extends CollectionArray implements MapInterface, MapConvertableInterface
 {
 
-    public function __construct($array = null)
+    public function getIterator()
     {
-        if ($array !== null) {
-            $this->addAll($array);
-        }
+        return new HashMapIterator($this->array);
     }
 
-    public function hashCode($object)
+    public function hashCode($item)
     {
-        return spl_object_hash($object);
+        if (is_object($item)) {
+            return spl_object_hash($item);
+        } elseif (is_numeric($item) || is_bool($item)) {
+            return "s_" . intval($item);
+        } elseif (is_string($item)) {
+            return "s_$item";
+        } elseif (is_resource($item)) {
+            return "r_$item";
+        } elseif (is_array($item)) {
+            return 'a_' . md5(serialize($item));
+        }
+
+        return '0';
     }
 
     /**
@@ -31,10 +43,9 @@ class Dictionary extends CollectionArray implements MapInterface, MapConvertable
     public function add($key, $value)
     {
         if ($this->containsKey($key)) {
-            throw new InvalidArgumentException('The key ' . $key . ' already exists!');
+            throw new KeyException('The key ' . $key . ' already exists!');
         }
         $this->set($key, $value);
-
         return $this;
     }
 
@@ -57,10 +68,6 @@ class Dictionary extends CollectionArray implements MapInterface, MapConvertable
 
     public function set($key, $value)
     {
-        if ($key === null) {
-            throw new InvalidArgumentException("Can't use 'null' as key!");
-        }
-
         $this->offsetSet($key, $value);
         return $this;
     }
@@ -70,10 +77,7 @@ class Dictionary extends CollectionArray implements MapInterface, MapConvertable
      */
     public function offsetExists($offset)
     {
-        if (is_object($offset)) {
-            $offset = $this->hashCode($offset);
-        }
-
+        $offset = $this->hashCode($offset);
         return isset($this->array[$offset]) || array_key_exists($offset, $this->array);
     }
 
@@ -85,12 +89,8 @@ class Dictionary extends CollectionArray implements MapInterface, MapConvertable
         if ($this->containsKey($offset) === false) {
             throw new OutOfBoundsException('No element at position ' . $offset);
         }
-
-        if (is_object($offset)) {
-            $offset = $this->hashCode($offset);
-        }
-
-        return $this->array[$offset];
+        $pair = $this->array[$this->hashCode($offset)];
+        return $pair->second;
     }
 
     /**
@@ -98,11 +98,12 @@ class Dictionary extends CollectionArray implements MapInterface, MapConvertable
      */
     public function offsetSet($offset, $value)
     {
-        if (is_object($offset)) {
-            $offset = $this->hashCode($offset);
+        if ($offset === null) {
+            throw new InvalidArgumentException("Can't use 'null' as key!");
         }
 
-        $this->array[$offset] = $value;
+        $hash = $this->hashCode($offset);
+        $this->array[$hash] = new Pair($offset, $value);
     }
 
     /**
@@ -114,7 +115,7 @@ class Dictionary extends CollectionArray implements MapInterface, MapConvertable
             throw new InvalidArgumentException('The key ' . $offset . ' is not present in the dictionary');
         }
 
-        unset($this->array[$offset]);
+        unset($this->array[$this->hashCode($offset)]);
     }
 
     /**
@@ -123,6 +124,18 @@ class Dictionary extends CollectionArray implements MapInterface, MapConvertable
     public function toList()
     {
         return new ArrayList($this->array);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function toKeysArrays()
+    {
+        $array = array();
+        foreach ($this->array as $value) {
+            $array[] = $value->first;
+        }
+        return $array;
     }
 
     /**
@@ -139,5 +152,19 @@ class Dictionary extends CollectionArray implements MapInterface, MapConvertable
             }
         }
         return $map;
+    }
+
+
+    public function toArray()
+    {
+        $array = array();
+        foreach ($this->array as $value) {
+            if ($value instanceof CollectionInterface) {
+                $array[$value->first] = $value->toArray();
+            } else {
+                $array[$value->first] = $value->second;
+            }
+        }
+        return $array;
     }
 }

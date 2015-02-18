@@ -1,7 +1,7 @@
 <?php
 
 // Copyright (c) Lellys Informática. All rights reserved. See License.txt in the project root for license information.
-namespace Easy\Collections;
+namespace Collections;
 
 use InvalidArgumentException;
 use OutOfBoundsException;
@@ -84,5 +84,15 @@ class ImmutableVector extends AbstractCollection implements ConstIndexAccessInte
             }
         }
         return $vector;
+    }
+
+    /**
+     * Adds all the key/value Pairs from the Traversable to the IList.
+     * @param Traversable $items The collection whose elements should be added to the end of the IList.
+     * @return VectorInterface
+     */
+    public function addAll($items)
+    {
+        // TODO: Implement addAll() method.
     }
 }

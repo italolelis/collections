@@ -34,7 +34,7 @@ Take a look and see what we're talking about!!
 The Collection represents the List in .NET language or simply non-associative arrays in php:
 
 ```php
-  $collection = new \Easy\Collections\ArrayList();
+  $collection = new Collections\ArrayList();
   $collection->add('John');
   $collection->add('Maria');
   $collection->add('Anderson');
@@ -55,7 +55,7 @@ Great, now we know how to run through a collection and how to count it, but thes
 ```php
   $collection->sort(); //by default the sort is by the keys
   
-  $colletion->sort(new \Easy\Collections\Comparer\StringComparer()); //this will sort by alfabetic order
+  $colletion->sort(new Collections\Comparer\StringComparer()); //this will sort by alfabetic order
   
   $collection->sort(new YourCustomComparer()); //you can create your own custom comparer to sort your collection
 ```
@@ -73,7 +73,7 @@ Ok now we learned many things of collections, we can do even more, but I'll show
 The Dictionary class is something like associative arrays in PHP, or Hash tables in other languages.
 
 ```php
-  $dictionary = new \Easy\Collections\Dictionary();
+  $dictionary = new Collections\Dictionary();
   $dictionary->add('person1', array(
       'name' => 'John',
       'age' => 20
@@ -96,7 +96,7 @@ The Dictionary class is something like associative arrays in PHP, or Hash tables
 We can use object as keys too.
 
 ```php
-    $dictionary = new \Easy\Collections\Dictionary();
+    $dictionary = new Collections\Dictionary();
     
     $object = new \stdClass();
     $dictionary->add($object, 'value');
@@ -118,7 +118,7 @@ All Collection methods are also avaliable in Dictionary class, just remember to 
 To our last exemple we'll use objects in our collection.
 
 ```php
-  $collection = new \Easy\Collections\ArrayList();
+  $collection = new Collections\ArrayList();
   $collection->add(new Person('John', 20));
   $collection->add(new Person('Peter', 20));
   $collection->add(new Person('Sophie', 21));
@@ -135,7 +135,7 @@ Pretty simple, but the reason I wanted to show you objects is because of Express
 Lets seek everyone with age 20.
 
 ```php
-  $criteria = new \Easy\Collections\Criteria();
+  $criteria = new Collections\Criteria();
   $expr = $criteria->createExpression()->eq("age", 20);
   $criteria->where($expr);
   $collection = $collection->matching($criteria);
@@ -149,7 +149,7 @@ Lets seek everyone with age 20.
 Now we want everyone where the name starts with 'A'
 
 ```php
-  $criteria = new \Easy\Collections\Criteria();
+  $criteria = new Collections\Criteria();
   $expr = $criteria->createExpression()->contains("name", "A");
   $criteria->where($expr);
   $collection = $collection->matching($criteria);
@@ -162,7 +162,7 @@ Now we want everyone where the name starts with 'A'
 Let's filter a collection with regex which will filter a string where starts with letter **A** and ends with letter **A**.
 
 ```php
-  $criteria = new \Easy\Collections\Criteria();
+  $criteria = new Collections\Criteria();
   $expr = $criteria->createExpression()->regex("name", "#^a.+a$#i");
   $criteria->where($expr);
   $collection = $collection->matching($criteria);

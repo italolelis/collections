@@ -1,7 +1,7 @@
 <?php
 
 // Copyright (c) Lellys Informática. All rights reserved. See License.txt in the project root for license information.
-namespace Easy\Collections;
+namespace Collections;
 
 /**
  * Provides utility protected methods for extracting a property or column

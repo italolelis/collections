@@ -5,10 +5,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-namespace Easy\Tests\Collections;
+namespace Tests\Collections;
 
 use ArrayObject;
-use Easy\Collections\Dictionary;
+use Collections\Dictionary;
 use InvalidArgumentException;
 use OutOfBoundsException;
 use stdClass;
@@ -96,7 +96,7 @@ class DictionaryTest extends CollectionsTestCase
     }
 
     /**
-     * @expectedException InvalidArgumentException
+     * @expectedException \Collections\Exception\KeyException
      */
     public function testAddDuplicateKey()
     {
@@ -190,7 +190,7 @@ class DictionaryTest extends CollectionsTestCase
         $this->coll->addAll(array(1, 2, 3, 4));
         $map = $this->coll->toList();
 
-        $this->assertInstanceOf('Easy\\Collections\\ArrayList', $map);
+        $this->assertInstanceOf('\Collections\\ArrayList', $map);
     }
 
     public function testSetObjectKey()

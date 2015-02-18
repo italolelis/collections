@@ -1,14 +1,14 @@
 <?php
 
 // Copyright (c) Lellys Informática. All rights reserved. See License.txt in the project root for license information.
-namespace Easy\Collections\Rx;
+namespace Collections\Rx;
 
 use CallbackFilterIterator;
-use Easy\Collections\CollectionInterface;
-use Easy\Collections\ExtractTrait;
-use Easy\Collections\Iterator\ExtractIterator;
-use Easy\Collections\Iterator\ReplaceIterator;
-use Easy\Collections\Iterator\UnfoldIterator;
+use Collections\CollectionInterface;
+use Collections\ExtractTrait;
+use Collections\Iterator\ExtractIterator;
+use Collections\Iterator\ReplaceIterator;
+use Collections\Iterator\UnfoldIterator;
 use LimitIterator;
 use RecursiveIteratorIterator;
 

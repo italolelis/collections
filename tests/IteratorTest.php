@@ -1,8 +1,8 @@
 <?php
 
-namespace Easy\Tests\Collections;
+namespace Tests\Collections;
 
-use Easy\Collections\ArrayList;
+use Collections\ArrayList;
 use RegexIterator;
 
 class IteratorTest extends CollectionsTestCase

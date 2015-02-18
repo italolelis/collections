@@ -1,7 +1,7 @@
 <?php
 
 // Copyright (c) Lellys Informática. All rights reserved. See License.txt in the project root for license information.
-namespace Easy\Collections;
+namespace Collections;
 
 use Countable;
 use IteratorAggregate;
@@ -26,7 +26,7 @@ interface CollectionInterface extends Countable, Serializable, IteratorAggregate
     public function isEmpty();
 
     /**
-     * Gets an ICollection object containing the values in the IDictionary object.
+     * Gets an CollectionInterface object containing the values in the IDictionary object.
      */
     public function values();
 
@@ -36,4 +36,11 @@ interface CollectionInterface extends Countable, Serializable, IteratorAggregate
      * @return CollectionInterface
      */
     public function concat(CollectionConvertableInterface $collection);
+
+    /**
+     * Adds all the key/value Pairs from the Traversable to the IList.
+     * @param Traversable $items The collection whose elements should be added to the end of the IList.
+     * @return VectorInterface
+     */
+    public function addAll($items);
 }

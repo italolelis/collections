@@ -1,8 +1,8 @@
 <?php
 
-namespace Easy\Tests\Collections;
+namespace Tests\Collections;
 
-use Easy\Collections\ArrayList;
+use Collections\ArrayList;
 
 class RxTest extends CollectionsTestCase
 {

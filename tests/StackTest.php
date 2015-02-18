@@ -5,9 +5,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-namespace Easy\Tests\Collections;
+namespace Tests\Collections;
 
-use Easy\Collections\Stack;
+use Collections\Stack;
 use RuntimeException;
 
 /**
@@ -33,13 +33,13 @@ class StackTest extends CollectionsTestCase
     public function testEnqueueItem()
     {
         $this->coll->push('testing');
-        $this->assertTrue(is_string((string) $this->coll));
+        $this->assertTrue(is_string((string)$this->coll));
     }
 
     public function testEnqueueMultiple()
     {
         $this->coll->pushMultiple(array(1, 2, 3, 4));
-        $this->assertTrue(is_string((string) $this->coll));
+        $this->assertTrue(is_string((string)$this->coll));
     }
 
     /**
@@ -48,20 +48,6 @@ class StackTest extends CollectionsTestCase
     public function testDequeueEmptyQueue()
     {
         $this->coll->pop();
-    }
-
-    /**
-     * @expectedException RuntimeException
-     */
-    public function testPeekEmptyQueue()
-    {
-        $this->coll->peek();
-    }
-
-    public function testPeekItem()
-    {
-        $this->coll->push('testing');
-        $this->assertEquals('testing', $this->coll->peek());
     }
 
     public function testEnqueueToArray()

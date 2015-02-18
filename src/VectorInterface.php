@@ -1,7 +1,7 @@
 <?php
 
 // Copyright (c) Lellys Informática. All rights reserved. See License.txt in the project root for license information.
-namespace Easy\Collections;
+namespace Collections;
 
 use Traversable;
 
@@ -17,13 +17,6 @@ interface VectorInterface extends CollectionInterface, IndexAccessInterface, Con
      * @return VectorInterface
      */
     public function add($item);
-
-    /**
-     * Adds all the key/value Pairs from the Traversable to the IList.
-     * @param Traversable $items The collection whose elements should be added to the end of the IList.
-     * @return VectorInterface
-     */
-    public function addAll($items);
 
     /**
      * Inserts an item to the IList at the specified index.

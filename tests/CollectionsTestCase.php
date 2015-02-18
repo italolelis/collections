@@ -6,7 +6,7 @@
  * and open the template in the editor.
  */
 
-namespace Easy\Tests\Collections;
+namespace Tests\Collections;
 
 use PHPUnit_Framework_TestCase;
 
