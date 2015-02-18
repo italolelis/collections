@@ -1,10 +1,14 @@
 <?php
 
-namespace Collections;
+namespace Tests\Collections;
 
-class LinkedStackTest extends \PHPUnit_Framework_TestCase {
+use Collections\LinkedStack;
 
-    function testPushOne() {
+class LinkedStackTest extends CollectionsTestCase
+{
+
+    public function testPushOne()
+    {
         $stack = new LinkedStack();
         $this->assertTrue($stack->isEmpty());
         $this->assertCount(0, $stack);
@@ -14,11 +18,11 @@ class LinkedStackTest extends \PHPUnit_Framework_TestCase {
         $this->assertCount(1, $stack);
     }
 
-
     /**
      * @depends testPushOne
      */
-    function testPeekOne() {
+    public function testPeekOne()
+    {
         $stack = new LinkedStack();
         $stack->push(1);
 
@@ -32,7 +36,8 @@ class LinkedStackTest extends \PHPUnit_Framework_TestCase {
     /**
      * @depends testPushOne
      */
-    function testPopOne() {
+    public function testPopOne()
+    {
         $stack = new LinkedStack();
         $stack->push(1);
 
@@ -46,7 +51,8 @@ class LinkedStackTest extends \PHPUnit_Framework_TestCase {
     /**
      * @depends testPopOne
      */
-    function testMultiplePushPeekPop() {
+    public function testMultiplePushPeekPop()
+    {
         $stack = new LinkedStack();
         $stack->push(1);
         $stack->push(3);
@@ -90,7 +96,8 @@ class LinkedStackTest extends \PHPUnit_Framework_TestCase {
     /**
      * @expectedException \Collections\Exception\EmptyException
      */
-    function testPeekEmpty() {
+    public function testPeekEmpty()
+    {
         $stack = new LinkedStack();
         $stack->last();
     }
@@ -99,20 +106,23 @@ class LinkedStackTest extends \PHPUnit_Framework_TestCase {
     /**
      * @expectedException \Collections\Exception\EmptyException
      */
-    function testPopEmpty() {
+    public function testPopEmpty()
+    {
         $stack = new LinkedStack();
         $stack->pop();
     }
 
 
-    function testGetIteratorEmpty() {
+    public function testGetIteratorEmpty()
+    {
         $stack = new LinkedStack();
         $iterator = $stack->getIterator();
         $this->assertInstanceOf('Collections\\Iterator\\StackIterator', $iterator);
     }
 
 
-    function testIteratorForeach() {
+    public function testIteratorForeach()
+    {
         $stack = new LinkedStack();
         $stack->push(1);
         $stack->push(2);
@@ -140,7 +150,8 @@ class LinkedStackTest extends \PHPUnit_Framework_TestCase {
     }
 
 
-    function testClear() {
+    public function testClear()
+    {
         $stack = new LinkedStack();
         $stack->push(1);
         $stack->clear();
@@ -148,7 +159,8 @@ class LinkedStackTest extends \PHPUnit_Framework_TestCase {
     }
 
 
-    function testToArrayEmpty() {
+    public function testToArrayEmpty()
+    {
         $stack = new LinkedStack();
         $array = $stack->toArray();
         $this->assertTrue(is_array($array));
@@ -156,7 +168,8 @@ class LinkedStackTest extends \PHPUnit_Framework_TestCase {
     }
 
 
-    function testToArray() {
+    public function testToArray()
+    {
         $stack = new LinkedStack();
         for ($i = 0; $i < 3; $i++) {
             $stack->push($i);
@@ -169,5 +182,4 @@ class LinkedStackTest extends \PHPUnit_Framework_TestCase {
             $this->assertEquals($i--, $item);
         }
     }
-
 }

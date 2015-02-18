@@ -118,5 +118,4 @@ class LinkedStack implements StackInterface
     {
         // TODO: Implement pushMultiple() method.
     }
-
 }
