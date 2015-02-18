@@ -9,7 +9,7 @@ use Traversable;
 /**
  * Represents a strongly typed list of objects that can be accessed by index. Provides methods to search, sort, and manipulate lists.
  */
-class ArrayList extends CollectionArray implements VectorInterface, VectorConvertableInterface
+class ArrayList extends AbstractCollectionArray implements VectorInterface, VectorConvertableInterface
 {
     use GuardTrait;
 
@@ -18,7 +18,7 @@ class ArrayList extends CollectionArray implements VectorInterface, VectorConver
      */
     public function add($item)
     {
-        $this->array[] = $item;
+        $this->storage[] = $item;
         return $this;
     }
 
@@ -44,7 +44,7 @@ class ArrayList extends CollectionArray implements VectorInterface, VectorConver
      */
     public function indexOf($item)
     {
-        return array_search($item, $this->array, true);
+        return array_search($item, $this->storage, true);
     }
 
     /**
@@ -61,9 +61,9 @@ class ArrayList extends CollectionArray implements VectorInterface, VectorConver
 
         $current = $this->Count() - 1;
         for (; $current >= $index; $current--) {
-            $this->array[$current + 1] = $this->array[$current];
+            $this->storage[$current + 1] = $this->storage[$current];
         }
-        $this->array[$index] = $item;
+        $this->storage[$index] = $item;
 
         return $this;
     }
@@ -74,7 +74,7 @@ class ArrayList extends CollectionArray implements VectorInterface, VectorConver
     public function offsetExists($offset)
     {
         $offset = $this->intGuard($offset);
-        return array_key_exists((int)$offset, $this->array);
+        return array_key_exists((int)$offset, $this->storage);
     }
 
     /**
@@ -83,7 +83,7 @@ class ArrayList extends CollectionArray implements VectorInterface, VectorConver
     public function offsetGet($offset)
     {
         $offset = $this->existsGuard($this->intGuard($offset));
-        return $this->array[$offset];
+        return $this->storage[$offset];
     }
 
     /**
@@ -95,7 +95,7 @@ class ArrayList extends CollectionArray implements VectorInterface, VectorConver
         if ($offset < 0) {
             throw new InvalidArgumentException('The option value must be a number > 0');
         }
-        $this->array[(int)$offset] = $value;
+        $this->storage[(int)$offset] = $value;
     }
 
     /**
@@ -104,11 +104,12 @@ class ArrayList extends CollectionArray implements VectorInterface, VectorConver
     public function offsetUnset($offset)
     {
         $offset = $this->intGuard($offset);
+
         if ($this->containsKey($offset) === false) {
             throw new InvalidArgumentException('The key ' . $offset . ' is not present in the collection');
         }
 
-        unset($this->array[$offset]);
+        unset($this->storage[$offset]);
     }
 
     /**
@@ -116,7 +117,23 @@ class ArrayList extends CollectionArray implements VectorInterface, VectorConver
      */
     public function toMap()
     {
-        return new Dictionary($this->array);
+        return new Dictionary($this->getIterator());
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function reverse()
+    {
+        return static::fromArray(array_reverse($this->storage));
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function splice($offset, $length = null)
+    {
+        return static::fromArray(array_splice($this->storage, $offset, $length));
     }
 
     /**
@@ -138,32 +155,8 @@ class ArrayList extends CollectionArray implements VectorInterface, VectorConver
     /**
      * {@inheritdoc}
      */
-    public function reverse()
-    {
-        array_reverse($this->array);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function splice($offset, $length = null)
-    {
-        return static::fromArray(array_splice($this->array, $offset, $length));
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     public function toArray()
     {
-        $array = array();
-        foreach ($this->array as $key => $value) {
-            if ($value instanceof CollectionInterface) {
-                $array[$key] = $value->toArray();
-            } else {
-                $array[$key] = $value;
-            }
-        }
-        return $array;
+        return $this->getIterator()->toArray();
     }
 }

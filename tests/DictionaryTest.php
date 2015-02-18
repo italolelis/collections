@@ -86,13 +86,13 @@ class DictionaryTest extends CollectionsTestCase
             'key2' => 'value2',
             'key3' => 'value3',
             'key4' => 'value4'
-            ), $arrayList->toArray());
+        ), $arrayList->toArray());
     }
 
     public function testAddItem()
     {
         $this->coll->add('key', 'testing');
-        $this->assertTrue(is_string((string) $this->coll));
+        $this->assertTrue(is_string((string)$this->coll));
     }
 
     /**
@@ -107,7 +107,7 @@ class DictionaryTest extends CollectionsTestCase
     public function testSetItem()
     {
         $this->coll->set('key', 'testing');
-        $this->assertTrue(is_string((string) $this->coll));
+        $this->assertTrue(is_string((string)$this->coll));
     }
 
     public function testGetItem()
@@ -191,6 +191,19 @@ class DictionaryTest extends CollectionsTestCase
         $map = $this->coll->toList();
 
         $this->assertInstanceOf('\Collections\\ArrayList', $map);
+    }
+
+    public function testToArray()
+    {
+        $data = [
+            'key1' => 'value1',
+            'key2' => 'value2',
+            'key3' => [
+                'key3.1' => 'value3.1'
+            ]
+        ];
+        $this->coll->addAll($data);
+        $this->assertEquals($data, $this->coll->toArray());
     }
 
     public function testSetObjectKey()

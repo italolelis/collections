@@ -21,7 +21,7 @@ class LinkedStack implements StackInterface
     /**
      * @return bool
      */
-    function isEmpty()
+    public function isEmpty()
     {
         return $this->top === null;
     }
@@ -31,7 +31,7 @@ class LinkedStack implements StackInterface
      * @link http://php.net/manual/en/iteratoraggregate.getiterator.php
      * @return StackIterator
      */
-    function getIterator()
+    public function getIterator()
     {
         return new LinkedStackIterator($this->size, $this->top);
     }
@@ -41,7 +41,7 @@ class LinkedStack implements StackInterface
      * @link http://php.net/manual/en/countable.count.php
      * @return int
      */
-    function count()
+    public function count()
     {
         return $this->size;
     }
@@ -54,7 +54,7 @@ class LinkedStack implements StackInterface
      * @throws FullException if the Stack is full.
      * @return void
      */
-    function push($object)
+    public function push($object)
     {
         $this->top = new Pair($object, $this->top);
         $this->size++;
@@ -65,7 +65,7 @@ class LinkedStack implements StackInterface
      * @throws EmptyException if the Stack is empty.
      * @return mixed
      */
-    function pop()
+    public function pop()
     {
         $this->emptyGuard(__METHOD__);
 
@@ -80,14 +80,14 @@ class LinkedStack implements StackInterface
      * @throws EmptyException if the Stack is empty.
      * @return mixed
      */
-    function last()
+    public function last()
     {
         $this->emptyGuard(__METHOD__);
         return $this->top->first;
     }
 
 
-    function clear()
+    public function clear()
     {
         $this->top = null;
         $this->size = 0;
@@ -97,7 +97,7 @@ class LinkedStack implements StackInterface
     /**
      * @return array
      */
-    function toArray()
+    public function toArray()
     {
         $a = [];
         $current = $this->top;

@@ -4,13 +4,14 @@
 namespace Collections;
 
 use Closure;
+use Collections\Iterator\ArrayIterator;
 use Collections\Rx\ReactiveExtensionInterface;
 use Collections\Rx\RxTrait;
 
 /**
  * Provides the abstract base class for a strongly typed collection.
  */
-abstract class CollectionArray extends AbstractCollection implements
+abstract class AbstractCollectionArray extends AbstractCollection implements
     IndexAccessInterface,
     ConstIndexAccessInterface,
     ReactiveExtensionInterface,
@@ -19,12 +20,84 @@ abstract class CollectionArray extends AbstractCollection implements
 
     use RxTrait,
         SortTrait;
+    /**
+     * @var array
+     */
+    protected $storage = array();
 
     public function __construct($array = null)
     {
         if ($array !== null) {
             $this->addAll($array);
         }
+    }
+
+    /**
+     * Gets the collection's iterator
+     * @return \Iterator
+     */
+    public function getIterator()
+    {
+        return new ArrayIterator($this->storage);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function count()
+    {
+        return count($this->storage);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function clear()
+    {
+        $this->storage = [];
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function isEmpty()
+    {
+        return $this->count() < 1;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function values()
+    {
+        return array_values($this->storage);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function serialize()
+    {
+        return serialize($this->storage);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function unserialize($serialized)
+    {
+        $this->storage = unserialize($serialized);
+        return $this->storage;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function concat(CollectionConvertableInterface $collection)
+    {
+        $this->storage = array_merge($this->storage, $collection->toArray());
+        return $this;
     }
 
     /**
@@ -40,7 +113,7 @@ abstract class CollectionArray extends AbstractCollection implements
      */
     public function contains($element)
     {
-        return in_array($element, $this->array, true);
+        return in_array($element, $this->storage, true);
     }
 
     /**
@@ -78,7 +151,7 @@ abstract class CollectionArray extends AbstractCollection implements
      */
     public function removeValue($element)
     {
-        $key = array_search($element, $this->array, true);
+        $key = array_search($element, $this->storage, true);
 
         if ($key !== false) {
             $this->offsetUnset($key);
@@ -93,7 +166,7 @@ abstract class CollectionArray extends AbstractCollection implements
      */
     public function exists(Closure $p)
     {
-        foreach ($this->array as $key => $element) {
+        foreach ($this->storage as $key => $element) {
             if ($p($key, $element)) {
                 return true;
             }

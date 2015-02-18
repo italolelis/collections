@@ -21,7 +21,7 @@ interface IndexAccessInterface extends ArrayAccess
     /**
      * Removes the element with the specified key from the IList object.
      * @param mixed $index The key of the element to remove.
-     * @return CollectionArray
+     * @return AbstractCollectionArray
      */
     public function remove($index);
 }

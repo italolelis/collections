@@ -2,6 +2,8 @@
 
 namespace Collections\Iterator;
 
+use Collections\CollectionInterface;
+
 class HashMapIterator extends IteratorCollectionAdapter implements MapIterator
 {
 
@@ -52,4 +54,16 @@ class HashMapIterator extends IteratorCollectionAdapter implements MapIterator
         return $this->size;
     }
 
+    public function toArray()
+    {
+        $array = parent::toArray();
+        foreach ($array as $key => $value) {
+            if ($value instanceof CollectionInterface) {
+                $array[$key] = $value->toArray();
+            } else {
+                $array[$key] = $value;
+            }
+        }
+        return $array;
+    }
 }

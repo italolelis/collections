@@ -214,7 +214,7 @@ trait RxTrait
      */
     public function shuffle()
     {
-        shuffle($this->array);
+        shuffle($this->storage);
         return $this;
     }
 

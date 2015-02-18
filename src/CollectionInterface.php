@@ -15,7 +15,7 @@ interface CollectionInterface extends Countable, Serializable, IteratorAggregate
 
     /**
      * Clear all of the elements in the collection
-     * @return CollectionArray
+     * @return AbstractCollectionArray
      */
     public function clear();
 

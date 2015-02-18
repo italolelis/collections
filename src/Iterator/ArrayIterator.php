@@ -2,6 +2,8 @@
 
 namespace Collections\Iterator;
 
+use Collections\CollectionInterface;
+
 class ArrayIterator extends IteratorCollectionAdapter implements CountableSeekableIterator
 {
 
@@ -40,4 +42,16 @@ class ArrayIterator extends IteratorCollectionAdapter implements CountableSeekab
         return parent::getInnerIterator();
     }
 
+    public function toArray()
+    {
+        $array = parent::toArray();
+        foreach ($array as $key => $value) {
+            if ($value instanceof CollectionInterface) {
+                $array[$key] = $value->toArray();
+            } else {
+                $array[$key] = $value;
+            }
+        }
+        return $array;
+    }
 }

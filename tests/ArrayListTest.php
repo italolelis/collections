@@ -133,7 +133,7 @@ class ArrayListTest extends CollectionsTestCase
 
     public function testInteratorInsntance()
     {
-        $this->assertInstanceOf('ArrayIterator', $this->coll->getIterator());
+        $this->assertInstanceOf('Collections\Iterator\ArrayIterator', $this->coll->getIterator());
     }
 
     public function testSerialize()

@@ -2,7 +2,6 @@
 
 namespace Collections;
 
-
 interface BinarySearchTree extends \Countable, \IteratorAggregate
 {
     /**

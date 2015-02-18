@@ -351,7 +351,7 @@ class AvlTree implements BinarySearchTree
     }
 
 
-    private function farthest($direction, BinaryTree $context)
+    protected function farthest($direction, BinaryTree $context)
     {
         for ($node = $context; $node->$direction() !== null; $node = $node->$direction()) {
             ;
@@ -360,13 +360,13 @@ class AvlTree implements BinarySearchTree
     }
 
 
-    private function doNothing()
+    protected function doNothing()
     {
 
     }
 
 
-    private function createTree($element)
+    protected function createTree($element)
     {
         $this->size++;
         return new BinaryTree($element);
@@ -377,7 +377,7 @@ class AvlTree implements BinarySearchTree
      * @param BinaryTree $node
      * @return int
      */
-    private function deleteSelectState(BinaryTree $node)
+    protected function deleteSelectState(BinaryTree $node)
     {
         $state = 0;
         $state |= ($node->right() != null) << 0;
@@ -386,14 +386,14 @@ class AvlTree implements BinarySearchTree
     }
 
 
-    private function deleteNoChildren(BinaryTree $tree)
+    protected function deleteNoChildren()
     {
         $this->size--;
         return null;
     }
 
 
-    private function deleteSelect($direction)
+    protected function deleteSelect($direction)
     {
         return function (BinaryTree $node) use ($direction) {
             $d = $node->$direction();
@@ -407,7 +407,7 @@ class AvlTree implements BinarySearchTree
      * @param BinaryTree $node
      * @return BinaryTree
      */
-    private function deleteNeitherChildIsNull(BinaryTree $node)
+    protected function deleteNeitherChildIsNull(BinaryTree $node)
     {
         $value = $node->inOrderPredecessor()->value();
         $node->setLeft($this->removeRecursive($value, $node->left()));
