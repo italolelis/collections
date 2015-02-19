@@ -17,14 +17,14 @@ User guide
 ----------
 
 .. toctree::
-:maxdepth: 2
+  :maxdepth: 2
 
-        overview
-        quickstart
-        clients
-        http-messages
-        events
-        streams
-        handlers
-        testing
-        faq
+  overview
+  quickstart
+  clients
+  http-messages
+  events
+  streams
+  handlers
+  testing
+  faq
