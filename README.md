@@ -22,7 +22,7 @@ Take a look and see what we're talking about!!
 ``` json
 {
     "require": {
-        "easyframework/collections": "~3.2"
+        "easyframework/collections": "~4.0"
     }
 }
 ```
