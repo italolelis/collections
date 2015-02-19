@@ -27,7 +27,6 @@ class AvlTree implements BinarySearchTreeInterface
 
     private $deleteOptions;
 
-
     /**
      * @param callable $comparator
      */
@@ -42,16 +41,13 @@ class AvlTree implements BinarySearchTreeInterface
         ];
     }
 
-
     /**
      * @param mixed $element
      */
     public function add($element)
     {
         $this->root = $this->addRecursive($element, $this->root);
-        $this->cache = null;
     }
-
 
     /**
      * @param mixed $element
@@ -59,9 +55,7 @@ class AvlTree implements BinarySearchTreeInterface
     public function remove($element)
     {
         $this->root = $this->removeRecursive($element, $this->root);
-        $this->cache = null;
     }
-
 
     /**
      * @param $element
@@ -78,7 +72,6 @@ class AvlTree implements BinarySearchTreeInterface
         return $node->value();
     }
 
-
     /**
      * @return BinaryTree A copy of the current BinaryTree
      */
@@ -89,7 +82,6 @@ class AvlTree implements BinarySearchTreeInterface
             : null;
     }
 
-
     /**
      * @return void
      */
@@ -98,7 +90,6 @@ class AvlTree implements BinarySearchTreeInterface
         $this->root = null;
         $this->size = 0;
     }
-
 
     /**
      * @param $item
@@ -111,7 +102,6 @@ class AvlTree implements BinarySearchTreeInterface
         return $this->findNode($item, $this->root) !== null;
     }
 
-
     /**
      * @return mixed
      * @throws EmptyException when the tree is empty
@@ -121,7 +111,6 @@ class AvlTree implements BinarySearchTreeInterface
         $this->emptyGuard(__METHOD__);
         return $this->farthest('left', $this->root);
     }
-
 
     /**
      * @return mixed
@@ -133,7 +122,6 @@ class AvlTree implements BinarySearchTreeInterface
         return $this->farthest('right', $this->root);
     }
 
-
     /**
      * @return bool
      */
@@ -142,7 +130,6 @@ class AvlTree implements BinarySearchTreeInterface
         return $this->root === null;
     }
 
-
     /**
      * @return BinaryTreeIterator
      */
@@ -150,7 +137,6 @@ class AvlTree implements BinarySearchTreeInterface
     {
         return new InOrderIterator($this->root, $this->size);
     }
-
 
     /**
      * @link http://php.net/manual/en/countable.count.php
@@ -161,14 +147,12 @@ class AvlTree implements BinarySearchTreeInterface
         return $this->size;
     }
 
-
     public function __clone()
     {
         $this->root = $this->root === null
             ? null
             : clone $this->root;
     }
-
 
     /**
      * @param callable $f
@@ -182,7 +166,6 @@ class AvlTree implements BinarySearchTreeInterface
         }
         $this->comparator = $f;
     }
-
 
     /**
      * @param $element
@@ -200,7 +183,6 @@ class AvlTree implements BinarySearchTreeInterface
         return $this->doRecursive($nullAction, $matchAction, $element, $node);
     }
 
-
     /**
      * @param $element
      * @param BinaryTree $node
@@ -213,7 +195,6 @@ class AvlTree implements BinarySearchTreeInterface
         $matchAction = [$this, 'deleteNode'];
         return $this->doRecursive($nullAction, $matchAction, $element, $node);
     }
-
 
     private function doRecursive($nullAction, $matchAction, $element, BinaryTree $node = null)
     {
@@ -234,7 +215,6 @@ class AvlTree implements BinarySearchTreeInterface
         return $this->balance($node);
     }
 
-
     /**
      * @param BinaryTree $node
      *
@@ -245,7 +225,6 @@ class AvlTree implements BinarySearchTreeInterface
         $state = $this->deleteSelectState($node);
         return $this->deleteOptions[$state]($node);
     }
-
 
     /**
      * @param BinaryTree $node
@@ -270,7 +249,6 @@ class AvlTree implements BinarySearchTreeInterface
 
         return $node;
     }
-
 
     /**
      * @param BinaryTree $root
@@ -300,7 +278,6 @@ class AvlTree implements BinarySearchTreeInterface
         return $pivot;
     }
 
-
     /**
      * @param BinaryTree $root
      *
@@ -328,7 +305,6 @@ class AvlTree implements BinarySearchTreeInterface
         return $pivot;
     }
 
-
     private function findNode($element, BinaryTree $context = null)
     {
         while ($context !== null) {
@@ -348,25 +324,23 @@ class AvlTree implements BinarySearchTreeInterface
 
     protected function farthest($direction, BinaryTree $context)
     {
-        for ($node = $context; $node->$direction() !== null; $node = $node->$direction()) {
-            ;
+        $node = $context;
+        while ($node->$direction() !== null) {
+            $node = $node->$direction();
         }
         return $node->value();
     }
-
 
     protected function doNothing()
     {
 
     }
 
-
     protected function createTree($element)
     {
         $this->size++;
         return new BinaryTree($element);
     }
-
 
     /**
      * @param BinaryTree $node
@@ -380,13 +354,11 @@ class AvlTree implements BinarySearchTreeInterface
         return $state;
     }
 
-
     protected function deleteNoChildren()
     {
         $this->size--;
         return null;
     }
-
 
     protected function deleteSelect($direction)
     {
@@ -396,7 +368,6 @@ class AvlTree implements BinarySearchTreeInterface
             return $d;
         };
     }
-
 
     /**
      * @param BinaryTree $node
@@ -409,7 +380,6 @@ class AvlTree implements BinarySearchTreeInterface
         $node->setValue($value);
         return $node;
     }
-
 
     /**
      * @param $a

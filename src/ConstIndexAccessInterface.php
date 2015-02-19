@@ -35,8 +35,8 @@ interface ConstIndexAccessInterface
      * Gets the value associated with the specified key.
      * @param mixed $index The key of the value to get.
      * @param string|null $default The default value which is returned if the key doesn't exists.
-     * @return mixed When this method returns, contains the value associated with the 
-     * specified key, if the key is found; otherwise, the default value for the 
+     * @return mixed When this method returns, contains the value associated with the
+     * specified key, if the key is found; otherwise, the default value for the
      * type of the value parameter. This parameter is passed uninitialized.
      */
     public function tryGet($index, $default = null);

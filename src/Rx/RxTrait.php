@@ -162,8 +162,6 @@ trait RxTrait
 
     /**
      * {@inheritDoc}
-     *
-     * @return CollectionInterface
      */
     public function insert($path, $values)
     {
