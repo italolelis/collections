@@ -39,7 +39,7 @@ The Collection represents the List in .NET language or simply non-associative ar
   $collection->add('Maria');
   $collection->add('Anderson');
   
-  $collection->map(function($item){
+  $collection->each(function($item){
         echo $item;
   });
 
@@ -87,7 +87,7 @@ The Dictionary class is something like associative arrays in PHP, or Hash tables
       'age' => 25
   ));
 
-  $collection->map(function($item){
+  $collection->each(function($item){
         echo $key . ": " . $item['name'] . "-" . $item['age'];
   });
   
@@ -118,60 +118,52 @@ All Collection methods are also avaliable in Dictionary class, just remember to 
 To our last exemple we'll use objects in our collection.
 
 ```php
-  $collection = new Collections\ArrayList();
-  $collection->add(new Person('John', 20));
-  $collection->add(new Person('Peter', 20));
-  $collection->add(new Person('Sophie', 21));
-  $collection->add(new Person('Angela', 29));
-  $collection->add(new Person('Maria', 19));
-  $collection->add(new Person('Anderson', 25));
+  $people = new Collections\ArrayList();
+  $people->add(new Person('John', 20));
+  $people->add(new Person('Peter', 20));
+  $people->add(new Person('Sophie', 21));
+  $people->add(new Person('Angela', 29));
+  $people->add(new Person('Maria', 19));
+  $people->add(new Person('Anderson', 25));
 
-  $collection->map(function($item){
+  $people->each(function($item){
         echo $item->getName();
   });
 ```  
 
-Pretty simple, but the reason I wanted to show you objects is because of Expression search, something like Linq for .NET
+Pretty simple, but the reason I wanted to show you objects is because of Reactive Extension API.
 Lets seek everyone with age 20.
 
 ```php
-  $criteria = new Collections\Criteria();
-  $expr = $criteria->createExpression()->eq("age", 20);
-  $criteria->where($expr);
-  $collection = $collection->matching($criteria);
-  
-  //only going to list John and Peter wich has 20 years
-  $collection->map(function($item){
-        echo $item->getName() . "-" . $item->getAge();
+  // this will return John and Peter
+  $people = $people->filter(function($person){
+      return $person->getAge() === 20 ? $person : null;
   });
 ``` 
 
-Now we want everyone where the name starts with 'A'
+The *map()* method will create a new collection based on the output of the callback being applied to each object 
+in the original collection:
 
 ```php
-  $criteria = new Collections\Criteria();
-  $expr = $criteria->createExpression()->contains("name", "A");
-  $criteria->where($expr);
-  $collection = $collection->matching($criteria);
-  
-  $collection->map(function($item){
-        echo $item->getName() . "-" . $item->getAge();
+  $new = $people->map(function ($person, $key) {
+      return $person->getAge() * 2;
   });
-```  
-
-Let's filter a collection with regex which will filter a string where starts with letter **A** and ends with letter **A**.
-
-```php
-  $criteria = new Collections\Criteria();
-  $expr = $criteria->createExpression()->regex("name", "#^a.+a$#i");
-  $criteria->where($expr);
-  $collection = $collection->matching($criteria);
   
-  //only going to list Angela
-  $collection->map(function($item){
-        echo $item->getName() . "-" . $item->getAge();
-  });
+  // $result contains all persons with twice theirs ages;
+  $result = $new->toArray();
 ``` 
+
+One of the most common uses for a *map()* function is to extract a single column from a collection. 
+If you are looking to build a list of elements containing the values for a particular property, 
+you can use the *extract()* method:
+
+```php
+  $names = $people->extract('name');
+  
+  // $result contains ['John', 'Peter', 'Sophie', 'Angela', 'Maria', 'Anderson'];
+  $result = $names->toArray();
+``` 
+
 ## Testing
 
 ``` bash
