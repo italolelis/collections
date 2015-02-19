@@ -13,7 +13,7 @@ Instalation
 Composer
 ~~~~~~~~
 
-A maneira recomendada de instalar YA Retorno Boleto é com o 'Composer <http://getcomposer.org> `_. Composer é uma 
+A maneira recomendada de instalar YA Retorno Boleto é com o 'Composer <http://getcomposer.org> `_. Comoser é uma
 ferramenta de gerenciamento de dependência para PHP que lhe permite declarar as dependências que o seu projeto precisa 
 e instala-los em seu projeto.
 
