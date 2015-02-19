@@ -7,6 +7,7 @@ use CallbackFilterIterator;
 use Collections\CollectionInterface;
 use Collections\ExtractTrait;
 use Collections\Iterator\ExtractIterator;
+use Collections\Iterator\InsertIterator;
 use Collections\Iterator\ReplaceIterator;
 use Collections\Iterator\UnfoldIterator;
 use LimitIterator;

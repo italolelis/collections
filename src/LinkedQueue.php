@@ -127,6 +127,6 @@ class LinkedQueue implements QueueInterface
      */
     public function enqueueMultiple($items)
     {
-        // TODO: Implement enqueueMultiple() method.
+
     }
 }

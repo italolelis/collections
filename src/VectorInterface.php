@@ -3,8 +3,6 @@
 // Copyright (c) Lellys Informática. All rights reserved. See License.txt in the project root for license information.
 namespace Collections;
 
-use Traversable;
-
 /**
  * Represents a non-generic collection of objects that can be individually accessed by index.
  */

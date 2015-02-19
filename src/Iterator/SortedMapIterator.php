@@ -5,7 +5,7 @@ namespace Collections\Iterator;
 use Collections\Exception\TypeException;
 use Collections\Pair;
 
-class SortedMapIterator extends IteratorCollectionAdapter implements MapIterator
+class SortedMapIterator extends IteratorCollectionAdapter implements MapIteratorInterface
 {
 
     private $size = 0;

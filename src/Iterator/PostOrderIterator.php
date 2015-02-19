@@ -5,7 +5,7 @@ namespace Collections\Iterator;
 use Collections\BinaryTree;
 use Collections\LinkedStack;
 
-class PostOrderIterator implements BinaryTreeIterator
+class PostOrderIterator implements BinaryTreeIteratorInterface
 {
 
     use IteratorCollectionTrait;
@@ -34,19 +34,16 @@ class PostOrderIterator implements BinaryTreeIterator
 
     private $size = 0;
 
-
     public function __construct(BinaryTree $root = null, $count = 0)
     {
         $this->root = $root;
         $this->size = $count;
     }
 
-
     public function count()
     {
         return $this->size;
     }
-
 
     /**
      * @link http://php.net/manual/en/iterator.rewind.php
@@ -61,7 +58,6 @@ class PostOrderIterator implements BinaryTreeIterator
         $this->next();
     }
 
-
     /**
      * @link http://php.net/manual/en/iterator.valid.php
      * @return boolean
@@ -70,7 +66,6 @@ class PostOrderIterator implements BinaryTreeIterator
     {
         return $this->current !== null;
     }
-
 
     /**
      * @link http://php.net/manual/en/iterator.key.php
@@ -81,7 +76,6 @@ class PostOrderIterator implements BinaryTreeIterator
         return $this->key;
     }
 
-
     /**
      * @link http://php.net/manual/en/iterator.current.php
      * @return mixed
@@ -91,7 +85,6 @@ class PostOrderIterator implements BinaryTreeIterator
         return $this->current->value();
     }
 
-
     /**
      * @link http://php.net/manual/en/iterator.next.php
      * @return void
@@ -99,57 +92,51 @@ class PostOrderIterator implements BinaryTreeIterator
     public function next()
     {
         if ($this->value !== null) {
-            $this->next_valueNotNull();
+            $this->nextValueNotNull();
             return;
         }
 
         if ($this->stack->isEmpty()) {
-            $this->next_set();
+            $this->nextSet();
             return;
         }
 
         $this->value = $this->stack->pop();
 
-        $this->next_right();
+        $this->nextRight();
     }
 
-
-    private function next_right()
+    private function nextRight()
     {
         $right = $this->value->right();
         if ($right !== null && !$this->stack->isEmpty() && $right === $this->stack->last()) {
             $this->stack->pop();
-            $this->next_push($right);
+            $this->nextPush($right);
         } else {
-            $this->next_set();
+            $this->nextSet();
         }
     }
 
-
-    private function next_valueNotNull()
+    private function nextValueNotNull()
     {
         $right = $this->value->right();
         if ($right !== null) {
             $this->stack->push($right);
         }
-        $this->next_push($this->value->left());
+        $this->nextPush($this->value->left());
     }
 
-
-    private function next_set()
+    private function nextSet()
     {
         $this->current = $this->value;
         $this->key++;
         $this->value = null;
     }
 
-
-    private function next_push(BinaryTree $n = null)
+    private function nextPush(BinaryTree $n = null)
     {
         $this->stack->push($this->value);
         $this->value = $n;
         $this->next();
     }
-
-
 }

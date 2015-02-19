@@ -2,7 +2,7 @@
 
 namespace Collections\Iterator;
 
-class HashSetIterator extends IteratorCollectionAdapter implements SetIterator
+class HashSetIterator extends IteratorCollectionAdapter implements SetIteratorInterface
 {
 
     private $size = 0;

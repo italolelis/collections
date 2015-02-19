@@ -2,7 +2,7 @@
 
 namespace Collections;
 
-interface BinarySearchTree extends \Countable, \IteratorAggregate
+interface BinarySearchTreeInterface extends \Countable, \IteratorAggregate
 {
     /**
      * @param callable $f

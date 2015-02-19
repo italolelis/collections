@@ -33,4 +33,4 @@ class ValueIterator extends IteratorCollectionAdapter
         parent::next();
         $this->i++;
     }
-} 
+}

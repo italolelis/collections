@@ -117,9 +117,8 @@ class LinkedStackTest extends CollectionsTestCase
     {
         $stack = new LinkedStack();
         $iterator = $stack->getIterator();
-        $this->assertInstanceOf('Collections\\Iterator\\StackIterator', $iterator);
+        $this->assertInstanceOf('Collections\\Iterator\\StackIteratorInterface', $iterator);
     }
-
 
     public function testIteratorForeach()
     {
@@ -148,7 +147,6 @@ class LinkedStackTest extends CollectionsTestCase
         $this->assertFalse($iterator->valid());
 
     }
-
 
     public function testClear()
     {

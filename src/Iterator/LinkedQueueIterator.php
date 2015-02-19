@@ -4,7 +4,7 @@ namespace Collections\Iterator;
 
 use Collections\Pair;
 
-class LinkedQueueIterator implements QueueIterator
+class LinkedQueueIterator implements QueueIteratorInterface
 {
 
     use IteratorCollectionTrait;

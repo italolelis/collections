@@ -4,7 +4,7 @@ namespace Collections\Iterator;
 
 use Collections\CollectionInterface;
 
-class ArrayIterator extends IteratorCollectionAdapter implements CountableSeekableIterator
+class ArrayIterator extends IteratorCollectionAdapter implements CountableSeekableIteratorInterface
 {
 
     private $count;

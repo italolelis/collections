@@ -41,4 +41,4 @@ trait GuardTrait
         return (int)$i;
     }
 
-} 
+}

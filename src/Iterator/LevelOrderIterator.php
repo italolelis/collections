@@ -4,7 +4,7 @@ namespace Collections\Iterator;
 
 use Collections\BinaryTree;
 
-class LevelOrderIterator implements BinaryTreeIterator
+class LevelOrderIterator implements BinaryTreeIteratorInterface
 {
 
     use IteratorCollectionTrait;

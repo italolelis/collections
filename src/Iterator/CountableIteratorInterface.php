@@ -4,7 +4,7 @@ namespace Collections\Iterator;
 
 use Iterator;
 
-interface CountableIterator extends \Countable, Iterator
+interface CountableIteratorInterface extends \Countable, Iterator
 {
 
     /**

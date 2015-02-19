@@ -4,7 +4,6 @@
 namespace Collections\Iterator;
 
 use IteratorIterator;
-use Traversable;
 
 /**
  * Creates an iterator from another iterator that extract the requested column
@@ -23,18 +22,6 @@ class ExtractIterator extends IteratorIterator
     /**
      * Creates the iterator that will return the requested property for each value
      * in the collection expressed in $path
-     *
-     * ### Example:
-     *
-     * Extract the user name for all comments in the array:
-     *
-     * ```
-     * $items = [
-     *  ['comment' => ['body' => 'cool', 'user' => ['name' => 'Mark']],
-     *  ['comment' => ['body' => 'very cool', 'user' => ['name' => 'Renan']]
-     * ];
-     * $extractor = new ExtractIterator($items, 'comment.user.name'');
-     * ```
      *
      * @param array|\Traversable $items The list of values to iterate
      * @param string $path a dot separated string symbolizing the path to follow

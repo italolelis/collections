@@ -4,7 +4,7 @@ namespace Collections\Iterator;
 
 use Collections\CollectionInterface;
 
-class HashMapIterator extends IteratorCollectionAdapter implements MapIterator
+class HashMapIterator extends IteratorCollectionAdapter implements MapIteratorInterface
 {
 
     private $size = 0;

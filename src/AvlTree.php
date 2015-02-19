@@ -7,7 +7,7 @@ use Collections\Exception\StateException;
 use Collections\Iterator\InOrderIterator;
 use Collections\Iterator\IteratorCollectionTrait;
 
-class AvlTree implements BinarySearchTree
+class AvlTree implements BinarySearchTreeInterface
 {
 
     use GuardTrait;
@@ -22,11 +22,6 @@ class AvlTree implements BinarySearchTree
      * @var callable
      */
     protected $comparator;
-
-    /**
-     * @var BinaryTree
-     */
-    private $cache = null;
 
     private $size = 0;
 
@@ -380,8 +375,8 @@ class AvlTree implements BinarySearchTree
     protected function deleteSelectState(BinaryTree $node)
     {
         $state = 0;
-        $state |= ($node->right() != null) << 0;
-        $state |= ($node->left() != null) << 1;
+        $state |= ($node->right() !== null) << 0;
+        $state |= ($node->left() !== null) << 1;
         return $state;
     }
 

@@ -116,6 +116,6 @@ class LinkedStack implements StackInterface
      */
     public function pushMultiple($items)
     {
-        // TODO: Implement pushMultiple() method.
+
     }
 }

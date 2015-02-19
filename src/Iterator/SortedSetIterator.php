@@ -2,12 +2,12 @@
 
 namespace Collections\Iterator;
 
-class SortedSetIterator extends IteratorCollectionAdapter implements SetIterator
+class SortedSetIterator extends IteratorCollectionAdapter implements SetIteratorInterface
 {
 
     private $size = 0;
 
-    public function __construct(BinaryTreeIterator $iterator, $size)
+    public function __construct(BinaryTreeIteratorInterface $iterator, $size)
     {
         parent::__construct(new ValueIterator($iterator));
         $this->size = $size;

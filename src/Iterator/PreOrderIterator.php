@@ -5,7 +5,7 @@ namespace Collections\Iterator;
 use Collections\BinaryTree;
 use Collections\LinkedStack;
 
-class PreOrderIterator implements BinaryTreeIterator
+class PreOrderIterator implements BinaryTreeIteratorInterface
 {
 
     use IteratorCollectionTrait;

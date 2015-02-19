@@ -4,7 +4,7 @@ namespace Collections\Iterator;
 
 use Collections\Pair;
 
-class LinkedStackIterator implements StackIterator
+class LinkedStackIterator implements StackIteratorInterface
 {
 
     use IteratorCollectionTrait;

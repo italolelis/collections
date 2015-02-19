@@ -65,22 +65,6 @@ interface IterableInterface
      * This is useful when each of the elements in the source collection are
      * lists of items to be appended one after another.
      *
-     * ### Example:
-     *
-     * ```
-     * $items [[1, 2, 3], [4, 5]];
-     * $unfold = (new Collection($items))->unfold(); // Returns [1, 2, 3, 4, 5]
-     * ```
-     *
-     * Using a transformer
-     *
-     * ```
-     * $items [1, 2, 3];
-     * $allItems = (new Collection($items))->unfold(function ($page) {
-     *  return $service->fetchPage($page)->toArray();
-     * });
-     * ```
-     *
      * @param callable|array $transformer A callable function that will receive each of
      * the items in the collection and should return an array or Traversable object
      * @return CollectionInterface

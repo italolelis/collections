@@ -5,7 +5,7 @@ namespace Collections\Iterator;
 use Collections\Exception\IndexException;
 use Collections\VectorConvertableInterface;
 
-class VectorIterator extends IteratorCollectionAdapter implements CountableSeekableIterator, \Iterator
+class VectorIterator extends IteratorCollectionAdapter implements CountableSeekableIteratorInterface, \Iterator
 {
 
     public function __construct(VectorConvertableInterface $vector)

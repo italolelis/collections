@@ -6,7 +6,6 @@ namespace Collections\Iterator;
 use Iterator;
 use IteratorIterator;
 use RecursiveIterator;
-use Traversable;
 
 /**
  * An iterator that can be used to generate nested iterators out of each of
