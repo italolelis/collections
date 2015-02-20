@@ -155,16 +155,16 @@ class AvlTree implements BinarySearchTreeInterface
     }
 
     /**
-     * @param callable $f
+     * @param callable $callable
      * @return mixed
      * @throws StateException when the tree is not empty
      */
-    public function setCompare(callable $f)
+    public function setCompare(callable $callable)
     {
         if ($this->root !== null) {
             throw new StateException('Cannot set compare function when the BinarySearchTree is not empty');
         }
-        $this->comparator = $f;
+        $this->comparator = $callable;
     }
 
     /**

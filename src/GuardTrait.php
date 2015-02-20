@@ -21,23 +21,23 @@ trait GuardTrait
     }
 
     /**
-     * @param int $i
+     * @param int $element
      * @return mixed
      * @throws IndexException
      */
-    protected function existsGuard($i)
+    protected function existsGuard($element)
     {
-        if (!$this->offsetExists($i)) {
+        if (!$this->offsetExists($element)) {
             throw new IndexException();
         }
-        return $i;
+        return $element;
     }
 
-    protected function intGuard($i)
+    protected function intGuard($element)
     {
-        if (filter_var($i, FILTER_VALIDATE_INT) === false) {
+        if (filter_var($element, FILTER_VALIDATE_INT) === false) {
             throw new TypeException();
         }
-        return (int)$i;
+        return (int)$element;
     }
 }

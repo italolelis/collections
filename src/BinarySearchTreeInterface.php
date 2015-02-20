@@ -5,11 +5,11 @@ namespace Collections;
 interface BinarySearchTreeInterface extends \Countable, \IteratorAggregate
 {
     /**
-     * @param callable $f
+     * @param callable $callable
      * @return mixed
      * @throws StateException when the tree is not empty
      */
-    public function setCompare(callable $f);
+    public function setCompare(callable $callable);
 
     /**
      * @param mixed $element

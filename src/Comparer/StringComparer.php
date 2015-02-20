@@ -14,8 +14,8 @@ class StringComparer implements ComparerInterface
     /**
      * {@inheritdoc}
      */
-    public function compare($x, $y)
+    public function compare($first, $second)
     {
-        return (bool) strcmp($x, $y);
+        return (bool) strcmp($first, $second);
     }
 }

@@ -164,10 +164,10 @@ abstract class AbstractCollectionArray extends AbstractCollection implements
     /**
      * {@inheritdoc}
      */
-    public function exists(Closure $p)
+    public function exists(Closure $closure)
     {
         foreach ($this->storage as $key => $element) {
-            if ($p($key, $element)) {
+            if ($closure($key, $element)) {
                 return true;
             }
         }

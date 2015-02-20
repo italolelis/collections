@@ -15,9 +15,9 @@ interface ReactiveExtensionInterface extends FilterableInterface, IterableInterf
     /**
      * Tests for the existence of an element that satisfies the given predicate.
      *
-     * @param Closure $p The predicate.
+     * @param Closure $closure The predicate.
      *
      * @return boolean True if the predicate is True for at least one element, False otherwise.
      */
-    public function exists(Closure $p);
+    public function exists(Closure $closure);
 }

@@ -120,9 +120,9 @@ class InOrderIterator implements BinaryTreeIteratorInterface
     }
 
 
-    private function pushLeft(BinaryTree $n = null)
+    private function pushLeft(BinaryTree $tree = null)
     {
-        for ($current = $n; $current !== null; $current = $current->left()) {
+        for ($current = $tree; $current !== null; $current = $current->left()) {
             $this->stack->push($current);
         }
     }

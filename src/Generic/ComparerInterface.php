@@ -15,9 +15,9 @@ interface ComparerInterface
     /**
      * Compares two objects and returns a value indicating whether one is less than, equal to, or greater
      * than the other.
-     * @param object $x The first object to compare.
-     * @param object $y The second object to compare.
+     * @param object $first The first object to compare.
+     * @param object $second The second object to compare.
      * @return int A int that indicates the relative values of x and y, as shown in the following table.
      */
-    public function compare($x, $y);
+    public function compare($first, $second);
 }

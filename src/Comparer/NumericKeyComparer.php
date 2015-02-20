@@ -14,11 +14,11 @@ class NumericKeyComparer implements ComparerInterface
     /**
      * {@inheritdoc}
      */
-    public function compare($x, $y)
+    public function compare($first, $second)
     {
-        if ($x < $y) {
+        if ($first < $second) {
             return 1;
-        } elseif ($x === $y) {
+        } elseif ($first === $second) {
             return 0;
         } else {
             return -1;
