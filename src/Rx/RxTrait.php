@@ -55,12 +55,12 @@ trait RxTrait
      *
      * @return CollectionInterface
      */
-    public function reject(callable $c)
+    public function reject(callable $callable)
     {
-        return $this->iteratorToCollection(new CallbackFilterIterator($this->getIterator(),
-            function ($key, $value, $items) use ($c) {
-                return !$c($key, $value, $items);
-            }));
+        $filterCallback = function ($key, $value, $items) use ($callable) {
+            return !$callable($key, $value, $items);
+        };
+        return $this->iteratorToCollection(new CallbackFilterIterator($this->getIterator(), $filterCallback));
     }
 
     /**
