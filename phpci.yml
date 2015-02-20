@@ -4,6 +4,7 @@ build_settings:
         - "bin"
         - "app"
         - "tests"
+        - "docs"
  
 setup:
     composer:
@@ -24,3 +25,10 @@ test:
         level: "all"
     php_docblock_checker:
         allowed_warnings: -1 # Allow unlimited warnings for now.
+
+slack_notify:
+    webhook_url: "https://hooks.slack.com/services/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"
+    room: "#collections"
+    username: "PHPCI"
+    icon: ":ghost:"
+    message: "%PROJECT_TITLE% - build %BUILD% completed"
