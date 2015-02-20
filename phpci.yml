@@ -26,6 +26,6 @@ test:
 slack_notify:
     webhook_url: "https://hooks.slack.com/services/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"
     room: "#collections"
-    username: "PHPCI"
+    username: "italolelis"
     icon: ":ghost:"
     message: "%PROJECT_TITLE% - build %BUILD% completed"
