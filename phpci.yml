@@ -19,8 +19,6 @@ test:
         standard: "PSR2"
         allowed_warnings: 0
         allowed_errors: 0
-    php_cs_fixer:
-        level: all
     php_docblock_checker:
         allowed_warnings: -1 # Allow unlimited warnings for now.
 
