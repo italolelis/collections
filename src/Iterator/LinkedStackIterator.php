@@ -103,5 +103,4 @@ class LinkedStackIterator implements StackIteratorInterface
     {
         return $this->count;
     }
-
 }

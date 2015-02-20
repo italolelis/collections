@@ -47,5 +47,4 @@ class VectorIterator extends IteratorCollectionAdapter implements CountableSeeka
     {
         return parent::getInnerIterator();
     }
-
 }

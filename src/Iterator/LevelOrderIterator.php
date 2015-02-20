@@ -112,5 +112,4 @@ class LevelOrderIterator implements BinaryTreeIteratorInterface
             $this->queue[] = $value;
         }
     }
-
 }

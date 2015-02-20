@@ -23,5 +23,4 @@ class SortedSetIterator extends IteratorCollectionAdapter implements SetIterator
     {
         return $this->size;
     }
-
 }

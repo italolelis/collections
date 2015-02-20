@@ -6,7 +6,8 @@ namespace Collections;
 use BadFunctionCallException;
 
 /**
- * Provides functionality to evaluate queries against a specific data source wherein the type of the data is not specified.
+ * Provides functionality to evaluate queries against a specific data source wherein the type of the data
+ * is not specified.
  */
 interface StackInterface extends \IteratorAggregate
 {
@@ -31,5 +32,4 @@ interface StackInterface extends \IteratorAggregate
      * @throws BadFunctionCallException
      */
     public function pop();
-
 }

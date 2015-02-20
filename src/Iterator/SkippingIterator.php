@@ -32,5 +32,4 @@ class SkippingIterator extends IteratorCollectionAdapter
             }
         }
     }
-
 }

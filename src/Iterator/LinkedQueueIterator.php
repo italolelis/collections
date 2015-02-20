@@ -102,5 +102,4 @@ class LinkedQueueIterator implements QueueIteratorInterface
     {
         return $this->count;
     }
-
 }

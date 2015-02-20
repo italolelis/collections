@@ -126,5 +126,4 @@ class InOrderIterator implements BinaryTreeIteratorInterface
             $this->stack->push($current);
         }
     }
-
 }

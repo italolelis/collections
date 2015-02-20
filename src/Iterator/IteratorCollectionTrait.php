@@ -2,7 +2,7 @@
 
 namespace Collections\Iterator;
 
-trait IteratorCollectionTrait /* implements \Collections\Collection */
+trait IteratorCollectionTrait
 {
 
     /**
@@ -113,5 +113,4 @@ trait IteratorCollectionTrait /* implements \Collections\Collection */
     {
         return new ValueIterator($this->asIterator());
     }
-
 }

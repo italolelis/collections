@@ -62,6 +62,4 @@ class SortedMapIterator extends IteratorCollectionAdapter implements MapIterator
         }
         return $pair;
     }
-
-
 }

@@ -54,5 +54,4 @@ class KeyIterator extends IteratorCollectionAdapter
         parent::next();
         $this->i++;
     }
-
 }

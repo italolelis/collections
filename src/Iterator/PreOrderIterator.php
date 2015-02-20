@@ -116,5 +116,4 @@ class PreOrderIterator implements BinaryTreeIteratorInterface
             $this->stack->push($next);
         }
     }
-
 }

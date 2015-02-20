@@ -40,5 +40,4 @@ class SlicingIterator extends IteratorCollectionAdapter
             $this->inner->next();
         }
     }
-
 }

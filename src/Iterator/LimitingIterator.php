@@ -56,5 +56,4 @@ class LimitingIterator extends IteratorCollectionAdapter
     {
         return $this->used < $this->n && parent::valid();
     }
-
 }

@@ -10,6 +10,5 @@ interface CountableIteratorInterface extends \Countable, Iterator
     /**
      * @return bool
      */
-    function isEmpty();
-
+    public function isEmpty();
 }

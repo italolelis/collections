@@ -73,5 +73,4 @@ class IteratorCollectionAdapter implements \Iterator, \OuterIterator
     {
         $this->inner->rewind();
     }
-
 }

@@ -4,7 +4,8 @@
 namespace Collections;
 
 /**
- * Provides functionality to evaluate queries against a specific data source wherein the type of the data is not specified.
+ * Provides functionality to evaluate queries against a specific data source wherein the type of the data
+ * is not specified.
  */
 interface QueueInterface extends \IteratorAggregate
 {

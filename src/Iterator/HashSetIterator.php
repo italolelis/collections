@@ -8,7 +8,7 @@ class HashSetIterator extends IteratorCollectionAdapter implements SetIteratorIn
     private $size = 0;
 
 
-    public function  __construct(array $set)
+    public function __construct(array $set)
     {
         parent::__construct(new ValueIterator(new \ArrayIterator($set)));
         $this->size = count($set);
@@ -20,5 +20,4 @@ class HashSetIterator extends IteratorCollectionAdapter implements SetIteratorIn
     {
         return $this->size;
     }
-
 }

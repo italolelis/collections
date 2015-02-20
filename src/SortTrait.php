@@ -13,7 +13,8 @@ trait SortTrait
 {
     /**
      * Sorts the elements in the entire Collection<T> using the specified comparer.
-     * @param ComparerInterface $comparer The ComparerInterface implementation to use when comparing elements, or null to use the default comparer Comparer<T>.Default.
+     * @param ComparerInterface $comparer The ComparerInterface implementation to use when comparing elements, or null
+     * to use the default comparer Comparer<T>.Default.
      * @return $this
      */
     public function sort(ComparerInterface $comparer = null)
@@ -27,7 +28,8 @@ trait SortTrait
 
     /**
      * Sorts the keys in the entire Collection<T> using the specified comparer.
-     * @param ComparerInterface $comparer The ComparerInterface implementation to use when comparing elements, or null to use the default comparer Comparer<T>.Default.
+     * @param ComparerInterface $comparer The ComparerInterface implementation to use when comparing elements, or
+     * null to use the default comparer Comparer<T>.Default.
      * @return $this
      */
     public function sortByKey(ComparerInterface $comparer = null)

@@ -87,5 +87,4 @@ class FilteringIterator extends IteratorCollectionAdapter
         $this->key = null;
         $this->next();
     }
-
 }

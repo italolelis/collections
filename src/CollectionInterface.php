@@ -8,7 +8,8 @@ use IteratorAggregate;
 use Serializable;
 
 /**
- * Provides functionality to evaluate queries against a specific data source wherein the type of the data is not specified.
+ * Provides functionality to evaluate queries against a specific data source wherein the type of the data is not
+ * specified.
  */
 interface CollectionInterface extends Countable, Serializable, IteratorAggregate
 {

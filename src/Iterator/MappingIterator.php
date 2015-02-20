@@ -30,5 +30,4 @@ class MappingIterator extends IteratorCollectionAdapter
             $this->inner->key()
         );
     }
-
 }

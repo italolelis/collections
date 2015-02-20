@@ -57,9 +57,10 @@ trait RxTrait
      */
     public function reject(callable $c)
     {
-        return $this->iteratorToCollection(new CallbackFilterIterator($this->getIterator(), function ($key, $value, $items) use ($c) {
-            return !$c($key, $value, $items);
-        }));
+        return $this->iteratorToCollection(new CallbackFilterIterator($this->getIterator(),
+            function ($key, $value, $items) use ($c) {
+                return !$c($key, $value, $items);
+            }));
     }
 
     /**
@@ -94,7 +95,8 @@ trait RxTrait
      * Iteratively reduce the collection to a single value using a callback function.
      *
      * @param callable $c The callable used for reduce.
-     * @param int $zero If the optional initial is available, it will be used at the beginning of the process, or as a final result in case the array is empty.
+     * @param int $zero If the optional initial is available, it will be used at the beginning of the process,
+     * or as a final result in case the array is empty.
      * @return CollectionInterface A collection with the results of the filter operation.
      */
     public function reduce(callable $c, $zero = null)
@@ -180,7 +182,8 @@ trait RxTrait
     }
 
     /**
-     * Returns the last element of an observable sequence that satisfies the condition in the predicate if specified, else the last element.
+     * Returns the last element of an observable sequence that satisfies the condition in the predicate if specified,
+     * else the last element.
      *
      * @return CollectionInterface A collection with the results of the filter operation.
      */

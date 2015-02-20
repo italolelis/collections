@@ -13,5 +13,4 @@ class Pair
         $this->first = $first;
         $this->second = $second;
     }
-
 }
