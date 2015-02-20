@@ -14,7 +14,8 @@ test:
     php_cpd:
         allow_failures: true
     php_mess_detector:
-        allowed_warnings: 0
+      allow_failures: true
+      zero_config: true # do not make build as failed if something was detected
     php_code_sniffer:
         standard: "PSR2"
         allowed_warnings: 0

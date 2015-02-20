@@ -17,11 +17,11 @@ interface IterableInterface
      * and passes both the value and key for them on each step.
      * Returns the same collection for chaining.
      *
-     * @param callable $c callable function that will receive each of the elements
+     * @param callable $callable callable function that will receive each of the elements
      * in this collection
      * @return CollectionInterface
      */
-    public function each(callable $c);
+    public function each(callable $callable);
 
     /**
      * Returns another collection after modifying each of the values in this one using
@@ -31,11 +31,11 @@ interface IterableInterface
      * in the current iteration, the key of the element and this collection as
      * arguments, in that order.
      *
-     * @param callable $c the method that will receive each of the elements and
+     * @param callable $callable the method that will receive each of the elements and
      * returns the new value for the key that is being iterated
      * @return CollectionInterface
      */
-    public function map(callable $c);
+    public function map(callable $callable);
 
     /**
      * Returns a new collection containing the column or property value found in each

@@ -17,9 +17,9 @@ interface AggregatableInterface
      * If $zero is omitted the first value of the collection will be used in its place
      * and reduction will start from the second item.
      *
-     * @param callable $c The callback function to be called
+     * @param callable $callable The callback function to be called
      * @param mixed $zero The state of reduction
      * @return void
      */
-    public function reduce(callable $c, $zero = null);
+    public function reduce(callable $callable, $zero = null);
 }

@@ -16,10 +16,10 @@ interface FilterableInterface
      * Returns all the elements of this collection that satisfy the predicate p.
      * The order of the elements is preserved.
      *
-     * @param callable $c The callable used for filtering.
+     * @param callable $callable The callable used for filtering.
      * @return CollectionInterface A collection with the results of the filter operation.
      */
-    public function filter(callable $c);
+    public function filter(callable $callable);
 
     /**
      * Looks through each value in the collection, and returns another collection with
@@ -29,11 +29,11 @@ interface FilterableInterface
      * in the current iteration, the key of the element and this collection as
      * arguments, in that order.
      *
-     * @param callable $c the method that will receive each of the elements and
+     * @param callable $callable the method that will receive each of the elements and
      * returns true whether or not they should be out of the resulting collection.
      * @return CollectionInterface
      */
-    public function reject(callable $c);
+    public function reject(callable $callable);
 
     /**
      * Returns true if all values in this collection pass the truth test provided
@@ -43,11 +43,11 @@ interface FilterableInterface
      * in the current iteration and  the key of the element as arguments, in that
      * order.
      *
-     * @param callable $c a callback function
+     * @param callable $callable a callback function
      * @return bool true if for all elements in this collection the provided
      * callback returns true, false otherwise
      */
-    public function every(callable $c);
+    public function every(callable $callable);
 
     /**
      * Returns true if any of the values in this collection pass the truth test
@@ -57,11 +57,11 @@ interface FilterableInterface
      * in the current iteration and the key of the element as arguments, in that
      * order.
      *
-     * @param callable $c a callback function
+     * @param callable $callable a callback function
      * @return bool true if for all elements in this collection the provided
      * callback returns true, false otherwise
      */
-    public function some(callable $c);
+    public function some(callable $callable);
 
     /**
      * Looks through each value in the list, returning a Collection of all the

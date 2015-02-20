@@ -22,10 +22,10 @@ trait RxTrait
      * {@inheritDoc}
      *
      */
-    public function each(callable $c)
+    public function each(callable $callable)
     {
         foreach ($this->getIterator() as $k => $v) {
-            $c($v, $k);
+            $callable($v, $k);
         }
         return $this;
     }
@@ -35,9 +35,9 @@ trait RxTrait
      *
      * @return CollectionInterface
      */
-    public function filter(callable $c)
+    public function filter(callable $callable)
     {
-        return $this->iteratorToCollection(new CallbackFilterIterator($this->getIterator(), $c));
+        return $this->iteratorToCollection(new CallbackFilterIterator($this->getIterator(), $callable));
     }
 
     /**
@@ -67,10 +67,10 @@ trait RxTrait
      * {@inheritDoc}
      *
      */
-    public function every(callable $c)
+    public function every(callable $callable)
     {
         foreach ($this->getIterator() as $key => $value) {
-            if (!$c($value, $key)) {
+            if (!$callable($value, $key)) {
                 return false;
             }
         }
@@ -81,10 +81,10 @@ trait RxTrait
      * {@inheritDoc}
      *
      */
-    public function some(callable $c)
+    public function some(callable $callable)
     {
         foreach ($this->getIterator() as $key => $value) {
-            if ($c($value, $key) === true) {
+            if ($callable($value, $key) === true) {
                 return true;
             }
         }
@@ -94,12 +94,12 @@ trait RxTrait
     /**
      * Iteratively reduce the collection to a single value using a callback function.
      *
-     * @param callable $c The callable used for reduce.
+     * @param callable $callable The callable used for reduce.
      * @param int $zero If the optional initial is available, it will be used at the beginning of the process,
      * or as a final result in case the array is empty.
      * @return CollectionInterface A collection with the results of the filter operation.
      */
-    public function reduce(callable $c, $zero = null)
+    public function reduce(callable $callable, $zero = null)
     {
         $isFirst = false;
         if (func_num_args() < 2) {
@@ -112,7 +112,7 @@ trait RxTrait
                 $isFirst = false;
                 continue;
             }
-            $result = $c($result, $value, $k);
+            $result = $callable($result, $value, $k);
         }
         return $result;
     }
