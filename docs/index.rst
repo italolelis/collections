@@ -21,7 +21,7 @@ User guide
 
   overview
   quickstart
-  clients
+  reactive-extension
   http-messages
   events
   streams
