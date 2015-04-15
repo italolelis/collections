@@ -6,7 +6,14 @@ All notable changes to this project will be documented in this file.
 - Reactive Extensions initiative.
 - Adding new data structures LinkedList and LinkedDictionary. 
 
-## 4.0.0 - unreleased
+## 4.1.0 - unreleased
+### Add
+- Added to all collections the JsonSerializable interface.
+
+### Updated
+- All collections that extends from ArrayCollection now have the toArrayKeys method.
+
+## 4.0.0 - 2015-02-21
 ### Add
 - Added Reactive Extension Trait.
 - Added unfold method, almost like flatMap.
