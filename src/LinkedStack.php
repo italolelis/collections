@@ -2,10 +2,13 @@
 
 namespace Collections;
 
+use Collections\Exception\EmptyException;
+use Collections\Exception\FullException;
+use Collections\Exception\TypeException;
 use Collections\Iterator\IteratorCollectionTrait;
 use Collections\Iterator\LinkedStackIterator;
 
-class LinkedStack implements StackInterface
+class LinkedStack implements StackInterface, \JsonSerializable
 {
 
     use GuardTrait;
@@ -30,7 +33,7 @@ class LinkedStack implements StackInterface
 
     /**
      * @link http://php.net/manual/en/iteratoraggregate.getiterator.php
-     * @return StackIterator
+     * @return LinkedStackIterator
      */
     public function getIterator()
     {
@@ -117,5 +120,17 @@ class LinkedStack implements StackInterface
     public function pushMultiple($items)
     {
 
+    }
+
+    /**
+     * (PHP 5 &gt;= 5.4.0)<br/>
+     * Specify data which should be serialized to JSON
+     * @link http://php.net/manual/en/jsonserializable.jsonserialize.php
+     * @return mixed data which can be serialized by <b>json_encode</b>,
+     * which is a value of any type other than a resource.
+     */
+    public function jsonSerialize()
+    {
+        return $this->getIterator()->toArray();
     }
 }

@@ -5,7 +5,7 @@ namespace Collections;
 use Collections\Iterator\IteratorCollectionTrait;
 use Collections\Iterator\LinkedQueueIterator;
 
-class LinkedQueue implements QueueInterface
+class LinkedQueue implements QueueInterface, \JsonSerializable
 {
 
     use GuardTrait;
@@ -34,7 +34,7 @@ class LinkedQueue implements QueueInterface
 
     /**
      * @link http://php.net/manual/en/iteratoraggregate.getiterator.php
-     * @return QueueIterator
+     * @return LinkedQueueIterator
      */
     public function getIterator()
     {
@@ -128,5 +128,17 @@ class LinkedQueue implements QueueInterface
     public function enqueueMultiple($items)
     {
 
+    }
+
+    /**
+     * (PHP 5 &gt;= 5.4.0)<br/>
+     * Specify data which should be serialized to JSON
+     * @link http://php.net/manual/en/jsonserializable.jsonserialize.php
+     * @return mixed data which can be serialized by <b>json_encode</b>,
+     * which is a value of any type other than a resource.
+     */
+    public function jsonSerialize()
+    {
+        return $this->getIterator()->toArray();
     }
 }

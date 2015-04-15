@@ -152,12 +152,4 @@ class ArrayList extends AbstractCollectionArray implements VectorInterface, Vect
         }
         return $map;
     }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function toArray()
-    {
-        return $this->getIterator()->toArray();
-    }
 }

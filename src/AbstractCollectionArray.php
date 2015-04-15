@@ -15,7 +15,8 @@ abstract class AbstractCollectionArray extends AbstractCollection implements
     IndexAccessInterface,
     ConstIndexAccessInterface,
     ReactiveExtensionInterface,
-    CollectionConvertableInterface
+    CollectionConvertableInterface,
+    \JsonSerializable
 {
 
     use RxTrait,
@@ -23,7 +24,7 @@ abstract class AbstractCollectionArray extends AbstractCollection implements
     /**
      * @var array
      */
-    protected $storage = array();
+    protected $storage = [];
 
     public function __construct($array = null)
     {
@@ -172,5 +173,30 @@ abstract class AbstractCollectionArray extends AbstractCollection implements
             }
         }
         return false;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function toKeysArrays()
+    {
+        return $this->getIterator()->keys()->toArray();
+    }
+
+    public function toArray()
+    {
+        return $this->getIterator()->toArray();
+    }
+
+    /**
+     * (PHP 5 &gt;= 5.4.0)<br/>
+     * Specify data which should be serialized to JSON
+     * @link http://php.net/manual/en/jsonserializable.jsonserialize.php
+     * @return mixed data which can be serialized by <b>json_encode</b>,
+     * which is a value of any type other than a resource.
+     */
+    public function jsonSerialize()
+    {
+        return $this->storage;
     }
 }

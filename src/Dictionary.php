@@ -141,17 +141,4 @@ class Dictionary extends AbstractCollectionArray implements MapInterface, MapCon
     {
         return new ArrayList($this->getIterator());
     }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function toKeysArrays()
-    {
-        return $this->getIterator()->keys()->toArray();
-    }
-
-    public function toArray()
-    {
-        return $this->getIterator()->toArray();
-    }
 }
