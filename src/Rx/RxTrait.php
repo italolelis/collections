@@ -4,7 +4,9 @@
 namespace Collections\Rx;
 
 use CallbackFilterIterator;
+use Collections\ArrayList;
 use Collections\CollectionInterface;
+use Collections\Dictionary;
 use Collections\ExtractTrait;
 use Collections\Iterator\ExtractIterator;
 use Collections\Iterator\InsertIterator;
@@ -27,6 +29,7 @@ trait RxTrait
         foreach ($this->getIterator() as $k => $v) {
             $callable($v, $k);
         }
+
         return $this;
     }
 
@@ -60,6 +63,7 @@ trait RxTrait
         $filterCallback = function ($key, $value, $items) use ($callable) {
             return !$callable($key, $value, $items);
         };
+
         return $this->iteratorToCollection(new CallbackFilterIterator($this->getIterator(), $filterCallback));
     }
 
@@ -74,6 +78,7 @@ trait RxTrait
                 return false;
             }
         }
+
         return true;
     }
 
@@ -88,6 +93,7 @@ trait RxTrait
                 return true;
             }
         }
+
         return false;
     }
 
@@ -114,6 +120,7 @@ trait RxTrait
             }
             $result = $callable($result, $value, $k);
         }
+
         return $result;
     }
 
@@ -203,6 +210,7 @@ trait RxTrait
                 return $item;
             };
         }
+
         return $this->iteratorToCollection(
             new RecursiveIteratorIterator(
                 new UnfoldIterator($this->getIterator(), $transformer),
@@ -217,6 +225,7 @@ trait RxTrait
     public function shuffle()
     {
         shuffle($this->storage);
+
         return $this;
     }
 
@@ -228,5 +237,26 @@ trait RxTrait
     protected function iteratorToCollection($iterator, $useKeys = true)
     {
         return static::fromArray(iterator_to_array($iterator), $useKeys);
+    }
+
+    /**
+     * {@inheritDoc}
+     *
+     */
+    public function groupBy($callback)
+    {
+        $callback = $this->propertyExtractor($callback);
+        $group = new Dictionary();
+        foreach ($this as $value) {
+            $key = $callback($value);
+            if (!$group->containsKey($key)) {
+                $group->add($key, new ArrayList([$value]));
+            } else {
+                $value = $group->get($key)->add($value);
+                $group->set($key, $value);
+            }
+        }
+
+        return $group;
     }
 }

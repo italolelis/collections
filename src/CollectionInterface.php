@@ -11,7 +11,7 @@ use Serializable;
  * Provides functionality to evaluate queries against a specific data source wherein the type of the data is not
  * specified.
  */
-interface CollectionInterface extends Countable, Serializable, IteratorAggregate
+interface CollectionInterface extends Countable, Serializable, IteratorAggregate, RxInterface
 {
 
     /**
@@ -40,7 +40,7 @@ interface CollectionInterface extends Countable, Serializable, IteratorAggregate
 
     /**
      * Adds all the key/value Pairs from the Traversable to the IList.
-     * @param Traversable $items The collection whose elements should be added to the end of the IList.
+     * @param \Traversable $items The collection whose elements should be added to the end of the IList.
      * @return VectorInterface
      */
     public function addAll($items);
