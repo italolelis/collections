@@ -25,7 +25,7 @@ class Dictionary extends AbstractCollectionArray implements MapInterface, MapCon
         if (is_object($item)) {
             return spl_object_hash($item);
         } elseif (is_numeric($item) || is_bool($item)) {
-            return "s_" . intval($item);
+            return "n_" . intval($item);
         } elseif (is_string($item)) {
             return "s_$item";
         } elseif (is_resource($item)) {
@@ -46,6 +46,7 @@ class Dictionary extends AbstractCollectionArray implements MapInterface, MapCon
             throw new KeyException('The key ' . $key . ' already exists!');
         }
         $this->set($key, $value);
+
         return $this;
     }
 
@@ -69,6 +70,7 @@ class Dictionary extends AbstractCollectionArray implements MapInterface, MapCon
     public function set($key, $value)
     {
         $this->offsetSet($key, $value);
+
         return $this;
     }
 
@@ -78,6 +80,7 @@ class Dictionary extends AbstractCollectionArray implements MapInterface, MapCon
     public function offsetExists($offset)
     {
         $offset = $this->hashCode($offset);
+
         return isset($this->storage[$offset]) || array_key_exists($offset, $this->storage);
     }
 
@@ -90,6 +93,7 @@ class Dictionary extends AbstractCollectionArray implements MapInterface, MapCon
             throw new OutOfBoundsException('No element at position ' . $offset);
         }
         $pair = $this->storage[$this->hashCode($offset)];
+
         return $pair->second;
     }
 
@@ -131,6 +135,7 @@ class Dictionary extends AbstractCollectionArray implements MapInterface, MapCon
                 $map->add($k, $v);
             }
         }
+
         return $map;
     }
 

@@ -259,4 +259,20 @@ trait RxTrait
 
         return $group;
     }
+
+    /**
+     * {@inheritDoc}
+     *
+     */
+    public function indexBy($callback)
+    {
+        $callback = $this->propertyExtractor($callback);
+        $group = new Dictionary();
+        foreach ($this as $value) {
+            $key = $callback($value);
+            $group->set($key, $value);
+        }
+
+        return $group;
+    }
 }

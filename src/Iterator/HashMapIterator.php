@@ -2,7 +2,8 @@
 
 namespace Collections\Iterator;
 
-use Collections\CollectionInterface;
+use Collections\CollectionConvertableInterface;
+use Collections\Pair;
 
 class HashMapIterator extends IteratorCollectionAdapter implements MapIteratorInterface
 {
@@ -27,6 +28,7 @@ class HashMapIterator extends IteratorCollectionAdapter implements MapIteratorIn
          * @var Pair $pair
          */
         $pair = parent::current();
+
         return $pair->first;
     }
 
@@ -41,6 +43,7 @@ class HashMapIterator extends IteratorCollectionAdapter implements MapIteratorIn
          * @var Pair $pair
          */
         $pair = parent::current();
+
         return $pair->second;
     }
 
@@ -58,12 +61,13 @@ class HashMapIterator extends IteratorCollectionAdapter implements MapIteratorIn
     {
         $array = parent::toArray();
         foreach ($array as $key => $value) {
-            if ($value instanceof CollectionInterface) {
+            if ($value instanceof CollectionConvertableInterface) {
                 $array[$key] = $value->toArray();
             } else {
                 $array[$key] = $value;
             }
         }
+
         return $array;
     }
 }
