@@ -3,6 +3,7 @@
 namespace Tests\Collections;
 
 use Collections\ArrayList;
+use Collections\Dictionary;
 
 class RxTest extends CollectionsTestCase
 {
@@ -112,5 +113,62 @@ class RxTest extends CollectionsTestCase
     {
         $testSubjects = $people->sample(20);
         $this->assertNotEmpty($testSubjects);
+    }
+
+    /**
+     * Tests groupBy
+     *
+     * @return void
+     */
+    public function testGroupBy()
+    {
+        $items = [
+            ['id' => 1, 'name' => 'foo', 'parent_id' => 10],
+            ['id' => 2, 'name' => 'bar', 'parent_id' => 11],
+            ['id' => 3, 'name' => 'baz', 'parent_id' => 10],
+        ];
+        $collection = new Dictionary($items);
+        $grouped = $collection->groupBy('parent_id');
+        $expected = [
+            10 => [
+                ['id' => 1, 'name' => 'foo', 'parent_id' => 10],
+                ['id' => 3, 'name' => 'baz', 'parent_id' => 10],
+            ],
+            11 => [
+                ['id' => 2, 'name' => 'bar', 'parent_id' => 11],
+            ]
+        ];
+        $this->assertEquals($expected, $grouped->toArray());
+        $this->assertInstanceOf('Collections\CollectionInterface', $grouped);
+        $grouped = $collection->groupBy(function ($element) {
+            return $element['parent_id'];
+        });
+        $this->assertEquals($expected, $grouped->toArray());
+    }
+
+    /**
+     * Tests grouping by a deep key
+     *
+     * @return void
+     */
+    public function testGroupByDeepKey()
+    {
+        $items = [
+            ['id' => 1, 'name' => 'foo', 'thing' => ['parent_id' => 10]],
+            ['id' => 2, 'name' => 'bar', 'thing' => ['parent_id' => 11]],
+            ['id' => 3, 'name' => 'baz', 'thing' => ['parent_id' => 10]],
+        ];
+        $collection = new Dictionary($items);
+        $grouped = $collection->groupBy('thing.parent_id');
+        $expected = [
+            10 => [
+                ['id' => 1, 'name' => 'foo', 'thing' => ['parent_id' => 10]],
+                ['id' => 3, 'name' => 'baz', 'thing' => ['parent_id' => 10]],
+            ],
+            11 => [
+                ['id' => 2, 'name' => 'bar', 'thing' => ['parent_id' => 11]],
+            ]
+        ];
+        $this->assertEquals($expected, $grouped->toArray());
     }
 }

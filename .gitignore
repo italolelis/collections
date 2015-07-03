@@ -15,3 +15,4 @@ tmp/*
 resources/cache
 resources/cache/*
 /build/
+/bin/

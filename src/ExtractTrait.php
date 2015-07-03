@@ -28,6 +28,7 @@ trait ExtractTrait
                 return $this->extractData($element, $path);
             };
         }
+
         return $callback;
     }
 
@@ -44,17 +45,20 @@ trait ExtractTrait
         $accessor = PropertyAccess::createPropertyAccessor();
         $value = null;
         foreach ($path as $column) {
-            if (!$accessor->isReadable($data, $column)) {
-                return null;
-            }
 
-            if (is_array($data)) {
+            if (is_array($data) || $data instanceof CollectionConvertableInterface) {
                 $value = $accessor->getValue($data, "[$column]");
             } else {
+
+                if (!$accessor->isReadable($data, $column)) {
+                    return null;
+                }
+
                 $value = $accessor->getValue($data, $column);
             }
             $data = $value;
         }
+
         return $value;
     }
 
@@ -76,12 +80,14 @@ trait ExtractTrait
                 return $extractor($v) == $value;
             };
         }
+
         return function ($value) use ($matchers) {
             foreach ($matchers as $match) {
                 if (!$match($value)) {
                     return false;
                 }
             }
+
             return true;
         };
     }
