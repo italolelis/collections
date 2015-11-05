@@ -4,6 +4,8 @@
 namespace Collections;
 
 use InvalidArgumentException;
+use Rx\Observable\ArrayObservable;
+use Rx\ObservableInterface;
 use Traversable;
 
 /**
@@ -20,6 +22,7 @@ class ArrayList extends AbstractCollectionArray implements VectorInterface, Vect
     public function add($item)
     {
         $this->storage[] = $item;
+
         return $this;
     }
 
@@ -56,11 +59,11 @@ class ArrayList extends AbstractCollectionArray implements VectorInterface, Vect
         if (!is_numeric($index)) {
             throw new InvalidArgumentException('The index must be numeric');
         }
-        if ($index < 0 || $index >= $this->Count()) {
+        if ($index < 0 || $index >= $this->count()) {
             throw new InvalidArgumentException('The index is out of bounds (must be >=0 and <= size of te array)');
         }
 
-        $current = $this->Count() - 1;
+        $current = $this->count() - 1;
         for (; $current >= $index; $current--) {
             $this->storage[$current + 1] = $this->storage[$current];
         }
@@ -75,6 +78,7 @@ class ArrayList extends AbstractCollectionArray implements VectorInterface, Vect
     public function offsetExists($offset)
     {
         $offset = $this->intGuard($offset);
+
         return array_key_exists((int)$offset, $this->storage);
     }
 
@@ -84,6 +88,7 @@ class ArrayList extends AbstractCollectionArray implements VectorInterface, Vect
     public function offsetGet($offset)
     {
         $offset = $this->existsGuard($this->intGuard($offset));
+
         return $this->storage[$offset];
     }
 
@@ -150,6 +155,7 @@ class ArrayList extends AbstractCollectionArray implements VectorInterface, Vect
                 $map->add($v);
             }
         }
+
         return $map;
     }
 }
