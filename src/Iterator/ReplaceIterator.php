@@ -20,6 +20,7 @@ class ReplaceIterator extends IteratorIterator
      * @var callable
      */
     protected $callback;
+
     /**
      * A reference to the internal iterator this object is wrapping.
      *
@@ -54,6 +55,7 @@ class ReplaceIterator extends IteratorIterator
     public function current()
     {
         $callback = $this->callback;
+
         return $callback(parent::current(), $this->key(), $this->innerIterator);
     }
 }

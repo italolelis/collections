@@ -4,26 +4,45 @@ namespace Collections\Iterator;
 
 class IteratorCollectionAdapter implements \Iterator, \OuterIterator
 {
-
-    use IteratorCollectionTrait;
-
     /**
      * @var \Iterator
      */
     protected $inner;
-
 
     public function __construct(\Iterator $Iterator)
     {
         $this->inner = $Iterator;
     }
 
+    /**
+     * @return \Iterator
+     */
+    private function asIterator()
+    {
+        if ($this instanceof \IteratorAggregate) {
+            return $this->getIterator();
+        }
+
+        return $this;
+    }
+    
+    /**
+     * @return array
+     */
+    public function toArray()
+    {
+        return iterator_to_array($this->asIterator());
+    }
+
+    public function keys()
+    {
+        return new KeyIterator($this->asIterator());
+    }
 
     public function getInnerIterator()
     {
         return $this->inner;
     }
-
 
     /**
      * @link http://php.net/manual/en/iterator.current.php
