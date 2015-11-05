@@ -182,7 +182,7 @@ class DictionaryTest extends CollectionsTestCase
 
     public function testToList()
     {
-        $this->coll->addAll(array(1, 2, 3, 4));
+        $this->coll->addAll([1, 2, 3, 4]);
         $map = $this->coll->toList();
 
         $this->assertInstanceOf('\Collections\\ArrayList', $map);
@@ -199,13 +199,5 @@ class DictionaryTest extends CollectionsTestCase
         ];
         $this->coll->addAll($data);
         $this->assertEquals($data, $this->coll->toArray());
-    }
-
-    public function testSetObjectKey()
-    {
-        $class = new stdClass();
-        $this->coll->set($class, 'testing');
-
-        $this->assertEquals($this->coll->get($class), 'testing');
     }
 }
