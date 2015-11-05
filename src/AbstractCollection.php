@@ -6,13 +6,14 @@ namespace Collections;
 use Collections\Comparer\NumericKeyComparer;
 use Collections\Generic\ComparerInterface;
 use Easy\Generics\EquatableInterface;
+use Rx\Observable\ArrayObservable;
+use Rx\ObservableInterface;
 
 /**
  * Provides the abstract base class for a strongly typed collection.
  */
 abstract class AbstractCollection implements CollectionInterface, EquatableInterface
 {
-
     /**
      * @var ComparerInterface
      */
@@ -27,6 +28,7 @@ abstract class AbstractCollection implements CollectionInterface, EquatableInter
         if ($this->defaultComparer === null) {
             $this->defaultComparer = new NumericKeyComparer();
         }
+
         return $this->defaultComparer;
     }
 
@@ -38,6 +40,7 @@ abstract class AbstractCollection implements CollectionInterface, EquatableInter
     public function setDefaultComparer(ComparerInterface $defaultComparer)
     {
         $this->defaultComparer = $defaultComparer;
+
         return $this;
     }
 
