@@ -7,20 +7,23 @@ use Closure;
 use Collections\Iterator\ArrayIterator;
 use Collections\Rx\ReactiveExtensionInterface;
 use Collections\Rx\RxTrait;
+use Rx\Observable\ArrayObservable;
+use Rx\ObservableInterface;
 
 /**
  * Provides the abstract base class for a strongly typed collection.
  */
 abstract class AbstractCollectionArray extends AbstractCollection implements
     IndexAccessInterface,
-    ConstIndexAccessInterface,
     ReactiveExtensionInterface,
+    ConstIndexAccessInterface,
     CollectionConvertableInterface,
     \JsonSerializable
 {
 
     use RxTrait,
         SortTrait;
+
     /**
      * @var array
      */
@@ -56,6 +59,7 @@ abstract class AbstractCollectionArray extends AbstractCollection implements
     public function clear()
     {
         $this->storage = [];
+
         return $this;
     }
 
@@ -89,6 +93,7 @@ abstract class AbstractCollectionArray extends AbstractCollection implements
     public function unserialize($serialized)
     {
         $this->storage = unserialize($serialized);
+
         return $this->storage;
     }
 
@@ -98,6 +103,7 @@ abstract class AbstractCollectionArray extends AbstractCollection implements
     public function concat(CollectionConvertableInterface $collection)
     {
         $this->storage = array_merge($this->storage, $collection->toArray());
+
         return $this;
     }
 
@@ -127,7 +133,6 @@ abstract class AbstractCollectionArray extends AbstractCollection implements
 
     /**
      * {@inheritdoc}
-     * @param string $default
      */
     public function tryGet($index, $default = null)
     {
@@ -144,6 +149,7 @@ abstract class AbstractCollectionArray extends AbstractCollection implements
     public function remove($index)
     {
         $this->offsetUnset($index);
+
         return $this;
     }
 
@@ -156,6 +162,7 @@ abstract class AbstractCollectionArray extends AbstractCollection implements
 
         if ($key !== false) {
             $this->offsetUnset($key);
+
             return true;
         }
 
@@ -172,6 +179,7 @@ abstract class AbstractCollectionArray extends AbstractCollection implements
                 return true;
             }
         }
+
         return false;
     }
 
@@ -183,9 +191,20 @@ abstract class AbstractCollectionArray extends AbstractCollection implements
         return $this->getIterator()->keys()->toArray();
     }
 
+    /**
+     * @{@inheritdoc}
+     */
     public function toArray()
     {
         return $this->getIterator()->toArray();
+    }
+
+    /**
+     * @return ObservableInterface
+     */
+    public function toObservable()
+    {
+        return new ArrayObservable($this->toArray());
     }
 
     /**
