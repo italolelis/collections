@@ -1,6 +1,6 @@
 {
   "name": "easyframework/collections",
-  "description": "Easy Framework Collection Component",
+  "description": "Collections Abstraction library for PHP",
   "type": "library",
   "license": "MIT",
   "keywords": [
@@ -13,17 +13,18 @@
   "authors": [
     {
       "name": "Ítalo Lelis de Vietro",
-      "email": "italolelis@lellysinformatica.com"
+      "email": "italolelis@gmail.com"
     }
   ],
   "require": {
     "easyframework/generics": "~2.0",
-    "symfony/property-access": "~2.6"
+    "symfony/property-access": "~2.6",
+    "asm89/rx.php": "~0.3"
   },
   "require-dev": {
     "php": ">=5.4.0",
-    "phpunit/phpunit": "~4.5",
-    "symfony/var-dumper": "~2.6."
+    "phpunit/phpunit": "~4.8",
+    "symfony/var-dumper": "~2.7"
   },
   "autoload": {
     "psr-4": {
@@ -40,7 +41,7 @@
   },
   "extra": {
     "branch-alias": {
-      "dev-master": "4.1-dev"
+      "dev-master": "5.0-dev"
     }
   }
 }
