@@ -9,7 +9,7 @@
          processIsolation="false"
          stopOnFailure="false"
          syntaxCheck="false"
-         bootstrap="./tests/bootstrap.php"
+         bootstrap="vendor/autoload.php"
 >
     <testsuites>
         <testsuite name="Collections Test Suites">
@@ -26,9 +26,4 @@
             </exclude>
         </whitelist>
     </filter>
-    
-    <logging>
-        <log type="coverage-html" target="build/coverage" title="Collection Coverage" charset="UTF-8" yui="true" highlight="true" />
-        <log type="coverage-clover" target="build/logs/clover.xml"/>
-    </logging>
 </phpunit>
