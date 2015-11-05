@@ -11,18 +11,14 @@ use Collections\ExtractTrait;
 use Collections\Iterator\ExtractIterator;
 use Collections\Iterator\InsertIterator;
 use Collections\Iterator\ReplaceIterator;
-use Collections\Iterator\UnfoldIterator;
 use LimitIterator;
-use RecursiveIteratorIterator;
 
 trait RxTrait
 {
-
     use ExtractTrait;
 
     /**
      * {@inheritDoc}
-     *
      */
     public function each(callable $callable)
     {
@@ -69,7 +65,6 @@ trait RxTrait
 
     /**
      * {@inheritDoc}
-     *
      */
     public function every(callable $callable)
     {
@@ -84,7 +79,6 @@ trait RxTrait
 
     /**
      * {@inheritDoc}
-     *
      */
     public function some(callable $callable)
     {
@@ -200,26 +194,6 @@ trait RxTrait
     }
 
     /**
-     * {@inheritDoc}
-     *
-     */
-    public function unfold(callable $transformer = null)
-    {
-        if ($transformer === null) {
-            $transformer = function ($item) {
-                return $item;
-            };
-        }
-
-        return $this->iteratorToCollection(
-            new RecursiveIteratorIterator(
-                new UnfoldIterator($this->getIterator(), $transformer),
-                RecursiveIteratorIterator::LEAVES_ONLY
-            )
-        );
-    }
-
-    /**
      * {@inheritdoc}
      */
     public function shuffle()
@@ -231,12 +205,11 @@ trait RxTrait
 
     /**
      * @param $iterator
-     * @param bool $useKeys
      * @return CollectionInterface
      */
-    protected function iteratorToCollection($iterator, $useKeys = true)
+    protected function iteratorToCollection($iterator)
     {
-        return static::fromArray(iterator_to_array($iterator), $useKeys);
+        return new static($iterator);
     }
 
     /**

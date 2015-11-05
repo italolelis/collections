@@ -45,7 +45,6 @@ trait ExtractTrait
         $accessor = PropertyAccess::createPropertyAccessor();
         $value = null;
         foreach ($path as $column) {
-
             if (is_array($data) || $data instanceof CollectionConvertableInterface) {
                 $value = $accessor->getValue($data, "[$column]");
             } else {

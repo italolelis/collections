@@ -4,7 +4,6 @@
 namespace Collections;
 
 use Collections\Exception\KeyException;
-use Collections\Iterator\HashMapIterator;
 use InvalidArgumentException;
 use OutOfBoundsException;
 use Traversable;
@@ -14,29 +13,6 @@ use Traversable;
  */
 class Dictionary extends AbstractCollectionArray implements MapInterface, MapConvertableInterface
 {
-
-    public function getIterator()
-    {
-        return new HashMapIterator($this->storage);
-    }
-
-    private function hashCode($item)
-    {
-        if (is_object($item)) {
-            return spl_object_hash($item);
-        } elseif (is_numeric($item) || is_bool($item)) {
-            return "n_" . intval($item);
-        } elseif (is_string($item)) {
-            return "s_$item";
-        } elseif (is_resource($item)) {
-            return "r_$item";
-        } elseif (is_array($item)) {
-            return 'a_' . md5(serialize($item));
-        }
-
-        return '0';
-    }
-
     /**
      * {@inheritdoc}
      */
@@ -79,8 +55,6 @@ class Dictionary extends AbstractCollectionArray implements MapInterface, MapCon
      */
     public function offsetExists($offset)
     {
-        $offset = $this->hashCode($offset);
-
         return isset($this->storage[$offset]) || array_key_exists($offset, $this->storage);
     }
 
@@ -92,9 +66,8 @@ class Dictionary extends AbstractCollectionArray implements MapInterface, MapCon
         if ($this->containsKey($offset) === false) {
             throw new OutOfBoundsException('No element at position ' . $offset);
         }
-        $pair = $this->storage[$this->hashCode($offset)];
 
-        return $pair->second;
+        return $this->storage[$offset];
     }
 
     /**
@@ -106,8 +79,7 @@ class Dictionary extends AbstractCollectionArray implements MapInterface, MapCon
             throw new InvalidArgumentException("Can't use 'null' as key!");
         }
 
-        $hash = $this->hashCode($offset);
-        $this->storage[$hash] = new Pair($offset, $value);
+        $this->storage[$offset] = $value;
     }
 
     /**
@@ -119,7 +91,7 @@ class Dictionary extends AbstractCollectionArray implements MapInterface, MapCon
             throw new InvalidArgumentException('The key ' . $offset . ' is not present in the dictionary');
         }
 
-        unset($this->storage[$this->hashCode($offset)]);
+        unset($this->storage[$offset]);
     }
 
     /**
@@ -127,10 +99,10 @@ class Dictionary extends AbstractCollectionArray implements MapInterface, MapCon
      */
     public static function fromArray(array $arr)
     {
-        $map = new Dictionary();
+        $map = new static();
         foreach ($arr as $k => $v) {
             if (is_array($v)) {
-                $map->add($k, new Dictionary($v));
+                $map->add($k, new static($v));
             } else {
                 $map->add($k, $v);
             }
