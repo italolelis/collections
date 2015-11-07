@@ -43,13 +43,6 @@ class Dictionary extends AbstractCollectionArray implements MapInterface, MapCon
         }
     }
 
-    public function set($key, $value)
-    {
-        $this->offsetSet($key, $value);
-
-        return $this;
-    }
-
     /**
      * {@inheritdoc}
      */

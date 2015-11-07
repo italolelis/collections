@@ -9,12 +9,12 @@ use BadFunctionCallException;
  * Provides functionality to evaluate queries against a specific data source wherein the type of the data
  * is not specified.
  */
-interface StackInterface extends \IteratorAggregate
+interface StackInterface
 {
 
     /**
      * Inserts an object at the top of the Stack.
-     * @param type $item The Object to push onto the Stack. The value <b>can</b> be null.
+     * @param mixed $item The Object to push onto the Stack. The value <b>can</b> be null.
      * @return Stack
      */
     public function push($item);

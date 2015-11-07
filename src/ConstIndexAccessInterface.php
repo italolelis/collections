@@ -8,19 +8,11 @@ namespace Collections;
  */
 interface ConstIndexAccessInterface
 {
-
-    /**
-     * Determines whether the ICollection object contains an element with the specified key.
-     * @param mixed $item The key to locate in the IDictionary object.
-     * @return boolean
-     */
-    public function contains($item);
-
     /**
      * Checks whether the collection contains an element with the specified key/index.
      *
      * @param string|integer $key The key/index to check for.
-     * @return boolean TRUE if the collection contains an element with the specified key/index,
+     * @return bool TRUE if the collection contains an element with the specified key/index,
      *                 FALSE otherwise.
      */
     public function containsKey($key);

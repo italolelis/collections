@@ -9,6 +9,7 @@ use Collections\Rx\ReactiveExtensionInterface;
 use Collections\Rx\RxTrait;
 use Rx\Observable\ArrayObservable;
 use Rx\ObservableInterface;
+use Traversable;
 
 /**
  * Provides the abstract base class for a strongly typed collection.
@@ -100,9 +101,9 @@ abstract class AbstractCollectionArray extends AbstractCollection implements
     /**
      * {@inheritdoc}
      */
-    public function concat(CollectionConvertableInterface $collection)
+    public function concat(Traversable $collection)
     {
-        $this->storage = array_merge($this->storage, $collection->toArray());
+        $this->storage = array_merge($this->storage, $collection);
 
         return $this;
     }
@@ -121,6 +122,13 @@ abstract class AbstractCollectionArray extends AbstractCollection implements
     public function contains($element)
     {
         return in_array($element, $this->storage, true);
+    }
+
+    public function set($key, $value)
+    {
+        $this->offsetSet($key, $value);
+
+        return $this;
     }
 
     /**

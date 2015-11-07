@@ -1,27 +1,17 @@
 <?php
 
-// Copyright (c) Lellys Informática. All rights reserved. See License.txt in the project root for license information.
 namespace Collections;
 
 use ArrayAccess;
 
-/**
- * Allows for access key-based collections with methods such as indexOf().
- */
 interface IndexAccessInterface extends ArrayAccess
 {
-
     /**
-     * Removes the IList item at the specified index.
-     * @param int $element The zero-based index of the item to remove.
-     * @return boolean
+     * Store a value into the collection with the specified key, overwriting a previous value if already present.
+     *
+     * @param int $key
+     * @param mixed $value
+     * @return IndexAccessInterface
      */
-    public function removeValue($element);
-
-    /**
-     * Removes the element with the specified key from the IList object.
-     * @param mixed $index The key of the element to remove.
-     * @return AbstractCollectionArray
-     */
-    public function remove($index);
+    public function set($key, $value);
 }

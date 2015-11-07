@@ -9,7 +9,7 @@ use SplQueue;
 /**
  * Represents a first-in, first-out collection of objects.
  */
-class Queue extends SplQueue implements \JsonSerializable
+class Queue extends SplQueue implements QueueInterface, \JsonSerializable
 {
 
     /**
@@ -22,6 +22,7 @@ class Queue extends SplQueue implements \JsonSerializable
         foreach ($items as $item) {
             $this->enqueue($item);
         }
+
         return $this;
     }
 
@@ -35,6 +36,7 @@ class Queue extends SplQueue implements \JsonSerializable
                 $collection->enqueue($v);
             }
         }
+
         return $collection;
     }
 
@@ -51,6 +53,7 @@ class Queue extends SplQueue implements \JsonSerializable
                 $array[$key] = $value;
             }
         }
+
         return $array;
     }
 
@@ -63,15 +66,6 @@ class Queue extends SplQueue implements \JsonSerializable
     }
 
     /**
-     * @link http://php.net/manual/en/iteratoraggregate.getiterator.php
-     * @return LinkedQueueIterator
-     */
-    public function getIterator()
-    {
-        return new LinkedQueueIterator($this->count(), $this->top());
-    }
-
-    /**
      * (PHP 5 &gt;= 5.4.0)<br/>
      * Specify data which should be serialized to JSON
      * @link http://php.net/manual/en/jsonserializable.jsonserialize.php
@@ -80,6 +74,6 @@ class Queue extends SplQueue implements \JsonSerializable
      */
     public function jsonSerialize()
     {
-        return $this->getIterator()->toArray();
+//        return $this->getIterator()->toArray();
     }
 }

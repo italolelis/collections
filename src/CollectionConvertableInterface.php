@@ -24,6 +24,7 @@ interface CollectionConvertableInterface
 
     /**
      * Returns a Map containing the key/value pairs from the specified array.
+     * @param array $arr The array to be turned into a collection.
      * @return MapInterface Returns a Map containing the key/value pairs from the specified array.
      */
     public static function fromArray(array $arr);
