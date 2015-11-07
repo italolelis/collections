@@ -6,14 +6,11 @@ use Collections\CollectionConvertableInterface;
 
 class ArrayIterator extends IteratorCollectionAdapter
 {
-    private $count;
-
     public function __construct(array $array)
     {
         parent::__construct(new \ArrayIterator($array));
-        $this->count = count($array);
     }
-    
+
     public function toArray()
     {
         $array = parent::toArray();

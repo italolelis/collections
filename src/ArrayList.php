@@ -4,8 +4,6 @@
 namespace Collections;
 
 use InvalidArgumentException;
-use Rx\Observable\ArrayObservable;
-use Rx\ObservableInterface;
 use Traversable;
 
 /**

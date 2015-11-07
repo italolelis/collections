@@ -6,8 +6,6 @@ namespace Collections;
 use Collections\Comparer\NumericKeyComparer;
 use Collections\Generic\ComparerInterface;
 use Easy\Generics\EquatableInterface;
-use Rx\Observable\ArrayObservable;
-use Rx\ObservableInterface;
 
 /**
  * Provides the abstract base class for a strongly typed collection.
