@@ -2,8 +2,6 @@
 
 namespace Collections\Iterator;
 
-use Collections\CollectionConvertableInterface;
-
 class ArrayIterator extends IteratorCollectionAdapter
 {
     public function __construct(array $array)
@@ -15,7 +13,7 @@ class ArrayIterator extends IteratorCollectionAdapter
     {
         $array = parent::toArray();
         foreach ($array as $key => $value) {
-            if ($value instanceof CollectionConvertableInterface) {
+            if ($value instanceof \Iterable) {
                 $array[$key] = $value->toArray();
             } else {
                 $array[$key] = $value;

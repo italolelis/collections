@@ -19,6 +19,7 @@ trait RxTrait
 
     /**
      * {@inheritDoc}
+     * @return $this
      */
     public function each(callable $callable)
     {
@@ -31,8 +32,16 @@ trait RxTrait
 
     /**
      * {@inheritDoc}
-     *
-     * @return CollectionInterface
+     * @return $this
+     */
+    public function map(callable $callable)
+    {
+        return $this->iteratorToCollection(new ReplaceIterator($this->getIterator(), $callable));
+    }
+
+    /**
+     * {@inheritDoc}
+     * @return $this
      */
     public function filter(callable $callable)
     {
@@ -41,18 +50,25 @@ trait RxTrait
 
     /**
      * {@inheritDoc}
-     *
-     * @return CollectionInterface
+     * @return $this
      */
-    public function map(callable $c)
+    public function take($size = 1, $from = 0)
     {
-        return $this->iteratorToCollection(new ReplaceIterator($this->getIterator(), $c));
+        return $this->iteratorToCollection(new LimitIterator($this->getIterator(), $from, $size));
     }
 
     /**
      * {@inheritDoc}
-     *
-     * @return CollectionInterface
+     * @return $this
+     */
+    public function slice($start, $length = null)
+    {
+        return $this->iteratorToCollection(array_slice($this->getIterator(), $start, $length));
+    }
+
+    /**
+     * {@inheritDoc}
+     * @return $this
      */
     public function reject(callable $callable)
     {
@@ -65,6 +81,7 @@ trait RxTrait
 
     /**
      * {@inheritDoc}
+     * @return $this
      */
     public function every(callable $callable)
     {
@@ -79,6 +96,7 @@ trait RxTrait
 
     /**
      * {@inheritDoc}
+     * @return $this
      */
     public function some(callable $callable)
     {
@@ -97,7 +115,7 @@ trait RxTrait
      * @param callable $callable The callable used for reduce.
      * @param int $zero If the optional initial is available, it will be used at the beginning of the process,
      * or as a final result in case the array is empty.
-     * @return CollectionInterface A collection with the results of the filter operation.
+     * @return $this A collection with the results of the filter operation.
      */
     public function reduce(callable $callable, $zero = null)
     {
@@ -120,7 +138,7 @@ trait RxTrait
 
     /**
      * @param $matcher
-     * @return CollectionInterface
+     * @return $this
      */
     public function extract($matcher)
     {
@@ -129,25 +147,17 @@ trait RxTrait
 
     /**
      * {@inheritDoc}
-     *
+     * @return $this
      */
     public function sample($size = 10)
     {
         return $this->iteratorToCollection(new LimitIterator($this->shuffle()->getIterator(), 0, $size));
     }
 
-    /**
-     * {@inheritDoc}
-     *
-     */
-    public function take($size = 1, $from = 0)
-    {
-        return $this->iteratorToCollection(new LimitIterator($this->getIterator(), $from, $size));
-    }
 
     /**
      * {@inheritDoc}
-     *
+     * @return $this
      */
     public function match(array $conditions)
     {
@@ -156,7 +166,7 @@ trait RxTrait
 
     /**
      * {@inheritDoc}
-     *
+     * @return $this
      */
     public function firstMatch(array $conditions)
     {
@@ -165,6 +175,7 @@ trait RxTrait
 
     /**
      * {@inheritDoc}
+     * @return $this
      */
     public function insert($path, $values)
     {
@@ -172,29 +183,8 @@ trait RxTrait
     }
 
     /**
-     * {@inheritDoc}
-     *
-     */
-    public function first()
-    {
-        foreach ($this->take(1) as $result) {
-            return $result;
-        }
-    }
-
-    /**
-     * Returns the last element of an observable sequence that satisfies the condition in the predicate if specified,
-     * else the last element.
-     *
-     * @return CollectionInterface A collection with the results of the filter operation.
-     */
-    public function last()
-    {
-        return array_pop($this->getIterator());
-    }
-
-    /**
      * {@inheritdoc}
+     * @return $this
      */
     public function shuffle()
     {
@@ -205,7 +195,7 @@ trait RxTrait
 
     /**
      * @param $iterator
-     * @return CollectionInterface
+     * @return $this
      */
     protected function iteratorToCollection($iterator)
     {
@@ -214,7 +204,7 @@ trait RxTrait
 
     /**
      * {@inheritDoc}
-     *
+     * @return $this
      */
     public function groupBy($callback)
     {
@@ -235,7 +225,7 @@ trait RxTrait
 
     /**
      * {@inheritDoc}
-     *
+     * @return $this
      */
     public function indexBy($callback)
     {

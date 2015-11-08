@@ -28,16 +28,18 @@ trait GuardTrait
     protected function existsGuard($element)
     {
         if (!$this->offsetExists($element)) {
-            throw new IndexException();
+            throw new IndexException(sprintf("The element %s doesn't exist", $element));
         }
+
         return $element;
     }
 
     protected function intGuard($element)
     {
         if (filter_var($element, FILTER_VALIDATE_INT) === false) {
-            throw new TypeException();
+            throw new TypeException("The key must but an integer");
         }
+
         return (int)$element;
     }
 }

@@ -10,7 +10,6 @@ use Rx\ObservableInterface;
  */
 interface CollectionConvertableInterface
 {
-
     /**
      * Return an array containing the values from this CollectionInterface.
      * @return array

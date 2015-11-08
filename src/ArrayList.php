@@ -3,6 +3,7 @@
 // Copyright (c) Lellys Informática. All rights reserved. See License.txt in the project root for license information.
 namespace Collections;
 
+use Collections\Iterator\ArrayIterator;
 use InvalidArgumentException;
 use Traversable;
 
@@ -10,9 +11,18 @@ use Traversable;
  * Represents a strongly typed list of objects that can be accessed by index. Provides methods to search, sort,
  * and manipulate lists.
  */
-class ArrayList extends AbstractCollectionArray implements VectorInterface, VectorConvertableInterface
+class ArrayList extends AbstractCollectionArray implements VectorInterface
 {
     use GuardTrait;
+
+    /**
+     * Gets the collection's iterator
+     * @return \Iterator
+     */
+    public function getIterator()
+    {
+        return new ArrayIterator($this->storage);
+    }
 
     /**
      * {@inheritdoc}
@@ -39,6 +49,18 @@ class ArrayList extends AbstractCollectionArray implements VectorInterface, Vect
             }
             $this->add($item);
         }
+
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function removeKey($key)
+    {
+        $this->offsetUnset($key);
+
+        return $this;
     }
 
     /**

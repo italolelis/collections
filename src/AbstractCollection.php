@@ -10,7 +10,7 @@ use Easy\Generics\EquatableInterface;
 /**
  * Provides the abstract base class for a strongly typed collection.
  */
-abstract class AbstractCollection implements CollectionInterface, EquatableInterface
+abstract class AbstractCollection implements EquatableInterface
 {
     /**
      * @var ComparerInterface

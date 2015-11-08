@@ -2,7 +2,10 @@
 
 namespace Collections;
 
-interface MapAccessInterface extends ConstMapAccessInterface, SetAccessInterface, IndexAccessInterface
+interface MapAccessInterface extends
+    ConstMapAccessInterface,
+    SetAccessInterface,
+    IndexAccessInterface
 {
 
 }

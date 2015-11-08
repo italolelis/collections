@@ -4,6 +4,7 @@ namespace Tests\Collections;
 
 use ArrayObject;
 use Collections\Dictionary;
+use Collections\Exception\IndexException;
 use InvalidArgumentException;
 use OutOfBoundsException;
 use stdClass;
@@ -126,7 +127,7 @@ class DictionaryTest extends CollectionsTestCase
         $this->coll->add('keyTwo', 'testing2');
         $this->coll->add('keyThree', 'testing3');
 
-        $this->assertEquals(array('keyOne', 'keyTwo', 'keyThree'), $this->coll->toKeysArrays());
+        $this->assertEquals(array('keyOne', 'keyTwo', 'keyThree'), $this->coll->toKeysArray());
     }
 
     /**
@@ -159,11 +160,11 @@ class DictionaryTest extends CollectionsTestCase
     }
 
     /**
-     * @expectedException InvalidArgumentException
+     * @expectedException \Collections\Exception\IndexException
      */
     public function testRemovingNonExistentEntryReturnsNull()
     {
-        $this->assertEquals(null, $this->coll->remove('testing_does_not_exist'));
+        $this->coll->remove('testing_does_not_exist');
     }
 
     public function testArrayAccess()
@@ -183,7 +184,7 @@ class DictionaryTest extends CollectionsTestCase
     public function testToList()
     {
         $this->coll->addAll([1, 2, 3, 4]);
-        $map = $this->coll->toList();
+        $map = $this->coll->toVector();
 
         $this->assertInstanceOf('\Collections\\ArrayList', $map);
     }

@@ -7,10 +7,10 @@ namespace Collections;
  * Represents a nongeneric collection of key/value pairs.
  */
 interface MapInterface extends
+    ConstMapInterface,
     CollectionInterface,
     MapAccessInterface
 {
-
     /**
      * Adds an element with the provided key and value to the IDictionary object.
      * @param mixed $key The Object to use as the key of the element to add.

@@ -3,7 +3,9 @@
 // Copyright (c) Lellys Informática. All rights reserved. See License.txt in the project root for license information.
 namespace Collections;
 
+use Collections\Exception\IndexException;
 use Collections\Exception\KeyException;
+use Collections\Iterator\ArrayIterator;
 use InvalidArgumentException;
 use OutOfBoundsException;
 use Traversable;
@@ -11,8 +13,17 @@ use Traversable;
 /**
  * Represents a collection of keys and values.
  */
-class Dictionary extends AbstractCollectionArray implements MapInterface, MapConvertableInterface
+class Dictionary extends AbstractCollectionArray implements MapInterface
 {
+    /**
+     * Gets the collection's iterator
+     * @return ArrayIterator
+     */
+    public function getIterator()
+    {
+        return new ArrayIterator($this->storage);
+    }
+
     /**
      * {@inheritdoc}
      */
@@ -41,6 +52,40 @@ class Dictionary extends AbstractCollectionArray implements MapInterface, MapCon
             }
             $this->add($key, $value);
         }
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function contains($element)
+    {
+        return in_array($element, $this->storage, true);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function remove($element)
+    {
+        $key = array_search($element, $this->storage, true);
+
+        if (!$key) {
+            throw new IndexException("The element doesn't exist in the collection");
+        }
+
+        $this->removeKey($key);
+
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function removeKey($key)
+    {
+        $this->offsetUnset($key);
+
+        return $this;
     }
 
     /**
@@ -102,13 +147,5 @@ class Dictionary extends AbstractCollectionArray implements MapInterface, MapCon
         }
 
         return $map;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function toList()
-    {
-        return new ArrayList($this->getIterator());
     }
 }

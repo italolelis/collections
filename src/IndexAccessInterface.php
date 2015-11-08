@@ -14,4 +14,11 @@ interface IndexAccessInterface extends ArrayAccess
      * @return IndexAccessInterface
      */
     public function set($key, $value);
+
+    /**
+     * Removes a value from the collection based on it's key.
+     * @param mixed $key
+     * @return IndexAccessInterface
+     */
+    public function removeKey($key);
 }

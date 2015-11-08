@@ -51,14 +51,6 @@ class RxTest extends CollectionsTestCase
         $this->assertEquals($people->extract('name')->toArray(), ['Marc', 'Anderson', 'Ana Martha', 'Daize']);
     }
 
-//    public function testUnfold()
-//    {
-//        $collection = new ArrayList([[1, 2, 3], [4, 5]]);
-//        dump($collection->unfold()->toArray());
-//        $this->assertEquals($collection->unfold()->toArray(), [1, 2, 3, 4, 5]);
-//    }
-
-
     /**
      * @param $people
      * @dataProvider peopleProvider

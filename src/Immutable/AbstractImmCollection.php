@@ -1,27 +1,24 @@
 <?php
 
 // Copyright (c) Lellys Informática. All rights reserved. See License.txt in the project root for license information.
-namespace Collections;
+namespace Collections\Immutable;
 
-use Closure;
-use Collections\Iterator\MergeIterator;
+use Collections\AbstractCollection;
+use Collections\ConstIndexAccessInterface;
 use Collections\Rx\ReactiveExtensionInterface;
 use Collections\Rx\RxTrait;
+use Collections\SortTrait;
 use Collections\Traits\StrictIterableTrait;
 use Collections\Traits\StrictKeyedIterableTrait;
 use Rx\Observable\ArrayObservable;
 use Rx\ObservableInterface;
-use Traversable;
 
 /**
  * Provides the abstract base class for a strongly typed collection.
  */
-abstract class AbstractCollectionArray extends AbstractCollection implements
-    CollectionInterface,
-    IndexAccessInterface,
+abstract class AbstractImmCollection extends AbstractCollection implements
     ReactiveExtensionInterface,
     ConstIndexAccessInterface,
-    CollectionConvertableInterface,
     \Serializable,
     \JsonSerializable
 {
@@ -99,39 +96,6 @@ abstract class AbstractCollectionArray extends AbstractCollection implements
     /**
      * {@inheritdoc}
      */
-    public function concat(\Iterable $collection)
-    {
-        $this->storage = array_merge($this->storage, $collection->toArray());
-
-        return $this;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function containsKey($key)
-    {
-        return $this->offsetExists($key);
-    }
-
-    public function set($key, $value)
-    {
-        $this->offsetSet($key, $value);
-
-        return $this;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function get($index)
-    {
-        return $this->offsetGet($index);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     public function tryGet($index, $default = null)
     {
         if ($this->containsKey($index) === false) {
@@ -144,7 +108,7 @@ abstract class AbstractCollectionArray extends AbstractCollection implements
     /**
      * {@inheritdoc}
      */
-    public function exists(Closure $closure)
+    public function exists(\Closure $closure)
     {
         foreach ($this->storage as $key => $element) {
             if ($closure($key, $element)) {

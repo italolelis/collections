@@ -11,16 +11,6 @@ use Collections\CollectionInterface;
  */
 interface FilterableInterface
 {
-
-    /**
-     * Returns all the elements of this collection that satisfy the predicate p.
-     * The order of the elements is preserved.
-     *
-     * @param callable $callable The callable used for filtering.
-     * @return CollectionInterface A collection with the results of the filter operation.
-     */
-    public function filter(callable $callable);
-
     /**
      * Looks through each value in the collection, and returns another collection with
      * all the values that do not pass a truth test. This is the opposite of `filter`.
