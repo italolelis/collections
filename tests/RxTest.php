@@ -98,16 +98,6 @@ class RxTest extends CollectionsTestCase
     }
 
     /**
-     * @param $people
-     * @dataProvider peopleProvider
-     */
-    public function testSample(ArrayList $people)
-    {
-        $testSubjects = $people->sample(20);
-        $this->assertNotEmpty($testSubjects);
-    }
-
-    /**
      * Tests groupBy
      *
      * @return void

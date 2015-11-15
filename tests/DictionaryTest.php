@@ -113,7 +113,7 @@ class DictionaryTest extends CollectionsTestCase
     }
 
     /**
-     * @expectedException OutOfBoundsException
+     * @expectedException \OutOfBoundsException
      */
     public function testGetInvalidItem()
     {
@@ -128,14 +128,6 @@ class DictionaryTest extends CollectionsTestCase
         $this->coll->add('keyThree', 'testing3');
 
         $this->assertEquals(array('keyOne', 'keyTwo', 'keyThree'), $this->coll->toKeysArray());
-    }
-
-    /**
-     * @expectedException InvalidArgumentException
-     */
-    public function testSetNullKey()
-    {
-        $this->coll->set(null, 'testing');
     }
 
     public function testTryGetSuccess()
@@ -160,7 +152,7 @@ class DictionaryTest extends CollectionsTestCase
     }
 
     /**
-     * @expectedException \Collections\Exception\IndexException
+     * @expectedException \OutOfBoundsException
      */
     public function testRemovingNonExistentEntryReturnsNull()
     {

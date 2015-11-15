@@ -63,7 +63,8 @@ class ArrayListTest extends CollectionsTestCase
     public function testAddAllWithSomeValues()
     {
         $arrayList = new ArrayList();
-        $arrayList->add(1)
+        $arrayList
+            ->add(1)
             ->add(2);
 
         $secoundArrayList = new ArrayList();
@@ -113,7 +114,7 @@ class ArrayListTest extends CollectionsTestCase
     }
 
     /**
-     * @expectedException \InvalidArgumentException
+     * @expectedException \OutOfBoundsException
      */
     public function testRemovingValueThrowsException()
     {
@@ -217,9 +218,16 @@ class ArrayListTest extends CollectionsTestCase
         $this->assertEquals($this->coll[0], 'one');
         $this->assertEquals($this->coll[1], 'two');
 
-        unset($this->coll[0]);
-        $this->assertEquals(1, $this->coll->count());
         $this->assertTrue(isset($this->coll[1]));
+    }
+
+    /**
+     * @expectedException \RuntimeException
+     */
+    public function testTryToUnsetAnElement()
+    {
+        $this->coll[0] = 'one';
+        unset($this->coll[0]);
     }
 
     /**
@@ -237,14 +245,6 @@ class ArrayListTest extends CollectionsTestCase
     public function testInvalidOffsetSet()
     {
         $this->coll['string'] = 'one';
-    }
-
-    /**
-     * @expectedException \InvalidArgumentException
-     */
-    public function testNegativeOffsetSet()
-    {
-        $this->coll[-1] = 'one';
     }
 
     public function testSearch()
