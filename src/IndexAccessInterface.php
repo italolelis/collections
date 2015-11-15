@@ -2,9 +2,7 @@
 
 namespace Collections;
 
-use ArrayAccess;
-
-interface IndexAccessInterface extends ArrayAccess
+interface IndexAccessInterface
 {
     /**
      * Store a value into the collection with the specified key, overwriting a previous value if already present.
@@ -14,6 +12,8 @@ interface IndexAccessInterface extends ArrayAccess
      * @return IndexAccessInterface
      */
     public function set($key, $value);
+
+    public function setAll($traversable);
 
     /**
      * Removes a value from the collection based on it's key.
