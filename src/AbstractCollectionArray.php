@@ -4,14 +4,13 @@
 namespace Collections;
 
 use Closure;
-use Collections\Iterator\MergeIterator;
+use Collections\Immutable\ImmArrayList;
+use Collections\Immutable\ImmDictionary;
+use Collections\Immutable\ImmSet;
 use Collections\Rx\ReactiveExtensionInterface;
 use Collections\Rx\RxTrait;
-use Collections\Traits\StrictIterableTrait;
-use Collections\Traits\StrictKeyedIterableTrait;
 use Rx\Observable\ArrayObservable;
 use Rx\ObservableInterface;
-use Traversable;
 
 /**
  * Provides the abstract base class for a strongly typed collection.
@@ -27,15 +26,13 @@ abstract class AbstractCollectionArray extends AbstractCollection implements
 {
 
     use
-        StrictIterableTrait,
-        StrictKeyedIterableTrait,
         RxTrait,
         SortTrait;
 
     /**
      * @var array
      */
-    protected $storage = [];
+    protected $container = [];
 
     public function __construct($array = null)
     {
@@ -47,17 +44,18 @@ abstract class AbstractCollectionArray extends AbstractCollection implements
     /**
      * {@inheritdoc}
      */
-    public function count()
+    public function setAll($items)
     {
-        return count($this->storage);
-    }
+        if (!is_array($items) && !$items instanceof \Traversable) {
+            throw new \InvalidArgumentException('Parameter must be an array or an instance of Traversable');
+        }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function clear()
-    {
-        $this->storage = [];
+        foreach ($items as $key => $item) {
+            if (is_array($item)) {
+                $item = new static($item);
+            }
+            $this->set($key, $item);
+        }
 
         return $this;
     }
@@ -67,7 +65,25 @@ abstract class AbstractCollectionArray extends AbstractCollection implements
      */
     public function isEmpty()
     {
-        return $this->count() < 1;
+        return $this->count() === 0;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function count()
+    {
+        return count($this->container);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function clear()
+    {
+        $this->container = [];
+
+        return $this;
     }
 
     /**
@@ -83,7 +99,7 @@ abstract class AbstractCollectionArray extends AbstractCollection implements
      */
     public function serialize()
     {
-        return serialize($this->storage);
+        return serialize($this->container);
     }
 
     /**
@@ -91,42 +107,9 @@ abstract class AbstractCollectionArray extends AbstractCollection implements
      */
     public function unserialize($serialized)
     {
-        $this->storage = unserialize($serialized);
+        $this->container = unserialize($serialized);
 
-        return $this->storage;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function concat(\Iterable $collection)
-    {
-        $this->storage = array_merge($this->storage, $collection->toArray());
-
-        return $this;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function containsKey($key)
-    {
-        return $this->offsetExists($key);
-    }
-
-    public function set($key, $value)
-    {
-        $this->offsetSet($key, $value);
-
-        return $this;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function get($index)
-    {
-        return $this->offsetGet($index);
+        return $this->container;
     }
 
     /**
@@ -146,7 +129,7 @@ abstract class AbstractCollectionArray extends AbstractCollection implements
      */
     public function exists(Closure $closure)
     {
-        foreach ($this->storage as $key => $element) {
+        foreach ($this->container as $key => $element) {
             if ($closure($key, $element)) {
                 return true;
             }
@@ -172,6 +155,51 @@ abstract class AbstractCollectionArray extends AbstractCollection implements
      */
     public function jsonSerialize()
     {
-        return $this->storage;
+        return $this->container;
+    }
+
+    public function toValuesArray()
+    {
+        return array_values($this->container);
+    }
+
+    public function toKeysArray()
+    {
+        return array_keys($this->container);
+    }
+
+    public function toVector()
+    {
+        return new ArrayList($this);
+    }
+
+    public function toImmVector()
+    {
+        return new ImmArrayList($this);
+    }
+
+    public function toSet()
+    {
+        // TODO: Implement toSet() method.
+    }
+
+    public function toImmSet()
+    {
+        return new ImmSet($this);
+    }
+
+    public function lazy()
+    {
+        return new LazyIterableView($this);
+    }
+
+    public function toMap()
+    {
+        return new Dictionary($this);
+    }
+
+    public function toImmMap()
+    {
+        return new ImmDictionary($this);
     }
 }
