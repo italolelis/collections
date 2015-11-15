@@ -3,7 +3,6 @@
 namespace Collections;
 
 use Collections\Exception\EmptyException;
-use Collections\Exception\IndexException;
 use Collections\Exception\TypeException;
 
 trait GuardTrait

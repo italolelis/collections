@@ -3,11 +3,6 @@
 // Copyright (c) Lellys Informática. All rights reserved. See License.txt in the project root for license information.
 namespace Collections;
 
-use Collections\Exception\KeyException;
-use InvalidArgumentException;
-use OutOfBoundsException;
-use Traversable;
-
 /**
  * Represents a collection of keys and values.
  */

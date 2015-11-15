@@ -9,7 +9,6 @@ use Collections\Dictionary;
 use Collections\Iterator\ExtractIterator;
 use Collections\Iterator\InsertIterator;
 use Collections\Traits\ExtractTrait;
-use LimitIterator;
 
 trait RxTrait
 {
