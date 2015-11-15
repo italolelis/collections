@@ -1,7 +1,7 @@
 <?php
 
 // Copyright (c) Lellys Informática. All rights reserved. See License.txt in the project root for license information.
-namespace Collections;
+namespace Collections\Traits;
 
 use Symfony\Component\PropertyAccess\PropertyAccess;
 
@@ -45,7 +45,7 @@ trait ExtractTrait
         $accessor = PropertyAccess::createPropertyAccessor();
         $value = null;
         foreach ($path as $column) {
-            if (is_array($data) || $data instanceof CollectionConvertableInterface) {
+            if (is_array($data) || $data instanceof \ArrayAccess) {
                 $value = $accessor->getValue($data, "[$column]");
             } else {
 
