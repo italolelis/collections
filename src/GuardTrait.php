@@ -8,8 +8,9 @@ use Collections\Exception\TypeException;
 
 trait GuardTrait
 {
-
     abstract function isEmpty();
+
+    abstract function count();
 
     protected function emptyGuard($method)
     {
@@ -20,26 +21,26 @@ trait GuardTrait
         }
     }
 
+    protected function validateKeyBounds($k)
+    {
+        if (!$this->isBoundedKey($k)) {
+            throw new \OutOfBoundsException("Integer key $k is out of bounds");
+        }
+    }
+
     /**
      * @param int $element
      * @return mixed
-     * @throws IndexException
      */
-    protected function existsGuard($element)
+    protected function isBoundedKey($element)
     {
-        if (!$this->offsetExists($element)) {
-            throw new IndexException(sprintf("The element %s doesn't exist", $element));
-        }
-
-        return $element;
+        return $element >= 0 && $element < $this->count();
     }
 
-    protected function intGuard($element)
+    protected function validateKeyType($element)
     {
         if (filter_var($element, FILTER_VALIDATE_INT) === false) {
-            throw new TypeException("The key must but an integer");
+            throw new TypeException('Only integer keys may be used with ' . (get_class($this)));
         }
-
-        return (int)$element;
     }
 }
