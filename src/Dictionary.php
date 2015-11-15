@@ -3,25 +3,52 @@
 // Copyright (c) Lellys Informática. All rights reserved. See License.txt in the project root for license information.
 namespace Collections;
 
-use Collections\Exception\IndexException;
 use Collections\Exception\KeyException;
 use Collections\Iterator\ArrayIterator;
+use Collections\Traits\StrictKeyedIterableTrait;
 use InvalidArgumentException;
-use OutOfBoundsException;
+use Symfony\Component\PropertyAccess\Exception\OutOfBoundsException;
 use Traversable;
 
 /**
  * Represents a collection of keys and values.
  */
-class Dictionary extends AbstractCollectionArray implements MapInterface
+class Dictionary extends AbstractCollectionArray implements MapInterface, \ArrayAccess
 {
+    use StrictKeyedIterableTrait,
+        GuardTrait;
+
     /**
      * Gets the collection's iterator
      * @return ArrayIterator
      */
     public function getIterator()
     {
-        return new ArrayIterator($this->storage);
+        return new ArrayIterator($this->container);
+    }
+
+    public function at($k)
+    {
+        return $this[$k];
+    }
+
+    public function set($key, $value)
+    {
+        $this->container[$key] = $value;
+
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function get($index)
+    {
+        if ($this->containsKey($index) === false) {
+            throw new OutOfBoundsException('No element at position ' . $index);
+        }
+
+        return $this->container[$index];
     }
 
     /**
@@ -57,9 +84,17 @@ class Dictionary extends AbstractCollectionArray implements MapInterface
     /**
      * {@inheritdoc}
      */
+    public function containsKey($key)
+    {
+        return array_key_exists($key, $this->container);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function contains($element)
     {
-        return in_array($element, $this->storage, true);
+        return in_array($element, $this->container, true);
     }
 
     /**
@@ -67,13 +102,8 @@ class Dictionary extends AbstractCollectionArray implements MapInterface
      */
     public function remove($element)
     {
-        $key = array_search($element, $this->storage, true);
-
-        if (!$key) {
-            throw new IndexException("The element doesn't exist in the collection");
-        }
-
-        $this->removeKey($key);
+        $this->validateKeyBounds($element);
+        unset($this->container[$element]);
 
         return $this;
     }
@@ -83,9 +113,7 @@ class Dictionary extends AbstractCollectionArray implements MapInterface
      */
     public function removeKey($key)
     {
-        $this->offsetUnset($key);
-
-        return $this;
+        return $this->remove($key);
     }
 
     /**
@@ -93,7 +121,7 @@ class Dictionary extends AbstractCollectionArray implements MapInterface
      */
     public function offsetExists($offset)
     {
-        return isset($this->storage[$offset]) || array_key_exists($offset, $this->storage);
+        return isset($this->container[$offset]) || array_key_exists($offset, $this->container);
     }
 
     /**
@@ -101,11 +129,7 @@ class Dictionary extends AbstractCollectionArray implements MapInterface
      */
     public function offsetGet($offset)
     {
-        if ($this->containsKey($offset) === false) {
-            throw new OutOfBoundsException('No element at position ' . $offset);
-        }
-
-        return $this->storage[$offset];
+        return $this->get($offset);
     }
 
     /**
@@ -113,11 +137,11 @@ class Dictionary extends AbstractCollectionArray implements MapInterface
      */
     public function offsetSet($offset, $value)
     {
-        if ($offset === null) {
-            throw new InvalidArgumentException("Can't use 'null' as key!");
+        if (is_null($offset)) {
+            $this->add($offset, $value);
+        } else {
+            $this->set($offset, $value);
         }
-
-        $this->storage[$offset] = $value;
     }
 
     /**
@@ -125,11 +149,7 @@ class Dictionary extends AbstractCollectionArray implements MapInterface
      */
     public function offsetUnset($offset)
     {
-        if ($this->containsKey($offset) === false) {
-            throw new InvalidArgumentException('The key ' . $offset . ' is not present in the dictionary');
-        }
-
-        unset($this->storage[$offset]);
+        $this->removeKey($offset);
     }
 
     /**
