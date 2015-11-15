@@ -4,6 +4,7 @@
 namespace Collections;
 
 use Collections\Iterator\ArrayIterator;
+use Collections\Traits\StrictIterableTrait;
 use InvalidArgumentException;
 use Traversable;
 
@@ -11,17 +12,35 @@ use Traversable;
  * Represents a strongly typed list of objects that can be accessed by index. Provides methods to search, sort,
  * and manipulate lists.
  */
-class ArrayList extends AbstractCollectionArray implements VectorInterface
+class ArrayList extends AbstractCollectionArray implements VectorInterface, \ArrayAccess
 {
-    use GuardTrait;
+    use StrictIterableTrait,
+        GuardTrait;
+
+    public function at($key)
+    {
+        $this->validateKeyType($key);
+        $this->validateKeyBounds($key);
+
+        return $this->container[$key];
+    }
+
+    public function set($key, $value)
+    {
+        $this->validateKeyType($key);
+        $this->container[$key] = $value;
+
+        return $this;
+    }
 
     /**
-     * Gets the collection's iterator
-     * @return \Iterator
+     * {@inheritdoc}
      */
-    public function getIterator()
+    public function get($index)
     {
-        return new ArrayIterator($this->storage);
+        $this->validateKeyType($index);
+
+        return $this->container[$index];
     }
 
     /**
@@ -29,7 +48,7 @@ class ArrayList extends AbstractCollectionArray implements VectorInterface
      */
     public function add($item)
     {
-        $this->storage[] = $item;
+        $this->container[] = $item;
 
         return $this;
     }
@@ -40,12 +59,12 @@ class ArrayList extends AbstractCollectionArray implements VectorInterface
     public function addAll($items)
     {
         if (!is_array($items) && !$items instanceof Traversable) {
-            throw new \InvalidArgumentException('The items must be an array or Traversable');
+            throw new \InvalidArgumentException('Parameter must be an array or an instance of Traversable');
         }
 
         foreach ($items as $item) {
             if (is_array($item)) {
-                $item = static::fromArray($item);
+                $item = new static($item);
             }
             $this->add($item);
         }
@@ -56,9 +75,23 @@ class ArrayList extends AbstractCollectionArray implements VectorInterface
     /**
      * {@inheritdoc}
      */
+    public function containsKey($key)
+    {
+        $this->validateKeyType($key);
+
+        return $key >= 0 && $key < $this->count();
+    }
+
+
+    /**
+     * {@inheritdoc}
+     */
     public function removeKey($key)
     {
-        $this->offsetUnset($key);
+        $this->validateKeyType($key);
+        $this->validateKeyBounds($key);
+
+        array_splice($this->container, $key, 1);
 
         return $this;
     }
@@ -68,7 +101,7 @@ class ArrayList extends AbstractCollectionArray implements VectorInterface
      */
     public function indexOf($item)
     {
-        return array_search($item, $this->storage, true);
+        return array_search($item, $this->container, true);
     }
 
     /**
@@ -85,9 +118,9 @@ class ArrayList extends AbstractCollectionArray implements VectorInterface
 
         $current = $this->count() - 1;
         for (; $current >= $index; $current--) {
-            $this->storage[$current + 1] = $this->storage[$current];
+            $this->container[$current + 1] = $this->container[$current];
         }
-        $this->storage[$index] = $item;
+        $this->container[$index] = $item;
 
         return $this;
     }
@@ -97,9 +130,9 @@ class ArrayList extends AbstractCollectionArray implements VectorInterface
      */
     public function offsetExists($offset)
     {
-        $offset = $this->intGuard($offset);
+        $this->validateKeyType($offset);
 
-        return array_key_exists((int)$offset, $this->storage);
+        return $this->containsKey($offset) && $this->at($offset) !== null;
     }
 
     /**
@@ -107,9 +140,7 @@ class ArrayList extends AbstractCollectionArray implements VectorInterface
      */
     public function offsetGet($offset)
     {
-        $offset = $this->existsGuard($this->intGuard($offset));
-
-        return $this->storage[$offset];
+        return $this->get($offset);
     }
 
     /**
@@ -117,11 +148,11 @@ class ArrayList extends AbstractCollectionArray implements VectorInterface
      */
     public function offsetSet($offset, $value)
     {
-        $offset = $this->intGuard($offset);
-        if ($offset < 0) {
-            throw new InvalidArgumentException('The option value must be a number > 0');
+        if (is_null($offset)) {
+            $this->add($value);
+        } else {
+            $this->set($offset, $value);
         }
-        $this->storage[(int)$offset] = $value;
     }
 
     /**
@@ -129,13 +160,8 @@ class ArrayList extends AbstractCollectionArray implements VectorInterface
      */
     public function offsetUnset($offset)
     {
-        $offset = $this->intGuard($offset);
-
-        if ($this->containsKey($offset) === false) {
-            throw new InvalidArgumentException('The key ' . $offset . ' is not present in the collection');
-        }
-
-        unset($this->storage[$offset]);
+        throw new \RuntimeException(
+            'Cannot unset an element of a ' . get_class($this));
     }
 
     /**
@@ -151,7 +177,7 @@ class ArrayList extends AbstractCollectionArray implements VectorInterface
      */
     public function reverse()
     {
-        return static::fromArray(array_reverse($this->storage));
+        return static::fromArray(array_reverse($this->container));
     }
 
     /**
@@ -159,7 +185,7 @@ class ArrayList extends AbstractCollectionArray implements VectorInterface
      */
     public function splice($offset, $length = null)
     {
-        return static::fromArray(array_splice($this->storage, $offset, $length));
+        return static::fromArray(array_splice($this->container, $offset, $length));
     }
 
     /**
@@ -177,5 +203,14 @@ class ArrayList extends AbstractCollectionArray implements VectorInterface
         }
 
         return $map;
+    }
+
+    /**
+     * Gets the collection's iterator
+     * @return \Iterator
+     */
+    public function getIterator()
+    {
+        return new ArrayIterator($this->container);
     }
 }

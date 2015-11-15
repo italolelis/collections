@@ -22,7 +22,8 @@ trait SortTrait
         if ($comparer === null) {
             $comparer = $this->getDefaultComparer();
         }
-        usort($this->storage, array($comparer, 'compare'));
+        usort($this->container, array($comparer, 'compare'));
+
         return $this;
     }
 
@@ -37,7 +38,8 @@ trait SortTrait
         if ($comparer === null) {
             $comparer = $this->getDefaultComparer();
         }
-        uksort($this->storage, array($comparer, 'compare'));
+        uksort($this->container, array($comparer, 'compare'));
+
         return $this;
     }
 }
