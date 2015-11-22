@@ -22,7 +22,7 @@ Take a look and see what we're talking about!!
 ``` json
 {
     "require": {
-        "easyframework/collections": "~4.0"
+        "easyframework/collections": "~5.0"
     }
 }
 ```
@@ -34,16 +34,29 @@ Take a look and see what we're talking about!!
 The Collection represents the List in .NET language or simply non-associative arrays in php:
 
 ```php
-  $collection = new Collections\ArrayList();
-  $collection->add('John');
-  $collection->add('Maria');
-  $collection->add('Anderson');
+  $person1 = new \stdClass();
+  $person1->name = 'John';
+  $person1->age = 25;
   
-  $collection->each(function($item){
-        echo $item;
+  $person2 = new \stdClass();
+  $person2->name = 'Maria';
+  $person2->age = 30;
+  
+  $person3 = new \stdClass();
+  $person3->name = 'Anderson';
+  $person3->age = 15;
+     
+  $collection = new Collections\ArrayList();
+  $collection->add($person1);
+  $collection->add($person2);
+  $collection->add($person3);
+  
+  $collection->filter(function($person){
+        return $person->age > 18;
+  })->each(function($item){
+        echo $item->name; //John and Maria
   });
-
-```    
+```
 
 ## Contributing
 

@@ -1,9 +1,9 @@
-=================
+======================
 Welcome to Collections
-=================
+======================
 
 What is it?
-============
+===========
 
 The Collection library is one of the most useful things that many modern languages has, but for some reason
 PHP doesn't has a built in collection layer.
@@ -14,7 +14,7 @@ collections patterns and unify it with PHP array power.
 Installation
 ============
 
-The recommended way to install Guzzle is with `Composer <http://getcomposer.org>`_. Composer is a dependency
+The recommended way to install Collections is with `Composer <http://getcomposer.org>`_. Composer is a dependency
 management tool for PHP that allows you to declare the dependencies your project needs and installs them into your
 project.
 
@@ -23,7 +23,7 @@ project.
     # Install Composer
     curl -sS https://getcomposer.org/installer | php
 
-You can add Guzzle as a dependency using the composer.phar CLI:
+You can add Collections as a dependency using the composer.phar CLI:
 
 .. code-block:: bash
 
@@ -36,7 +36,7 @@ existing composer.json file:
 
     {
       "require": {
-         "easyframework/collections": "~4.0"
+         "easyframework/collections": "~5.0"
       }
    }
 
@@ -53,13 +53,13 @@ Bleeding edge
 -------------
 
 During your development, you can keep up with the latest changes on the master
-branch by setting the version requirement for Guzzle to ``~4.0@dev``.
+branch by setting the version requirement for Collections to ``~5.0@dev``.
 
 .. code-block:: js
 
    {
       "require": {
-         "easyframework/collections": "~4.0@dev"
+         "easyframework/collections": "~5.0@dev"
       }
    }
 
@@ -112,9 +112,9 @@ install Collection's dependencies using Composer:
 .. code-block:: bash
 
     git clone https://github.com/italolelis/collections.git
-    cd guzzle && curl -s http://getcomposer.org/installer | php && ./composer.phar install --dev
+    cd collections && curl -s http://getcomposer.org/installer | php && ./composer.phar install --dev
 
-Guzzle is unit tested with PHPUnit. Run the tests using the vendored PHPUnit
+Collections is unit tested with PHPUnit. Run the tests using the vendored PHPUnit
 binary:
 
 .. code-block:: bash
