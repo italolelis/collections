@@ -2,7 +2,7 @@
 
 namespace Collections\Iterator;
 
-class VectorIterator extends \ArrayIterator
+class MapIterator extends \ArrayIterator
 {
 
 }

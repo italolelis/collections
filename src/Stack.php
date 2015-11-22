@@ -3,23 +3,13 @@
 // Copyright (c) Lellys Informática. All rights reserved. See License.txt in the project root for license information.
 namespace Collections;
 
-use Collections\Iterator\LinkedStackIterator;
 use SplStack;
 
 /**
  * Represents a simple last-in-first-out (LIFO) non-generic collection of objects.
  */
-class Stack extends SplStack implements \JsonSerializable
+class Stack extends SplStack implements StackInterface, \JsonSerializable
 {
-    /**
-     * @link http://php.net/manual/en/iteratoraggregate.getiterator.php
-     * @return LinkedStackIterator
-     */
-    public function getIterator()
-    {
-        return new LinkedStackIterator($this->count(), $this->top());
-    }
-
     /**
      * Inserts multiples objects at the top of the Stack.
      * @param array $items The Objects to push onto the Stack. The value <b>can</b> be null.
@@ -30,6 +20,7 @@ class Stack extends SplStack implements \JsonSerializable
         foreach ($items as $item) {
             $this->push($item);
         }
+
         return $this;
     }
 
@@ -43,6 +34,7 @@ class Stack extends SplStack implements \JsonSerializable
                 $collection->push($v);
             }
         }
+
         return $collection;
     }
 
@@ -59,6 +51,7 @@ class Stack extends SplStack implements \JsonSerializable
                 $array[$key] = $value;
             }
         }
+
         return $array;
     }
 
@@ -79,6 +72,6 @@ class Stack extends SplStack implements \JsonSerializable
      */
     public function jsonSerialize()
     {
-        return $this->getIterator()->toArray();
+//        return $this->getIterator()->toArray();
     }
 }

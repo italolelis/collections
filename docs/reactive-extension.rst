@@ -1,18 +1,18 @@
-=================
+==================
 Reactive Extension
-=================
+==================
 
 What is it?
-============
+===========
 
 The reactive extensions for PHP are a set of libraries to compose asynchronous
 and event-based programs using observable collections and LINQ-style query operators in PHP.
 
 Iterating
-============
+=========
 
 each
-------------
+----
 
 Collections can be iterated and/or transformed into new collections with the each() and map() methods. The each()
 method will not create a new collection, but will allow you to modify any objects within the collection:
@@ -27,7 +27,7 @@ method will not create a new collection, but will allow you to modify any object
     });
 
 map
-------------
+---
 
 The map() method will create a new collection based on the output of the callback being applied to each
 object in the original collection:
@@ -49,7 +49,7 @@ object in the original collection:
 The map() method will create a new iterator which lazily creates the resulting items when iterated.
 
 extract
-------------
+-------
 
 One of the most common uses for a map() function is to extract a single column from a collection. If you are
 looking to build a list of elements containing the values for a particular property, you can use the
@@ -92,7 +92,7 @@ function to return it:
     });
 
 combine
-------------
+-------
 
 The map() method will create a new collection based on the output of the callback being applied to each
 object in the original collection:

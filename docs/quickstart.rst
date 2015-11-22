@@ -7,7 +7,7 @@ If you have not already installed, Collections, head over to the :ref:`installat
 page.
 
 ArrayList
-==============
+=========
 
 The ArrayList represents the List in .NET language or simply non-associative arrays in php:
 
@@ -15,20 +15,34 @@ The ArrayList represents the List in .NET language or simply non-associative arr
 
     use Collections\ArrayList;
 
-    $collection = new ArrayList();
-    $collection->add('John');
-    $collection->add('Maria');
-    $collection->add('Anderson');
+    $person1 = new \stdClass();
+    $person1->name = 'John';
+    $person1->age = 25;
 
-    $collection->map(function($item){
-        echo $item;
+    $person2 = new \stdClass();
+    $person2->name = 'Maria';
+    $person2->age = 30;
+
+    $person3 = new \stdClass();
+    $person3->name = 'Anderson';
+    $person3->age = 15;
+
+    $collection = new Collections\ArrayList();
+    $collection->add($person1);
+    $collection->add($person2);
+    $collection->add($person3);
+
+    $collection->filter(function($person){
+        return $person->age > 18;
+    })->each(function($item){
+        echo $item->name; //John and Maria
     });
 
-Lets continue with the exemple above and count how many elements we have!
+Lets continue with the example above and count how many elements we have!
 
 .. code-block:: php
 
-    echo $colletion->count();
+    echo $collection->count();
 
 Great, now we know how to run through a collection and how to count it, but these are pretty simple things to do,
 so lets sort them:
@@ -52,7 +66,7 @@ Ok now we learned many things of collections, we can do even more, but I'll show
 called Dictionary.
 
 Dictionary
-==============
+==========
 
 The Dictionary class is something like associative arrays in PHP, or Hash tables in other languages.
 
@@ -95,12 +109,12 @@ the method set(). Here is an example of how we can get some item based on the ke
 
 .. code-block:: php
 
-  print_r ($dictionary->get('person1')); //returns array('name' => John, 'age' => 20)
+  print_r ($dictionary->get('person1')); //returns ['name' => John, 'age' => 20]
 
 Working with objects
-==============
+====================
 
-To our last exemple we'll use objects in our collection.
+To our last example we'll use objects in our collection.
 
 .. code-block:: php
 
@@ -125,7 +139,7 @@ Lets seek everyone with age 20.
 
   // this will return John and Peter
   $people = $people->filter(function($person){
-      return $person->getAge() === 20 ? $person : null;
+      return $person->getAge() === 20;
   });
 
 The *map()* method will create a new collection based on the output of the callback being applied to each object

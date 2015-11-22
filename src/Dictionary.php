@@ -4,37 +4,43 @@
 namespace Collections;
 
 use Collections\Exception\KeyException;
-use Collections\Iterator\HashMapIterator;
+use Collections\Iterator\MapIterator;
+use Collections\Traits\GuardTrait;
+use Collections\Traits\StrictKeyedIterableTrait;
 use InvalidArgumentException;
-use OutOfBoundsException;
+use Symfony\Component\PropertyAccess\Exception\OutOfBoundsException;
 use Traversable;
 
 /**
  * Represents a collection of keys and values.
  */
-class Dictionary extends AbstractCollectionArray implements MapInterface, MapConvertableInterface
+class Dictionary extends AbstractCollectionArray implements MapInterface, \ArrayAccess
 {
+    use StrictKeyedIterableTrait,
+        GuardTrait;
 
-    public function getIterator()
+    public function at($k)
     {
-        return new HashMapIterator($this->storage);
+        return $this[$k];
     }
 
-    private function hashCode($item)
+    public function set($key, $value)
     {
-        if (is_object($item)) {
-            return spl_object_hash($item);
-        } elseif (is_numeric($item) || is_bool($item)) {
-            return "n_" . intval($item);
-        } elseif (is_string($item)) {
-            return "s_$item";
-        } elseif (is_resource($item)) {
-            return "r_$item";
-        } elseif (is_array($item)) {
-            return 'a_' . md5(serialize($item));
+        $this->container[$key] = $value;
+
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function get($index)
+    {
+        if ($this->containsKey($index) === false) {
+            throw new OutOfBoundsException('No element at position ' . $index);
         }
 
-        return '0';
+        return $this->container[$index];
     }
 
     /**
@@ -67,9 +73,29 @@ class Dictionary extends AbstractCollectionArray implements MapInterface, MapCon
         }
     }
 
-    public function set($key, $value)
+    /**
+     * {@inheritdoc}
+     */
+    public function containsKey($key)
     {
-        $this->offsetSet($key, $value);
+        return array_key_exists($key, $this->container);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function contains($element)
+    {
+        return in_array($element, $this->container, true);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function remove($element)
+    {
+        $this->validateKeyBounds($element);
+        unset($this->container[$element]);
 
         return $this;
     }
@@ -77,11 +103,17 @@ class Dictionary extends AbstractCollectionArray implements MapInterface, MapCon
     /**
      * {@inheritdoc}
      */
+    public function removeKey($key)
+    {
+        return $this->remove($key);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function offsetExists($offset)
     {
-        $offset = $this->hashCode($offset);
-
-        return isset($this->storage[$offset]) || array_key_exists($offset, $this->storage);
+        return isset($this->container[$offset]) || array_key_exists($offset, $this->container);
     }
 
     /**
@@ -89,12 +121,7 @@ class Dictionary extends AbstractCollectionArray implements MapInterface, MapCon
      */
     public function offsetGet($offset)
     {
-        if ($this->containsKey($offset) === false) {
-            throw new OutOfBoundsException('No element at position ' . $offset);
-        }
-        $pair = $this->storage[$this->hashCode($offset)];
-
-        return $pair->second;
+        return $this->get($offset);
     }
 
     /**
@@ -102,12 +129,11 @@ class Dictionary extends AbstractCollectionArray implements MapInterface, MapCon
      */
     public function offsetSet($offset, $value)
     {
-        if ($offset === null) {
-            throw new InvalidArgumentException("Can't use 'null' as key!");
+        if (is_null($offset)) {
+            $this->add($offset, $value);
+        } else {
+            $this->set($offset, $value);
         }
-
-        $hash = $this->hashCode($offset);
-        $this->storage[$hash] = new Pair($offset, $value);
     }
 
     /**
@@ -115,35 +141,16 @@ class Dictionary extends AbstractCollectionArray implements MapInterface, MapCon
      */
     public function offsetUnset($offset)
     {
-        if ($this->containsKey($offset) === false) {
-            throw new InvalidArgumentException('The key ' . $offset . ' is not present in the dictionary');
-        }
-
-        unset($this->storage[$this->hashCode($offset)]);
+        $this->removeKey($offset);
     }
 
     /**
-     * {@inheritdoc}
+     * Gets the collection's iterator
+     * @return MapIterator
      */
-    public static function fromArray(array $arr)
+    public function getIterator()
     {
-        $map = new Dictionary();
-        foreach ($arr as $k => $v) {
-            if (is_array($v)) {
-                $map->add($k, new Dictionary($v));
-            } else {
-                $map->add($k, $v);
-            }
-        }
-
-        return $map;
+        return new MapIterator($this->container);
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function toList()
-    {
-        return new ArrayList($this->getIterator());
-    }
 }

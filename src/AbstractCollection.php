@@ -10,9 +10,8 @@ use Easy\Generics\EquatableInterface;
 /**
  * Provides the abstract base class for a strongly typed collection.
  */
-abstract class AbstractCollection implements CollectionInterface, EquatableInterface
+abstract class AbstractCollection implements EquatableInterface
 {
-
     /**
      * @var ComparerInterface
      */
@@ -27,6 +26,7 @@ abstract class AbstractCollection implements CollectionInterface, EquatableInter
         if ($this->defaultComparer === null) {
             $this->defaultComparer = new NumericKeyComparer();
         }
+
         return $this->defaultComparer;
     }
 
@@ -38,6 +38,7 @@ abstract class AbstractCollection implements CollectionInterface, EquatableInter
     public function setDefaultComparer(ComparerInterface $defaultComparer)
     {
         $this->defaultComparer = $defaultComparer;
+
         return $this;
     }
 

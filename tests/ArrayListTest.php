@@ -31,18 +31,26 @@ class ArrayListTest extends CollectionsTestCase
     public function testNewInstanceWithArray()
     {
         $this->assertNotNull(new ArrayList(array(
-            1, 2 => array(
-                21, 22 => array(
-                    221, 222
+            1,
+            2 => array(
+                21,
+                22 => array(
+                    221,
+                    222
                 )
-            ), 3, 4
+            ),
+            3,
+            4
         )));
     }
 
     public function testNewInstanceWithTraversable()
     {
         $traversable = new ArrayObject(array(
-            1, 2, 3, 4
+            1,
+            2,
+            3,
+            4
         ));
         $this->assertNotNull(new ArrayList($traversable));
     }
@@ -55,7 +63,8 @@ class ArrayListTest extends CollectionsTestCase
     public function testAddAllWithSomeValues()
     {
         $arrayList = new ArrayList();
-        $arrayList->add(1)
+        $arrayList
+            ->add(1)
             ->add(2);
 
         $secoundArrayList = new ArrayList();
@@ -70,13 +79,13 @@ class ArrayListTest extends CollectionsTestCase
             3 => array(
                 0 => 31
             )
-            ), $arrayList->toArray());
+        ), $arrayList->toArray());
     }
 
     public function testToString()
     {
         $this->coll->add('testing');
-        $this->assertTrue(is_string((string) $this->coll));
+        $this->assertTrue(is_string((string)$this->coll));
     }
 
     public function testSort()
@@ -97,13 +106,21 @@ class ArrayListTest extends CollectionsTestCase
     {
         $element = 'testing';
         $this->coll->add($element);
-        $this->assertTrue($this->coll->removeValue($element));
+
+        $key = $this->coll->indexOf($element);
+        $this->coll->removeKey($key);
+
+        $this->assertFalse($this->coll->containsKey($key));
     }
 
-    public function testRemovingValueReturnsFalse()
+    /**
+     * @expectedException \OutOfBoundsException
+     */
+    public function testRemovingValueThrowsException()
     {
-        $this->coll->add('testing');
-        $this->assertFalse($this->coll->removeValue('nonExistentValue'));
+        $element = 'testing';
+        $this->coll->add($element);
+        $this->coll->removeKey(-1);
     }
 
     /**
@@ -111,14 +128,7 @@ class ArrayListTest extends CollectionsTestCase
      */
     public function testRemovingWrongType()
     {
-        $this->assertEquals(null, $this->coll->remove('testing_does_not_exist'));
-    }
-
-    public function testGetValues()
-    {
-        $this->coll->add('testing1');
-        $this->coll->add('testing2');
-        $this->assertEquals(array('testing1', 'testing2'), $this->coll->values());
+        $this->coll->removeKey('testing_does_not_exist');
     }
 
     public function testEquals()
@@ -133,7 +143,7 @@ class ArrayListTest extends CollectionsTestCase
 
     public function testInteratorInsntance()
     {
-        $this->assertInstanceOf('Collections\Iterator\ArrayIterator', $this->coll->getIterator());
+        $this->assertInstanceOf('\ArrayIterator', $this->coll->getIterator());
     }
 
     public function testSerialize()
@@ -159,21 +169,31 @@ class ArrayListTest extends CollectionsTestCase
     {
         $this->coll->add("one");
         $this->coll->add("two");
-        $exists = $this->coll->contains("one");
+
+        $key = $this->coll->indexOf("one");
+
+        $exists = $this->coll->containsKey($key);
         $this->assertTrue($exists);
-        $exists = $this->coll->contains("other");
-        $this->assertFalse($exists);
+    }
+
+    /**
+     * @expectedException \Collections\Exception\TypeException
+     */
+    public function testContainsWithWrongKeyType()
+    {
+        $this->coll->add("one");
+        $this->coll->containsKey("other");
     }
 
     public function testExists()
     {
         $this->coll->add("one");
         $this->coll->add("two");
-        $exists = $this->coll->exists(function($k, $e) {
+        $exists = $this->coll->exists(function ($e) {
             return $e == "one";
         });
         $this->assertTrue($exists);
-        $exists = $this->coll->exists(function($k, $e) {
+        $exists = $this->coll->exists(function ($e) {
             return $e == "other";
         });
         $this->assertFalse($exists);
@@ -184,7 +204,7 @@ class ArrayListTest extends CollectionsTestCase
         $this->coll->add(1);
         $this->coll->add("foo");
         $this->coll->add(3);
-        $res = $this->coll->filter(function($e) {
+        $res = $this->coll->filter(function ($e) {
             return is_numeric($e);
         });
         $this->assertEquals(array(0 => 1, 1 => 3), $res->toArray());
@@ -198,9 +218,16 @@ class ArrayListTest extends CollectionsTestCase
         $this->assertEquals($this->coll[0], 'one');
         $this->assertEquals($this->coll[1], 'two');
 
-        unset($this->coll[0]);
-        $this->assertEquals(1, $this->coll->count());
         $this->assertTrue(isset($this->coll[1]));
+    }
+
+    /**
+     * @expectedException \RuntimeException
+     */
+    public function testTryToUnsetAnElement()
+    {
+        $this->coll[0] = 'one';
+        unset($this->coll[0]);
     }
 
     /**
@@ -218,14 +245,6 @@ class ArrayListTest extends CollectionsTestCase
     public function testInvalidOffsetSet()
     {
         $this->coll['string'] = 'one';
-    }
-
-    /**
-     * @expectedException \InvalidArgumentException
-     */
-    public function testNegativeOffsetSet()
-    {
-        $this->coll[-1] = 'one';
     }
 
     public function testSearch()

@@ -6,7 +6,6 @@ use ArrayObject;
 use Collections\Dictionary;
 use InvalidArgumentException;
 use OutOfBoundsException;
-use stdClass;
 
 /**
  * Description of CollectionTest
@@ -112,7 +111,7 @@ class DictionaryTest extends CollectionsTestCase
     }
 
     /**
-     * @expectedException OutOfBoundsException
+     * @expectedException \OutOfBoundsException
      */
     public function testGetInvalidItem()
     {
@@ -126,15 +125,7 @@ class DictionaryTest extends CollectionsTestCase
         $this->coll->add('keyTwo', 'testing2');
         $this->coll->add('keyThree', 'testing3');
 
-        $this->assertEquals(array('keyOne', 'keyTwo', 'keyThree'), $this->coll->toKeysArrays());
-    }
-
-    /**
-     * @expectedException InvalidArgumentException
-     */
-    public function testSetNullKey()
-    {
-        $this->coll->set(null, 'testing');
+        $this->assertEquals(array('keyOne', 'keyTwo', 'keyThree'), $this->coll->toKeysArray());
     }
 
     public function testTryGetSuccess()
@@ -159,11 +150,11 @@ class DictionaryTest extends CollectionsTestCase
     }
 
     /**
-     * @expectedException InvalidArgumentException
+     * @expectedException \OutOfBoundsException
      */
     public function testRemovingNonExistentEntryReturnsNull()
     {
-        $this->assertEquals(null, $this->coll->remove('testing_does_not_exist'));
+        $this->coll->remove('testing_does_not_exist');
     }
 
     public function testArrayAccess()
@@ -182,8 +173,8 @@ class DictionaryTest extends CollectionsTestCase
 
     public function testToList()
     {
-        $this->coll->addAll(array(1, 2, 3, 4));
-        $map = $this->coll->toList();
+        $this->coll->addAll([1, 2, 3, 4]);
+        $map = $this->coll->toVector();
 
         $this->assertInstanceOf('\Collections\\ArrayList', $map);
     }
@@ -199,13 +190,5 @@ class DictionaryTest extends CollectionsTestCase
         ];
         $this->coll->addAll($data);
         $this->assertEquals($data, $this->coll->toArray());
-    }
-
-    public function testSetObjectKey()
-    {
-        $class = new stdClass();
-        $this->coll->set($class, 'testing');
-
-        $this->assertEquals($this->coll->get($class), 'testing');
     }
 }

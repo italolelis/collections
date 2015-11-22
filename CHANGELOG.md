@@ -3,10 +3,13 @@ All notable changes to this project will be documented in this file.
 
 ## Next - unreleased
 
-- Reactive Extensions initiative.
 - Adding new data structures LinkedList and LinkedDictionary. 
 
-## 4.1.0 - unreleased
+## 5.0.0 - unreleased
+### Add
+- Reactive Extensions initiative.
+
+## 4.1.0 - 2015-06-03
 ### Add
 - Added to all collections the JsonSerializable interface.
 
