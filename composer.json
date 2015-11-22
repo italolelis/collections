@@ -9,7 +9,7 @@
     "generics",
     "collection"
   ],
-  "homepage": "https://github.com/LellysInformatica/collections",
+  "homepage": "https://github.com/italolelis/collections",
   "authors": [
     {
       "name": "Ítalo Lelis de Vietro",
@@ -17,12 +17,12 @@
     }
   ],
   "require": {
+    "php": ">=5.4.0",
     "easyframework/generics": "~2.0",
     "symfony/property-access": "~2.6",
     "asm89/rx.php": "~0.3"
   },
   "require-dev": {
-    "php": ">=5.4.0",
     "phpunit/phpunit": "~4.8",
     "symfony/var-dumper": "~2.7"
   },
