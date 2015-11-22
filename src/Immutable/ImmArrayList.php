@@ -2,18 +2,24 @@
 
 namespace Collections\Immutable;
 
+use Collections\AbstractConstCollectionArray;
 use Collections\ConstVectorInterface;
+use Collections\Iterator\VectorIterator;
+use Collections\Traits\GuardTrait;
+use Collections\Traits\StrictKeyedIterableTrait;
+use OutOfBoundsException;
 
-class ImmArrayList extends AbstractImmCollection implements ConstVectorInterface
+class ImmArrayList extends AbstractConstCollectionArray implements ConstVectorInterface
 {
-    /**
-     * {@inheritdoc}
-     */
-    public function containsKey($key)
-    {
-        $offset = $this->intGuard($key);
+    use StrictKeyedIterableTrait,
+        GuardTrait;
 
-        return array_key_exists((int)$offset, $this->storage);
+    public function at($key)
+    {
+        $this->validateKeyType($key);
+        $this->validateKeyBounds($key);
+
+        return $this->container[$key];
     }
 
     /**
@@ -21,8 +27,31 @@ class ImmArrayList extends AbstractImmCollection implements ConstVectorInterface
      */
     public function get($index)
     {
-        $offset = $this->existsGuard($this->intGuard($index));
+        $this->validateKeyType($index);
 
-        return $this->storage[$offset];
+        if ($this->containsKey($index) === false) {
+            throw new OutOfBoundsException('No element at position ' . $index);
+        }
+
+        return $this->container[$index];
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function containsKey($key)
+    {
+        $this->validateKeyType($key);
+
+        return $key >= 0 && $key < $this->count();
+    }
+
+    /**
+     * Gets the collection's iterator
+     * @return VectorIterator
+     */
+    public function getIterator()
+    {
+        return new VectorIterator($this->container);
     }
 }

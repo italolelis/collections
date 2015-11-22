@@ -1,6 +1,6 @@
 <?php
 
-namespace Collections;
+namespace Collections\Traits;
 
 use Collections\Exception\EmptyException;
 use Collections\Exception\TypeException;

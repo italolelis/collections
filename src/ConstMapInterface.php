@@ -5,8 +5,8 @@ namespace Collections;
 interface ConstMapInterface extends
     ConstCollectionInterface,
     ConstMapAccessInterface,
-    \KeyedIterable,
-    \Indexish
+    KeyedIterable,
+    Indexish
 {
 
 }

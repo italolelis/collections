@@ -2,7 +2,7 @@
 
 namespace Tests\Collections\Iterator;
 
-use Collections\Iterator\ArrayIterator;
+use Collections\Iterator\VectorIterator;
 use Tests\Collections\CollectionsTestCase;
 
 class ArrayIteratorTest extends CollectionsTestCase
@@ -11,17 +11,17 @@ class ArrayIteratorTest extends CollectionsTestCase
     public function testCount()
     {
         $array = [];
-        $iterator = new ArrayIterator($array);
+        $iterator = new VectorIterator($array);
 
         $this->assertCount(count($array), $iterator);
 
         $array = [0];
-        $iterator = new ArrayIterator($array);
+        $iterator = new VectorIterator($array);
 
         $this->assertCount(count($array), $iterator);
 
         $array = [0, 2, 4, 6];
-        $iterator = new ArrayIterator($array);
+        $iterator = new VectorIterator($array);
 
         $this->assertCount(count($array), $iterator);
     }
@@ -29,7 +29,7 @@ class ArrayIteratorTest extends CollectionsTestCase
     public function testIteration()
     {
         $array = [0, 2, 4, 8];
-        $iterator = new ArrayIterator($array);
+        $iterator = new VectorIterator($array);
 
         $i = 0;
         $iterator->rewind();
@@ -40,13 +40,5 @@ class ArrayIteratorTest extends CollectionsTestCase
             $iterator->next();
             $i++;
         }
-    }
-
-    public function testArrayToArray()
-    {
-        $array = [0, 2, 4, 8];
-        $iterator = new ArrayIterator($array);
-
-        $this->assertEquals($array, $iterator->toArray());
     }
 }

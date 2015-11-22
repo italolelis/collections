@@ -6,7 +6,7 @@ interface ConstCollectionInterface extends \Countable
 {
     /**
      * Verifies whether a collection is empty
-     * @return bool Returns TRUE if the collection is empty; FASLE otherswise.
+     * @return bool Returns TRUE if the collection is empty; FALSE otherswise.
      */
     public function isEmpty();
 }

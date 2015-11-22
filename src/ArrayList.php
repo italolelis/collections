@@ -3,7 +3,8 @@
 // Copyright (c) Lellys Informática. All rights reserved. See License.txt in the project root for license information.
 namespace Collections;
 
-use Collections\Iterator\ArrayIterator;
+use Collections\Iterator\VectorIterator;
+use Collections\Traits\GuardTrait;
 use Collections\Traits\StrictIterableTrait;
 use InvalidArgumentException;
 use Traversable;
@@ -207,10 +208,10 @@ class ArrayList extends AbstractCollectionArray implements VectorInterface, \Arr
 
     /**
      * Gets the collection's iterator
-     * @return \Iterator
+     * @return VectorIterator
      */
     public function getIterator()
     {
-        return new ArrayIterator($this->container);
+        return new VectorIterator($this->container);
     }
 }

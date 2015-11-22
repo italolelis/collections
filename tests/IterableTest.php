@@ -2,11 +2,8 @@
 
 namespace Tests\Collections;
 
-use ArrayObject;
 use Collections\ArrayList;
-use Collections\Comparer\StringComparer;
 use Collections\Dictionary;
-use InvalidArgumentException;
 
 class IterableTest extends CollectionsTestCase
 {
@@ -24,7 +21,7 @@ class IterableTest extends CollectionsTestCase
     {
         $this->coll->add('testing1');
         $this->coll->add('testing2');
-        $this->assertEquals(['testing1', 'testing2'], $this->coll->values());
+        $this->assertEquals(['testing1', 'testing2'], $this->coll->values()->toArray());
     }
 
     public function testGetFirstElement()

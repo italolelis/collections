@@ -4,21 +4,7 @@ namespace Collections\Traits;
 
 trait StrictIterableTrait
 {
-    use ExtractTrait;
-
-    public function toArray()
-    {
-        $arr = [];
-        foreach ($this as $value) {
-            if ($value instanceof \Iterable) {
-                $arr[] = $value->toArray();
-            } else {
-                $arr[] = $value;
-            }
-        }
-
-        return $arr;
-    }
+    use CommonMutableContainerTrait;
 
     /**
      * {@inheritDoc}
@@ -33,7 +19,6 @@ trait StrictIterableTrait
 
         return $res;
     }
-
 
     /**
      * {@inheritDoc}
@@ -206,68 +191,16 @@ trait StrictIterableTrait
     }
 
     /**
-     * {@inheritDoc}
-     * @return $this
+     * {@inheritdoc}
      */
-    public function every(callable $callable)
+    public function exists(callable $fn)
     {
-        foreach ($this as $key => $value) {
-            if (!$callable($value)) {
-                return false;
-            }
-        }
-
-        return true;
-    }
-
-    /**
-     * {@inheritDoc}
-     * @return $this
-     */
-    public function some(callable $callable)
-    {
-        foreach ($this as $key => $value) {
-            if ($callable($value) === true) {
+        foreach ($this as $element) {
+            if ($fn($element)) {
                 return true;
             }
         }
 
         return false;
-    }
-
-    /**
-     * Iteratively reduce the collection to a single value using a callback function.
-     *
-     * @param callable $callable The callable used for reduce.
-     * @param int $zero If the optional initial is available, it will be used at the beginning of the process,
-     * or as a final result in case the array is empty.
-     * @return $this A collection with the results of the filter operation.
-     */
-    public function reduce(callable $callable, $zero = null)
-    {
-        $isFirst = false;
-        if (func_num_args() < 2) {
-            $isFirst = true;
-        }
-        $result = $zero;
-        foreach ($this as $k => $value) {
-            if ($isFirst) {
-                $result = $value;
-                $isFirst = false;
-                continue;
-            }
-            $result = $callable($result, $value);
-        }
-
-        return $result;
-    }
-
-    /**
-     * {@inheritDoc}
-     * @return $this
-     */
-    public function match(array $conditions)
-    {
-        return $this->filter($this->createMatcherFilter($conditions));
     }
 }

@@ -8,6 +8,14 @@ namespace Collections;
  */
 interface ConstIndexAccessInterface
 {
+    public function at($k);
+
+    /**
+     * Gets or sets the element with the specified key.
+     * @param mixed $key The key of the element to get or set.
+     */
+    public function get($key);
+
     /**
      * Checks whether the collection contains an element with the specified key/index.
      *
@@ -16,12 +24,6 @@ interface ConstIndexAccessInterface
      *                 FALSE otherwise.
      */
     public function containsKey($key);
-
-    /**
-     * Gets or sets the element with the specified key.
-     * @param mixed $key The key of the element to get or set.
-     */
-    public function get($key);
 
     /**
      * Gets the value associated with the specified key.

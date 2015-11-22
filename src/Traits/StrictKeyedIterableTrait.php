@@ -7,24 +7,7 @@ use Collections\Dictionary;
 
 trait StrictKeyedIterableTrait
 {
-    public function toArray()
-    {
-        $arr = [];
-        foreach ($this as $key => $value) {
-            if ($value instanceof \Iterable) {
-                $arr[$key] = $value->toArray();
-            } else {
-                $arr[$key] = $value;
-            }
-        }
-
-        return $arr;
-    }
-
-    public function values()
-    {
-        return new ArrayList($this);
-    }
+    use CommonMutableContainerTrait;
 
     public function keys()
     {
@@ -241,59 +224,16 @@ trait StrictKeyedIterableTrait
     }
 
     /**
-     * {@inheritDoc}
-     * @return $this
+     * {@inheritdoc}
      */
-    public function every(callable $callable)
+    public function exists(callable $fn)
     {
-        foreach ($this as $key => $value) {
-            if (!$callable($value, $key)) {
-                return false;
-            }
-        }
-
-        return true;
-    }
-
-    /**
-     * {@inheritDoc}
-     * @return $this
-     */
-    public function some(callable $callable)
-    {
-        foreach ($this as $key => $value) {
-            if ($callable($value, $key) === true) {
+        foreach ($this as $key => $element) {
+            if ($fn($key, $element)) {
                 return true;
             }
         }
 
         return false;
-    }
-
-    /**
-     * Iteratively reduce the collection to a single value using a callback function.
-     *
-     * @param callable $callable The callable used for reduce.
-     * @param int $zero If the optional initial is available, it will be used at the beginning of the process,
-     * or as a final result in case the array is empty.
-     * @return $this A collection with the results of the filter operation.
-     */
-    public function reduce(callable $callable, $zero = null)
-    {
-        $isFirst = false;
-        if (func_num_args() < 2) {
-            $isFirst = true;
-        }
-        $result = $zero;
-        foreach ($this as $k => $value) {
-            if ($isFirst) {
-                $result = $value;
-                $isFirst = false;
-                continue;
-            }
-            $result = $callable($result, $value, $k);
-        }
-
-        return $result;
     }
 }

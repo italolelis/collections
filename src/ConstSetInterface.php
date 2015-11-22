@@ -5,8 +5,8 @@ namespace Collections;
 interface ConstSetInterface extends
     ConstCollectionInterface,
     ConstSetAccessInterface,
-    \KeyedIterable,
-    \Container
+    KeyedIterable,
+    Container
 {
 
 }

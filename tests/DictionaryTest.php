@@ -4,10 +4,8 @@ namespace Tests\Collections;
 
 use ArrayObject;
 use Collections\Dictionary;
-use Collections\Exception\IndexException;
 use InvalidArgumentException;
 use OutOfBoundsException;
-use stdClass;
 
 /**
  * Description of CollectionTest

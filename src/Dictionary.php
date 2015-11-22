@@ -4,7 +4,8 @@
 namespace Collections;
 
 use Collections\Exception\KeyException;
-use Collections\Iterator\ArrayIterator;
+use Collections\Iterator\MapIterator;
+use Collections\Traits\GuardTrait;
 use Collections\Traits\StrictKeyedIterableTrait;
 use InvalidArgumentException;
 use Symfony\Component\PropertyAccess\Exception\OutOfBoundsException;
@@ -17,15 +18,6 @@ class Dictionary extends AbstractCollectionArray implements MapInterface, \Array
 {
     use StrictKeyedIterableTrait,
         GuardTrait;
-
-    /**
-     * Gets the collection's iterator
-     * @return ArrayIterator
-     */
-    public function getIterator()
-    {
-        return new ArrayIterator($this->container);
-    }
 
     public function at($k)
     {
@@ -153,19 +145,12 @@ class Dictionary extends AbstractCollectionArray implements MapInterface, \Array
     }
 
     /**
-     * {@inheritdoc}
+     * Gets the collection's iterator
+     * @return MapIterator
      */
-    public static function fromArray(array $arr)
+    public function getIterator()
     {
-        $map = new static();
-        foreach ($arr as $k => $v) {
-            if (is_array($v)) {
-                $map->add($k, new static($v));
-            } else {
-                $map->add($k, $v);
-            }
-        }
-
-        return $map;
+        return new MapIterator($this->container);
     }
+
 }

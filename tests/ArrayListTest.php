@@ -143,7 +143,7 @@ class ArrayListTest extends CollectionsTestCase
 
     public function testInteratorInsntance()
     {
-        $this->assertInstanceOf('Collections\Iterator\ArrayIterator', $this->coll->getIterator());
+        $this->assertInstanceOf('\ArrayIterator', $this->coll->getIterator());
     }
 
     public function testSerialize()
@@ -189,11 +189,11 @@ class ArrayListTest extends CollectionsTestCase
     {
         $this->coll->add("one");
         $this->coll->add("two");
-        $exists = $this->coll->exists(function ($k, $e) {
+        $exists = $this->coll->exists(function ($e) {
             return $e == "one";
         });
         $this->assertTrue($exists);
-        $exists = $this->coll->exists(function ($k, $e) {
+        $exists = $this->coll->exists(function ($e) {
             return $e == "other";
         });
         $this->assertFalse($exists);

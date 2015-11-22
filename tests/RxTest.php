@@ -42,62 +42,6 @@ class RxTest extends CollectionsTestCase
     }
 
     /**
-     *
-     * @param $people
-     * @dataProvider peopleProvider
-     */
-    public function testExtractSucess(ArrayList $people)
-    {
-        $this->assertEquals($people->extract('name')->toArray(), ['Marc', 'Anderson', 'Ana Martha', 'Daize']);
-    }
-
-    /**
-     * @param $people
-     * @dataProvider peopleProvider
-     */
-    public function testReject(ArrayList $people)
-    {
-        $ladies = $people->reject(function ($person) {
-            return $person->gender === 'male';
-        });
-
-        $this->assertCount(2, $ladies);
-    }
-
-    /**
-     * @param $people
-     * @dataProvider peopleProvider
-     */
-    public function testSomePeople(ArrayList $people)
-    {
-        $hasYoungPeople = $people->some(function ($person) {
-            return $person->age < 21;
-        });
-
-        $this->assertTrue($hasYoungPeople);
-    }
-
-    /**
-     * @param $people
-     * @dataProvider peopleProvider
-     */
-    public function testMachName($people)
-    {
-        $commentsFromMark = $people->match(['user.name' => 'Test']);
-        $this->assertCount(3, $commentsFromMark);
-    }
-
-    public function testReduce()
-    {
-        $collection = new ArrayList([100, 200]);
-        $totalPrice = $collection->reduce(function ($accumulated, $orderLine) {
-            return $accumulated + $orderLine;
-        }, 0);
-
-        $this->assertEquals(300, $totalPrice);
-    }
-
-    /**
      * Tests groupBy
      *
      * @return void
