@@ -2,9 +2,23 @@
 
 namespace Collections\Traits;
 
+use Collections\Iterable;
+
 trait StrictIterableTrait
 {
     use CommonMutableContainerTrait;
+
+    public function concatAll()
+    {
+        $results = new static();
+        $this->each(function (Iterable $subArray) use ($results) {
+            $subArray->each(function ($item) use ($results) {
+                $results->add($item);
+            });
+        });
+
+        return $results;
+    }
 
     /**
      * {@inheritDoc}

@@ -2,6 +2,8 @@
 
 namespace Collections;
 
+use Rx\Observable\ArrayObservable;
+
 interface Iterable extends \IteratorAggregate
 {
     /**
@@ -37,6 +39,11 @@ interface Iterable extends \IteratorAggregate
      * @return ConstSetInterface - an `ImmSet` converted from the current `Iterable`.
      */
     public function toImmSet();
+
+    /**
+     * @return ArrayObservable
+     */
+    public function toObservable();
 
     /**
      * Returns a lazy, access elements only when needed view of the current
@@ -185,4 +192,6 @@ interface Iterable extends \IteratorAggregate
     public function indexBy($callback);
 
     public function exists(callable $fn);
+
+    public function concatAll();
 }
