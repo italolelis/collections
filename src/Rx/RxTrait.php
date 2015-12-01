@@ -12,6 +12,7 @@ use Collections\Iterator\ExtractIterator;
 use Collections\Iterator\InsertIterator;
 use Collections\Iterator\ReplaceIterator;
 use Collections\Iterator\UnfoldIterator;
+use Collections\VectorInterface;
 use LimitIterator;
 use RecursiveIteratorIterator;
 
@@ -250,7 +251,8 @@ trait RxTrait
         foreach ($this as $value) {
             $key = $callback($value);
             if (!$group->containsKey($key)) {
-                $group->add($key, new static([$value]));
+                $element = $this instanceof VectorInterface ? new static([$value]) : new ArrayList([$value]);
+                $group->add($key, $element);
             } else {
                 $value = $group->get($key)->add($value);
                 $group->set($key, $value);
