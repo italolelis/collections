@@ -78,7 +78,7 @@ trait CommonMutableContainerTrait
         foreach ($this as $value) {
             $key = $callback($value);
             if (!$group->containsKey($key)) {
-                $group->add($key, new ArrayList([$value]));
+                $group->add($key, new static([$value]));
             } else {
                 $value = $group->get($key)->add($value);
                 $group->set($key, $value);
