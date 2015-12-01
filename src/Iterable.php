@@ -185,4 +185,6 @@ interface Iterable extends \IteratorAggregate
     public function indexBy($callback);
 
     public function exists(callable $fn);
+
+    public function concatAll();
 }

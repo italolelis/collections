@@ -4,6 +4,8 @@ namespace Collections\Traits;
 
 use Collections\ArrayList;
 use Collections\Dictionary;
+use Collections\Iterable;
+use Collections\MapInterface;
 
 trait StrictKeyedIterableTrait
 {
@@ -235,5 +237,18 @@ trait StrictKeyedIterableTrait
         }
 
         return false;
+    }
+
+    public function concatAll()
+    {
+        /** @var MapInterface $results */
+        $results = new static();
+        $this->each(function (Iterable $subArray) use ($results) {
+            $subArray->each(function ($item, $key) use ($results) {
+                $results->add($key, $item);
+            });
+        });
+
+        return $results;
     }
 }
