@@ -27,7 +27,7 @@ trait StrictIterableTrait
 
     /**
      * {@inheritDoc}
-     * @return $this
+     * @return VectorInterface
      */
     public function filter(callable $callable)
     {
@@ -44,7 +44,7 @@ trait StrictIterableTrait
 
     /**
      * {@inheritDoc}
-     * @return array
+     * @return VectorInterface
      */
     public function zip(Iterable $iterable)
     {
@@ -65,7 +65,7 @@ trait StrictIterableTrait
 
     /**
      * {@inheritDoc}
-     * @return $this
+     * @return VectorInterface
      */
     public function take($size = 1)
     {
@@ -88,7 +88,7 @@ trait StrictIterableTrait
 
     /**
      * {@inheritDoc}
-     * @return $this
+     * @return VectorInterface
      */
     public function takeWhile(callable $callable)
     {
@@ -107,7 +107,7 @@ trait StrictIterableTrait
 
     /**
      * {@inheritDoc}
-     * @return $this
+     * @return VectorInterface
      */
     public function skip($n)
     {
@@ -127,7 +127,7 @@ trait StrictIterableTrait
 
     /**
      * {@inheritDoc}
-     * @return $this
+     * @return VectorInterface
      */
     public function skipWhile(callable $callable)
     {
@@ -150,7 +150,7 @@ trait StrictIterableTrait
 
     /**
      * {@inheritDoc}
-     * @return $this
+     * @return VectorInterface
      */
     public function slice($start, $length)
     {
@@ -250,6 +250,9 @@ trait StrictIterableTrait
         return false;
     }
 
+    /**
+     * @return VectorInterface
+     */
     public function concatAll()
     {
         /** @var VectorInterface $results */
