@@ -11,227 +11,318 @@ trait StrictKeyedIterableTrait
 {
     use CommonMutableContainerTrait;
 
+    /**
+     * @return ArrayList
+     */
     public function keys()
     {
-        $res = new ArrayList();
-        foreach ($this as $k => $_) {
-            $res[] = $k;
+        $results = new ArrayList();
+        /** @var Dictionary $this */
+        foreach ($this as $key => $nulled) {
+            $results[] = $key;
         }
 
-        return $res;
+        return $results;
     }
 
+    /**
+     * @param callable $callback
+     *
+     * @return Dictionary
+     */
     public function map(callable $callback)
     {
-        $res = new Dictionary();
-        foreach ($this as $k => $v) {
-            $res[$k] = $callback($v);
+        $results = new Dictionary();
+        /** @var Dictionary $this */
+        foreach ($this as $key => $element) {
+            $results[$key] = $callback($element);
         }
 
-        return $res;
+        return $results;
     }
 
-    public function mapWithKey($callback)
+    /**
+     * @param callable $callback
+     *
+     * @return Dictionary
+     */
+    public function mapWithKey(callable $callback)
     {
-        $res = new Dictionary();
-        foreach ($this as $k => $v) {
-            $res[$k] = $callback($k, $v);
+        $results = new Dictionary();
+        /** @var Dictionary $this */
+        foreach ($this as $key => $element) {
+            $results[$key] = $callback($key, $element);
         }
 
-        return $res;
+        return $results;
     }
 
+    /**
+     * @param callable $callback
+     *
+     * @return Dictionary
+     */
     public function filter(callable $callback)
     {
-        $res = new Dictionary();
-        foreach ($this as $k => $v) {
-            if ($callback($v)) {
-                $res[$k] = $v;
+        $results = new Dictionary();
+        /** @var Dictionary $this */
+        foreach ($this as $key => $element) {
+            if ($callback($element)) {
+                $results[$key] = $element;
             }
         }
 
-        return $res;
+        return $results;
     }
 
-    public function filterWithKey($callback)
+    /**
+     * @param callable $callback
+     *
+     * @return Dictionary
+     */
+    public function filterWithKey(callable $callback)
     {
-        $res = new Dictionary();
-        foreach ($this as $k => $v) {
-            if ($callback($k, $v)) {
-                $res[$k] = $v;
+        $results = new Dictionary();
+        /** @var Dictionary $this */
+        foreach ($this as $key => $element) {
+            if ($callback($key, $element)) {
+                $results[$key] = $element;
             }
         }
 
-        return $res;
+        return $results;
     }
 
-    public function zip($iterable)
+    /**
+     * @param Dictionary $iterable
+     *
+     * @return Dictionary
+     */
+    public function zip(Dictionary $iterable)
     {
-        $res = new Dictionary();
+        $results = new Dictionary();
         $it = $iterable->getIterator();
-        foreach ($this as $k => $v) {
+        /** @var Dictionary $this */
+        foreach ($this as $key => $element) {
             if (!$it->valid()) {
                 break;
             }
-            $res[$k] = new Pair($v, $it->current());
+            $results[$key] = new Pair($element, $it->current());
             $it->next();
         }
 
-        return $res;
+        return $results;
     }
 
+    /**
+     * @param int $size
+     *
+     * @return Dictionary
+     */
     public function take($size = 1)
     {
-        $res = new Dictionary();
+        $results = new Dictionary();
         if ($size <= 0) {
-            return $res;
+            return $results;
         }
-        foreach ($this as $k => $v) {
-            $res[$k] = $v;
+        /** @var Dictionary $this */
+        foreach ($this as $key => $element) {
+            $results[$key] = $element;
             if (--$size === 0) {
                 break;
             }
         }
 
-        return $res;
+        return $results;
     }
 
-    public function takeWhile($fn)
+    /**
+     * @param callable $callback
+     *
+     * @return Dictionary
+     */
+    public function takeWhile(callable $callback)
     {
-        $res = new Dictionary();
-        foreach ($this as $k => $v) {
-            if (!$fn($v)) {
+        $results = new Dictionary();
+        /** @var Dictionary $this */
+        foreach ($this as $key => $element) {
+            if (!$callback($element)) {
                 break;
             }
-            $res[$k] = $v;
+            $results[$key] = $element;
         }
 
-        return $res;
+        return $results;
     }
 
-    public function skip($n)
+    /**
+     * @param int $count
+     *
+     * @return Dictionary
+     */
+    public function skip($count)
     {
-        $res = new Dictionary();
-        foreach ($this as $k => $v) {
-            if ($n <= 0) {
-                $res[$k] = $v;
+        $results = new Dictionary();
+        /** @var Dictionary $this */
+        foreach ($this as $key => $element) {
+            if ($count <= 0) {
+                $results[$key] = $element;
             } else {
-                --$n;
+                --$count;
             }
         }
 
-        return $res;
+        return $results;
     }
 
-    public function skipWhile($fn)
+    /**
+     * @param callable $callback
+     *
+     * @return Dictionary
+     */
+    public function skipWhile(callable $callback)
     {
-        $res = new Dictionary();
+        $results = new Dictionary();
         $skip = true;
-        foreach ($this as $k => $v) {
+        /** @var Dictionary $this */
+        foreach ($this as $key => $element) {
             if ($skip) {
-                if ($fn($v)) {
+                if ($callback($element)) {
                     continue;
                 }
                 $skip = false;
             }
-            $res[$k] = $v;
+            $results[$key] = $element;
         }
 
-        return $res;
+        return $results;
     }
 
-    public function slice($start, $lenght)
+    /**
+     * @param int $start
+     * @param int $length
+     *
+     * @return Dictionary
+     */
+    public function slice($start, $length)
     {
-        $res = new Dictionary();
-        if ($lenght <= 0) {
-            return $res;
+        $results = new Dictionary();
+        if ($length <= 0) {
+            return $results;
         }
-        foreach ($this as $k => $v) {
+        /** @var Dictionary $this */
+        foreach ($this as $key => $element) {
             if ($start !== 0) {
                 --$start;
                 continue;
             }
-            $res[$k] = $v;
-            if (--$lenght === 0) {
+            $results[$key] = $element;
+            if (--$length === 0) {
                 break;
             }
         }
 
-        return $res;
+        return $results;
     }
 
+    /**
+     * @param \Traversable $iterable
+     *
+     * @return Dictionary
+     */
     public function concat(\Traversable $iterable)
     {
-        $res = [];
-
-        foreach ($this as $k => $v) {
-            $res[$k] = $v;
+        $results = [];
+        /** @var Dictionary $this */
+        foreach ($this as $key => $element) {
+            $results[$key] = $element;
         }
 
-        foreach ($iterable as $k => $v) {
-            $res[$k] = $v;
+        foreach ($iterable as $key => $element) {
+            $results[$key] = $element;
         }
-        $this->container = $res;
+        $this->setAll($results);
 
         return $this;
     }
 
+    /**
+     * @return mixed|null
+     */
     public function first()
     {
-        foreach ($this as $v) {
-            return $v;
+        /** @var Dictionary $this */
+        foreach ($this as $element) {
+            return $element;
         }
 
         return null;
-    }
-
-    public function firstKey()
-    {
-        foreach ($this as $k => $_) {
-            return $k;
-        }
-
-        return null;
-    }
-
-    public function last()
-    {
-        $v = null;
-        foreach ($this as $v) {
-        }
-
-        return $v;
-    }
-
-    public function lastKey()
-    {
-        $k = null;
-        foreach ($this as $k => $_) {
-        }
-
-        return $k;
     }
 
     /**
-     * {@inheritDoc}
-     * @return $this
+     * @return int|null|string
      */
-    public function each(callable $callable)
+    public function firstKey()
     {
-        foreach ($this as $k => $v) {
-            $callable($v, $k);
+        /** @var Dictionary $this */
+        foreach ($this as $key => $nulled) {
+            return $key;
+        }
+
+        return null;
+    }
+
+    /**
+     * @return mixed|null
+     */
+    public function last()
+    {
+        $element = null;
+        /** @var Dictionary $this */
+        foreach ($this as $element) {
+        }
+
+        return $element;
+    }
+
+    /**
+     * @return int|null|string
+     */
+    public function lastKey()
+    {
+        $key = null;
+        /** @var Dictionary $this */
+        foreach ($this as $key => $nulled) {
+        }
+
+        return $key;
+    }
+
+    /**
+     * @param callable $callback
+     *
+     * @return Dictionary
+     */
+    public function each(callable $callback)
+    {
+        /** @var Dictionary $this */
+        foreach ($this as $key => $element) {
+            $callback($element, $key);
         }
 
         return $this;
     }
 
     /**
-     * {@inheritdoc}
+     * @param callable $callback
+     *
+     * @return bool
      */
-    public function exists(callable $fn)
+    public function exists(callable $callback)
     {
+        /** @var Dictionary $this */
         foreach ($this as $key => $element) {
-            if ($fn($key, $element)) {
+            if ($callback($key, $element)) {
                 return true;
             }
         }
@@ -239,6 +330,9 @@ trait StrictKeyedIterableTrait
         return false;
     }
 
+    /**
+     * @return MapInterface
+     */
     public function concatAll()
     {
         /** @var MapInterface $results */
