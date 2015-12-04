@@ -11,22 +11,6 @@ trait StrictIterableTrait
     use CommonMutableContainerTrait;
 
     /**
-     * @return $this
-     */
-    public function concatAll()
-    {
-        /** @var VectorInterface $results */
-        $results = new static();
-        $this->each(function (Iterable $subArray) use ($results) {
-            $subArray->each(function ($item) use ($results) {
-                $results->add($item);
-            });
-        });
-
-        return $results;
-    }
-
-    /**
      * {@inheritDoc}
      * @return $this
      */
@@ -264,5 +248,18 @@ trait StrictIterableTrait
         }
 
         return false;
+    }
+
+    public function concatAll()
+    {
+        /** @var VectorInterface $results */
+        $results = new static();
+        $this->each(function (Iterable $subArray) use ($results) {
+            $subArray->each(function ($item) use ($results) {
+                $results->add($item);
+            });
+        });
+
+        return $results;
     }
 }

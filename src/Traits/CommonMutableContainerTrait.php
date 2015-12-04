@@ -5,6 +5,7 @@ namespace Collections\Traits;
 use Collections\ArrayList;
 use Collections\Dictionary;
 use Collections\Iterable;
+use Collections\VectorInterface;
 
 trait CommonMutableContainerTrait
 {
@@ -78,7 +79,8 @@ trait CommonMutableContainerTrait
         foreach ($this as $value) {
             $key = $callback($value);
             if (!$group->containsKey($key)) {
-                $group->add($key, new ArrayList([$value]));
+                $element = $this instanceof VectorInterface ? new static([$value]) : new ArrayList([$value]);
+                $group->add($key, $element);
             } else {
                 $value = $group->get($key)->add($value);
                 $group->set($key, $value);
