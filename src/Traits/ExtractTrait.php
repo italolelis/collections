@@ -16,8 +16,9 @@ trait ExtractTrait
      * an array or object based on a dot separated path.
      *
      * @param string|callable $callback A dot separated path of column to follow
-     * so that the final one can be returned or a callable that will take care
-     * of doing that.
+     *                                  so that the final one can be returned or a callable that will take care
+     *                                  of doing that.
+     *
      * @return callable
      */
     public function propertyExtractor($callback)
@@ -37,7 +38,8 @@ trait ExtractTrait
      * by iterating over the column names contained in $path
      *
      * @param array|\ArrayAccess $data Data.
-     * @param array $path Path to extract from.
+     * @param array              $path Path to extract from.
+     *
      * @return mixed
      */
     protected function extractData($data, $path)
@@ -48,7 +50,6 @@ trait ExtractTrait
             if (is_array($data) || $data instanceof \ArrayAccess) {
                 $value = $accessor->getValue($data, "[$column]");
             } else {
-
                 if (!$accessor->isReadable($data, $column)) {
                     return null;
                 }
@@ -66,8 +67,9 @@ trait ExtractTrait
      * it matches certain condition.
      *
      * @param array $conditions A key-value list of conditions to match where the
-     * key is the property path to get from the current item and the value is the
-     * value to be compared the item with.
+     *                          key is the property path to get from the current item and the value is the
+     *                          value to be compared the item with.
+     *
      * @return callable
      */
     protected function createMatcherFilter(array $conditions)

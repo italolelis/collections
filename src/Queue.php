@@ -14,7 +14,7 @@ class Queue extends SplQueue implements QueueInterface, \JsonSerializable
     /**
      * Adds multiples objects to the end of the Queue.
      * @param CollectionInterface|array $items The objects to add to the Queue. The value can be null.
-     * @return $this|Queue
+     * @return Queue
      */
     public function enqueueMultiple($items)
     {
@@ -25,6 +25,11 @@ class Queue extends SplQueue implements QueueInterface, \JsonSerializable
         return $this;
     }
 
+    /**
+     * @param array $arr
+     *
+     * @return Queue
+     */
     public static function fromArray(array $arr)
     {
         $collection = new Queue();

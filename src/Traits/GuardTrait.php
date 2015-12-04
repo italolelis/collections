@@ -7,10 +7,21 @@ use Collections\Exception\TypeException;
 
 trait GuardTrait
 {
-    abstract function isEmpty();
+    /**
+     * @return bool
+     */
+    abstract public function isEmpty();
 
-    abstract function count();
+    /**
+     * @return int
+     */
+    abstract public function count();
 
+    /**
+     * @param string $method
+     *
+     * @throws EmptyException
+     */
     protected function emptyGuard($method)
     {
         if ($this->isEmpty()) {
@@ -20,26 +31,35 @@ trait GuardTrait
         }
     }
 
-    protected function validateKeyBounds($k)
+    /**
+     * @param $key
+     */
+    protected function validateKeyBounds($key)
     {
-        if (!$this->isBoundedKey($k)) {
-            throw new \OutOfBoundsException("Integer key $k is out of bounds");
+        if (!$this->isBoundedKey($key)) {
+            throw new \OutOfBoundsException("Integer key $key is out of bounds");
         }
     }
 
     /**
      * @param int $element
-     * @return mixed
+     *
+     * @return bool
      */
     protected function isBoundedKey($element)
     {
-        return $element >= 0 && $element < $this->count();
+        return ($element >= 0 && $element < $this->count());
     }
 
+    /**
+     * @param int $element
+     *
+     * @throws TypeException
+     */
     protected function validateKeyType($element)
     {
         if (filter_var($element, FILTER_VALIDATE_INT) === false) {
-            throw new TypeException('Only integer keys may be used with ' . (get_class($this)));
+            throw new TypeException('Only integer keys may be used with '.(get_class($this)));
         }
     }
 }

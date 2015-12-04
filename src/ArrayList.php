@@ -198,6 +198,7 @@ class ArrayList extends AbstractCollectionArray implements VectorInterface, \Arr
 
     /**
      * {@inheritdoc}
+     * @return ArrayList;
      */
     public static function fromArray(array $arr)
     {

@@ -29,7 +29,7 @@ abstract class AbstractConstCollectionArray extends AbstractCollection implement
     /**
      * AbstractConstCollectionArray constructor.
      *
-     * @param AbstractCollection|array|null $array
+     * @param mixed $array
      *
      * @throws  \InvalidArgumentException
      */
@@ -178,5 +178,13 @@ abstract class AbstractConstCollectionArray extends AbstractCollection implement
     public function toImmMap()
     {
         return new ImmDictionary($this);
+    }
+
+    /**
+     * @return array
+     */
+    public function getAll()
+    {
+        return $this->container;
     }
 }

@@ -13,6 +13,7 @@ class StringComparer implements ComparerInterface
 
     /**
      * {@inheritdoc}
+     * @return bool
      */
     public function compare($first, $second)
     {

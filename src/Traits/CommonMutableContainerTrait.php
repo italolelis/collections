@@ -66,6 +66,7 @@ trait CommonMutableContainerTrait
      */
     public static function fromArray(array $array)
     {
+        /** @var Dictionary $this */
         $map = new static();
         foreach ($array as $key => $element) {
             if (is_array($element)) {

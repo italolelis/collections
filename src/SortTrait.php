@@ -13,32 +13,41 @@ trait SortTrait
 {
     /**
      * Sorts the elements in the entire Collection<T> using the specified comparer.
+     *
      * @param ComparerInterface $comparer The ComparerInterface implementation to use when comparing elements, or null
-     * to use the default comparer Comparer<T>.Default.
+     *                                    to use the default comparer Comparer<T>.Default.
+     *
      * @return $this
      */
     public function sort(ComparerInterface $comparer = null)
     {
+        /** @var Dictionary $this */
         if ($comparer === null) {
             $comparer = $this->getDefaultComparer();
         }
-        usort($this->container, array($comparer, 'compare'));
+        $container = $this->getAll();
+        usort($container, [$comparer, 'compare']);
 
         return $this;
     }
 
     /**
      * Sorts the keys in the entire Collection<T> using the specified comparer.
+     *
      * @param ComparerInterface $comparer The ComparerInterface implementation to use when comparing elements, or
-     * null to use the default comparer Comparer<T>.Default.
+     *                                    null to use the default comparer Comparer<T>.Default.
+     *
      * @return $this
      */
     public function sortByKey(ComparerInterface $comparer = null)
     {
+        /** @var Dictionary $this */
         if ($comparer === null) {
             $comparer = $this->getDefaultComparer();
         }
-        uksort($this->container, array($comparer, 'compare'));
+
+        $container = $this->getAll();
+        uksort($container, [$comparer, 'compare']);
 
         return $this;
     }
