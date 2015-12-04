@@ -62,7 +62,7 @@ trait CommonMutableContainerTrait
     /**
      * @param array $array
      *
-     * @return Dictionary
+     * @return CommonMutableContainerTrait
      */
     public static function fromArray(array $array)
     {
