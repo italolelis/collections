@@ -29,7 +29,7 @@ abstract class AbstractConstCollectionArray extends AbstractCollection implement
     /**
      * AbstractConstCollectionArray constructor.
      *
-     * @param array|null $array
+     * @param AbstractCollection|array|null $array
      *
      * @throws  \InvalidArgumentException
      */
@@ -46,8 +46,6 @@ abstract class AbstractConstCollectionArray extends AbstractCollection implement
                 }
                 $this[$key] = $item;
             }
-
-            return $this;
         }
     }
 
@@ -143,9 +141,11 @@ abstract class AbstractConstCollectionArray extends AbstractCollection implement
         return new ImmArrayList($this);
     }
 
+    /**
+     * TODO: Implement toSet() method.
+     */
     public function toSet()
     {
-        // TODO: Implement toSet() method.
     }
 
     /**
