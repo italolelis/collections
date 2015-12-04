@@ -33,6 +33,7 @@ trait StrictIterableTrait
     {
         /** @var VectorInterface $results */
         $results = new static();
+        /** @var Dictionary $this */
         foreach ($this as $element) {
             if ($callable($element)) {
                 $results[] = $element;
@@ -52,6 +53,7 @@ trait StrictIterableTrait
         $results = new static();
         /** @var \Iterator $iterator */
         $iterator = $iterable->getIterator();
+        /** @var Dictionary $this */
         foreach ($this as $element) {
             if (!$iterator->valid()) {
                 break;
