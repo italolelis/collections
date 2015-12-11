@@ -277,4 +277,16 @@ trait RxTrait
 
         return $group;
     }
+
+    public function concatAll()
+    {
+        $results = new static();
+        $this->each(function ($subArray, $key) use ($results) {
+            $subArray->each(function ($item) use ($results, $key) {
+                $results[$key] = $item;
+            });
+        });
+
+        return $results;
+    }
 }
