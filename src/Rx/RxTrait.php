@@ -281,8 +281,9 @@ trait RxTrait
     public function concatAll()
     {
         $results = new static();
-        $this->each(function ($subArray, $key) use ($results) {
-            $subArray->each(function ($item) use ($results, $key) {
+        $this->each(function ($subArray) use ($results) {
+            $subArray->each(function ($item, $key) use ($results) {
+                var_dump($key);
                 $results[$key] = $item;
             });
         });
