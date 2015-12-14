@@ -283,7 +283,6 @@ trait RxTrait
         $results = new static();
         $this->each(function ($subArray) use ($results) {
             $subArray->each(function ($item, $key) use ($results) {
-                var_dump($key);
                 $results[$key] = $item;
             });
         });
