@@ -12,56 +12,67 @@ trait CommonMutableContainerTrait
     use ExtractTrait;
 
     /**
-     * {@inheritdoc}
+     * @return ArrayList
      */
     public function values()
     {
         return new ArrayList($this);
     }
 
+    /**
+     * @return array
+     */
     public function toValuesArray()
     {
         return $this->toArray();
     }
 
+    /**
+     * @return array
+     */
     public function toKeysArray()
     {
-        $res = [];
-        foreach ($this as $k => $_) {
-            $res[] = $k;
+        $results = [];
+        /** @var Dictionary $this */
+        foreach ($this as $key => $nulled) {
+            $results[] = $key;
         }
 
-        return $res;
+        return $results;
     }
 
     /**
-     * {@inheritdoc}
+     * @return array
      */
     public function toArray()
     {
-        $arr = [];
-        foreach ($this as $key => $value) {
-            if ($value instanceof Iterable) {
-                $arr[$key] = $value->toArray();
+        $results = [];
+        /** @var Dictionary $this */
+        foreach ($this as $key => $element) {
+            if ($element instanceof Iterable) {
+                $results[$key] = $element->toArray();
             } else {
-                $arr[$key] = $value;
+                $results[$key] = $element;
             }
         }
 
-        return $arr;
+        return $results;
     }
 
     /**
-     * {@inheritdoc}
+     * @param array $array
+     *
+     * @return CommonMutableContainerTrait
      */
-    public static function fromArray(array $arr)
+    public static function fromArray(array $array)
     {
+        /** @var Dictionary $this */
         $map = new static();
-        foreach ($arr as $k => $v) {
-            if (is_array($v)) {
-                $map[$k] = new static($v);
+        foreach ($array as $key => $element) {
+            if (is_array($element)) {
+                $map[$key] = new static($element);
             } else {
-                $map[$k] = $v;
+                $map[$key] = $element;
             }
         }
 
@@ -70,20 +81,21 @@ trait CommonMutableContainerTrait
 
     /**
      * {@inheritDoc}
-     * @return $this
+     * @return Dictionary
      */
     public function groupBy($callback)
     {
         $callback = $this->propertyExtractor($callback);
         $group = new Dictionary();
-        foreach ($this as $value) {
-            $key = $callback($value);
+        /** @var Dictionary $this */
+        foreach ($this as $element) {
+            $key = $callback($element);
             if (!$group->containsKey($key)) {
-                $element = $this instanceof VectorInterface ? new static([$value]) : new ArrayList([$value]);
+                $element = ($this instanceof VectorInterface) ? new static([$element]) : new ArrayList([$element]);
                 $group->add($key, $element);
             } else {
-                $value = $group->get($key)->add($value);
-                $group->set($key, $value);
+                $element = $group->get($key)->add($element);
+                $group->set($key, $element);
             }
         }
 
@@ -92,15 +104,16 @@ trait CommonMutableContainerTrait
 
     /**
      * {@inheritDoc}
-     * @return $this
+     * @return Dictionary
      */
     public function indexBy($callback)
     {
         $callback = $this->propertyExtractor($callback);
         $group = new Dictionary();
-        foreach ($this as $value) {
-            $key = $callback($value);
-            $group->set($key, $value);
+        /** @var Dictionary $this */
+        foreach ($this as $element) {
+            $key = $callback($element);
+            $group->set($key, $element);
         }
 
         return $group;

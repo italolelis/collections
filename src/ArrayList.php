@@ -18,6 +18,9 @@ class ArrayList extends AbstractCollectionArray implements VectorInterface, \Arr
     use StrictIterableTrait,
         GuardTrait;
 
+    /**
+     * {@inheritdoc}
+     */
     public function at($key)
     {
         $this->validateKeyType($key);
@@ -26,6 +29,9 @@ class ArrayList extends AbstractCollectionArray implements VectorInterface, \Arr
         return $this->container[$key];
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function set($key, $value)
     {
         $this->validateKeyType($key);
@@ -162,7 +168,8 @@ class ArrayList extends AbstractCollectionArray implements VectorInterface, \Arr
     public function offsetUnset($offset)
     {
         throw new \RuntimeException(
-            'Cannot unset an element of a ' . get_class($this));
+            'Cannot unset an element of a '.get_class($this)
+        );
     }
 
     /**
@@ -191,6 +198,7 @@ class ArrayList extends AbstractCollectionArray implements VectorInterface, \Arr
 
     /**
      * {@inheritdoc}
+     * @return ArrayList;
      */
     public static function fromArray(array $arr)
     {

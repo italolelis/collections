@@ -19,11 +19,17 @@ class Dictionary extends AbstractCollectionArray implements MapInterface, \Array
     use StrictKeyedIterableTrait,
         GuardTrait;
 
+    /**
+     * {@inheritdoc}
+     */
     public function at($k)
     {
         return $this[$k];
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function set($key, $value)
     {
         $this->container[$key] = $value;
@@ -37,7 +43,7 @@ class Dictionary extends AbstractCollectionArray implements MapInterface, \Array
     public function get($index)
     {
         if ($this->containsKey($index) === false) {
-            throw new OutOfBoundsException('No element at position ' . $index);
+            throw new OutOfBoundsException('No element at position '.$index);
         }
 
         return $this->container[$index];
@@ -49,7 +55,7 @@ class Dictionary extends AbstractCollectionArray implements MapInterface, \Array
     public function add($key, $value)
     {
         if ($this->containsKey($key)) {
-            throw new KeyException('The key ' . $key . ' already exists!');
+            throw new KeyException('The key '.$key.' already exists!');
         }
         $this->set($key, $value);
 

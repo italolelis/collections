@@ -2,6 +2,7 @@
 
 namespace Collections\Traits;
 
+use Collections\Dictionary;
 use Collections\Iterable;
 use Collections\VectorInterface;
 
@@ -15,143 +16,183 @@ trait StrictIterableTrait
      */
     public function map(callable $callable)
     {
-        $res = new static();
-        foreach ($this as $v) {
-            $res[] = $callable($v);
+        $results = new static();
+        /** @var Dictionary $this */
+        foreach ($this as $element) {
+            $results[] = $callable($element);
         }
 
-        return $res;
+        return $results;
     }
 
     /**
      * {@inheritDoc}
-     * @return $this
+     * @return VectorInterface
      */
     public function filter(callable $callable)
     {
-        $res = new static();
-        foreach ($this as $v) {
-            if ($callable($v)) {
-                $res[] = $v;
+        /** @var VectorInterface $results */
+        $results = new static();
+        /** @var Dictionary $this */
+        foreach ($this as $element) {
+            if ($callable($element)) {
+                $results[] = $element;
             }
         }
 
-        return $res;
-    }
-
-    public function zip(Iterable $iterable)
-    {
-        $res = new static();
-        $it = $iterable->getIterator();
-        foreach ($this as $v) {
-            if (!$it->valid()) {
-                break;
-            }
-            $res[] = new Pair($v, $it->current());
-            $it->next();
-        }
-
-        return $res;
+        return $results;
     }
 
     /**
      * {@inheritDoc}
-     * @return $this
+     * @return VectorInterface
+     */
+    public function zip(Iterable $iterable)
+    {
+        /** @var VectorInterface $results */
+        $results = new static();
+        /** @var \Iterator $iterator */
+        $iterator = $iterable->getIterator();
+        /** @var Dictionary $this */
+        foreach ($this as $element) {
+            if (!$iterator->valid()) {
+                break;
+            }
+            $results[] = new Pair($element, $iterator->current());
+            $iterator->next();
+        }
+
+        return $results;
+    }
+
+    /**
+     * {@inheritDoc}
+     * @return VectorInterface
      */
     public function take($size = 1)
     {
-        $res = new static();
+        /** @var VectorInterface $results */
+        $results = new static();
 
         if ($size <= 0) {
-            return $res;
+            return $results;
         }
-
-        foreach ($this as $v) {
-            $res[] = $v;
+        /** @var Dictionary $this */
+        foreach ($this as $element) {
+            $results[] = $element;
             if (--$size === 0) {
                 break;
             }
         }
 
-        return $res;
+        return $results;
     }
 
+    /**
+     * {@inheritDoc}
+     * @return VectorInterface
+     */
     public function takeWhile(callable $callable)
     {
-        $res = new static();
-        foreach ($this as $v) {
-            if (!$callable($v)) {
+        /** @var VectorInterface $results */
+        $results = new static();
+        /** @var Dictionary $this */
+        foreach ($this as $element) {
+            if (!$callable($element)) {
                 break;
             }
-            $res[] = $v;
+            $results[] = $element;
         }
 
-        return $res;
+        return $results;
     }
 
+    /**
+     * {@inheritDoc}
+     * @return VectorInterface
+     */
     public function skip($n)
     {
-        $res = new static();
-        foreach ($this as $v) {
+        /** @var VectorInterface $results */
+        $results = new static();
+        /** @var Dictionary $this */
+        foreach ($this as $element) {
             if ($n <= 0) {
-                $res[] = $v;
+                $results[] = $element;
             } else {
                 --$n;
             }
         }
 
-        return $res;
+        return $results;
     }
 
+    /**
+     * {@inheritDoc}
+     * @return VectorInterface
+     */
     public function skipWhile(callable $callable)
     {
-        $res = new static();
+        /** @var VectorInterface $results */
+        $results = new static();
         $skip = true;
-        foreach ($this as $v) {
+        /** @var Dictionary $this */
+        foreach ($this as $element) {
             if ($skip) {
-                if ($callable($v)) {
+                if ($callable($element)) {
                     continue;
                 }
                 $skip = false;
             }
-            $res[] = $v;
+            $results[] = $element;
         }
 
-        return $res;
+        return $results;
     }
 
+    /**
+     * {@inheritDoc}
+     * @return VectorInterface
+     */
     public function slice($start, $length)
     {
-        $res = new static();
+        /** @var VectorInterface $results */
+        $results = new static();
+
         if ($length <= 0) {
-            return $res;
+            return $results;
         }
-        foreach ($this as $v) {
+        /** @var Dictionary $this */
+        foreach ($this as $element) {
             if ($start !== 0) {
                 --$start;
                 continue;
             }
-            $res[] = $v;
+            $results[] = $element;
             if (--$length === 0) {
                 break;
             }
         }
 
-        return $res;
+        return $results;
     }
 
+    /**
+     * {@inheritDoc}
+     * @return $this
+     */
     public function concat(\Traversable $iterable)
     {
-        $res = [];
-
-        foreach ($this as $v) {
-            $res[] = $v;
+        $results = [];
+        /** @var Dictionary $this */
+        foreach ($this as $element) {
+            $results[] = $element;
         }
 
-        foreach ($iterable as $v) {
-            $res[] = $v;
+        foreach ($iterable as $element) {
+            $results[] = $element;
         }
-        $this->container = $res;
+        $this->setAll($results);
 
         return $this;
     }
@@ -162,8 +203,9 @@ trait StrictIterableTrait
      */
     public function first()
     {
-        foreach ($this as $v) {
-            return $v;
+        /** @var Dictionary $this */
+        foreach ($this as $element) {
+            return $element;
         }
 
         return null;
@@ -175,9 +217,9 @@ trait StrictIterableTrait
      */
     public function last()
     {
-        $result = $this->toArray();
+        $results = $this->toArray();
 
-        return array_pop($result);
+        return array_pop($results);
     }
 
     /**
@@ -186,8 +228,9 @@ trait StrictIterableTrait
      */
     public function each(callable $callable)
     {
-        foreach ($this as $v) {
-            $callable($v);
+        /** @var Dictionary $this */
+        foreach ($this as $element) {
+            $callable($element);
         }
 
         return $this;
@@ -195,11 +238,13 @@ trait StrictIterableTrait
 
     /**
      * {@inheritdoc}
+     * @return bool
      */
-    public function exists(callable $fn)
+    public function exists(callable $callable)
     {
+        /** @var Dictionary $this */
         foreach ($this as $element) {
-            if ($fn($element)) {
+            if ($callable($element)) {
                 return true;
             }
         }
@@ -207,6 +252,9 @@ trait StrictIterableTrait
         return false;
     }
 
+    /**
+     * @return VectorInterface
+     */
     public function concatAll()
     {
         /** @var VectorInterface $results */

@@ -26,6 +26,13 @@ abstract class AbstractConstCollectionArray extends AbstractCollection implement
      */
     protected $container = [];
 
+    /**
+     * AbstractConstCollectionArray constructor.
+     *
+     * @param mixed $array
+     *
+     * @throws  \InvalidArgumentException
+     */
     public function __construct($array = null)
     {
         if ($array !== null) {
@@ -39,8 +46,6 @@ abstract class AbstractConstCollectionArray extends AbstractCollection implement
                 }
                 $this[$key] = $item;
             }
-
-            return $this;
         }
     }
 
@@ -120,38 +125,66 @@ abstract class AbstractConstCollectionArray extends AbstractCollection implement
         return $this->container;
     }
 
+    /**
+     * @return ArrayList
+     */
     public function toVector()
     {
         return new ArrayList($this);
     }
 
+    /**
+     * @return ImmArrayList
+     */
     public function toImmVector()
     {
         return new ImmArrayList($this);
     }
 
+    /**
+     * TODO: Implement toSet() method.
+     */
     public function toSet()
     {
-        // TODO: Implement toSet() method.
     }
 
+    /**
+     * @return ImmSet
+     */
     public function toImmSet()
     {
         return new ImmSet($this);
     }
 
+    /**
+     * @return LazyIterableView
+     */
     public function lazy()
     {
         return new LazyIterableView($this);
     }
 
+    /**
+     * @return Dictionary
+     */
     public function toMap()
     {
         return new Dictionary($this);
     }
 
+    /**
+     * @return ImmDictionary
+     */
     public function toImmMap()
     {
         return new ImmDictionary($this);
+    }
+
+    /**
+     * @return array
+     */
+    public function getAll()
+    {
+        return $this->container;
     }
 }

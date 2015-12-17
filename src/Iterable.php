@@ -73,7 +73,8 @@ interface Iterable extends \IteratorAggregate
      * Returns the same collection for chaining.
      *
      * @param callable $fn - A callable function that will receive each of the elements
-     * in this collection
+     *                     in this collection
+     *
      * @return Iterable - The same `Iterable` instance.
      */
     public function each(callable $fn);
@@ -86,7 +87,7 @@ interface Iterable extends \IteratorAggregate
      * unlike `filter()` where only values that meet a certain criteria are
      * affected.
      *
-     * @param $fn - The callback containing the operation to apply to the
+     * @param $fn   - The callback containing the operation to apply to the
      *              `Iterable` values.
      *
      * @return Iterable - an `Iterable` containing the values after a user-specified
@@ -101,7 +102,7 @@ interface Iterable extends \IteratorAggregate
      * Only values that meet a certain criteria are affected by a call to
      * `filter()`, while all values are affected by a call to `map()`.
      *
-     * @param $fn - The callback containing the condition to apply to the
+     * @param $fn   - The callback containing the condition to apply to the
      *              `Itearble` values.
      *
      * @return Iterable - an `Iterable` containing the values after a user-specified
@@ -118,8 +119,8 @@ interface Iterable extends \IteratorAggregate
      *
      * `$n` is 1-based. So the first element is 1, the second 2, etc.
      *
-     * @param $size - The last element that will be included in the returned
-     *             `Iterable`.
+     * @param int $size - The last element that will be included in the returned
+     *                  `Iterable`.
      *
      * @return Iterable - An `Iterable that is a proper subset of the current `Iterable`
      *           up to `n` elements.
@@ -135,13 +136,13 @@ interface Iterable extends \IteratorAggregate
      *
      * `$n` is 1-based. So the first element is 1, the second 2, etc.
      *
-     * @param $n - The last element to be skipped; the `$n+1` element will be
-     *             the first one in the returned `Iterable`.
+     * @param int $count - The last element to be skipped; the `$count+1` element will be
+     *                   the first one in the returned `Iterable`.
      *
      * @return Iterable - An `Iterable` that is a proper subset of the current `Iterable`
      *           containing values after the specified `n`-th element.
      */
-    public function skip($n);
+    public function skip($count);
 
     /**
      * Returns a subset of the current `Iterable` starting from a given key up
@@ -154,9 +155,9 @@ interface Iterable extends \IteratorAggregate
      * The returned `Iterable` will always be a proper subset of the current
      * `Iterable`.
      *
-     * @param $start - The starting key of the current `Iterable` to begin the
-     *                 returned `Iterable`.
-     * @param $length - The length of the returned `Iterable`.
+     * @param int $start  - The starting key of the current `Iterable` to begin the
+     *                    returned `Iterable`.
+     * @param int $length - The length of the returned `Iterable`.
      *
      * @return Iterable - An `Iterable` that is a proper subset of the current `Iterable`
      *           starting at `$start` up to but not including the element
@@ -166,7 +167,9 @@ interface Iterable extends \IteratorAggregate
 
     /**
      * Merge the elements of this vector into another
+     *
      * @param \Traversable $collection
+     *
      * @return Iterable
      */
     public function concat(\Traversable $collection);
@@ -187,11 +190,29 @@ interface Iterable extends \IteratorAggregate
      */
     public function last();
 
+    /**
+     * @param callable $callback
+     *
+     * @return Dictionary
+     */
     public function groupBy($callback);
 
+    /**
+     * @param callable $callback
+     *
+     * @return Dictionary
+     */
     public function indexBy($callback);
 
-    public function exists(callable $fn);
+    /**
+     * @param callable $callback
+     *
+     * @return bool
+     */
+    public function exists(callable $callback);
 
+    /**
+     * @return mixed
+     */
     public function concatAll();
 }

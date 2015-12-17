@@ -2,6 +2,10 @@
 
 namespace Collections;
 
+/**
+ * Interface OutputCollectionInterface
+ * @package Collections
+ */
 interface OutputCollectionInterface
 {
     /**
