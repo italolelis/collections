@@ -55,14 +55,6 @@ class Set extends AbstractCollectionArray implements SetInterface
     /**
      * @inheritDoc
      */
-    public function removeKey($key)
-    {
-        return $this->remove($key);
-    }
-
-    /**
-     * @inheritDoc
-     */
     public function addAll($items)
     {
         if (!is_array($items) && !$items instanceof \Traversable) {
@@ -74,10 +66,24 @@ class Set extends AbstractCollectionArray implements SetInterface
         }
     }
 
-    public function remove($index)
+    /**
+     * {@inheritdoc}
+     */
+    public function remove($element)
     {
-        $this->validateKeyBounds($index);
-        unset($this->container[$index]);
+        $key = array_search($element, $this->container);
+        $this->removeKey($key);
+
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function removeKey($key)
+    {
+        $this->validateKeyBounds($key);
+        unset($this->container[$key]);
 
         return $this;
     }
@@ -98,5 +104,14 @@ class Set extends AbstractCollectionArray implements SetInterface
         $this->container[] = $item;
 
         return $this;
+    }
+
+    public function removeAll(Iterable $iterable)
+    {
+        $iterable->each(function ($item) {
+            if ($this->contains($item)) {
+                $this->remove($item);
+            }
+        });
     }
 }

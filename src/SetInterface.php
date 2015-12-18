@@ -23,4 +23,6 @@ interface SetInterface extends
      * @return $this - A shallow copy of the updated current collection itself.
      */
     public function add($item);
+
+    public function removeAll(Iterable $iterable);
 }

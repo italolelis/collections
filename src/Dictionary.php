@@ -94,8 +94,8 @@ class Dictionary extends AbstractCollectionArray implements MapInterface, \Array
      */
     public function remove($element)
     {
-        $this->validateKeyBounds($element);
-        unset($this->container[$element]);
+        $key = array_search($element, $this->container);
+        $this->removeKey($key);
 
         return $this;
     }
@@ -105,7 +105,10 @@ class Dictionary extends AbstractCollectionArray implements MapInterface, \Array
      */
     public function removeKey($key)
     {
-        return $this->remove($key);
+        $this->validateKeyBounds($key);
+        unset($this->container[$key]);
+
+        return $this;
     }
 
     /**
