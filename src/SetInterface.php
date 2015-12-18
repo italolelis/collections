@@ -4,13 +4,13 @@
 namespace Collections;
 
 /**
- * Represents a write-enabled (mutable) sequence of key/value pairs
- * (i.e. a map).
+ * Represents a write-enabled (mutable) set of values, not indexed by keys
+ * (i.e. a set).
  */
-interface MapInterface extends
-    ConstMapInterface,
+interface SetInterface extends
+    ConstSetInterface,
     CollectionInterface,
-    MapAccessInterface
+    SetAccessInterface
 {
     /**
      * Add a value to the collection and return the collection itself.
@@ -19,10 +19,8 @@ interface MapInterface extends
      * made to the current collection will be reflected in the returned
      * collection.
      *
-     * @param $key - The key to set a value.
-     * @param $value - The value to add.
-     *
-     * @return  - A shallow copy of the updated current collection itself.
+     * @param mixed $item - The value to add.
+     * @return $this - A shallow copy of the updated current collection itself.
      */
-    public function add($key, $value);
+    public function add($item);
 }

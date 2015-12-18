@@ -4,7 +4,8 @@
 namespace Collections;
 
 /**
- * Represents a non-generic collection of objects that can be individually accessed by index.
+ * Represents a write-enabled (mutable) sequence of values, indexed by integers
+ * (i.e., a vector).
  */
 interface VectorInterface extends
     ConstVectorInterface,
@@ -12,9 +13,14 @@ interface VectorInterface extends
     IndexAccessInterface
 {
     /**
-     * Adds an item to the VectorInterface.
-     * @param mixed $item The object to add to the VectorInterface.
-     * @return VectorInterface
+     * Add a value to the collection and return the collection itself.
+     *
+     * It returns a shallow copy of the current collection, meaning changes
+     * made to the current collection will be reflected in the returned
+     * collection.
+     *
+     * @param mixed $item - The value to add.
+     * @return $this - A shallow copy of the updated current collection itself.
      */
     public function add($item);
 

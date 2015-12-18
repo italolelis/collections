@@ -132,7 +132,7 @@ abstract class AbstractConstCollectionArray extends AbstractCollection implement
 
     public function toSet()
     {
-        // TODO: Implement toSet() method.
+        return new Set($this);
     }
 
     public function toImmSet()
