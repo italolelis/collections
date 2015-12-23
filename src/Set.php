@@ -6,7 +6,7 @@ use Collections\Iterator\SetIterator;
 use Collections\Traits\GuardTrait;
 use Collections\Traits\StrictKeyedIterableTrait;
 
-class Set extends AbstractCollectionArray implements SetInterface
+class Set extends AbstractCollectionArray implements SetInterface, \ArrayAccess
 {
     use GuardTrait,
         StrictKeyedIterableTrait;
@@ -71,7 +71,7 @@ class Set extends AbstractCollectionArray implements SetInterface
      */
     public function remove($element)
     {
-        $key = array_search($element, $this->container);
+        $key = array_search($element, $this->container, true);
         $this->removeKey($key);
 
         return $this;
@@ -82,7 +82,6 @@ class Set extends AbstractCollectionArray implements SetInterface
      */
     public function removeKey($key)
     {
-        $this->validateKeyBounds($key);
         unset($this->container[$key]);
 
         return $this;
@@ -93,7 +92,7 @@ class Set extends AbstractCollectionArray implements SetInterface
      */
     public function getIterator()
     {
-        return new SetIterator();
+        return new SetIterator($this->container);
     }
 
     /**
@@ -106,6 +105,9 @@ class Set extends AbstractCollectionArray implements SetInterface
         return $this;
     }
 
+    /**
+     * @inheritDoc
+     */
     public function removeAll(Iterable $iterable)
     {
         $iterable->each(function ($item) {
@@ -113,5 +115,44 @@ class Set extends AbstractCollectionArray implements SetInterface
                 $this->remove($item);
             }
         });
+
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function offsetExists($offset)
+    {
+        return $this->containsKey($offset) && $this->at($offset) !== null;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function offsetGet($offset)
+    {
+        return $this->get($offset);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function offsetSet($offset, $value)
+    {
+        if (is_null($offset)) {
+            $this->add($value);
+        } else {
+            $this->set($offset, $value);
+        }
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function offsetUnset($offset)
+    {
+        throw new \RuntimeException(
+            'Cannot unset an element of a ' . get_class($this));
     }
 }
