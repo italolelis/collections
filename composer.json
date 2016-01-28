@@ -17,9 +17,9 @@
     }
   ],
   "require": {
-    "php": ">=5.4.0",
+    "php": ">=5.5.9",
     "easyframework/generics": "~2.0",
-    "symfony/property-access": "~2.6",
+    "symfony/property-access": "~3.0",
     "asm89/rx.php": "~0.3"
   },
   "require-dev": {
