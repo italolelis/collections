@@ -6,8 +6,6 @@ namespace Collections;
 use Collections\Immutable\ImmArrayList;
 use Collections\Immutable\ImmDictionary;
 use Collections\Immutable\ImmSet;
-use Rx\Observable\ArrayObservable;
-use Rx\Observable\BaseObservable;
 
 /**
  * Provides the abstract base class for a strongly typed collection.
@@ -101,14 +99,6 @@ abstract class AbstractConstCollectionArray extends AbstractCollection implement
     }
 
     /**
-     * @return BaseObservable
-     */
-    public function toObservable()
-    {
-        return new ArrayObservable($this->toArray());
-    }
-
-    /**
      * (PHP 5 &gt;= 5.4.0)<br/>
      * Specify data which should be serialized to JSON
      * @link http://php.net/manual/en/jsonserializable.jsonserialize.php
@@ -138,11 +128,6 @@ abstract class AbstractConstCollectionArray extends AbstractCollection implement
     public function toImmSet()
     {
         return new ImmSet($this);
-    }
-
-    public function lazy()
-    {
-        return new LazyIterableView($this);
     }
 
     public function toMap()

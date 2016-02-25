@@ -2,8 +2,6 @@
 
 namespace Collections;
 
-use Rx\Observable\ArrayObservable;
-
 interface Iterable extends \IteratorAggregate
 {
     /**
@@ -39,24 +37,6 @@ interface Iterable extends \IteratorAggregate
      * @return ConstSetInterface - an `ImmSet` converted from the current `Iterable`.
      */
     public function toImmSet();
-
-    /**
-     * @return ArrayObservable
-     */
-    public function toObservable();
-
-    /**
-     * Returns a lazy, access elements only when needed view of the current
-     * `Iterable`.
-     *
-     * Normally, memory is allocated for all of the elements of the `Iterable`.
-     * With a lazy view, memory is allocated for an element only when needed or
-     * used in a calculation like in `map()` or `filter()`.
-     *
-     * @return Iterable - an `Iterable` representing the lazy view into the current
-     *           `Iterable`.
-     */
-    public function lazy();
 
     /**
      * Returns an `Iterable` containing the current `Iterable`'s values.
