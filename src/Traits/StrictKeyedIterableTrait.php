@@ -2,6 +2,7 @@
 
 namespace Collections\Traits;
 
+use Collections\ArrayList;
 use Collections\Iterable;
 use Collections\MapInterface;
 
@@ -11,7 +12,7 @@ trait StrictKeyedIterableTrait
 
     public function keys()
     {
-        $res = new static();
+        $res = new ArrayList();
         foreach ($this as $k => $_) {
             $res[] = $k;
         }
