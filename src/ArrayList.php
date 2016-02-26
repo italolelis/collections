@@ -5,7 +5,7 @@ namespace Collections;
 
 use Collections\Iterator\VectorIterator;
 use Collections\Traits\GuardTrait;
-use Collections\Traits\StrictKeyedIterableTrait;
+use Collections\Traits\StrictIterableTrait;
 use InvalidArgumentException;
 use Traversable;
 
@@ -15,7 +15,7 @@ use Traversable;
  */
 class ArrayList extends AbstractCollectionArray implements VectorInterface, \ArrayAccess
 {
-    use StrictKeyedIterableTrait,
+    use StrictIterableTrait,
         GuardTrait;
 
     public function at($key)

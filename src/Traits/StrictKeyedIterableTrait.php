@@ -2,8 +2,6 @@
 
 namespace Collections\Traits;
 
-use Collections\ArrayList;
-use Collections\Dictionary;
 use Collections\Iterable;
 use Collections\MapInterface;
 
@@ -13,7 +11,7 @@ trait StrictKeyedIterableTrait
 
     public function keys()
     {
-        $res = new ArrayList();
+        $res = new static();
         foreach ($this as $k => $_) {
             $res[] = $k;
         }
@@ -23,7 +21,7 @@ trait StrictKeyedIterableTrait
 
     public function map(callable $callback)
     {
-        $res = new Dictionary();
+        $res = new static();
         foreach ($this as $k => $v) {
             $res[$k] = $callback($v);
         }
@@ -33,7 +31,7 @@ trait StrictKeyedIterableTrait
 
     public function mapWithKey($callback)
     {
-        $res = new Dictionary();
+        $res = new static();
         foreach ($this as $k => $v) {
             $res[$k] = $callback($k, $v);
         }
@@ -43,7 +41,7 @@ trait StrictKeyedIterableTrait
 
     public function filter(callable $callback)
     {
-        $res = new Dictionary();
+        $res = new static();
         foreach ($this as $k => $v) {
             if ($callback($v)) {
                 $res[$k] = $v;
@@ -55,7 +53,7 @@ trait StrictKeyedIterableTrait
 
     public function filterWithKey($callback)
     {
-        $res = new Dictionary();
+        $res = new static();
         foreach ($this as $k => $v) {
             if ($callback($k, $v)) {
                 $res[$k] = $v;
@@ -67,7 +65,7 @@ trait StrictKeyedIterableTrait
 
     public function zip($iterable)
     {
-        $res = new Dictionary();
+        $res = new static();
         $it = $iterable->getIterator();
         foreach ($this as $k => $v) {
             if (!$it->valid()) {
@@ -82,7 +80,7 @@ trait StrictKeyedIterableTrait
 
     public function take($size = 1)
     {
-        $res = new Dictionary();
+        $res = new static();
         if ($size <= 0) {
             return $res;
         }
@@ -98,7 +96,7 @@ trait StrictKeyedIterableTrait
 
     public function takeWhile($fn)
     {
-        $res = new Dictionary();
+        $res = new static();
         foreach ($this as $k => $v) {
             if (!$fn($v)) {
                 break;
@@ -111,7 +109,7 @@ trait StrictKeyedIterableTrait
 
     public function skip($n)
     {
-        $res = new Dictionary();
+        $res = new static();
         foreach ($this as $k => $v) {
             if ($n <= 0) {
                 $res[$k] = $v;
@@ -125,7 +123,7 @@ trait StrictKeyedIterableTrait
 
     public function skipWhile($fn)
     {
-        $res = new Dictionary();
+        $res = new static();
         $skip = true;
         foreach ($this as $k => $v) {
             if ($skip) {
@@ -142,7 +140,7 @@ trait StrictKeyedIterableTrait
 
     public function slice($start, $lenght)
     {
-        $res = new Dictionary();
+        $res = new static();
         if ($lenght <= 0) {
             return $res;
         }

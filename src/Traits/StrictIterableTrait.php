@@ -27,6 +27,20 @@ trait StrictIterableTrait
      * {@inheritDoc}
      * @return $this
      */
+    public function mapWithKey($callback)
+    {
+        $res = new static();
+        foreach ($this as $k => $v) {
+            $res[$k] = $callback($k, $v);
+        }
+
+        return $res;
+    }
+
+    /**
+     * {@inheritDoc}
+     * @return $this
+     */
     public function filter(callable $callable)
     {
         $res = new static();
@@ -39,6 +53,26 @@ trait StrictIterableTrait
         return $res;
     }
 
+    /**
+     * {@inheritDoc}
+     * @return $this
+     */
+    public function filterWithKey($callback)
+    {
+        $res = new static();
+        foreach ($this as $k => $v) {
+            if ($callback($k, $v)) {
+                $res[$k] = $v;
+            }
+        }
+
+        return $res;
+    }
+
+    /**
+     * {@inheritDoc}
+     * @return $this
+     */
     public function zip(Iterable $iterable)
     {
         $res = new static();
