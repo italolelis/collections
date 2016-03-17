@@ -54,7 +54,9 @@ class RxTest extends CollectionsTestCase
             ['id' => 3, 'name' => 'baz', 'parent_id' => 10],
         ];
         $collection = new Dictionary($items);
-        $grouped = $collection->groupBy('parent_id');
+        $grouped = $collection->groupBy(function ($item) {
+            return $item['parent_id'];
+        });
         $expected = [
             10 => [
                 ['id' => 1, 'name' => 'foo', 'parent_id' => 10],
@@ -85,7 +87,9 @@ class RxTest extends CollectionsTestCase
             ['id' => 3, 'name' => 'baz', 'thing' => ['parent_id' => 10]],
         ];
         $collection = new Dictionary($items);
-        $grouped = $collection->groupBy('thing.parent_id');
+        $grouped = $collection->groupBy(function ($element) {
+            return $element['thing']['parent_id'];
+        });
         $expected = [
             10 => [
                 ['id' => 1, 'name' => 'foo', 'thing' => ['parent_id' => 10]],
@@ -111,7 +115,9 @@ class RxTest extends CollectionsTestCase
             ['id' => 3, 'name' => 'baz', 'parent_id' => 10],
         ];
         $collection = new Dictionary($items);
-        $grouped = $collection->indexBy('id');
+        $grouped = $collection->indexBy(function ($element) {
+            return $element['id'];
+        });
         $expected = [
             1 => ['id' => 1, 'name' => 'foo', 'parent_id' => 10],
             3 => ['id' => 3, 'name' => 'baz', 'parent_id' => 10],
@@ -138,7 +144,9 @@ class RxTest extends CollectionsTestCase
             ['id' => 3, 'name' => 'baz', 'thing' => ['parent_id' => 10]],
         ];
         $collection = new Dictionary($items);
-        $grouped = $collection->indexBy('thing.parent_id');
+        $grouped = $collection->indexBy(function ($element) {
+            return $element['thing']['parent_id'];
+        });
         $expected = [
             10 => ['id' => 3, 'name' => 'baz', 'thing' => ['parent_id' => 10]],
             11 => ['id' => 2, 'name' => 'bar', 'thing' => ['parent_id' => 11]],

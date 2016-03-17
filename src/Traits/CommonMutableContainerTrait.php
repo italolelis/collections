@@ -9,8 +9,6 @@ use Collections\VectorInterface;
 
 trait CommonMutableContainerTrait
 {
-    use ExtractTrait;
-
     /**
      * {@inheritdoc}
      */
@@ -74,7 +72,6 @@ trait CommonMutableContainerTrait
      */
     public function groupBy($callback)
     {
-        $callback = $this->propertyExtractor($callback);
         $group = new Dictionary();
         foreach ($this as $value) {
             $key = $callback($value);
@@ -96,7 +93,6 @@ trait CommonMutableContainerTrait
      */
     public function indexBy($callback)
     {
-        $callback = $this->propertyExtractor($callback);
         $group = new Dictionary();
         foreach ($this as $value) {
             $key = $callback($value);
