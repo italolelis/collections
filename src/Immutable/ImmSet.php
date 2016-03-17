@@ -7,7 +7,6 @@ use Collections\ConstSetInterface;
 use Collections\Iterator\SetIterator;
 use Collections\Traits\GuardTrait;
 use Collections\Traits\StrictKeyedIterableTrait;
-use Symfony\Component\PropertyAccess\Exception\OutOfBoundsException;
 
 class ImmSet extends AbstractConstCollectionArray implements ConstSetInterface
 {
@@ -30,7 +29,7 @@ class ImmSet extends AbstractConstCollectionArray implements ConstSetInterface
         $this->validateKeyType($index);
 
         if ($this->containsKey($index) === false) {
-            throw new OutOfBoundsException('No element at position ' . $index);
+            throw new \OutOfBoundsException('No element at position ' . $index);
         }
 
         return $this->container[$index];

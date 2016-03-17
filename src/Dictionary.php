@@ -8,7 +8,6 @@ use Collections\Iterator\MapIterator;
 use Collections\Traits\GuardTrait;
 use Collections\Traits\StrictKeyedIterableTrait;
 use InvalidArgumentException;
-use Symfony\Component\PropertyAccess\Exception\OutOfBoundsException;
 use Traversable;
 
 /**
@@ -37,7 +36,7 @@ class Dictionary extends AbstractCollectionArray implements MapInterface, \Array
     public function get($index)
     {
         if ($this->containsKey($index) === false) {
-            throw new OutOfBoundsException('No element at position ' . $index);
+            throw new \OutOfBoundsException('No element at position ' . $index);
         }
 
         return $this->container[$index];

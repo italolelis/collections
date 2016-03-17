@@ -6,7 +6,6 @@ use Collections\AbstractConstCollectionArray;
 use Collections\ConstMapInterface;
 use Collections\Iterator\MapIterator;
 use Collections\Traits\StrictKeyedIterableTrait;
-use Symfony\Component\PropertyAccess\Exception\OutOfBoundsException;
 
 class ImmDictionary extends AbstractConstCollectionArray implements ConstMapInterface
 {
@@ -23,7 +22,7 @@ class ImmDictionary extends AbstractConstCollectionArray implements ConstMapInte
     public function get($index)
     {
         if ($this->containsKey($index) === false) {
-            throw new OutOfBoundsException('No element at position ' . $index);
+            throw new \OutOfBoundsException('No element at position ' . $index);
         }
 
         return $this->container[$index];
