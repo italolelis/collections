@@ -17,9 +17,21 @@ trait CommonMutableContainerTrait
         return new ArrayList($this);
     }
 
+    /**
+     * @return array
+     */
     public function toValuesArray()
     {
-        return $this->toArray();
+        $arr = [];
+        foreach ($this as $value) {
+            if ($value instanceof Iterable) {
+                $arr[] = $value->toArray();
+            } else {
+                $arr[] = $value;
+            }
+        }
+
+        return $arr;
     }
 
     public function toKeysArray()

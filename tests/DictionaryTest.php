@@ -191,4 +191,12 @@ class DictionaryTest extends CollectionsTestCase
         $this->coll->addAll($data);
         $this->assertEquals($data, $this->coll->toArray());
     }
+    
+    public function testToValuesArray()
+    {
+        $dictionary = new Dictionary();
+        $dictionary->add('key1', 'value1')->add('key2', 'value2');
+        $expected = ['value1', 'value2'];
+        $this->assertEquals($expected, $dictionary->toValuesArray());
+    }
 }
