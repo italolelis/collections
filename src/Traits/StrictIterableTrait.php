@@ -253,4 +253,12 @@ trait StrictIterableTrait
 
         return $results;
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function reduce(callable $callback, $initial = null)
+    {
+        return array_reduce($this->toArray(), $callback, $initial);
+    }
 }

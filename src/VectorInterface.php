@@ -43,4 +43,13 @@ interface VectorInterface extends
      * @return void
      */
     public function reverse();
+
+    /**
+     * Reduce the vector to a single value.
+     *
+     * @param  callable  $callback
+     * @param  mixed     $initial
+     * @return self
+     */
+    public function reduce(callable $callback, $initial = null);
 }
