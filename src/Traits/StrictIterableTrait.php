@@ -259,6 +259,10 @@ trait StrictIterableTrait
      */
     public function reduce(callable $callback, $initial = null)
     {
-        return array_reduce($this->toArray(), $callback, $initial);
+        foreach ($this as $element) {
+            $initial = $callback($initial, $element);
+        }
+
+        return $initial;
     }
 }
