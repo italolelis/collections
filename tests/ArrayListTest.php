@@ -276,4 +276,20 @@ class ArrayListTest extends CollectionsTestCase
 
         $this->assertInstanceOf('\Collections\\Dictionary', $map);
     }
+
+    public function testReduce()
+    {
+        $this->coll->addAll(array(1, 2, 3, 4));
+        $result = $this->coll->reduce(function ($carry, $item) {
+            return $carry += $item;
+        });
+
+        $this->assertEquals(10, $result);
+
+        $result = $this->coll->reduce(function ($carry, $item) {
+            return $carry += $item;
+        }, 10);
+
+        $this->assertEquals(20, $result);
+    }
 }

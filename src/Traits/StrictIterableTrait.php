@@ -253,4 +253,16 @@ trait StrictIterableTrait
 
         return $results;
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function reduce(callable $callback, $initial = null)
+    {
+        foreach ($this as $element) {
+            $initial = $callback($initial, $element);
+        }
+
+        return $initial;
+    }
 }
