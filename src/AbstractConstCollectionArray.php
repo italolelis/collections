@@ -35,7 +35,7 @@ abstract class AbstractConstCollectionArray extends AbstractCollection implement
                 if (is_array($item)) {
                     $item = new static($item);
                 }
-                $this[$key] = $item;
+                $this->container[$key] = $item;
             }
 
             return $this;
