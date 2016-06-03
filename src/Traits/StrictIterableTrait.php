@@ -173,23 +173,7 @@ trait StrictIterableTrait
 
         return $res;
     }
-
-    public function concat(\Traversable $iterable)
-    {
-        $res = [];
-
-        foreach ($this as $v) {
-            $res[] = $v;
-        }
-
-        foreach ($iterable as $v) {
-            $res[] = $v;
-        }
-        $this->container = $res;
-
-        return $this;
-    }
-
+    
     /**
      * {@inheritDoc}
      * @return $this
