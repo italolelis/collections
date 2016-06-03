@@ -148,7 +148,7 @@ trait CommonMutableContainerTrait
     {
         $merged = $array;
 
-        foreach ($array1 as $key => & $value) {
+        foreach ($array1 as $key => $value) {
             $isValid = function ($value) {
                 return (is_array($value) || $value instanceof \Traversable);
             };
