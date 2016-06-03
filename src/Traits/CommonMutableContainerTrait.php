@@ -157,8 +157,8 @@ trait CommonMutableContainerTrait
                 $merged[$key] = $this->concatRecurse($merged[$key], $value);
             } else {
                 if (is_numeric($key)) {
-                    if (!isset($merged[$value])) {
-                        $merged[] = $value;
+                    if (!isset($merged[$key])) {
+                        $merged[$key] = $value;
                     }
                 } else {
                     $merged[$key] = $value;
