@@ -144,31 +144,6 @@ trait CommonMutableContainerTrait
         return $this;
     }
 
-    private function concatRecurse($array, $array1)
-    {
-        $merged = $array;
-
-        foreach ($array1 as $key => $value) {
-            $isValid = function ($value) {
-                return (is_array($value) || $value instanceof \Traversable);
-            };
-
-            if (($isValid($value) && isset($merged[$key])) && $isValid($merged[$key])) {
-                $merged[$key] = $this->concatRecurse($merged[$key], $value);
-            } else {
-                if (is_numeric($key)) {
-                    if (!isset($merged[$key])) {
-                        $merged[$key] = $value;
-                    }
-                } else {
-                    $merged[$key] = $value;
-                }
-            }
-        }
-
-        return $merged;
-    }
-
     private function replaceRecurse($array, $array1)
     {
         foreach ($array1 as $key => $value) {

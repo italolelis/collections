@@ -158,7 +158,7 @@ trait StrictKeyedIterableTrait
 
         return $res;
     }
-    
+
     public function first()
     {
         foreach ($this as $v) {
@@ -233,5 +233,24 @@ trait StrictKeyedIterableTrait
         });
 
         return $results;
+    }
+
+    private function concatRecurse($array, $array1)
+    {
+        $merged = $array;
+
+        foreach ($array1 as $key => $value) {
+            $isValid = function ($value) {
+                return (is_array($value) || $value instanceof \Traversable);
+            };
+
+            if (($isValid($value) && isset($merged[$key])) && $isValid($merged[$key])) {
+                $merged[$key] = $this->concatRecurse($merged[$key], $value);
+            } else {
+                $merged[$key] = $value;
+            }
+        }
+
+        return $merged;
     }
 }

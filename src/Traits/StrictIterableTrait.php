@@ -173,7 +173,7 @@ trait StrictIterableTrait
 
         return $res;
     }
-    
+
     /**
      * {@inheritDoc}
      * @return $this
@@ -248,5 +248,26 @@ trait StrictIterableTrait
         }
 
         return $initial;
+    }
+
+    private function concatRecurse($array, $array1)
+    {
+        $merged = $array;
+
+        foreach ($array1 as $key => $value) {
+            $isValid = function ($value) {
+                return (is_array($value) || $value instanceof \Traversable);
+            };
+
+            if (($isValid($value) && isset($merged[$key])) && $isValid($merged[$key])) {
+                $merged[$key] = $this->concatRecurse($merged[$key], $value);
+            } else {
+                if (!in_array($value, $merged->toArray())) {
+                    $merged[] = $value;
+                }
+            }
+        }
+
+        return $merged;
     }
 }
