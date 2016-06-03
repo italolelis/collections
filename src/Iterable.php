@@ -25,7 +25,7 @@ interface Iterable extends \IteratorAggregate
     public function toImmVector();
 
     /**
-     * @return
+     * @return SetInterface
      */
     public function toSet();
 
@@ -146,10 +146,17 @@ interface Iterable extends \IteratorAggregate
 
     /**
      * Merge the elements of this iterable into another
-     * @param \Traversable|array $collection
+     * @param \Traversable|array $iterable
      * @return Iterable
      */
-    public function concat($collection);
+    public function concat($iterable);
+
+    /**
+     * Replaces elements from passed array or iterable into the collection
+     * @param \Traversable|array $iterable
+     * @return Iterable
+     */
+    public function replace($iterable);
 
     /**
      * Returns the first value in the current `Iterable`.
@@ -167,11 +174,30 @@ interface Iterable extends \IteratorAggregate
      */
     public function last();
 
+    /**
+     * Groups the collection based on a given criteria
+     * @param $callback
+     * @return Iterable
+     */
     public function groupBy($callback);
 
+    /**
+     * Indexes the collection based on a given criteria
+     * @param $callback
+     * @return Iterable
+     */
     public function indexBy($callback);
 
+    /**
+     * Verifies if an element exists in the collection for a given criteria
+     * @param callable $fn
+     * @return Iterable
+     */
     public function exists(callable $fn);
 
+    /**
+     * Flatten the collection into one dimension
+     * @return Iterable
+     */
     public function concatAll();
 }
