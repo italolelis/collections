@@ -124,12 +124,52 @@ trait CommonMutableContainerTrait
             throw new \InvalidArgumentException('The items must be an array or Traversable');
         }
 
-        $this->setAll($this->recurse($this, $iterable));
+        $this->setAll($this->concatRecurse($this, $iterable));
 
         return $this;
     }
 
-    private function recurse($array, $array1)
+    /**
+     * {@inheritDoc}
+     * @return $this
+     */
+    public function replace($iterable)
+    {
+        if (!is_array($iterable) && !$iterable instanceof \Traversable) {
+            throw new \InvalidArgumentException('The items must be an array or Traversable');
+        }
+
+        $this->setAll($this->concatRecurse($this, $iterable));
+
+        return $this;
+    }
+
+    private function concatRecurse($array, $array1)
+    {
+        $merged = $array;
+
+        foreach ($array1 as $key => & $value) {
+            $isValid = function ($value) {
+                return (is_array($value) || $value instanceof \Traversable);
+            };
+
+            if (($isValid($value) && isset($merged[$key])) && $isValid($merged[$key])) {
+                $merged[$key] = $this->concatRecurse($merged[$key], $value);
+            } else {
+                if (is_numeric($key)) {
+                    if (!isset($merged[$value])) {
+                        $merged[] = $value;
+                    }
+                } else {
+                    $merged[$key] = $value;
+                }
+            }
+        }
+
+        return $merged;
+    }
+
+    private function replaceRecurse($array, $array1)
     {
         foreach ($array1 as $key => $value) {
             // create new key in $array, if it is empty or not an array
@@ -139,7 +179,7 @@ trait CommonMutableContainerTrait
 
             // overwrite the value in the base array
             if (is_array($value) || $value instanceof \Traversable) {
-                $value = $this->recurse($array[$key], $value);
+                $value = $this->replaceRecurse($array[$key], $value);
             }
             $array[$key] = $value;
         }
