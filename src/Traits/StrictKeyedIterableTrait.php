@@ -158,36 +158,7 @@ trait StrictKeyedIterableTrait
 
         return $res;
     }
-
-    public function concat($iterable)
-    {
-        if (!is_array($iterable) && !$iterable instanceof \Traversable) {
-            throw new \InvalidArgumentException('The items must be an array or Traversable');
-        }
-
-        $this->setAll($this->recurse($this, $iterable));
-
-        return $this;
-    }
-
-    private function recurse($array, $array1)
-    {
-        foreach ($array1 as $key => $value) {
-            // create new key in $array, if it is empty or not an array
-            if (!isset($array[$key]) || (isset($array[$key]) && (!is_array($array[$key]) && !$array[$key] instanceof \Traversable))) {
-                $array[$key] = [];
-            }
-
-            // overwrite the value in the base array
-            if (is_array($value) || $value instanceof \Traversable) {
-                $value = $this->recurse($array[$key], $value);
-            }
-            $array[$key] = $value;
-        }
-
-        return $array;
-    }
-
+    
     public function first()
     {
         foreach ($this as $v) {
