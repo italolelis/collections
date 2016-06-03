@@ -123,13 +123,29 @@ class IterableTest extends CollectionsTestCase
             3
         ], $this->coll->toArray());
 
-        $coll3 = new Dictionary(['key1' => 'value1', 'key2' => 'wrongValue']);
-        $coll4 = new Dictionary(['key2' => 'value2']);
+        $coll3 = new Dictionary([
+            'key1' => 'value1',
+            'key2' => 'wrongValue',
+            'key3' => [
+                'key31' => 'value31',
+            ]
+        ]);
+
+        $coll4 = new Dictionary([
+            'key2' => 'value2',
+            'key3' => [
+                'key32' => 'value32'
+            ]
+        ]);
         $coll3->concat($coll4);
 
         $this->assertEquals([
             'key1' => 'value1',
-            'key2' => 'value2'
+            'key2' => 'value2',
+            'key3' => [
+                'key31' => 'value31',
+                'key32' => 'value32'
+            ]
         ], $coll3->toArray());
     }
 }
