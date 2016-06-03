@@ -145,11 +145,11 @@ interface Iterable extends \IteratorAggregate
     public function slice($start, $length);
 
     /**
-     * Merge the elements of this vector into another
-     * @param \Traversable $collection
+     * Merge the elements of this iterable into another
+     * @param \Traversable|array $collection
      * @return Iterable
      */
-    public function concat(\Traversable $collection);
+    public function concat($collection);
 
     /**
      * Returns the first value in the current `Iterable`.
