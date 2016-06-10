@@ -1,6 +1,6 @@
 <?php
 
-// Copyright (c) Lellys Informática. All rights reserved. See License.txt in the project root for license information.
+// Copyright (c) italolelis. All rights reserved. See License.txt in the project root for license information.
 namespace Collections;
 
 use Collections\Exception\KeyException;
@@ -15,8 +15,7 @@ use Traversable;
  */
 class Dictionary extends AbstractCollectionArray implements MapInterface, \ArrayAccess
 {
-    use StrictKeyedIterableTrait,
-        GuardTrait;
+    use StrictKeyedIterableTrait;
 
     public function at($k)
     {
@@ -104,7 +103,10 @@ class Dictionary extends AbstractCollectionArray implements MapInterface, \Array
      */
     public function removeKey($key)
     {
-        $this->validateKeyBounds($key);
+        if ($this->containsKey($key) === false) {
+            throw new \OutOfBoundsException('No element at position ' . $key);
+        }
+
         unset($this->container[$key]);
 
         return $this;
@@ -154,5 +156,4 @@ class Dictionary extends AbstractCollectionArray implements MapInterface, \Array
     {
         return new MapIterator($this->container);
     }
-
 }
