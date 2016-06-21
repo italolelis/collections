@@ -2,5 +2,5 @@
 
 * [Introduction](README.md)
 * [Instalation](docs/instalation.md)
-* Quickstart
+* [Quickstart](docs/quickstart.md)
 
