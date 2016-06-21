@@ -2,7 +2,7 @@
 
 This page provides a quick introduction to Collections and introductory examples.
 
-If you have not already installed, Collections, head over to the :ref:`installation`page.
+If you have not already installed, Collections, head over to the `installation` page.
 
 ## ArrayList
 
