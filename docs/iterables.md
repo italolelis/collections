@@ -1,12 +1,11 @@
-# Functional approach
+# Iterating
 
 
-## What is it?
+## Projecting Collections
 
-The reactive extensions for PHP are a set of libraries to compose asynchronous
-and event-based programs using observable collections and LINQ-style query operators in PHP.
+Applying a function to a value and creating a new value is called a projection. To project one array into another, we apply a projection function to each item in the array and collect the results in a new array.
 
-Throughout the examples we are going to use this dataset:
+
 
 ```php
 $data = [
