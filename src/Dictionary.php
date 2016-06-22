@@ -93,6 +93,11 @@ class Dictionary extends AbstractCollectionArray implements MapInterface, \Array
     public function remove($element)
     {
         $key = array_search($element, $this->container);
+
+        if(false === $key) {
+            throw new \OutOfBoundsException('No element found in the collection ');
+        }
+
         $this->removeKey($key);
 
         return $this;

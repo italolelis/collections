@@ -152,10 +152,27 @@ class DictionaryTest extends CollectionsTestCase
     /**
      * @expectedException \OutOfBoundsException
      */
-    public function testRemovingNonExistentEntryReturnsNull()
+    public function testRemovingNonExistentKeyReturnsNull()
+    {
+        $this->coll->removeKey('testing_does_not_exist');
+    }
+
+    /**
+     * @expectedException \OutOfBoundsException
+     */
+    public function testRemovingNonExistentKey()
+    {
+        $this->coll->removeKey('testing_does_not_exist');
+    }
+
+    /**
+     * @expectedException \OutOfBoundsException
+     */
+    public function testRemovingNonExistentElement()
     {
         $this->coll->remove('testing_does_not_exist');
     }
+
 
     public function testArrayAccess()
     {
@@ -191,7 +208,7 @@ class DictionaryTest extends CollectionsTestCase
         $this->coll->addAll($data);
         $this->assertEquals($data, $this->coll->toArray());
     }
-    
+
     public function testToValuesArray()
     {
         $dictionary = new Dictionary();
