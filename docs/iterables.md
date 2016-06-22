@@ -54,16 +54,19 @@ The `concat($iterable)` method will merge the elements of the one iterable or ar
 use Collection\ArrayList;
 
 $items = [
-    ['id' => 1, 'name' => 'foo', 'parent' => 'a'],
-    ['id' => 2, 'name' => 'bar', 'parent' => 'b'],
-    ['id' => 3, 'name' => 'baz', 'parent' => 'a'],
+    'name' => 'test',
+    'age' => 25
 ];
-$combined = (new ArrayList($items))->combine('id', 'name');
+
+$collection = new ArrayList($items);
+collection->concat([
+  'gender' => 'm'
+]);
 
 // Result will look like this when converted to array
 [
-    1 => 'foo',
-    2 => 'bar',
-    3 => 'baz',
+    'name' => 'test',
+    'age' => 25,
+    'gender' => 'm'
 ];
 ```
