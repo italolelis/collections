@@ -1,11 +1,6 @@
 # Iterating
 
-
-## Projecting Collections
-
-Applying a function to a value and creating a new value is called a projection. To project one array into another, we apply a projection function to each item in the array and collect the results in a new array.
-
-
+Throughout the examples we're going to use this dataset
 
 ```php
 $data = [
@@ -37,14 +32,16 @@ $data = [
 $videos = new Dictionary($data);
 ```
 
-##Iterating
+## Projecting Collections
+
+Applying a function to a value and creating a new value is called a projection. To project one iterable into another, we apply a projection function to each item in the collection and collect the results in a new collection.
 
 ### Each
 
-Collections can be iterated and/or transformed into new collections with the `each()` and `map()` methods. The `each()` method will not create a new collection, but will allow you to modify any objects within the collection:
-
 ```php
-use Collection\ArrayList;
+use Collection\Dictionary;
+
+$videoAndTitlePairs = new Dictionary();
 
 $videos->each(function ($value, $key) {
     echo "Video $key: $value";
@@ -53,7 +50,7 @@ $videos->each(function ($value, $key) {
 
 ### Map
 
-The `map()` method will create a new collection based on the output of the callback being applied to each object in the original collection:
+To make projections easier, let's add a map() function to the Array type. Map accepts the projection function to be applied to each item in the source array, and returns the projected array.
 
 Lets use map to project a collection of videos into a collection of [id, title]:
 
