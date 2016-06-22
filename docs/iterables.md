@@ -45,66 +45,25 @@ The `map()` method will create a new iterator which lazily creates the resulting
 
 ### Concat All
 
-One of the most common uses for a `map()` function is to extract a single column from a collection. If you are looking to build a list of elements containing the values for a particular property, you can use the `extract()` method:
 
-.. code-block:: php
+### Concat
 
-    use Collection\ArrayList;
+The `concat($iterable)` method will merge the elements of the one iterable or array into the collection:
 
-    $collection = new ArrayList($people);
-    $names = $collection->extract('name');
+```php
+use Collection\ArrayList;
 
-    // $result contains ['mark', 'jose', 'barbara'];
-    $result = $names->toArray();
+$items = [
+    ['id' => 1, 'name' => 'foo', 'parent' => 'a'],
+    ['id' => 2, 'name' => 'bar', 'parent' => 'b'],
+    ['id' => 3, 'name' => 'baz', 'parent' => 'a'],
+];
+$combined = (new ArrayList($items))->combine('id', 'name');
 
-As with many other functions in the collection class, you are allowed to specify a dot-separated path
-for extracting columns. This example will return a collection containing the author names from a list
-of articles:
-
-.. code-block:: php
-
-    use Collection\ArrayList;
-
-    $collection = new ArrayList($articles);
-    $names = $collection->extract('author.name');
-
-    // $result contains ['Maria', 'Stacy', 'Larry'];
-    $result = $names->toArray();
-
-Finally, if the property you are looking after cannot be expressed as a path, you can use a callback
-function to return it:
-
-.. code-block:: php
-
-    use Collection\ArrayList;
-
-    $collection = new ArrayList($articles);
-    $names = $collection->extract(function ($article) {
-        return $article->author->name . ', ' . $article->author->last_name;
-    });
-
-combine
--------
-
-The map() method will create a new collection based on the output of the callback being applied to each
-object in the original collection:
-
-.. code-block:: php
-
-    use Collection\ArrayList;
-
-    $items = [
-        ['id' => 1, 'name' => 'foo', 'parent' => 'a'],
-        ['id' => 2, 'name' => 'bar', 'parent' => 'b'],
-        ['id' => 3, 'name' => 'baz', 'parent' => 'a'],
-    ];
-    $combined = (new ArrayList($items))->combine('id', 'name');
-
-    // Result will look like this when converted to array
-    [
-        1 => 'foo',
-        2 => 'bar',
-        3 => 'baz',
-    ];
-
-You can also optionally use a groupPath to group results based on a path:
+// Result will look like this when converted to array
+[
+    1 => 'foo',
+    2 => 'bar',
+    3 => 'baz',
+];
+```
