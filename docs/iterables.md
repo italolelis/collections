@@ -43,14 +43,14 @@ Applying a function to a value and creating a new value is called a projection. 
 ```php
 $videoAndTitlePairs = new Dictionary();
 
-$videos->each(function ($value, $key) {
-    echo $videoAndTitlePairs->addAll(["id" => $video["id"], "title" => $video["title"]])"Video $key: $value";
+$videos->each(function ($video) {
+    $videoAndTitlePairs->addAll(["id" => $video["id"], "title" => $video["title"]]);
 });
 ```
 
 ### Map
 
-To make projections easier, let's add a map() function to the Array type. Map accepts the projection function to be applied to each item in the source array, and returns the projected array.
+To make projections easier, lets add a `map()` function to the game. Map accepts the projection function to be applied to each item in the source collection, and returns the projected collection.
 
 Lets use map to project a collection of videos into a collection of [id, title]:
 
