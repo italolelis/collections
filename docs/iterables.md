@@ -3,6 +3,8 @@
 Throughout the examples we're going to use this dataset
 
 ```php
+use Collection\Dictionary;
+
 $data = [
   [
       "id" => 70111470,
@@ -39,8 +41,6 @@ Applying a function to a value and creating a new value is called a projection. 
 ### Each
 
 ```php
-use Collection\Dictionary;
-
 $videoAndTitlePairs = new Dictionary();
 
 $videos->each(function ($value, $key) {
@@ -55,8 +55,6 @@ To make projections easier, let's add a map() function to the Array type. Map ac
 Lets use map to project a collection of videos into a collection of [id, title]:
 
 ```php
-use Collection\Dictionary;
-
 $new = $videos->map(function ($video) {
     return [
 		"id" => $video["id"],
