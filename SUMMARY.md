@@ -3,5 +3,5 @@
 * [Introduction](README.md)
 * [Instalation](docs/instalation.md)
 * [Quickstart](docs/quickstart.md)
-* [Iterables](docs/iterables.md)
+* [Functional approach](docs/iterables.md)
 
