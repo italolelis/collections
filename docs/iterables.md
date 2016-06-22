@@ -6,11 +6,41 @@
 The reactive extensions for PHP are a set of libraries to compose asynchronous
 and event-based programs using observable collections and LINQ-style query operators in PHP.
 
-Iterating
-=========
+Throughout the examples we are going to use this dataset:
+
+```php
+$data = [
+  [
+      "id" => 70111470,
+      "title" =>  "Die Hard",
+      "boxart" => "http://cdn-0.nflximg.com/images/2891/DieHard.jpg",
+      "uri" => "http://api.netflix.com/catalog/titles/movies/70111470",
+      "rating" =>  [4.0],
+      "bookmark" =>  []
+  ],
+  [
+      "id" =>  654356453,
+      "title" => "Bad Boys",
+      "boxart" =>  "http://cdn-0.nflximg.com/images/2891/BadBoys.jpg",
+      "uri" => "http://api.netflix.com/catalog/titles/movies/70111470",
+      "rating" =>  [5.0],
+      "bookmark" => [{ "id" => 432534, "time" => 65876586 }]
+  ],
+  [
+      "id" => 65432445,
+      "title" => "The Chamber",
+      "boxart" => "http://cdn-0.nflximg.com/images/2891/TheChamber.jpg",
+      "uri" => "http://api.netflix.com/catalog/titles/movies/70111470",
+      "rating" => [4.0],
+      "bookmark" => []
+  ]
+];
+$videos = new Dictionary($data);
+```
+
+##Iterating
 
 ### Each
-
 
 Collections can be iterated and/or transformed into new collections with the `each()` and `map()` methods. The `each()` method will not create a new collection, but will allow you to modify any objects within the collection:
 
@@ -27,67 +57,84 @@ $collection = $collection->each(function ($value, $key) {
 
 The `map()` method will create a new collection based on the output of the callback being applied to each object in the original collection:
 
+Lets use map to project a collection of videos into a collection of [id, title]:
+
 ```php
 use Collection\Dictionary;
 
-$items = ['a' => 1, 'b' => 2, 'c' => 3];
-$collection = new Dictionary($items);
-
-$new = $collection->map(function ($value, $key) {
-    return $value * 2;
+$new = $videos->map(function ($video) {
+    return [
+		"id" => $video["id"],
+		"title" => $video["title"]
+	];
 });
-
-// $result contains [2, 4, 6];
-$result = $new->toArray();
 ```
 
 The `map()` method will create a new iterator which lazily creates the resulting items when iterated.
 
-### Concat All
+### Filter
 
-Concat all flattens the collection into one dimension.
+Like projection, filtering a collection is also a very common operation. To filter a collection we apply a test to each item in the iterable and collect the items that pass into a new iterable.
 
-Lets see this example:
-
-```php
-use Collection\ArrayList;
-
-$collection = new ArrayList(range(1, 100));
-$flattenCollection = $collection->groupBy(function($n){
-    return $n % 2 == 0;
-})->concatAll();
-
-$flattenCollection->each(function($item){
-  echo $item;
-});
-Observable.range(1, 100)
-                .groupBy(n -> n % 2 == 0)
-                .flatMap(g -> {
-                    return g.toList();
-                }).forEach(System.out::println);
-```
-
-### Concat
-
-The `concat($iterable)` method will merge the elements of the one iterable or array into the collection:
+Lets filter and map to collect the ids of videos that have a rating of 5.0
 
 ```php
 use Collection\Dictionary;
 
-$items = [
-    'name' => 'test',
-    'age' => 25
-];
+$topRatedVideos = $videos->filter(function ($video) {
+    return $video["rating"] === 5.0;
+})->map(function ($video) {
+    return $video["rating"] ;
+});
+```
 
-$collection = new Dictionary($items);
-$collection->concat([
-  'gender' => 'm'
-]);
+## Querying Trees
 
-// Result will look like this when converted to array
-[
-    'name' => 'test',
-    'age' => 25,
-    'gender' => 'm'
+Sometimes, in addition to flat collections, we need to query trees. Trees pose a challenge because we need to flatten them into collections in order to apply `filter()` and `map()` operations on them. In this section we'll define a `concatAll()` function that we can combine with `map()` and `filter()` to query trees.
+
+```php
+$movieLists = [
+  [
+    name => "New Releases",
+    videos => [
+        [
+            "id" => 70111470,
+            "title" => "Die Hard",
+            "boxart" => "http://cdn-0.nflximg.com/images/2891/DieHard.jpg",
+            "uri" => "http://api.netflix.com/catalog/titles/movies/70111470",
+            "rating" => 4.0,
+            "bookmark" => []
+        ],
+        [
+            "id" => 654356453,
+            "title" => "Bad Boys",
+            "boxart" => "http://cdn-0.nflximg.com/images/2891/BadBoys.jpg",
+            "uri" => "http://api.netflix.com/catalog/titles/movies/70111470",
+            "rating" => 5.0,
+            "bookmark" => [[ id:432534, time:65876586 ]]
+        ]
+    ]
+  ],
+  [
+    name => "Dramas",
+    videos => [
+        [
+            "id" => 65432445,
+            "title" => "The Chamber",
+            "boxart" => "http://cdn-0.nflximg.com/images/2891/TheChamber.jpg",
+            "uri" => "http://api.netflix.com/catalog/titles/movies/70111470",
+            "rating" => 4.0,
+            "bookmark" => []
+        ],
+        [
+            "id" => 675465,
+            "title" => "Fracture",
+            "boxart" => "http://cdn-0.nflximg.com/images/2891/Fracture.jpg",
+            "uri" => "http://api.netflix.com/catalog/titles/movies/70111470",
+            "rating" => 5.0,
+            "bookmark" => [[ "id" => 432534, "time" => 65876586 ]]
+        ]
+    ]
+  ]
 ];
 ```
