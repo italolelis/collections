@@ -45,21 +45,42 @@ The `map()` method will create a new iterator which lazily creates the resulting
 
 ### Concat All
 
+Concat all flattens the collection into one dimension.
+
+Lets see this example:
+
+```php
+use Collection\ArrayList;
+
+$collection = new ArrayList(range(1, 100));
+$flattenCollection = $collection->groupBy(function($n){
+    return $n % 2 == 0;
+})->concatAll();
+
+$flattenCollection->each(function($item){
+  echo $item;
+});
+Observable.range(1, 100)
+                .groupBy(n -> n % 2 == 0)
+                .flatMap(g -> {
+                    return g.toList();
+                }).forEach(System.out::println);
+```
 
 ### Concat
 
 The `concat($iterable)` method will merge the elements of the one iterable or array into the collection:
 
 ```php
-use Collection\ArrayList;
+use Collection\Dictionary;
 
 $items = [
     'name' => 'test',
     'age' => 25
 ];
 
-$collection = new ArrayList($items);
-collection->concat([
+$collection = new Dictionary($items);
+$collection->concat([
   'gender' => 'm'
 ]);
 
