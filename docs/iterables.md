@@ -9,49 +9,43 @@ and event-based programs using observable collections and LINQ-style query opera
 Iterating
 =========
 
-each
-----
+### Each
 
-Collections can be iterated and/or transformed into new collections with the each() and map() methods. The each()
-method will not create a new collection, but will allow you to modify any objects within the collection:
 
-.. code-block:: php
+Collections can be iterated and/or transformed into new collections with the `each()` and `map()` methods. The `each()` method will not create a new collection, but will allow you to modify any objects within the collection:
 
-    use Collection\ArrayList;
+```php
+use Collection\ArrayList;
 
-    $collection = new ArrayList($items);
-    $collection = $collection->each(function ($value, $key) {
-        echo "Element $key: $value";
-    });
+$collection = new ArrayList($items);
+$collection = $collection->each(function ($value, $key) {
+    echo "Element $key: $value";
+});
+```
 
-map
----
+### Map
 
-The map() method will create a new collection based on the output of the callback being applied to each
-object in the original collection:
+The `map()` method will create a new collection based on the output of the callback being applied to each object in the original collection:
 
-.. code-block:: php
+```php
+use Collection\Dictionary;
 
-    use Collection\Dictionary;
+$items = ['a' => 1, 'b' => 2, 'c' => 3];
+$collection = new Dictionary($items);
 
-    $items = ['a' => 1, 'b' => 2, 'c' => 3];
-    $collection = new Dictionary($items);
+$new = $collection->map(function ($value, $key) {
+    return $value * 2;
+});
 
-    $new = $collection->map(function ($value, $key) {
-        return $value * 2;
-    });
+// $result contains [2, 4, 6];
+$result = $new->toArray();
+```
 
-    // $result contains [2, 4, 6];
-    $result = $new->toArray();
+The `map()` method will create a new iterator which lazily creates the resulting items when iterated.
 
-The map() method will create a new iterator which lazily creates the resulting items when iterated.
+### Concat All
 
-extract
--------
-
-One of the most common uses for a map() function is to extract a single column from a collection. If you are
-looking to build a list of elements containing the values for a particular property, you can use the
-extract() method:
+One of the most common uses for a `map()` function is to extract a single column from a collection. If you are looking to build a list of elements containing the values for a particular property, you can use the `extract()` method:
 
 .. code-block:: php
 
