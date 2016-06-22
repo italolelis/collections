@@ -44,7 +44,7 @@ Applying a function to a value and creating a new value is called a projection. 
 $videoAndTitlePairs = new Dictionary();
 
 $videos->each(function ($value, $key) {
-    echo "Video $key: $value";
+    echo $videoAndTitlePairs->addAll(["id" => $video["id"], "title" => $video["title"]])"Video $key: $value";
 });
 ```
 
