@@ -4,5 +4,5 @@
 * [Instalation](docs/instalation.md)
 * [Quickstart](docs/quickstart.md)
 * [Functional approach](docs/iterables.md)
-* Querying Trees
+* [Querying Trees](docs/querying_trees.md)
 
