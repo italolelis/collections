@@ -74,7 +74,7 @@ The `map()` method will create a new iterator which lazily creates the resulting
 
 ### Filter
 
-Like projection, filtering a collection is also a very common operation. To filter a collection we apply a test to each item in the iterable and collect the items that pass into a new iterable.
+Like projection, filtering a collection is also a common operation. To filter a collection we apply a test to each item in the iterable and collect the items that pass into a new iterable.
 
 Lets filter and map to collect the ids of videos that have a rating of 5.0
 
@@ -93,10 +93,10 @@ $topRatedVideos = $videos->filter(function ($video) {
 Sometimes, in addition to flat collections, we need to query trees. Trees pose a challenge because we need to flatten them into collections in order to apply `filter()` and `map()` operations on them. In this section we'll define a `concatAll()` function that we can combine with `map()` and `filter()` to query trees.
 
 ```php
-$movieLists = [
+$data = [
   [
-    name => "New Releases",
-    videos => [
+    "name" => "New Releases",
+    "videos" => [
         [
             "id" => 70111470,
             "title" => "Die Hard",
@@ -116,8 +116,8 @@ $movieLists = [
     ]
   ],
   [
-    name => "Dramas",
-    videos => [
+    "name" => "Dramas",
+    "videos" => [
         [
             "id" => 65432445,
             "title" => "The Chamber",
@@ -137,4 +137,6 @@ $movieLists = [
     ]
   ]
 ];
+$movieLists = new Dictionary($data);
+
 ```
