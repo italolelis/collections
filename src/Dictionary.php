@@ -51,7 +51,7 @@ class Dictionary extends AbstractConstCollectionArray implements MapInterface, \
 
         return $this->get($index);
     }
-    
+
     /**
      * {@inheritdoc}
      */
@@ -103,7 +103,7 @@ class Dictionary extends AbstractConstCollectionArray implements MapInterface, \
      */
     public function containsKey($key)
     {
-        return array_key_exists($key, $this->container);
+        return $this->getIterator()->offsetExists($key);
     }
 
     /**
@@ -149,7 +149,7 @@ class Dictionary extends AbstractConstCollectionArray implements MapInterface, \
      */
     public function offsetExists($offset)
     {
-        return isset($this->container[$offset]) || array_key_exists($offset, $this->container);
+        return $this->containsKey($offset);
     }
 
     /**

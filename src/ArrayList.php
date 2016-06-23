@@ -107,7 +107,7 @@ class ArrayList extends AbstractConstCollectionArray implements VectorInterface,
     {
         $this->validateKeyType($key);
 
-        return $key >= 0 && $key < $this->count();
+        return $this->getIterator()->offsetExists($key);
     }
 
 
@@ -158,9 +158,7 @@ class ArrayList extends AbstractConstCollectionArray implements VectorInterface,
      */
     public function offsetExists($offset)
     {
-        $this->validateKeyType($offset);
-
-        return $this->containsKey($offset) && $this->at($offset) !== null;
+        return $this->containsKey($offset);
     }
 
     /**
