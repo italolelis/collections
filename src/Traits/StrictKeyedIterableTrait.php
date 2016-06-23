@@ -64,21 +64,6 @@ trait StrictKeyedIterableTrait
         return $res;
     }
 
-    public function zip($iterable)
-    {
-        $res = new static();
-        $it = $iterable->getIterator();
-        foreach ($this as $k => $v) {
-            if (!$it->valid()) {
-                break;
-            }
-            $res[$k] = new Pair($v, $it->current());
-            $it->next();
-        }
-
-        return $res;
-    }
-
     public function take($size = 1)
     {
         $res = new static();
@@ -235,7 +220,7 @@ trait StrictKeyedIterableTrait
         return $results;
     }
 
-    private function concatRecurse($array, $array1)
+    protected function concatRecurse($array, $array1)
     {
         $merged = $array;
 

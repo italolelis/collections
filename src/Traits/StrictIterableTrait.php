@@ -238,19 +238,7 @@ trait StrictIterableTrait
         return $results;
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function reduce(callable $callback, $initial = null)
-    {
-        foreach ($this as $element) {
-            $initial = $callback($initial, $element);
-        }
-
-        return $initial;
-    }
-
-    private function concatRecurse($array, $array1)
+    protected function concatRecurse($array, $array1)
     {
         $merged = $array;
 
