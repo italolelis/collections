@@ -145,20 +145,6 @@ interface Iterable extends \IteratorAggregate
     public function slice($start, $length);
 
     /**
-     * Merge the elements of this iterable into another
-     * @param \Traversable|array $iterable
-     * @return Iterable
-     */
-    public function concat($iterable);
-
-    /**
-     * Replaces elements from passed array or iterable into the collection
-     * @param \Traversable|array $iterable
-     * @return Iterable
-     */
-    public function replace($iterable);
-
-    /**
      * Returns the first value in the current `Iterable`.
      *
      * @return mixed - The first value in the current `Iterable`, or `null` if the
@@ -194,6 +180,13 @@ interface Iterable extends \IteratorAggregate
      * @return Iterable
      */
     public function exists(callable $fn);
+
+    /**
+     * Merge the elements of this iterable into another
+     * @param \Traversable|array $iterable
+     * @return Iterable
+     */
+    public function concat($iterable);
 
     /**
      * Flatten the collection into one dimension

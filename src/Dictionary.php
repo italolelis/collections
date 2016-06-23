@@ -7,15 +7,14 @@ use Collections\Exception\KeyException;
 use Collections\Iterator\MapIterator;
 use Collections\Traits\GuardTrait;
 use Collections\Traits\StrictKeyedIterableTrait;
-use InvalidArgumentException;
-use Traversable;
 
 /**
  * Represents a collection of keys and values.
  */
-class Dictionary extends AbstractCollectionArray implements MapInterface, \ArrayAccess
+class Dictionary extends AbstractConstCollectionArray implements MapInterface, \ArrayAccess
 {
-    use StrictKeyedIterableTrait;
+    use GuardTrait,
+        StrictKeyedIterableTrait;
 
     public function at($k)
     {
@@ -44,11 +43,24 @@ class Dictionary extends AbstractCollectionArray implements MapInterface, \Array
     /**
      * {@inheritdoc}
      */
+    public function tryGet($index, $default = null)
+    {
+        if ($this->containsKey($index) === false) {
+            return $default;
+        }
+
+        return $this->get($index);
+    }
+    
+    /**
+     * {@inheritdoc}
+     */
     public function add($key, $value)
     {
         if ($this->containsKey($key)) {
             throw new KeyException('The key ' . $key . ' already exists!');
         }
+
         $this->set($key, $value);
 
         return $this;
@@ -59,16 +71,31 @@ class Dictionary extends AbstractCollectionArray implements MapInterface, \Array
      */
     public function addAll($items)
     {
-        if (!is_array($items) && !$items instanceof Traversable) {
-            throw new \InvalidArgumentException('The items must be an array or Traversable');
-        }
+        $this->validateTraversable($items);
 
         foreach ($items as $key => $value) {
             if (is_array($value)) {
-                $value = Dictionary::fromArray($value);
+                $value = new static($value);
             }
             $this->add($key, $value);
         }
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setAll($items)
+    {
+        $this->validateTraversable($items);
+
+        foreach ($items as $key => $item) {
+            if (is_array($item)) {
+                $item = new static($item);
+            }
+            $this->set($key, $item);
+        }
+
+        return $this;
     }
 
     /**
@@ -94,7 +121,7 @@ class Dictionary extends AbstractCollectionArray implements MapInterface, \Array
     {
         $key = array_search($element, $this->container);
 
-        if(false === $key) {
+        if (false === $key) {
             throw new \OutOfBoundsException('No element found in the collection ');
         }
 
@@ -160,5 +187,18 @@ class Dictionary extends AbstractCollectionArray implements MapInterface, \Array
     public function getIterator()
     {
         return new MapIterator($this->container);
+    }
+
+    /**
+     * {@inheritDoc}
+     * @return $this
+     */
+    public function concat($iterable)
+    {
+        $this->validateTraversable($iterable);
+
+        $this->setAll($this->concatRecurse($this, $iterable));
+
+        return $this;
     }
 }

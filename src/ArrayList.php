@@ -7,13 +7,12 @@ use Collections\Iterator\VectorIterator;
 use Collections\Traits\GuardTrait;
 use Collections\Traits\StrictIterableTrait;
 use InvalidArgumentException;
-use Traversable;
 
 /**
  * Represents a strongly typed list of objects that can be accessed by index. Provides methods to search, sort,
  * and manipulate lists.
  */
-class ArrayList extends AbstractCollectionArray implements VectorInterface, \ArrayAccess
+class ArrayList extends AbstractConstCollectionArray implements VectorInterface, \ArrayAccess
 {
     use StrictIterableTrait,
         GuardTrait;
@@ -47,6 +46,18 @@ class ArrayList extends AbstractCollectionArray implements VectorInterface, \Arr
     /**
      * {@inheritdoc}
      */
+    public function tryGet($index, $default = null)
+    {
+        if ($this->containsKey($index) === false) {
+            return $default;
+        }
+
+        return $this->get($index);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function add($item)
     {
         $this->container[] = $item;
@@ -59,9 +70,7 @@ class ArrayList extends AbstractCollectionArray implements VectorInterface, \Arr
      */
     public function addAll($items)
     {
-        if (!is_array($items) && !$items instanceof Traversable) {
-            throw new \InvalidArgumentException('Parameter must be an array or an instance of Traversable');
-        }
+        $this->validateTraversable($items);
 
         foreach ($items as $item) {
             if (is_array($item)) {
@@ -72,6 +81,24 @@ class ArrayList extends AbstractCollectionArray implements VectorInterface, \Arr
 
         return $this;
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setAll($items)
+    {
+        $this->validateTraversable($items);
+
+        foreach ($items as $key => $item) {
+            if (is_array($item)) {
+                $item = new static($item);
+            }
+            $this->set($key, $item);
+        }
+
+        return $this;
+    }
+
 
     /**
      * {@inheritdoc}
@@ -213,5 +240,18 @@ class ArrayList extends AbstractCollectionArray implements VectorInterface, \Arr
     public function getIterator()
     {
         return new VectorIterator($this->container);
+    }
+
+    /**
+     * {@inheritDoc}
+     * @return $this
+     */
+    public function concat($iterable)
+    {
+        $this->validateTraversable($iterable);
+
+        $this->setAll($this->concatRecurse($this, $iterable));
+
+        return $this;
     }
 }
