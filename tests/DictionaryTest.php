@@ -56,9 +56,9 @@ class DictionaryTest extends CollectionsTestCase
     }
 
     /**
-     * @expectedException InvalidArgumentException
+     * @expectedException \Collections\Exception\InvalidArgumentException
      */
-    public function testInvalidElementsToInstanciate()
+    public function testInvalidElementsToInstantiate()
     {
         $coll = new Dictionary();
         $coll->addAll('string');

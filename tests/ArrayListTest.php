@@ -20,9 +20,9 @@ class ArrayListTest extends CollectionsTestCase
     }
 
     /**
-     * @expectedException InvalidArgumentException
+     * @expectedException \Collections\Exception\InvalidArgumentException
      */
-    public function testInvalidElementsToInstanciate()
+    public function testInvalidElementsToInstantiate()
     {
         $coll = new ArrayList();
         $coll->addAll('string');
