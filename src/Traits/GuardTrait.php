@@ -3,6 +3,7 @@
 namespace Collections\Traits;
 
 use Collections\Exception\EmptyException;
+use Collections\Exception\InvalidArgumentException;
 use Collections\Exception\TypeException;
 
 trait GuardTrait
@@ -54,6 +55,13 @@ trait GuardTrait
     {
         if (filter_var($element, FILTER_VALIDATE_INT) === false) {
             throw new TypeException('Only integer keys may be used with ' . (get_class($this)));
+        }
+    }
+
+    protected function validateTraversable($traversable)
+    {
+        if (!is_array($traversable) && !$traversable instanceof \Traversable) {
+            throw InvalidArgumentException::invalidTraversable();
         }
     }
 }
