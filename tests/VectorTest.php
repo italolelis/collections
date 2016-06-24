@@ -7,16 +7,11 @@ use Collections\Comparer\StringComparer;
 use Collections\Map;
 use Collections\Vector;
 
-class ArrayListTest extends CollectionsTestCase
+class VectorTest extends CollectionsTestCase
 {
-    /**
-     * @var Vector
-     */
-    private $coll;
-
-    protected function setUp()
+    protected function setUpCollection()
     {
-        $this->coll = new Vector();
+        return new Vector();
     }
 
     /**
@@ -89,6 +84,15 @@ class ArrayListTest extends CollectionsTestCase
         $this->coll->add('testing');
         $this->assertTrue(is_string((string)$this->coll));
     }
+
+    public function testGetValueByIndex()
+    {
+        $value = 'testing';
+
+        $this->coll->add($value);
+        $this->assertSame($value, $this->coll->get(0));
+    }
+
 
     public function testSort()
     {

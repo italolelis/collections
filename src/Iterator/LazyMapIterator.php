@@ -7,12 +7,12 @@ class LazyMapIterator implements \Iterator
     /**
      * @var \Iterator
      */
-    private $it;
+    protected $it;
 
     /**
      * @var callable
      */
-    private $fn;
+    protected $fn;
 
     public function __construct($it, $fn)
     {

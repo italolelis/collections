@@ -26,8 +26,7 @@ class LazyMapWithKeyIterable implements KeyedIterable
 
     public function getIterator()
     {
-        return new LazyMapWithKeyIterator($this->iterable->getIterator(),
-            $this->fn);
+        return new LazyMapWithKeyIterator($this->iterable->getIterator(), $this->fn);
     }
 }
 

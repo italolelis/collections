@@ -11,11 +11,11 @@ class SetTest extends CollectionsTestCase
     /**
      * @var SetInterface
      */
-    private $coll;
+    protected $coll;
 
-    protected function setUp()
+    protected function setUpCollection()
     {
-        $this->coll = new Set();
+        return new Set();
     }
 
     /**

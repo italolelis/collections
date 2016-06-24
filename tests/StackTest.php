@@ -13,7 +13,7 @@ use RuntimeException;
 /**
  * @author italo
  */
-class StackTest extends CollectionsTestCase
+class StackTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * @var Stack

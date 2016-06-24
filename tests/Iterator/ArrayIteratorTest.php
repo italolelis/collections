@@ -3,11 +3,9 @@
 namespace Tests\Collections\Iterator;
 
 use Collections\Iterator\VectorIterator;
-use Tests\Collections\CollectionsTestCase;
 
-class ArrayIteratorTest extends CollectionsTestCase
+class ArrayIteratorTest extends \PHPUnit_Framework_TestCase
 {
-
     public function testCount()
     {
         $array = [];

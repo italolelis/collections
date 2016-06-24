@@ -88,7 +88,7 @@ trait LazyKeyedIterableTrait
         return new LazyKeysIterable($this);
     }
 
-    public function map($callback)
+    public function map(callable $callback)
     {
         return new LazyMapKeyedIterable($this, $callback);
     }
@@ -98,7 +98,7 @@ trait LazyKeyedIterableTrait
         return new LazyMapWithKeyIterable($this, $callback);
     }
 
-    public function filter($callback)
+    public function filter(callable $callback)
     {
         return new LazyFilterKeyedIterable($this, $callback);
     }
@@ -117,9 +117,9 @@ trait LazyKeyedIterableTrait
         return new LazyZipKeyedIterable($this, $traversable);
     }
 
-    public function take($n)
+    public function take($size = 1)
     {
-        return new LazyTakeKeyedIterable($this, $n);
+        return new LazyTakeKeyedIterable($this, $size);
     }
 
     public function takeWhile($fn)

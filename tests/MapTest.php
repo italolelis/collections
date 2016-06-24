@@ -8,16 +8,11 @@ use Collections\Pair;
 use Collections\Vector;
 use OutOfBoundsException;
 
-class DictionaryTest extends CollectionsTestCase
+class MapTest extends CollectionsTestCase
 {
-    /**
-     * @var Map
-     */
-    private $coll;
-
-    protected function setUp()
+    protected function setUpCollection()
     {
-        $this->coll = new Map();
+        return new Map();
     }
 
     public function testNewInstanceWithArray()
@@ -79,6 +74,20 @@ class DictionaryTest extends CollectionsTestCase
             'key3' => 'value3',
             'key4' => 'value4'
         ], $arrayList->toArray());
+    }
+
+    public function testContainsKey()
+    {
+        $this->coll->set('key', 'value');
+
+        $this->assertTrue($this->coll->containsKey('key'));
+    }
+
+    public function testContainsValue()
+    {
+        $this->coll->set('key', 'value');
+
+        $this->assertTrue($this->coll->contains('value'));
     }
 
     public function testAddItem()

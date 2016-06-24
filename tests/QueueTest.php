@@ -1,10 +1,5 @@
 <?php
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 namespace Tests\Collections;
 
 use Collections\Queue;
@@ -13,7 +8,7 @@ use RuntimeException;
 /**
  * @author italo
  */
-class QueueTest extends CollectionsTestCase
+class QueueTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * @var Queue
@@ -33,13 +28,13 @@ class QueueTest extends CollectionsTestCase
     public function testEnqueueItem()
     {
         $this->coll->enqueue('testing');
-        $this->assertTrue(is_string((string) $this->coll));
+        $this->assertTrue(is_string((string)$this->coll));
     }
 
     public function testEnqueueMultiple()
     {
         $this->coll->enqueueMultiple(array(1, 2, 3, 4));
-        $this->assertTrue(is_string((string) $this->coll));
+        $this->assertTrue(is_string((string)$this->coll));
     }
 
     /**

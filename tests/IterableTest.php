@@ -2,29 +2,36 @@
 
 namespace Tests\Collections;
 
-use Collections\Vector;
+use Collections\Iterable;
 use Collections\Map;
+use Collections\Set;
+use Collections\Vector;
 
 class IterableTest extends CollectionsTestCase
 {
-    /**
-     * @var Vector
-     */
-    private $coll;
-
-    protected function setUp()
+    protected function setUpCollection()
     {
-        $this->coll = new Vector();
+        return new Vector();
     }
 
-    public function testGetValues()
+    /**
+     * @test
+     */
+    public function it_should_get_values()
     {
         $this->coll->add('testing1');
         $this->coll->add('testing2');
-        $this->assertEquals(['testing1', 'testing2'], $this->coll->values()->toArray());
+
+        $values = $this->coll->values();
+
+        $this->assertInstanceOf(Vector::class, $values);
+        $this->assertEquals(['testing1', 'testing2'], $values->toArray());
     }
 
-    public function testGetFirstElement()
+    /**
+     * @test
+     */
+    public function it_should_get_first_element()
     {
         $this->coll
             ->add("test1")
@@ -34,12 +41,18 @@ class IterableTest extends CollectionsTestCase
         $this->assertSame("test1", $this->coll->first());
     }
 
-    public function testGetFirstElementOfEmptyCollection()
+    /**
+     * @test
+     */
+    public function it_should_get_first_element_of_empty_collection()
     {
         $this->assertEmpty($this->coll->first());
     }
 
-    public function testGetLastElement()
+    /**
+     * @test
+     */
+    public function it_should_get_last_element()
     {
         $this->coll
             ->add("test1")
@@ -54,7 +67,10 @@ class IterableTest extends CollectionsTestCase
         $this->assertEmpty($this->coll->last());
     }
 
-    public function testMap()
+    /**
+     * @test
+     */
+    public function it_should_map()
     {
         $this->coll
             ->add(1)
@@ -65,35 +81,38 @@ class IterableTest extends CollectionsTestCase
             return $item * 2;
         });
 
-        $expected = new Vector([
+        $this->assertSame([
             2,
             4,
             6
-        ]);
-
-        $this->assertSame($expected->toArray(), $coll->toArray());
+        ], $coll->toArray());
     }
 
-    public function testFilter()
+    /**
+     * @test
+     */
+    public function it_should_map_with_keys()
     {
         $this->coll
             ->add(1)
             ->add(2)
             ->add(3);
 
-        $coll = $this->coll->filter(function ($item) {
-            return $item > 1;
+        $coll = $this->coll->mapWithKey(function ($key, $item) {
+            return $key;
         });
 
-        $expected = new Vector([
-            2,
-            3
-        ]);
-
-        $this->assertSame($expected->toArray(), $coll->toArray());
+        $this->assertSame([
+            0,
+            1,
+            2
+        ], $coll->toArray());
     }
 
-    public function testTake()
+    /**
+     * @test
+     */
+    public function it_should_take_2_elements()
     {
         $this->coll
             ->add(1)
@@ -106,49 +125,130 @@ class IterableTest extends CollectionsTestCase
         ], $this->coll->take(2)->toArray());
     }
 
-    public function testConcat()
+    /**
+     * @test
+     * @dataProvider filterProvider
+     */
+    public function it_should_filter_successfully(Iterable $coll, $expected)
     {
-        $this->coll
-            ->add(1)
-            ->add(2)
-            ->add(4);
+        $coll = $coll->filter(function ($item) {
+            return $item > 1;
+        });
 
-        $coll2 = new Vector([3]);
-        $concatenated = $this->coll->concat($coll2);
+        $this->assertEquals($expected, $coll->toArray());
+    }
 
-        $this->assertEquals([
-            1,
-            2,
-            4,
-            3
-        ], $concatenated->toArray());
+    public function filterProvider()
+    {
+        return [
+            [new Map([0 => 1, 1 => 2, 2 => 3]), [1 => 2, 2 => 3]],
+            [new Vector([1, 2, 3]), [2, 3]],
+            [new Set([1, 2, 3]), [2, 3]]
+        ];
+    }
 
-        $coll3 = new Map([
-            'key1' => 'value1',
-            'key2' => 'wrongValue',
-            'key3' => [
-                'key31' => 'value31',
-            ]
-        ]);
-
-        $coll4 = new Map([
-            'key2' => 'value2',
-            'key3' => [
-                'key32' => 'value32'
-            ]
-        ]);
-        $concatenated = $coll3->concat($coll4);
-
-        $this->assertEquals([
-            'key1' => 'value1',
-            'key2' => [
-                'wrongValue',
-                'value2'
+    /**
+     * @test
+     */
+    public function it_should_group_by_callable()
+    {
+        $items = [
+            ['id' => 1, 'name' => 'foo', 'parent_id' => 10],
+            ['id' => 2, 'name' => 'bar', 'parent_id' => 11],
+            ['id' => 3, 'name' => 'baz', 'parent_id' => 10],
+        ];
+        $collection = new Map($items);
+        $grouped = $collection->groupBy(function ($item) {
+            return $item['parent_id'];
+        });
+        $expected = [
+            10 => [
+                ['id' => 1, 'name' => 'foo', 'parent_id' => 10],
+                ['id' => 3, 'name' => 'baz', 'parent_id' => 10],
             ],
-            'key3' => [
-                'key31' => 'value31',
-                'key32' => 'value32'
+            11 => [
+                ['id' => 2, 'name' => 'bar', 'parent_id' => 11],
             ]
-        ], $concatenated->toArray());
+        ];
+        $this->assertEquals($expected, $grouped->toArray());
+        $this->assertInstanceOf('Collections\CollectionInterface', $grouped);
+        $grouped = $collection->groupBy(function ($element) {
+            return $element['parent_id'];
+        });
+        $this->assertEquals($expected, $grouped->toArray());
+    }
+
+    /**
+     * @test
+     */
+    public function it_should_group_by_key_deep()
+    {
+        $items = [
+            ['id' => 1, 'name' => 'foo', 'thing' => ['parent_id' => 10]],
+            ['id' => 2, 'name' => 'bar', 'thing' => ['parent_id' => 11]],
+            ['id' => 3, 'name' => 'baz', 'thing' => ['parent_id' => 10]],
+        ];
+        $collection = new Map($items);
+        $grouped = $collection->groupBy(function ($element) {
+            return $element['thing']['parent_id'];
+        });
+        $expected = [
+            10 => [
+                ['id' => 1, 'name' => 'foo', 'thing' => ['parent_id' => 10]],
+                ['id' => 3, 'name' => 'baz', 'thing' => ['parent_id' => 10]],
+            ],
+            11 => [
+                ['id' => 2, 'name' => 'bar', 'thing' => ['parent_id' => 11]],
+            ]
+        ];
+        $this->assertEquals($expected, $grouped->toArray());
+    }
+
+    /**
+     * @test
+     */
+    public function it_should_index_by_callable()
+    {
+        $items = [
+            ['id' => 1, 'name' => 'foo', 'parent_id' => 10],
+            ['id' => 2, 'name' => 'bar', 'parent_id' => 11],
+            ['id' => 3, 'name' => 'baz', 'parent_id' => 10],
+        ];
+        $collection = new Map($items);
+        $grouped = $collection->indexBy(function ($element) {
+            return $element['id'];
+        });
+        $expected = [
+            1 => ['id' => 1, 'name' => 'foo', 'parent_id' => 10],
+            3 => ['id' => 3, 'name' => 'baz', 'parent_id' => 10],
+            2 => ['id' => 2, 'name' => 'bar', 'parent_id' => 11],
+        ];
+        $this->assertEquals($expected, $grouped->toArray());
+        $this->assertInstanceOf('Collections\CollectionInterface', $grouped);
+        $grouped = $collection->indexBy(function ($element) {
+            return $element['id'];
+        });
+        $this->assertEquals($expected, $grouped->toArray());
+    }
+
+    /**
+     * @test
+     */
+    public function it_should_index_deep()
+    {
+        $items = [
+            ['id' => 1, 'name' => 'foo', 'thing' => ['parent_id' => 10]],
+            ['id' => 2, 'name' => 'bar', 'thing' => ['parent_id' => 11]],
+            ['id' => 3, 'name' => 'baz', 'thing' => ['parent_id' => 10]],
+        ];
+        $collection = new Map($items);
+        $grouped = $collection->indexBy(function ($element) {
+            return $element['thing']['parent_id'];
+        });
+        $expected = [
+            10 => ['id' => 3, 'name' => 'baz', 'thing' => ['parent_id' => 10]],
+            11 => ['id' => 2, 'name' => 'bar', 'thing' => ['parent_id' => 11]],
+        ];
+        $this->assertEquals($expected, $grouped->toArray());
     }
 }
