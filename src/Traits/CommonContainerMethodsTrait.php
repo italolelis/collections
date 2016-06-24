@@ -4,7 +4,7 @@ namespace Collections\Traits;
 
 use Collections\Vector;
 use Collections\Comparer\NumericKeyComparer;
-use Collections\Dictionary;
+use Collections\Map;
 use Collections\Generic\ComparerInterface;
 use Collections\Immutable\ImmArrayList;
 use Collections\Immutable\ImmDictionary;
@@ -194,7 +194,7 @@ trait CommonContainerMethodsTrait
      */
     public function toMap()
     {
-        return new Dictionary($this);
+        return new Map($this);
     }
 
     /**
@@ -376,7 +376,7 @@ trait CommonContainerMethodsTrait
      */
     public function groupBy($callback)
     {
-        $group = new Dictionary();
+        $group = new Map();
         foreach ($this as $value) {
             $key = $callback($value);
             if (!$group->containsKey($key)) {
@@ -397,7 +397,7 @@ trait CommonContainerMethodsTrait
      */
     public function indexBy($callback)
     {
-        $group = new Dictionary();
+        $group = new Map();
         foreach ($this as $value) {
             $key = $callback($value);
             $group->set($key, $value);

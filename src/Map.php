@@ -35,7 +35,7 @@ use Collections\Traits\MapLikeTrait;
  * reference, of if a Map is used with foreach by reference, an exception will
  * be thrown.
  */
-class Dictionary implements MapInterface, \ArrayAccess
+class Map implements MapInterface, \ArrayAccess
 {
     use MapLikeTrait, SortTrait;
 

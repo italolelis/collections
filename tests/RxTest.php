@@ -3,7 +3,7 @@
 namespace Tests\Collections;
 
 use Collections\Vector;
-use Collections\Dictionary;
+use Collections\Map;
 
 class RxTest extends CollectionsTestCase
 {
@@ -53,7 +53,7 @@ class RxTest extends CollectionsTestCase
             ['id' => 2, 'name' => 'bar', 'parent_id' => 11],
             ['id' => 3, 'name' => 'baz', 'parent_id' => 10],
         ];
-        $collection = new Dictionary($items);
+        $collection = new Map($items);
         $grouped = $collection->groupBy(function ($item) {
             return $item['parent_id'];
         });
@@ -86,7 +86,7 @@ class RxTest extends CollectionsTestCase
             ['id' => 2, 'name' => 'bar', 'thing' => ['parent_id' => 11]],
             ['id' => 3, 'name' => 'baz', 'thing' => ['parent_id' => 10]],
         ];
-        $collection = new Dictionary($items);
+        $collection = new Map($items);
         $grouped = $collection->groupBy(function ($element) {
             return $element['thing']['parent_id'];
         });
@@ -114,7 +114,7 @@ class RxTest extends CollectionsTestCase
             ['id' => 2, 'name' => 'bar', 'parent_id' => 11],
             ['id' => 3, 'name' => 'baz', 'parent_id' => 10],
         ];
-        $collection = new Dictionary($items);
+        $collection = new Map($items);
         $grouped = $collection->indexBy(function ($element) {
             return $element['id'];
         });
@@ -143,7 +143,7 @@ class RxTest extends CollectionsTestCase
             ['id' => 2, 'name' => 'bar', 'thing' => ['parent_id' => 11]],
             ['id' => 3, 'name' => 'baz', 'thing' => ['parent_id' => 10]],
         ];
-        $collection = new Dictionary($items);
+        $collection = new Map($items);
         $grouped = $collection->indexBy(function ($element) {
             return $element['thing']['parent_id'];
         });

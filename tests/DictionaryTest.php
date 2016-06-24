@@ -4,25 +4,25 @@ namespace Tests\Collections;
 
 use ArrayObject;
 use Collections\Vector;
-use Collections\Dictionary;
+use Collections\Map;
 use Collections\Pair;
 use OutOfBoundsException;
 
 class DictionaryTest extends CollectionsTestCase
 {
     /**
-     * @var Dictionary
+     * @var Map
      */
     private $coll;
 
     protected function setUp()
     {
-        $this->coll = new Dictionary();
+        $this->coll = new Map();
     }
 
     public function testNewInstanceWithArray()
     {
-        $this->assertNotNull(new Dictionary([
+        $this->assertNotNull(new Map([
             'key1' => 'value1',
             'key2' => [
                 'key21' => 'value21',
@@ -43,7 +43,7 @@ class DictionaryTest extends CollectionsTestCase
             'key3' => 'value3',
             'key4' => 'value4'
         ));
-        $this->assertNotNull(new Dictionary($traversable));
+        $this->assertNotNull(new Map($traversable));
     }
 
     public function testNewInstance()
@@ -56,18 +56,18 @@ class DictionaryTest extends CollectionsTestCase
      */
     public function testInvalidElementsToInstantiate()
     {
-        $coll = new Dictionary();
+        $coll = new Map();
         $coll->addAll('string');
     }
 
     public function testAddAllWithSomeValues()
     {
-        $arrayList = new Dictionary();
+        $arrayList = new Map();
         $arrayList
             ->add(new Pair('key1', 'value1'))
             ->add(new Pair('key2', 'value2'));
 
-        $secoundArrayList = new Dictionary();
+        $secoundArrayList = new Map();
         $secoundArrayList
             ->add(new Pair('key3', 'value3'))
             ->add(new Pair('key4', 'value4'));
@@ -219,7 +219,7 @@ class DictionaryTest extends CollectionsTestCase
 
     public function testToValuesArray()
     {
-        $dictionary = new Dictionary();
+        $dictionary = new Map();
         $dictionary->set('key1', 'value1')->set('key2', 'value2');
         $expected = ['value1', 'value2'];
         $this->assertEquals($expected, $dictionary->toValuesArray());

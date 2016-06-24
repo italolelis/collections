@@ -3,7 +3,7 @@
 namespace Tests\Collections;
 
 use Collections\Vector;
-use Collections\Dictionary;
+use Collections\Map;
 
 class IterableTest extends CollectionsTestCase
 {
@@ -123,7 +123,7 @@ class IterableTest extends CollectionsTestCase
             3
         ], $concatenated->toArray());
 
-        $coll3 = new Dictionary([
+        $coll3 = new Map([
             'key1' => 'value1',
             'key2' => 'wrongValue',
             'key3' => [
@@ -131,7 +131,7 @@ class IterableTest extends CollectionsTestCase
             ]
         ]);
 
-        $coll4 = new Dictionary([
+        $coll4 = new Map([
             'key2' => 'value2',
             'key3' => [
                 'key32' => 'value32'

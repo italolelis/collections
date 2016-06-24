@@ -3,7 +3,7 @@
 namespace Collections\Iterator;
 
 use Collections\Vector;
-use Collections\Dictionary;
+use Collections\Map;
 use Collections\Immutable\ImmArrayList;
 use Collections\Immutable\ImmDictionary;
 use Collections\Immutable\ImmSet;
@@ -53,7 +53,7 @@ trait LazyKeyedIterableTrait
 
     public function toMap()
     {
-        return new Dictionary($this);
+        return new Map($this);
     }
 
     public function toImmMap()
