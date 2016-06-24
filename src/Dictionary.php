@@ -42,6 +42,7 @@ class Dictionary extends AbstractConstCollectionArray implements MapInterface, \
 
     /**
      * {@inheritdoc}
+     * @deprecated - Will be removed on version 6
      */
     public function tryGet($index, $default = null)
     {
