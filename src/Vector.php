@@ -30,7 +30,7 @@ use Collections\Traits\VectorLikeTrait;
  * passed by reference, of if a Vector is used with foreach by reference, an
  * exception will be thrown.
  */
-class ArrayList implements VectorInterface, \ArrayAccess
+class Vector implements VectorInterface, \ArrayAccess
 {
     use VectorLikeTrait, SortTrait;
 

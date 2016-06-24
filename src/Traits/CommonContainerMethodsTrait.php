@@ -2,7 +2,7 @@
 
 namespace Collections\Traits;
 
-use Collections\ArrayList;
+use Collections\Vector;
 use Collections\Comparer\NumericKeyComparer;
 use Collections\Dictionary;
 use Collections\Generic\ComparerInterface;
@@ -162,7 +162,7 @@ trait CommonContainerMethodsTrait
      */
     public function toVector()
     {
-        return new ArrayList($this);
+        return new Vector($this);
     }
 
     /**
@@ -380,7 +380,7 @@ trait CommonContainerMethodsTrait
         foreach ($this as $value) {
             $key = $callback($value);
             if (!$group->containsKey($key)) {
-                $element = $this instanceof VectorInterface ? new static([$value]) : new ArrayList([$value]);
+                $element = $this instanceof VectorInterface ? new static([$value]) : new Vector([$value]);
                 $group->add(new Pair($key, $element));
             } else {
                 $value = $group->get($key)->add($value);

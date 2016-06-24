@@ -3,7 +3,7 @@
 namespace Tests\Collections;
 
 use ArrayObject;
-use Collections\ArrayList;
+use Collections\Vector;
 use Collections\Dictionary;
 use Collections\Pair;
 use OutOfBoundsException;
@@ -195,7 +195,7 @@ class DictionaryTest extends CollectionsTestCase
         ]);
         $map = $this->coll->toVector();
 
-        $this->assertInstanceOf(ArrayList::class, $map);
+        $this->assertInstanceOf(Vector::class, $map);
     }
 
     public function testToArray()

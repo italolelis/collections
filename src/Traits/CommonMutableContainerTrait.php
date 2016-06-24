@@ -2,7 +2,7 @@
 
 namespace Collections\Traits;
 
-use Collections\ArrayList;
+use Collections\Vector;
 use Collections\Iterable;
 use Collections\Iterator\LazyKeysIterable;
 use Collections\MapInterface;
@@ -36,12 +36,12 @@ trait CommonMutableContainerTrait
      */
     public function values()
     {
-        return new ArrayList($this);
+        return new Vector($this);
     }
 
     public function keys()
     {
-        return new ArrayList(new LazyKeysIterable($this));
+        return new Vector(new LazyKeysIterable($this));
     }
 
     /**

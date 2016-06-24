@@ -2,7 +2,7 @@
 
 namespace Tests\Collections;
 
-use Collections\ArrayList;
+use Collections\Vector;
 use Collections\Dictionary;
 
 class RxTest extends CollectionsTestCase
@@ -37,7 +37,7 @@ class RxTest extends CollectionsTestCase
         $female2->age = 30;
 
         return [
-            [new ArrayList([$male, $male2, $female, $female2])]
+            [new Vector([$male, $male2, $female, $female2])]
         ];
     }
 

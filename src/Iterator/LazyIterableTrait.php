@@ -2,7 +2,7 @@
 
 namespace Collections\Iterator;
 
-use Collections\ArrayList;
+use Collections\Vector;
 use Collections\Immutable\ImmArrayList;
 use Collections\Immutable\ImmDictionary;
 use Collections\Immutable\ImmSet;
@@ -27,7 +27,7 @@ trait LazyIterableTrait
 
     public function toVector()
     {
-        return new ArrayList($this);
+        return new Vector($this);
     }
 
     public function toImmVector()

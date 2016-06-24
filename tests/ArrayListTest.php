@@ -3,19 +3,19 @@
 namespace Tests\Collections;
 
 use ArrayObject;
-use Collections\ArrayList;
+use Collections\Vector;
 use Collections\Comparer\StringComparer;
 
 class ArrayListTest extends CollectionsTestCase
 {
     /**
-     * @var ArrayList
+     * @var Vector
      */
     private $coll;
 
     protected function setUp()
     {
-        $this->coll = new ArrayList();
+        $this->coll = new Vector();
     }
 
     /**
@@ -23,13 +23,13 @@ class ArrayListTest extends CollectionsTestCase
      */
     public function testInvalidElementsToInstantiate()
     {
-        $coll = new ArrayList();
+        $coll = new Vector();
         $coll->addAll('string');
     }
 
     public function testNewInstanceWithArray()
     {
-        $this->assertNotNull(new ArrayList(array(
+        $this->assertNotNull(new Vector(array(
             1,
             2 => array(
                 21,
@@ -51,7 +51,7 @@ class ArrayListTest extends CollectionsTestCase
             3,
             4
         ));
-        $this->assertNotNull(new ArrayList($traversable));
+        $this->assertNotNull(new Vector($traversable));
     }
 
     public function testNewInstance()
@@ -61,15 +61,15 @@ class ArrayListTest extends CollectionsTestCase
 
     public function testAddAllWithSomeValues()
     {
-        $arrayList = new ArrayList();
+        $arrayList = new Vector();
         $arrayList
             ->add(1)
             ->add(2);
 
-        $secoundArrayList = new ArrayList();
+        $secoundArrayList = new Vector();
         $secoundArrayList
             ->add(3)
-            ->add(new ArrayList([31]));
+            ->add(new Vector([31]));
 
         $arrayList->addAll($secoundArrayList);
 
@@ -139,7 +139,7 @@ class ArrayListTest extends CollectionsTestCase
 
     public function testNotEquals()
     {
-        $this->assertFalse($this->coll->equals(new ArrayList()));
+        $this->assertFalse($this->coll->equals(new Vector()));
     }
 
     public function testInteratorInsntance()

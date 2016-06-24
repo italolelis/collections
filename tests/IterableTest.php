@@ -2,19 +2,19 @@
 
 namespace Tests\Collections;
 
-use Collections\ArrayList;
+use Collections\Vector;
 use Collections\Dictionary;
 
 class IterableTest extends CollectionsTestCase
 {
     /**
-     * @var ArrayList
+     * @var Vector
      */
     private $coll;
 
     protected function setUp()
     {
-        $this->coll = new ArrayList();
+        $this->coll = new Vector();
     }
 
     public function testGetValues()
@@ -65,7 +65,7 @@ class IterableTest extends CollectionsTestCase
             return $item * 2;
         });
 
-        $expected = new ArrayList([
+        $expected = new Vector([
             2,
             4,
             6
@@ -85,7 +85,7 @@ class IterableTest extends CollectionsTestCase
             return $item > 1;
         });
 
-        $expected = new ArrayList([
+        $expected = new Vector([
             2,
             3
         ]);
@@ -113,7 +113,7 @@ class IterableTest extends CollectionsTestCase
             ->add(2)
             ->add(4);
 
-        $coll2 = new ArrayList([3]);
+        $coll2 = new Vector([3]);
         $concatenated = $this->coll->concat($coll2);
 
         $this->assertEquals([
