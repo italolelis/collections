@@ -181,30 +181,47 @@ interface Iterable extends \IteratorAggregate
      */
     public function last();
 
-//    /**
-//     * Groups the collection based on a given criteria
-//     * @param $callback
-//     * @return Iterable
-//     */
-//    public function groupBy($callback);
-//
-//    /**
-//     * Indexes the collection based on a given criteria
-//     * @param $callback
-//     * @return Iterable
-//     */
-//    public function indexBy($callback);
-//
-//    /**
-//     * Verifies if an element exists in the collection for a given criteria
-//     * @param callable $fn
-//     * @return Iterable
-//     */
-//    public function exists(callable $fn);
-//
-//    /**
-//     * Flatten the collection into one dimension
-//     * @return Iterable
-//     */
-//    public function concatAll();
+    /**
+     * Returns a `ConstVector` where each element is a `Pair` that combines the
+     * element of the current `ConstVector` and the provided `Traversable`.
+     *
+     * If the number of elements of the `Iterable` are not equal to the
+     * number of elements in the `Traversable`, then only the combined elements
+     * up to and including the final element of the one with the least number of
+     * elements is included.
+     *
+     * @param $traversable - The `Traversable` to use to combine with the
+     *                       elements of this `Iterable`.
+     *
+     * @return - The `Iterable` that combines the values of the current
+     *           `Iterable` with the provided `Traversable`.
+     */
+    public function zip($traversable);
+
+    /**
+     * Groups the collection based on a given criteria
+     * @param $callback
+     * @return Iterable
+     */
+    public function groupBy($callback);
+
+    /**
+     * Indexes the collection based on a given criteria
+     * @param $callback
+     * @return Iterable
+     */
+    public function indexBy($callback);
+
+    /**
+     * Verifies if an element exists in the collection for a given criteria
+     * @param callable $fn
+     * @return Iterable
+     */
+    public function exists(callable $fn);
+
+    /**
+     * Flatten the collection into one dimension
+     * @return Iterable
+     */
+    public function concatAll();
 }

@@ -2,11 +2,14 @@
 
 namespace Collections\Iterator;
 
-use Collections\Vector;
 use Collections\Immutable\ImmArrayList;
 use Collections\Immutable\ImmDictionary;
 use Collections\Immutable\ImmSet;
+use Collections\Map;
+use Collections\Pair;
 use Collections\Set;
+use Collections\Vector;
+use Collections\VectorInterface;
 
 trait LazyIterableTrait
 {
@@ -126,12 +129,91 @@ trait LazyIterableTrait
         return $v;
     }
 
+    /**
+     * {@inheritDoc}
+     * @return $this
+     */
     public function each(callable $callable)
     {
-        foreach ($this as $k => $v) {
-            $callable($v, $k);
+        foreach ($this as $v) {
+            $callable($v);
         }
 
         return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function exists(callable $fn)
+    {
+        foreach ($this as $element) {
+            if ($fn($element)) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    public function concatAll()
+    {
+        /** @var VectorInterface $results */
+        $results = new static();
+        $this->each(function ($subArray) use ($results) {
+            foreach ($subArray as $item) {
+                $results->add($item);
+            }
+        });
+
+        return $results;
+    }
+
+    /**
+     * {@inheritDoc}
+     * @return $this
+     */
+    public function groupBy($callback)
+    {
+        $group = new Map();
+        foreach ($this as $value) {
+            $key = $callback($value);
+            if (!$group->containsKey($key)) {
+                $element = $this instanceof VectorInterface ? new static([$value]) : new Vector([$value]);
+                $group->add(new Pair($key, $element));
+            } else {
+                $value = $group->get($key)->add($value);
+                $group->set($key, $value);
+            }
+        }
+
+        return $group;
+    }
+
+    /**
+     * {@inheritDoc}
+     * @return $this
+     */
+    public function indexBy($callback)
+    {
+        $group = new Map();
+        foreach ($this as $value) {
+            $key = $callback($value);
+            $group->set($key, $value);
+        }
+
+        return $group;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function reduce(callable $callback, $initial = null)
+    {
+        foreach ($this as $element) {
+            $initial = $callback($initial, $element);
+        }
+
+        return $initial;
     }
 }

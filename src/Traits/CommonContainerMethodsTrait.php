@@ -2,9 +2,7 @@
 
 namespace Collections\Traits;
 
-use Collections\Vector;
 use Collections\Comparer\NumericKeyComparer;
-use Collections\Map;
 use Collections\Generic\ComparerInterface;
 use Collections\Immutable\ImmArrayList;
 use Collections\Immutable\ImmDictionary;
@@ -20,8 +18,10 @@ use Collections\Iterator\LazySliceIterable;
 use Collections\Iterator\LazyTakeIterable;
 use Collections\Iterator\LazyTakeWhileIterable;
 use Collections\Iterator\LazyZipIterable;
+use Collections\Map;
 use Collections\Pair;
 use Collections\Set;
+use Collections\Vector;
 use Collections\VectorInterface;
 
 trait CommonContainerMethodsTrait
@@ -245,14 +245,14 @@ trait CommonContainerMethodsTrait
      * {@inheritDoc}
      * @return $this
      */
-    public function zip(Iterable $iterable)
+    public function zip($traversable)
     {
-        if (is_array($iterable)) {
-            $iterable = new ImmArrayList($iterable);
+        if (is_array($traversable)) {
+            $traversable = new ImmArrayList($traversable);
         }
 
-        if ($iterable instanceof \Traversable) {
-            return new static(new LazyZipIterable($this, $iterable));
+        if ($traversable instanceof \Traversable) {
+            return new static(new LazyZipIterable($this, $traversable));
         } else {
             throw new \InvalidArgumentException('Parameter must be an array or an instance of Traversable');
         }
