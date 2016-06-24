@@ -6,8 +6,6 @@
 [![Latest Stable Version](http://img.shields.io/packagist/v/easyframework/collections.svg?style=flat-square)](https://packagist.org/packages/easyframework/collections)
 [![Downloads](https://img.shields.io/packagist/dt/easyframework/collections.svg?style=flat-square)](https://packagist.org/packages/easyframework/collections)
 
-[![SensioLabsInsight](https://insight.sensiolabs.com/projects/1f67b9bd-f120-43d5-9f02-f73aa6132d86/small.png)](https://insight.sensiolabs.com/projects/1f67b9bd-f120-43d5-9f02-f73aa6132d86)
-
 Collections Abstraction library for PHP
 
 The Collection library is one of the most useful things that many modern languages has, but for some reason PHP doesn't has a built in collection layer.
