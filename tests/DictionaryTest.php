@@ -3,9 +3,9 @@
 namespace Tests\Collections;
 
 use ArrayObject;
-use Collections\Vector;
 use Collections\Map;
 use Collections\Pair;
+use Collections\Vector;
 use OutOfBoundsException;
 
 class DictionaryTest extends CollectionsTestCase

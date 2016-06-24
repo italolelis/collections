@@ -3,8 +3,9 @@
 namespace Tests\Collections;
 
 use ArrayObject;
-use Collections\Vector;
 use Collections\Comparer\StringComparer;
+use Collections\Map;
+use Collections\Vector;
 
 class ArrayListTest extends CollectionsTestCase
 {
@@ -275,7 +276,7 @@ class ArrayListTest extends CollectionsTestCase
         $this->coll->addAll(array(1, 2, 3, 4));
         $map = $this->coll->toMap();
 
-        $this->assertInstanceOf('\Collections\\Dictionary', $map);
+        $this->assertInstanceOf(Map::class, $map);
     }
 
     public function testReduce()
