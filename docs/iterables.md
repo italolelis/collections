@@ -3,7 +3,7 @@
 Throughout the examples we're going to use this dataset
 
 ```php
-use Collection\Dictionary;
+use Collection\Map;
 
 $data = [
   [
@@ -31,7 +31,7 @@ $data = [
       "bookmark" => []
   ]
 ];
-$videos = new Dictionary($data);
+$videos = new Map($data);
 ```
 
 ## Projecting Collections
@@ -41,7 +41,7 @@ Applying a function to a value and creating a new value is called a projection. 
 ### Each
 
 ```php
-$videoAndTitlePairs = new Dictionary();
+$videoAndTitlePairs = new Map();
 
 $videos->each(function ($video) {
     $videoAndTitlePairs->addAll(["id" => $video["id"], "title" => $video["title"]]);
@@ -72,7 +72,7 @@ Like projection, filtering a collection is also a common operation. To filter a 
 Lets filter and map to collect the ids of videos that have a rating of 5.0
 
 ```php
-use Collection\Dictionary;
+use Collection\Map;
 
 $topRatedVideos = $videos->filter(function ($video) {
     return $video["rating"] === 5.0;

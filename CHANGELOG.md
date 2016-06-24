@@ -1,11 +1,27 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
-## Next - unreleased
+## 6.0.0 - unreleased
 
-- Adding new data structures LinkedList and LinkedDictionary. 
+### Add
+- Lazy Iterator API, many new Lazy iterators that speed up the functional approach on the collections
+- `Pair` collection, that helps a `Map` to add a key value pair
 
-## 5.0.0 - unreleased
+## Removed
+- `tryGet()` method, now you need to use `get()`
+
+## 5.0.0 - 2016-04-06
+### Add
+- `Set` class
+
+### Deprecated
+- Deprecated `tryGet()` method, now we can use the `get()`
+
+### Fixed
+- `toKeysArray` bug
+- Immutable API bug
+- `concat()` method bug
+- `removeKey()` bug
 
 ## 4.1.0 - 2015-06-03
 ### Add

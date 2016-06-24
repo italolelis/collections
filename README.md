@@ -17,12 +17,8 @@ Take a look and see what we're talking about!!
 
 ## Install
 
-``` json
-{
-    "require": {
-        "easyframework/collections": "~5.0"
-    }
-}
+```bash
+composer require easyframework/collections
 ```
 
 ## Usage
@@ -44,7 +40,7 @@ The Collection represents the List in .NET language or simply non-associative ar
   $person3->name = 'Anderson';
   $person3->age = 15;
      
-  $collection = new Collections\ArrayList();
+  $collection = new Collections\Vector();
   $collection->add($person1);
   $collection->add($person2);
   $collection->add($person3);

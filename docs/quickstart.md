@@ -4,12 +4,12 @@ This page provides a quick introduction to Collections and introductory examples
 
 If you have not already installed, Collections, head over to the `installation` page.
 
-## ArrayList
+## Vector
 
-The ArrayList represents the List in `.NET` language or non-associative arrays in php:
+The Vector represents the List in `.NET` language or non-associative arrays in php:
 
 ```php
-use Collections\ArrayList;
+use Collections\Vector;
 
 $person1 = new \stdClass();
 $person1->name = 'John';
@@ -23,7 +23,7 @@ $person3 = new \stdClass();
 $person3->name = 'Anderson';
 $person3->age = 15;
 
-$collection = new Collections\ArrayList();
+$collection = new Collections\Vector();
 $collection->add($person1);
 $collection->add($person2);
 $collection->add($person3);
@@ -45,7 +45,7 @@ Great, now we know how to run through a collection and how to count it, but thes
 so lets sort them:
 
 ```php
-use Collections\ArrayList;
+use Collections\Vector;
 use Collections\Comparer\StringComparer;
 
 $collection->sort(); //by default the sort is by the keys
@@ -59,16 +59,16 @@ Yeah that is great, isn't it? But we can do much more things, now lets search fo
 print_r($collection->contains("John")); //returns true
 ```
 
-Ok, now that we've learned the basic concepts about collections, I'll show you other type of collection called Dictionary.
+Ok, now that we've learned the basic concepts about collections, I'll show you other type of collection called Map.
 
-## Dictionary
+## Map
 
-The Dictionary class is something like associative arrays in PHP, or Hash tables in other languages.
+The Map class is something like associative arrays in PHP, or Hash tables in other languages.
 
 ```php
-use Collections\Dictionary;
+use Collections\Map;
 
-$dictionary = new Dictionary();
+$dictionary = new Map();
 $dictionary->add('person1', array(
   'name' => 'John',
   'age' => 20
@@ -90,9 +90,9 @@ $dictionary->each(function($item){
 We can use object as keys too.
 
 ```php
-use Collections\Dictionary;
+use Collections\Map;
 
-$dictionary = new Dictionary();
+$dictionary = new Map();
 
 $object = new \stdClass();
 $dictionary->add($object, 'value');
@@ -110,9 +110,9 @@ When one key is added we can't insert the same key again, if we want to change i
 To our last example we'll use objects in our collection.
 
 ```php
-use Collections\ArrayList;
+use Collections\Vector;
 
-$collection = new ArrayList();
+$collection = new Vector();
 $collection->add(new Person('John', 20));
 $collection->add(new Person('Peter', 20));
 $collection->add(new Person('Sophie', 21));

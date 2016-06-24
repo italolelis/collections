@@ -47,7 +47,7 @@ $data = [
     ]
   ]
 ];
-$movieLists = new Dictionary($data);
+$movieLists = new Map($data);
 
 $flattenVideos = $movieLists->map(function($movieList) { 
     return $movieList["videos"]->map(function($video) {
