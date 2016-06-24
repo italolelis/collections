@@ -2,16 +2,16 @@
 
 namespace Collections\Exception;
 
-class UnsuportedException extends Exception
+class InvalidOperationException extends Exception
 {
     public static function unsupportedGet($class)
     {
-        return new static(sprintf('Cannot get an element of a %', $class));
+        return new static(sprintf('Cannot access a property on a collection %', $class));
     }
 
     public static function unsupportedSet($class)
     {
-        return new static(sprintf('Cannot set an element of a %', $class));
+        return new static(sprintf('Cannot access a property on a collection %', $class));
     }
 
     public static function unsupportedSetKey($class)
@@ -21,6 +21,6 @@ class UnsuportedException extends Exception
 
     public static function unsupportedUnset($class)
     {
-        return new static(sprintf('Cannot unset an element of a %', $class));
+        return new static(sprintf('Cannot access a property on a collection %', $class));
     }
 }

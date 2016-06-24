@@ -114,14 +114,14 @@ class IterableTest extends CollectionsTestCase
             ->add(4);
 
         $coll2 = new ArrayList([3]);
-        $this->coll->concat($coll2);
+        $concatenated = $this->coll->concat($coll2);
 
         $this->assertEquals([
             1,
             2,
             4,
             3
-        ], $this->coll->toArray());
+        ], $concatenated->toArray());
 
         $coll3 = new Dictionary([
             'key1' => 'value1',
@@ -137,15 +137,18 @@ class IterableTest extends CollectionsTestCase
                 'key32' => 'value32'
             ]
         ]);
-        $coll3->concat($coll4);
+        $concatenated = $coll3->concat($coll4);
 
         $this->assertEquals([
             'key1' => 'value1',
-            'key2' => 'value2',
+            'key2' => [
+                'wrongValue',
+                'value2'
+            ],
             'key3' => [
                 'key31' => 'value31',
                 'key32' => 'value32'
             ]
-        ], $coll3->toArray());
+        ], $concatenated->toArray());
     }
 }

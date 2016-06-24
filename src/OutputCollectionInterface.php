@@ -10,4 +10,6 @@ interface OutputCollectionInterface
      * @return OutputCollectionInterface
      */
     public function addAll($items);
+
+    public function add($item);
 }

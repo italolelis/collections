@@ -22,5 +22,4 @@ abstract class CollectionsTestCase extends PHPUnit_Framework_TestCase
     {
         date_default_timezone_set('America/Recife');
     }
-
 }

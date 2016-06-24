@@ -12,46 +12,5 @@ use Easy\Generics\EquatableInterface;
  */
 abstract class AbstractCollection implements EquatableInterface
 {
-    /**
-     * @var ComparerInterface
-     */
-    private $defaultComparer;
-
-    /**
-     * Gets the default comparer for this collection
-     * @return ComparerInterface
-     */
-    public function getDefaultComparer()
-    {
-        if ($this->defaultComparer === null) {
-            $this->defaultComparer = new NumericKeyComparer();
-        }
-
-        return $this->defaultComparer;
-    }
-
-    /**
-     * Sets the default comparer for this collection
-     * @param ComparerInterface $defaultComparer
-     * @return CollectionInterface
-     */
-    public function setDefaultComparer(ComparerInterface $defaultComparer)
-    {
-        $this->defaultComparer = $defaultComparer;
-
-        return $this;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function __toString()
-    {
-        return get_class($this);
-    }
-
-    public function equals($obj)
-    {
-        return ($obj === $this);
-    }
+    
 }

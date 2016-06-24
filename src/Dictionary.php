@@ -3,181 +3,45 @@
 // Copyright (c) italolelis. All rights reserved. See License.txt in the project root for license information.
 namespace Collections;
 
-use Collections\Exception\KeyException;
 use Collections\Iterator\MapIterator;
-use Collections\Traits\GuardTrait;
-use Collections\Traits\StrictKeyedIterableTrait;
+use Collections\Traits\MapLikeTrait;
 
 /**
- * Represents a collection of keys and values.
+ * Map is an ordered dictionary-style collection.
+ *
+ * Like all objects in PHP, Maps have reference-like semantics. When a caller
+ * passes a Map to a callee, the callee can modify the Map and the caller will
+ * see the changes. Maps do not have "copy-on-write" semantics.
+ *
+ * Maps preserve insertion order of key/value pairs. When iterating over a Map,
+ * the key/value pairs appear in the order they were inserted. Also, Maps do
+ * not automagically convert integer-like string keys (ex. "123") into integer
+ * keys.
+ *
+ * Maps only support integer keys and string keys. If a key of a different
+ * type is used, an exception will be thrown.
+ *
+ * Maps support "$m[$k]" style syntax for getting and setting values by key.
+ * Maps also support "isset($m[$k])" and "empty($m[$k])" syntax, and they
+ * provide similar semantics as arrays. Adding an element using "$m[] = .."
+ * syntax is not supported.
+ *
+ * Maps do not support iterating while new keys are being added or elements
+ * are being removed. When a new key is added or an element is removed, all
+ * iterators that point to the Map shall be considered invalid.
+ *
+ * Maps do not support taking elements by reference. If binding assignment (=&)
+ * is used with an element of a Map, or if an element of a Map is passed by
+ * reference, of if a Map is used with foreach by reference, an exception will
+ * be thrown.
  */
-class Dictionary extends AbstractConstCollectionArray implements MapInterface, \ArrayAccess
+class Dictionary implements MapInterface, \ArrayAccess
 {
-    use GuardTrait,
-        StrictKeyedIterableTrait;
+    use MapLikeTrait, SortTrait;
 
-    public function at($k)
+    public function __construct($array = null)
     {
-        return $this[$k];
-    }
-
-    public function set($key, $value)
-    {
-        $this->container[$key] = $value;
-
-        return $this;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function get($index)
-    {
-        if ($this->containsKey($index) === false) {
-            throw new \OutOfBoundsException('No element at position ' . $index);
-        }
-
-        return $this->container[$index];
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function tryGet($index, $default = null)
-    {
-        if ($this->containsKey($index) === false) {
-            return $default;
-        }
-
-        return $this->get($index);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function add($key, $value)
-    {
-        if ($this->containsKey($key)) {
-            throw new KeyException('The key ' . $key . ' already exists!');
-        }
-
-        $this->set($key, $value);
-
-        return $this;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function addAll($items)
-    {
-        $this->validateTraversable($items);
-
-        foreach ($items as $key => $value) {
-            if (is_array($value)) {
-                $value = new static($value);
-            }
-            $this->add($key, $value);
-        }
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setAll($items)
-    {
-        $this->validateTraversable($items);
-
-        foreach ($items as $key => $item) {
-            if (is_array($item)) {
-                $item = new static($item);
-            }
-            $this->set($key, $item);
-        }
-
-        return $this;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function containsKey($key)
-    {
-        return $this->getIterator()->offsetExists($key);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function contains($element)
-    {
-        return in_array($element, $this->container, true);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function remove($element)
-    {
-        $key = array_search($element, $this->container);
-
-        if (false === $key) {
-            throw new \OutOfBoundsException('No element found in the collection ');
-        }
-
-        $this->removeKey($key);
-
-        return $this;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function removeKey($key)
-    {
-        if ($this->containsKey($key) === false) {
-            throw new \OutOfBoundsException('No element at position ' . $key);
-        }
-
-        unset($this->container[$key]);
-
-        return $this;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function offsetExists($offset)
-    {
-        return $this->containsKey($offset);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function offsetGet($offset)
-    {
-        return $this->get($offset);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function offsetSet($offset, $value)
-    {
-        if (is_null($offset)) {
-            $this->add($offset, $value);
-        } else {
-            $this->set($offset, $value);
-        }
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function offsetUnset($offset)
-    {
-        $this->removeKey($offset);
+        $this->init($array);
     }
 
     /**
@@ -187,18 +51,5 @@ class Dictionary extends AbstractConstCollectionArray implements MapInterface, \
     public function getIterator()
     {
         return new MapIterator($this->container);
-    }
-
-    /**
-     * {@inheritDoc}
-     * @return $this
-     */
-    public function concat($iterable)
-    {
-        $this->validateTraversable($iterable);
-
-        $this->setAll($this->concatRecurse($this, $iterable));
-
-        return $this;
     }
 }

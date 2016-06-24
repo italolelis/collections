@@ -2,7 +2,9 @@
 
 namespace Collections\Iterator;
 
-class MapIterator extends \ArrayIterator
+use Collections\KeyedIterator;
+
+class MapIterator extends \ArrayIterator implements KeyedIterator
 {
 
 }

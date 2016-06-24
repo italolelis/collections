@@ -8,30 +8,26 @@ namespace Collections;
  */
 interface ConstIndexAccessInterface
 {
-    public function at($k);
-
     /**
-     * Gets or sets the element with the specified key.
-     * @param mixed $key The key of the element to get or set.
+     * Returns the value at the specified key in the current collection.
+     * @param string|int $key the key from which to retrieve the value.
+     * @return mixed The value at the specified key; or an exception if the key does not exist.
      */
-    public function get($key);
+    public function at($key);
 
     /**
      * Checks whether the collection contains an element with the specified key/index.
+     * If the key is not present, null is returned. If you would rather have an exception thrown
+     * when a key is not present, then use `at()`.
      *
-     * @param string|integer $key The key/index to check for.
-     * @return bool TRUE if the collection contains an element with the specified key/index,
-     *                 FALSE otherwise.
+     * @param string|int $key The key/index to check for.
+     * @return bool - true if the specified key is present in the current collection; false otherwise.
      */
     public function containsKey($key);
 
     /**
-     * Gets the value associated with the specified key.
-     * @param mixed $index The key of the value to get.
-     * @param string|null $default The default value which is returned if the key doesn't exists.
-     * @return mixed When this method returns, contains the value associated with the
-     * specified key, if the key is found; otherwise, the default value for the
-     * type of the value parameter. This parameter is passed uninitialized.
+     * Returns the value at the specified key in the current collection.
+     * @param mixed $key The key of the element to get or set.
      */
-    public function tryGet($index, $default = null);
+    public function get($key);
 }

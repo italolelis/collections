@@ -12,7 +12,7 @@ interface CollectionInterface extends
     OutputCollectionInterface
 {
     /**
-     * Clear all of the elements in the collection
+     * Removes all items from the collection.
      * @return void
      */
     public function clear();

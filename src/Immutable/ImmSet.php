@@ -2,55 +2,17 @@
 
 namespace Collections\Immutable;
 
-use Collections\AbstractConstCollectionArray;
 use Collections\ConstSetInterface;
 use Collections\Iterator\SetIterator;
-use Collections\Traits\GuardTrait;
-use Collections\Traits\StrictKeyedIterableTrait;
+use Collections\Traits\ImmSetLikeTrait;
 
-class ImmSet extends AbstractConstCollectionArray implements ConstSetInterface
+class ImmSet implements ConstSetInterface
 {
-    use StrictKeyedIterableTrait,
-        GuardTrait;
+    use ImmSetLikeTrait;
 
-    public function at($key)
+    public function __construct($array = null)
     {
-        $this->validateKeyType($key);
-        $this->validateKeyBounds($key);
-
-        return $this->container[$key];
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function get($index)
-    {
-        $this->validateKeyType($index);
-
-        if ($this->containsKey($index) === false) {
-            throw new \OutOfBoundsException('No element at position ' . $index);
-        }
-
-        return $this->container[$index];
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function containsKey($key)
-    {
-        $this->validateKeyType($key);
-
-        return $key >= 0 && $key < $this->count();
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function contains($element)
-    {
-        return in_array($element, $this->container, true);
+        $this->init($array);
     }
 
     /**

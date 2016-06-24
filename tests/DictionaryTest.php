@@ -3,15 +3,11 @@
 namespace Tests\Collections;
 
 use ArrayObject;
+use Collections\ArrayList;
 use Collections\Dictionary;
-use InvalidArgumentException;
+use Collections\Pair;
 use OutOfBoundsException;
 
-/**
- * Description of CollectionTest
- *
- * @author italo
- */
 class DictionaryTest extends CollectionsTestCase
 {
     /**
@@ -26,17 +22,17 @@ class DictionaryTest extends CollectionsTestCase
 
     public function testNewInstanceWithArray()
     {
-        $this->assertNotNull(new Dictionary(array(
+        $this->assertNotNull(new Dictionary([
             'key1' => 'value1',
-            'key2' => array(
+            'key2' => [
                 'key21' => 'value21',
-                'key22' => array(
+                'key22' => [
                     'key221' => 'value221',
-                )
-            ),
+                ]
+            ],
             'key3' => 'value3',
             'key4' => 'value4'
-        )));
+        ]));
     }
 
     public function testNewInstanceWithTraversable()
@@ -67,25 +63,27 @@ class DictionaryTest extends CollectionsTestCase
     public function testAddAllWithSomeValues()
     {
         $arrayList = new Dictionary();
-        $arrayList->add('key1', 'value1')
-            ->add('key2', 'value2');
+        $arrayList
+            ->add(new Pair('key1', 'value1'))
+            ->add(new Pair('key2', 'value2'));
 
         $secoundArrayList = new Dictionary();
-        $secoundArrayList->add('key3', 'value3')
-            ->add('key4', 'value4');
+        $secoundArrayList
+            ->add(new Pair('key3', 'value3'))
+            ->add(new Pair('key4', 'value4'));
 
         $arrayList->addAll($secoundArrayList);
-        $this->assertEquals(array(
+        $this->assertEquals([
             'key1' => 'value1',
             'key2' => 'value2',
             'key3' => 'value3',
             'key4' => 'value4'
-        ), $arrayList->toArray());
+        ], $arrayList->toArray());
     }
 
     public function testAddItem()
     {
-        $this->coll->add('key', 'testing');
+        $this->coll->add(new Pair('key', 'testing'));
         $this->assertTrue(is_string((string)$this->coll));
     }
 
@@ -94,8 +92,8 @@ class DictionaryTest extends CollectionsTestCase
      */
     public function testAddDuplicateKey()
     {
-        $this->coll->add('key', 'testing');
-        $this->coll->add('key', 'testing2');
+        $this->coll->add(new Pair('key', 'testing'));
+        $this->coll->add(new Pair('key', 'testing2'));
     }
 
     public function testSetItem()
@@ -116,38 +114,38 @@ class DictionaryTest extends CollectionsTestCase
     public function testGetInvalidItem()
     {
         $this->coll->set('keyOne', 'testing');
-        $this->coll->get('keyTwo');
+        $this->coll->at('keyTwo');
     }
 
     public function testGetKeys()
     {
-        $this->coll->add('keyOne', 'testing1');
-        $this->coll->add('keyTwo', 'testing2');
-        $this->coll->add('keyThree', 'testing3');
+        $this->coll->set('keyOne', 'testing1');
+        $this->coll->set('keyTwo', 'testing2');
+        $this->coll->set('keyThree', 'testing3');
 
         $this->assertEquals(array('keyOne', 'keyTwo', 'keyThree'), $this->coll->toKeysArray());
     }
 
     public function testTryGetSuccess()
     {
-        $this->coll->add('key', 'testing');
-        $value = $this->coll->tryGet('key');
+        $this->coll->set('key', 'testing');
+        $value = $this->coll->get('key');
         $this->assertEquals('testing', $value);
     }
 
     public function testTryGetError()
     {
-        $this->coll->add('key', 'testing');
-        $value = $this->coll->tryGet('key2');
+        $this->coll->add(new Pair('key', 'testing'));
+        $value = $this->coll->get('key2');
         $this->assertNull($value);
     }
 
-    public function testTryGetDefaultValue()
-    {
-        $this->coll->add('key', 'testing');
-        $value = $this->coll->tryGet('key2', 'testingValue');
-        $this->assertEquals('testingValue', $value);
-    }
+//    public function testTryGetDefaultValue()
+//    {
+//        $this->coll->set('key', 'testing');
+//        $value = $this->coll->get('key2', 'testingValue');
+//        $this->assertEquals('testingValue', $value);
+//    }
 
     /**
      * @expectedException \OutOfBoundsException
@@ -173,7 +171,6 @@ class DictionaryTest extends CollectionsTestCase
         $this->coll->remove('testing_does_not_exist');
     }
 
-
     public function testArrayAccess()
     {
         $this->coll['keyOne'] = 'one';
@@ -190,29 +187,40 @@ class DictionaryTest extends CollectionsTestCase
 
     public function testToList()
     {
-        $this->coll->addAll([1, 2, 3, 4]);
+        $this->coll->addAll([
+            new Pair("key1", 1),
+            new Pair("key2", 2),
+            new Pair("key3", 3),
+            new Pair("key4", 4)
+        ]);
         $map = $this->coll->toVector();
 
-        $this->assertInstanceOf('\Collections\\ArrayList', $map);
+        $this->assertInstanceOf(ArrayList::class, $map);
     }
 
     public function testToArray()
     {
         $data = [
-            'key1' => 'value1',
-            'key2' => 'value2',
-            'key3' => [
+            new Pair("key1", 'value1'),
+            new Pair("key2", 'value2'),
+            new Pair("key3", [
                 'key3.1' => 'value3.1'
-            ]
+            ])
         ];
         $this->coll->addAll($data);
-        $this->assertEquals($data, $this->coll->toArray());
+        $this->assertEquals([
+            "key1" => 'value1',
+            "key2" => 'value2',
+            "key3" => [
+                'key3.1' => 'value3.1'
+            ]
+        ], $this->coll->toArray());
     }
 
     public function testToValuesArray()
     {
         $dictionary = new Dictionary();
-        $dictionary->add('key1', 'value1')->add('key2', 'value2');
+        $dictionary->set('key1', 'value1')->set('key2', 'value2');
         $expected = ['value1', 'value2'];
         $this->assertEquals($expected, $dictionary->toValuesArray());
     }

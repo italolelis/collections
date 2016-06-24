@@ -2,7 +2,9 @@
 
 namespace Collections\Iterator;
 
-class SetIterator extends \ArrayIterator
+use Collections\KeyedIterator;
+
+class SetIterator extends \ArrayIterator implements KeyedIterator
 {
 
 }

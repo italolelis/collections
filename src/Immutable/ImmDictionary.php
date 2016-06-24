@@ -2,46 +2,17 @@
 
 namespace Collections\Immutable;
 
-use Collections\AbstractConstCollectionArray;
 use Collections\ConstMapInterface;
 use Collections\Iterator\MapIterator;
-use Collections\Traits\StrictKeyedIterableTrait;
+use Collections\Traits\ImmMapLikeTrait;
 
-class ImmDictionary extends AbstractConstCollectionArray implements ConstMapInterface
+class ImmDictionary implements ConstMapInterface
 {
-    use StrictKeyedIterableTrait;
+    use ImmMapLikeTrait;
 
-    public function at($k)
+    public function __construct($array = null)
     {
-        return $this[$k];
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function get($index)
-    {
-        if ($this->containsKey($index) === false) {
-            throw new \OutOfBoundsException('No element at position ' . $index);
-        }
-
-        return $this->container[$index];
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function containsKey($key)
-    {
-        return array_key_exists($key, $this->container);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function contains($element)
-    {
-        return in_array($element, $this->container, true);
+        $this->init($array);
     }
 
     /**
@@ -52,5 +23,4 @@ class ImmDictionary extends AbstractConstCollectionArray implements ConstMapInte
     {
         return new MapIterator($this->container);
     }
-
 }

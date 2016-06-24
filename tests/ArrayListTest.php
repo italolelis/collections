@@ -5,7 +5,6 @@ namespace Tests\Collections;
 use ArrayObject;
 use Collections\ArrayList;
 use Collections\Comparer\StringComparer;
-use InvalidArgumentException;
 
 class ArrayListTest extends CollectionsTestCase
 {
@@ -68,18 +67,20 @@ class ArrayListTest extends CollectionsTestCase
             ->add(2);
 
         $secoundArrayList = new ArrayList();
-        $secoundArrayList->add(3)
-            ->add(new ArrayList(array(31)));
+        $secoundArrayList
+            ->add(3)
+            ->add(new ArrayList([31]));
 
         $arrayList->addAll($secoundArrayList);
-        $this->assertEquals(array(
+
+        $this->assertEquals([
             0 => 1,
             1 => 2,
             2 => 3,
-            3 => array(
+            3 => [
                 0 => 31
-            )
-        ), $arrayList->toArray());
+            ]
+        ], $arrayList->toArray());
     }
 
     public function testToString()

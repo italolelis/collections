@@ -2,23 +2,12 @@
 
 namespace Collections\Traits;
 
-use Collections\ArrayList;
 use Collections\Iterable;
 use Collections\MapInterface;
 
 trait StrictKeyedIterableTrait
 {
     use CommonMutableContainerTrait;
-
-    public function keys()
-    {
-        $res = new ArrayList();
-        foreach ($this as $k => $_) {
-            $res[] = $k;
-        }
-
-        return $res;
-    }
 
     public function map(callable $callback)
     {

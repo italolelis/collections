@@ -4,6 +4,7 @@ namespace Collections\Traits;
 
 use Collections\Exception\EmptyException;
 use Collections\Exception\InvalidArgumentException;
+use Collections\Exception\KeyException;
 use Collections\Exception\TypeException;
 
 trait GuardTrait
@@ -20,9 +21,7 @@ trait GuardTrait
     protected function emptyGuard($method)
     {
         if ($this->isEmpty()) {
-            throw new EmptyException(
-                "{$method} cannot be called when the structure is empty"
-            );
+            throw new EmptyException("{$method} cannot be called when the structure is empty");
         }
     }
 
@@ -34,6 +33,26 @@ trait GuardTrait
     {
         if (!$this->isBoundedKey($key)) {
             throw new \OutOfBoundsException("Integer key $key is out of bounds");
+        }
+    }
+
+    /**
+     * @param $key
+     */
+    protected function validateKeyDoesNotExists($key)
+    {
+        if (!$this->containsKey($key)) {
+            throw new \OutOfBoundsException('No element at position ' . $key);
+        }
+    }
+
+    /**
+     * @param $key
+     */
+    protected function validateKeyExists($key)
+    {
+        if ($this->containsKey($key)) {
+            throw new KeyException('The key ' . $key . ' already exists!');
         }
     }
 

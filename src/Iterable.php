@@ -2,36 +2,46 @@
 
 namespace Collections;
 
+use Collections\Immutable\ImmArrayList;
+
 interface Iterable extends \IteratorAggregate
 {
     /**
-     * @return array
+     * Returns an array converted from the current Iterable.
+     * @return array - an array converted from the current Iterable.
      */
     public function toArray();
 
     /**
-     * @return array
+     * Returns an array with the values from the current Iterable.
+     * The keys in the current Iterable are discarded and replaced with integer indices, starting with 0.
+     * @return array - an array containing the values from the current Iterable.
      */
     public function toValuesArray();
 
     /**
-     * @return VectorInterface
+     * Returns a Vector converted from the current Iterable.
+     * Any keys in the current Iterable are discarded and replaced with integer indices, starting with 0.
+     * @return VectorInterface - a Vector converted from the current Iterable.
      */
     public function toVector();
 
     /**
-     * @return ConstVectorInterface
+     * Returns an immutable vector (`ImmVector`) converted from the current `Iterable`.
+     * Any keys in the current `Iterable` are discarded and replaced with integer indices, starting with 0.
+     * @return ImmArrayList - an `ImmVector` converted from the current `Iterable`.
      */
     public function toImmVector();
 
     /**
-     * @return SetInterface
+     * Returns a `Set` converted from the current `Iterable`.
+     * Any keys in the current `Iterable` are discarded.
+     * @return SetInterface - a `Set` converted from the current `Iterable`.
      */
     public function toSet();
 
     /**
      * Returns an immutable set (`ImmSet`) converted from the current `Iterable`.
-     *
      * Any keys in the current `Iterable` are discarded.
      *
      * @return ConstSetInterface - an `ImmSet` converted from the current `Iterable`.
@@ -40,7 +50,6 @@ interface Iterable extends \IteratorAggregate
 
     /**
      * Returns an `Iterable` containing the current `Iterable`'s values.
-     *
      * Any keys are discarded.
      *
      * @return Iterable - An `Iterable` with the values of the current `Iterable`.
@@ -145,6 +154,18 @@ interface Iterable extends \IteratorAggregate
     public function slice($start, $length);
 
     /**
+     * Returns an `Iterable` that is the concatenation of the values of the current `Iterable`
+     * and the values of the provided `Traversable`.
+     *
+     * The values of the provided `Traversable` is concatenated to the end of the current `Iterable`
+     * to produce the returned `Iterable`.
+     *
+     * @param \Traversable|array $traversable - The `Traversable` to concatenate to the current `Iterable`.
+     * @return Iterable - The concatenated `Iterable`.
+     */
+    public function concat($traversable);
+
+    /**
      * Returns the first value in the current `Iterable`.
      *
      * @return mixed - The first value in the current `Iterable`, or `null` if the
@@ -160,37 +181,30 @@ interface Iterable extends \IteratorAggregate
      */
     public function last();
 
-    /**
-     * Groups the collection based on a given criteria
-     * @param $callback
-     * @return Iterable
-     */
-    public function groupBy($callback);
-
-    /**
-     * Indexes the collection based on a given criteria
-     * @param $callback
-     * @return Iterable
-     */
-    public function indexBy($callback);
-
-    /**
-     * Verifies if an element exists in the collection for a given criteria
-     * @param callable $fn
-     * @return Iterable
-     */
-    public function exists(callable $fn);
-
-    /**
-     * Merge the elements of this iterable into another
-     * @param \Traversable|array $iterable
-     * @return Iterable
-     */
-    public function concat($iterable);
-
-    /**
-     * Flatten the collection into one dimension
-     * @return Iterable
-     */
-    public function concatAll();
+//    /**
+//     * Groups the collection based on a given criteria
+//     * @param $callback
+//     * @return Iterable
+//     */
+//    public function groupBy($callback);
+//
+//    /**
+//     * Indexes the collection based on a given criteria
+//     * @param $callback
+//     * @return Iterable
+//     */
+//    public function indexBy($callback);
+//
+//    /**
+//     * Verifies if an element exists in the collection for a given criteria
+//     * @param callable $fn
+//     * @return Iterable
+//     */
+//    public function exists(callable $fn);
+//
+//    /**
+//     * Flatten the collection into one dimension
+//     * @return Iterable
+//     */
+//    public function concatAll();
 }

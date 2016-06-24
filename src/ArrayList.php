@@ -4,124 +4,47 @@
 namespace Collections;
 
 use Collections\Iterator\VectorIterator;
-use Collections\Traits\GuardTrait;
-use Collections\Traits\StrictIterableTrait;
-use InvalidArgumentException;
+use Collections\Traits\VectorLikeTrait;
 
 /**
- * Represents a strongly typed list of objects that can be accessed by index. Provides methods to search, sort,
- * and manipulate lists.
+ * Vector is a stack-like collection.
+ *
+ * Like all objects in PHP, Vectors have reference-like semantics. When a
+ * caller passes a Vector to a callee, the callee can modify the Vector and the
+ * caller will see the changes. Vectors do not have "copy-on-write" semantics.
+ *
+ * Vectors only support integer keys. If a non-integer key is used, an
+ * exception will be thrown.
+ *
+ * Vectors suoport "$m[$k]" style syntax for getting and setting values by
+ * key. Vectors also support "isset($m[$k])" and "empty($m[$k])" syntax, and
+ * they provide similar semantics as arrays. Elements can be added to a Vector
+ * using "$m[] = .." syntax.
+ *
+ * Vectors do not support iterating while new elements are being added or
+ * elements are being removed. When a new element is added or removed, all
+ * iterators that point to the Vector shall be considered invalid.
+ *
+ * Vectors do not support taking elements by reference. If binding assignment
+ * (=&) is used with an element of a Vector, or if an element of a Vector is
+ * passed by reference, of if a Vector is used with foreach by reference, an
+ * exception will be thrown.
  */
-class ArrayList extends AbstractConstCollectionArray implements VectorInterface, \ArrayAccess
+class ArrayList implements VectorInterface, \ArrayAccess
 {
-    use StrictIterableTrait,
-        GuardTrait;
-
-    public function at($key)
-    {
-        $this->validateKeyType($key);
-        $this->validateKeyBounds($key);
-
-        return $this->container[$key];
-    }
-
-    public function set($key, $value)
-    {
-        $this->validateKeyType($key);
-        $this->container[$key] = $value;
-
-        return $this;
-    }
+    use VectorLikeTrait, SortTrait;
 
     /**
      * {@inheritdoc}
      */
-    public function get($index)
+    public function __construct($array = null)
     {
-        $this->validateKeyType($index);
-
-        return $this->container[$index];
+        $this->init($array);
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function tryGet($index, $default = null)
+    public static function fromItems($items)
     {
-        if ($this->containsKey($index) === false) {
-            return $default;
-        }
-
-        return $this->get($index);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function add($item)
-    {
-        $this->container[] = $item;
-
-        return $this;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function addAll($items)
-    {
-        $this->validateTraversable($items);
-
-        foreach ($items as $item) {
-            if (is_array($item)) {
-                $item = new static($item);
-            }
-            $this->add($item);
-        }
-
-        return $this;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setAll($items)
-    {
-        $this->validateTraversable($items);
-
-        foreach ($items as $key => $item) {
-            if (is_array($item)) {
-                $item = new static($item);
-            }
-            $this->set($key, $item);
-        }
-
-        return $this;
-    }
-
-
-    /**
-     * {@inheritdoc}
-     */
-    public function containsKey($key)
-    {
-        $this->validateKeyType($key);
-
-        return $this->getIterator()->offsetExists($key);
-    }
-
-
-    /**
-     * {@inheritdoc}
-     */
-    public function removeKey($key)
-    {
-        $this->validateKeyType($key);
-        $this->validateKeyBounds($key);
-
-        array_splice($this->container, $key, 1);
-
-        return $this;
+        return new self($items);
     }
 
     /**
@@ -135,100 +58,9 @@ class ArrayList extends AbstractConstCollectionArray implements VectorInterface,
     /**
      * {@inheritdoc}
      */
-    public function insert($index, $item)
-    {
-        if (!is_numeric($index)) {
-            throw new InvalidArgumentException('The index must be numeric');
-        }
-        if ($index < 0 || $index >= $this->count()) {
-            throw new InvalidArgumentException('The index is out of bounds (must be >=0 and <= size of te array)');
-        }
-
-        $current = $this->count() - 1;
-        for (; $current >= $index; $current--) {
-            $this->container[$current + 1] = $this->container[$current];
-        }
-        $this->container[$index] = $item;
-
-        return $this;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function offsetExists($offset)
-    {
-        return $this->containsKey($offset);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function offsetGet($offset)
-    {
-        return $this->get($offset);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function offsetSet($offset, $value)
-    {
-        if (is_null($offset)) {
-            $this->add($value);
-        } else {
-            $this->set($offset, $value);
-        }
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function offsetUnset($offset)
-    {
-        throw new \RuntimeException(
-            'Cannot unset an element of a ' . get_class($this));
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function toMap()
-    {
-        return new Dictionary($this->getIterator());
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     public function reverse()
     {
         return static::fromArray(array_reverse($this->container));
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function splice($offset, $length = null)
-    {
-        return static::fromArray(array_splice($this->container, $offset, $length));
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public static function fromArray(array $arr)
-    {
-        $map = new ArrayList();
-        foreach ($arr as $v) {
-            if (is_array($v)) {
-                $map->add(new ArrayList($v));
-            } else {
-                $map->add($v);
-            }
-        }
-
-        return $map;
     }
 
     /**
@@ -238,18 +70,5 @@ class ArrayList extends AbstractConstCollectionArray implements VectorInterface,
     public function getIterator()
     {
         return new VectorIterator($this->container);
-    }
-
-    /**
-     * {@inheritDoc}
-     * @return $this
-     */
-    public function concat($iterable)
-    {
-        $this->validateTraversable($iterable);
-
-        $this->setAll($this->concatRecurse($this, $iterable));
-
-        return $this;
     }
 }

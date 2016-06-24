@@ -2,8 +2,31 @@
 
 namespace Collections;
 
+/**
+ * Interface KeyedIterable
+ * @package Collections
+ */
 interface KeyedIterable extends KeyedTraversable, Iterable
 {
+    /**
+     * Returns an array with the keys from the current `KeyedIterable`.
+     * @return array - an array containing the values from the current `KeyedIterable`.
+     */
+    public function toKeysArray();
+
+    /**
+     * Returns a `Map` based on the keys and values of the current `KeyedIterable`.
+     * @return MapInterface - a `Map` that has the keys and associated values of the current `KeyedIterable`.
+     */
+    public function toMap();
+
+    /**
+     * Returns an `Iterable` containing the current `KeyedIterable`'s keys.
+     * Any values are discarded.
+     * @return VectorInterface - `Iterable` with the keys of the current `KeyedIterable`.
+     */
+    public function keys();
+
     /**
      * Returns an `KeyedIterable` containing the values after an operation has been
      * applied to each value in the current `KeyedIterable`.
@@ -34,17 +57,6 @@ interface KeyedIterable extends KeyedTraversable, Iterable
      *           condition is applied.
      */
     public function filterWithKey($callback);
-
-    /**
-     * Returns an array whose values are the keys from the ICollection.
-     * @return array
-     */
-    public function toKeysArray();
-
-    /**
-     * @return MapInterface
-     */
-    public function toMap();
 
     /**
      * @return ConstMapInterface
