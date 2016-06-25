@@ -6,7 +6,7 @@ use Collections\ConstVectorInterface;
 use Collections\Iterator\VectorIterator;
 use Collections\Traits\ImmVectorLikeTrait;
 
-class ImmArrayList implements ConstVectorInterface, \ArrayAccess
+class ImmVector implements ConstVectorInterface, \ArrayAccess
 {
     use ImmVectorLikeTrait;
 

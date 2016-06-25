@@ -2,8 +2,8 @@
 
 namespace Collections\Iterator;
 
-use Collections\Immutable\ImmArrayList;
-use Collections\Immutable\ImmDictionary;
+use Collections\Immutable\ImmVector;
+use Collections\Immutable\ImmMap;
 use Collections\Immutable\ImmSet;
 use Collections\Map;
 use Collections\Pair;
@@ -35,7 +35,7 @@ trait LazyIterableTrait
 
     public function toImmVector()
     {
-        return new ImmArrayList($this);
+        return new ImmVector($this);
     }
 
     public function toSet()
@@ -71,7 +71,7 @@ trait LazyIterableTrait
     public function zip($iterable)
     {
         if (is_array($iterable)) {
-            $iterable = new ImmDictionary($iterable);
+            $iterable = new ImmMap($iterable);
         }
 
         return new LazyZipIterable($this, $iterable);
@@ -105,7 +105,7 @@ trait LazyIterableTrait
     public function concat($iterable)
     {
         if (is_array($iterable)) {
-            $iterable = new ImmDictionary($iterable);
+            $iterable = new ImmMap($iterable);
         }
 
         return new LazyConcatIterable($this, $iterable);

@@ -2,7 +2,7 @@
 
 namespace Collections;
 
-use Collections\Immutable\ImmArrayList;
+use Collections\Immutable\ImmVector;
 
 interface Iterable extends \IteratorAggregate
 {
@@ -29,7 +29,7 @@ interface Iterable extends \IteratorAggregate
     /**
      * Returns an immutable vector (`ImmVector`) converted from the current `Iterable`.
      * Any keys in the current `Iterable` are discarded and replaced with integer indices, starting with 0.
-     * @return ImmArrayList - an `ImmVector` converted from the current `Iterable`.
+     * @return ImmVector - an `ImmVector` converted from the current `Iterable`.
      */
     public function toImmVector();
 

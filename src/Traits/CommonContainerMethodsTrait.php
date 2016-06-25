@@ -4,8 +4,8 @@ namespace Collections\Traits;
 
 use Collections\Comparer\NumericKeyComparer;
 use Collections\Generic\ComparerInterface;
-use Collections\Immutable\ImmArrayList;
-use Collections\Immutable\ImmDictionary;
+use Collections\Immutable\ImmVector;
+use Collections\Immutable\ImmMap;
 use Collections\Immutable\ImmSet;
 use Collections\Iterable;
 use Collections\Iterator\LazyFilterIterable;
@@ -170,7 +170,7 @@ trait CommonContainerMethodsTrait
      */
     public function toImmVector()
     {
-        return new ImmArrayList($this);
+        return new ImmVector($this);
     }
 
     /**
@@ -202,7 +202,7 @@ trait CommonContainerMethodsTrait
      */
     public function toImmMap()
     {
-        return new ImmDictionary($this);
+        return new ImmMap($this);
     }
 
     /**
@@ -248,7 +248,7 @@ trait CommonContainerMethodsTrait
     public function zip($traversable)
     {
         if (is_array($traversable)) {
-            $traversable = new ImmArrayList($traversable);
+            $traversable = new ImmVector($traversable);
         }
 
         if ($traversable instanceof \Traversable) {

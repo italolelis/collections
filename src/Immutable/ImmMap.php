@@ -6,7 +6,7 @@ use Collections\ConstMapInterface;
 use Collections\Iterator\MapIterator;
 use Collections\Traits\ImmMapLikeTrait;
 
-class ImmDictionary implements ConstMapInterface
+class ImmMap implements ConstMapInterface
 {
     use ImmMapLikeTrait;
 

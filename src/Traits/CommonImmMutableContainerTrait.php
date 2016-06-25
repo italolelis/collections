@@ -2,7 +2,7 @@
 
 namespace Collections\Traits;
 
-use Collections\Immutable\ImmArrayList;
+use Collections\Immutable\ImmVector;
 use Collections\Iterator\LazyConcatIterator;
 use Collections\Iterator\LazyKeysIterable;
 
@@ -18,7 +18,7 @@ trait CommonImmMutableContainerTrait
 
     public function keys()
     {
-        return new ImmArrayList(new LazyKeysIterable($this));
+        return new ImmVector(new LazyKeysIterable($this));
     }
 
     /**
@@ -27,11 +27,11 @@ trait CommonImmMutableContainerTrait
     public function concat($iterable)
     {
         if (is_array($iterable)) {
-            $iterable = new ImmArrayList($iterable);
+            $iterable = new ImmVector($iterable);
         }
 
         if ($iterable instanceof \Traversable) {
-            return new ImmArrayList(new LazyConcatIterator($this, $iterable));
+            return new ImmVector(new LazyConcatIterator($this, $iterable));
         } else {
             throw new \InvalidArgumentException('Parameter must be an array or an instance of Traversable');
         }
