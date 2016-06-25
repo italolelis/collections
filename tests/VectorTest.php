@@ -25,34 +25,40 @@ class VectorTest extends CollectionsTestCase
 
     public function testNewInstanceWithArray()
     {
-        $this->assertNotNull(new Vector(array(
+        $this->assertNotNull(new Vector([
             1,
-            2 => array(
+            2 => [
                 21,
-                22 => array(
+                22 => [
                     221,
                     222
-                )
-            ),
+                ]
+            ],
             3,
             4
-        )));
+        ]));
     }
 
     public function testNewInstanceWithTraversable()
     {
-        $traversable = new ArrayObject(array(
-            1,
-            2,
-            3,
-            4
-        ));
+        $traversable = new ArrayObject(range(1, 4));
         $this->assertNotNull(new Vector($traversable));
     }
 
     public function testNewInstance()
     {
         $this->assertNotNull($this->coll);
+    }
+
+    /**
+     * @test
+     */
+    public function it_should_create_vector_from_items()
+    {
+        $data = range(1, 10);
+        $vector = Vector::fromItems($data);
+
+        $this->assertNotNull($vector);
     }
 
     public function testAddAllWithSomeValues()
@@ -205,17 +211,6 @@ class VectorTest extends CollectionsTestCase
         $this->assertFalse($exists);
     }
 
-    public function testFilter()
-    {
-        $this->coll->add(1);
-        $this->coll->add("foo");
-        $this->coll->add(3);
-        $res = $this->coll->filter(function ($e) {
-            return is_numeric($e);
-        });
-        $this->assertEquals(array(0 => 1, 1 => 3), $res->toArray());
-    }
-
     public function testArrayAccess()
     {
         $this->coll[0] = 'one';
@@ -277,7 +272,7 @@ class VectorTest extends CollectionsTestCase
 
     public function testToMap()
     {
-        $this->coll->addAll(array(1, 2, 3, 4));
+        $this->coll->addAll(range(1, 4));
         $map = $this->coll->toMap();
 
         $this->assertInstanceOf(Map::class, $map);
@@ -285,7 +280,7 @@ class VectorTest extends CollectionsTestCase
 
     public function testReduce()
     {
-        $this->coll->addAll(array(1, 2, 3, 4));
+        $this->coll->addAll(range(1, 4));
         $result = $this->coll->reduce(function ($carry, $item) {
             return $carry += $item;
         });
@@ -297,5 +292,21 @@ class VectorTest extends CollectionsTestCase
         }, 10);
 
         $this->assertEquals(20, $result);
+    }
+
+    /**
+     * @test
+     */
+    public function it_should_reverse_the_collection()
+    {
+        $coll = new Vector(range(1, 5));
+
+        $this->assertSame([
+            5,
+            4,
+            3,
+            2,
+            1
+        ], $coll->reverse()->toArray());
     }
 }

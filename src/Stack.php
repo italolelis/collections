@@ -45,7 +45,7 @@ class Stack extends SplStack implements StackInterface, \JsonSerializable
     {
         $array = array();
         foreach ($this as $key => $value) {
-            if ($value instanceof CollectionConvertableInterface) {
+            if ($value instanceof Iterable) {
                 $array[$key] = $value->toArray();
             } else {
                 $array[$key] = $value;
@@ -72,6 +72,6 @@ class Stack extends SplStack implements StackInterface, \JsonSerializable
      */
     public function jsonSerialize()
     {
-//        return $this->getIterator()->toArray();
+        return $this->toArray();
     }
 }

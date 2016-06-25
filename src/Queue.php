@@ -10,7 +10,6 @@ use SplQueue;
  */
 class Queue extends SplQueue implements QueueInterface, \JsonSerializable
 {
-
     /**
      * Adds multiples objects to the end of the Queue.
      * @param CollectionInterface|array $items The objects to add to the Queue. The value can be null.
@@ -46,7 +45,7 @@ class Queue extends SplQueue implements QueueInterface, \JsonSerializable
     {
         $array = array();
         foreach ($this as $key => $value) {
-            if ($value instanceof CollectionConvertableInterface) {
+            if ($value instanceof Iterable) {
                 $array[$key] = $value->toArray();
             } else {
                 $array[$key] = $value;
@@ -73,6 +72,6 @@ class Queue extends SplQueue implements QueueInterface, \JsonSerializable
      */
     public function jsonSerialize()
     {
-//        return $this->getIterator()->toArray();
+        return $this->toArray();
     }
 }
