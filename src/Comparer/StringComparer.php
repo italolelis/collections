@@ -10,7 +10,6 @@ use Collections\Generic\ComparerInterface;
  */
 class StringComparer implements ComparerInterface
 {
-
     /**
      * {@inheritdoc}
      */
