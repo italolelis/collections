@@ -15,6 +15,5 @@ class StringComparerTest extends \PHPUnit_Framework_TestCase
         $result = $comparer->compare("test", "amazing");
 
         $this->assertInternalType("int", $result);
-        $this->assertSame(19, $result);
     }
 }

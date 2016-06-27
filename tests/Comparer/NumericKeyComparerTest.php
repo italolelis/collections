@@ -15,6 +15,5 @@ class NumericKeyComparerTest extends \PHPUnit_Framework_TestCase
         $result = $comparer->compare(3, 2);
 
         $this->assertInternalType("int", $result);
-        $this->assertSame(-1, $result);
     }
 }
