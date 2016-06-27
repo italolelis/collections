@@ -54,20 +54,13 @@ The Collection represents the List in .NET language or simply non-associative ar
 
 ## Contributing
 
-Please see [CONTRIBUTING](https://github.com/LellysInformatica/collections/blob/master/CONTRIBUTING.md) for details.
-
-## Credits
-
-- [italolelis](https://github.com/italolelis)
-- [philipe](https://github.com/philipe)
-- [AyrtonRicardo](https://github.com/AyrtonRicardo)
-- [All Contributors](https://github.com/LellysInformatica/collections/contributors)
+Please see [CONTRIBUTING](https://github.com/italolelis/collections/blob/master/CONTRIBUTING.md) for details.
 
 ## License
 
-The MIT License (MIT). Please see [License File](https://github.com/LellysInformatica/collections/blob/master/LICENSE) for more information.
+The MIT License (MIT). Please see [License File](https://github.com/italolelis/collections/blob/master/LICENSE) for more information.
 
 ### Documentation
 
 More information can be found in the online documentation at
-http://collections.readthedocs.org/.
+https://italolelis.gitbooks.io/collections.
