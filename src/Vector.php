@@ -30,7 +30,7 @@ use Collections\Traits\VectorLikeTrait;
  * passed by reference, of if a Vector is used with foreach by reference, an
  * exception will be thrown.
  */
-class Vector implements VectorInterface, \ArrayAccess
+class Vector implements VectorInterface, \ArrayAccess, \JsonSerializable, \Serializable
 {
     use VectorLikeTrait, SortTrait;
 

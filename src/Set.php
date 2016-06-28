@@ -30,7 +30,7 @@ use Collections\Traits\SetLikeTrait;
  * is used when adding a new element to a Set (ex. "$c[] =& ..."), or if a Set
  * is used with foreach by reference, an exception will be thrown.
  */
-class Set implements SetInterface, \ArrayAccess
+class Set implements SetInterface, \ArrayAccess, \JsonSerializable, \Serializable
 {
     use SetLikeTrait;
 
