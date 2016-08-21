@@ -16,4 +16,26 @@ class NumericKeyComparerTest extends \PHPUnit_Framework_TestCase
 
         $this->assertInternalType("int", $result);
     }
+
+    /**
+     * @test
+     */
+    public function first_is_less_than_second()
+    {
+        $comparer = new NumericKeyComparer();
+        $result = $comparer->compare(2,3);
+
+        $this->assertSame($result,1);
+    }
+
+    /**
+     * @test
+     */
+    public function first_equals_section()
+    {
+        $comparer = new NumericKeyComparer();
+        $result = $comparer->compare(2,2);
+
+        $this->assertSame($result,0);
+    }
 }
