@@ -31,7 +31,7 @@ class NumericKeyComparerTest extends \PHPUnit_Framework_TestCase
     /**
      * @test
      */
-    public function first_equals_section()
+    public function first_equals_second()
     {
         $comparer = new NumericKeyComparer();
         $result = $comparer->compare(2,2);
