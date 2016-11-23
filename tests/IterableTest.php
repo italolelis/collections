@@ -148,4 +148,45 @@ class IterableTest extends CollectionsTestCase
             ]
         ], $coll3->toArray());
     }
+
+    /**
+     * @dataProvider diffProvider
+     */
+    public function testDiff($one, $two, $callback, $expected)
+    {
+        $actual = $one->diff($two, $callback);
+
+        $this->assertEquals(array_values($expected), array_values($actual->toArray()));
+    }
+
+    public function diffProvider()
+    {
+        return [
+            // Simple === diff
+            [
+                new ArrayList([ 'grün', 'rot', 'blau', 'rot' ]),
+                new ArrayList([ 'grün', 'gelb', 'rot' ]),
+                null,
+                [ 2 => 'blau' ],
+            ],
+
+            // diff with callback
+            [
+                new ArrayList([ 'grün', 'rot', 'blau', 'rot' ]),
+                new ArrayList([ 'gruen', 'gelb', 'rot' ]),
+                function ($one, $two) {
+                    return str_replace('ü', 'ue', $one) <=> $two;
+                },
+                [ 2 => 'blau' ]
+            ],
+
+            // equatable diff
+            [
+                new ArrayList([ new EquatableClass('bob'), new EquatableClass('bill') ]),
+                new ArrayList([ new EquatableClass('bob') ]),
+                null,
+                [ new EquatableClass('bill') ]
+            ]
+        ];
+    }
 }

@@ -2,10 +2,11 @@
 
 namespace Collections\Traits;
 
+use Collections\Iterable;
 use Collections\ArrayList;
 use Collections\Dictionary;
-use Collections\Iterable;
 use Collections\VectorInterface;
+use Easy\Generics\EquatableInterface;
 
 trait CommonMutableContainerTrait
 {
@@ -124,5 +125,29 @@ trait CommonMutableContainerTrait
         }
 
         return $initial;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function diff(Iterable $other, callable $callback = null)
+    {
+        if (null === $callback) {
+            if ($this->first() instanceof EquatableInterface) {
+                $this->container = array_udiff($this->container, $other->toArray(), function ($mine, $theirs) {
+                    return $mine->equals($theirs);
+                });
+
+                return $this;
+            }
+
+            $this->container = array_diff($this->container, $other->toArray());
+
+            return $this;
+        }
+
+        $this->container = array_udiff($this->container, $other->toArray(), $callback);
+
+        return $this;
     }
 }
