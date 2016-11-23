@@ -150,4 +150,28 @@ trait CommonMutableContainerTrait
 
         return $this;
     }
+
+    /**
+     * @inheritdoc
+     */
+    public function intersect(Iterable $other, callable $callback = null)
+    {
+        if (null === $callback) {
+            if ($this->first() instanceof EquatableInterface) {
+                $this->container = array_uintersect($this->container, $other->toArray(), function ($mine, $theirs) {
+                    return $mine->equals($theirs);
+                });
+
+                return $this;
+            }
+
+            $this->container = array_intersect($this->container, $other->toArray());
+
+            return $this;
+        }
+
+        $this->container = array_uintersect($this->container, $other->toArray(), $callback);
+
+        return $this;
+    }
 }

@@ -152,7 +152,7 @@ class IterableTest extends CollectionsTestCase
     /**
      * @dataProvider diffProvider
      */
-    public function testDiff($one, $two, $callback, $expected)
+    public function testDiff(ArrayList $one, ArrayList $two, callable $callback = null, array $expected)
     {
         $actual = $one->diff($two, $callback);
 
@@ -167,7 +167,7 @@ class IterableTest extends CollectionsTestCase
                 new ArrayList([ 'grün', 'rot', 'blau', 'rot' ]),
                 new ArrayList([ 'grün', 'gelb', 'rot' ]),
                 null,
-                [ 2 => 'blau' ],
+                [ 'blau' ],
             ],
 
             // diff with callback
@@ -177,7 +177,7 @@ class IterableTest extends CollectionsTestCase
                 function ($one, $two) {
                     return str_replace('ü', 'ue', $one) <=> $two;
                 },
-                [ 2 => 'blau' ]
+                [ 'blau' ]
             ],
 
             // equatable diff
@@ -186,6 +186,47 @@ class IterableTest extends CollectionsTestCase
                 new ArrayList([ new EquatableClass('bob') ]),
                 null,
                 [ new EquatableClass('bill') ]
+            ]
+        ];
+    }
+
+    /**
+     * @dataProvider intersectProvider
+     */
+    public function testIntersect(ArrayList $one, ArrayList $two, callable $callback = null, array $expected)
+    {
+        $actual = $one->intersect($two, $callback);
+
+        $this->assertEquals(array_values($expected), array_values($actual->toArray()));
+    }
+
+    public function intersectProvider()
+    {
+        return [
+            // Simple === intersect
+            [
+                new ArrayList([ 'grün', 'rot', 'blau', 'rot' ]),
+                new ArrayList([ 'grün', 'gelb', 'rot' ]),
+                null,
+                [ 'grün', 'rot', 'rot' ],
+            ],
+
+            // intersect with callback
+            [
+                new ArrayList([ 'grün', 'rot', 'blau', 'rot' ]),
+                new ArrayList([ 'gruen', 'gelb', 'rot' ]),
+                function ($one, $two) {
+                    return str_replace('ü', 'ue', $one) <=> $two;
+                },
+                [ 'grün', 'rot', 'rot' ]
+            ],
+
+            // equatable intersect
+            [
+                new ArrayList([ new EquatableClass('bob'), new EquatableClass('bill') ]),
+                new ArrayList([ new EquatableClass('bob') ]),
+                null,
+                [ new EquatableClass('bob') ]
             ]
         ];
     }
