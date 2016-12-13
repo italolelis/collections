@@ -45,7 +45,7 @@ class Stack extends SplStack implements StackInterface, \JsonSerializable
     {
         $array = array();
         foreach ($this as $key => $value) {
-            if ($value instanceof Iterable) {
+            if ($value instanceof Enumerable) {
                 $array[$key] = $value->toArray();
             } else {
                 $array[$key] = $value;

@@ -24,14 +24,14 @@ trait CommonImmMutableContainerTrait
     /**
      * {@inheritDoc}
      */
-    public function concat($iterable)
+    public function concat($Enumerable)
     {
-        if (is_array($iterable)) {
-            $iterable = new ImmVector($iterable);
+        if (is_array($Enumerable)) {
+            $Enumerable = new ImmVector($Enumerable);
         }
 
-        if ($iterable instanceof \Traversable) {
-            return new ImmVector(new LazyConcatIterator($this, $iterable));
+        if ($Enumerable instanceof \Traversable) {
+            return new ImmVector(new LazyConcatIterator($this, $Enumerable));
         } else {
             throw new \InvalidArgumentException('Parameter must be an array or an instance of Traversable');
         }

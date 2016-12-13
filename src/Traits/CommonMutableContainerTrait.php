@@ -3,7 +3,7 @@
 namespace Collections\Traits;
 
 use Collections\Vector;
-use Collections\Iterable;
+use Collections\Enumerable;
 use Collections\Iterator\LazyKeysIterable;
 use Collections\MapInterface;
 use Collections\Pair;
@@ -47,13 +47,13 @@ trait CommonMutableContainerTrait
     /**
      * {@inheritDoc}
      */
-    public function concat($iterable)
+    public function concat($Enumerable)
     {
-        if ($iterable instanceof Iterable) {
-            $iterable = $iterable->toArray();
+        if ($Enumerable instanceof Enumerable) {
+            $Enumerable = $Enumerable->toArray();
         }
 
-        return new static(array_merge_recursive($this->toArray(), $iterable));
+        return new static(array_merge_recursive($this->toArray(), $Enumerable));
     }
 
     /**

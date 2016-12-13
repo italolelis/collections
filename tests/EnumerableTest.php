@@ -2,12 +2,12 @@
 
 namespace Tests\Collections;
 
-use Collections\Iterable;
+use Collections\Enumerable;
 use Collections\Map;
 use Collections\Set;
 use Collections\Vector;
 
-class IterableTest extends CollectionsTestCase
+class EnumerableTest extends CollectionsTestCase
 {
     protected function setUpCollection()
     {
@@ -129,7 +129,7 @@ class IterableTest extends CollectionsTestCase
      * @test
      * @dataProvider filterProvider
      */
-    public function it_should_filter_successfully(Iterable $coll, $expected)
+    public function it_should_filter_successfully(Enumerable $coll, $expected)
     {
         $coll = $coll->filter(function ($item) {
             return $item > 1;

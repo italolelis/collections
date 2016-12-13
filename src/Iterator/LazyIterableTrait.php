@@ -68,13 +68,13 @@ trait LazyIterableTrait
         return new LazyFilterIterable($this, $callback);
     }
 
-    public function zip($iterable)
+    public function zip($Enumerable)
     {
-        if (is_array($iterable)) {
-            $iterable = new ImmMap($iterable);
+        if (is_array($Enumerable)) {
+            $Enumerable = new ImmMap($Enumerable);
         }
 
-        return new LazyZipIterable($this, $iterable);
+        return new LazyZipIterable($this, $Enumerable);
     }
 
     public function take($size = 1)
@@ -102,13 +102,13 @@ trait LazyIterableTrait
         return new LazySliceIterable($this, $start, $len);
     }
 
-    public function concat($iterable)
+    public function concat($Enumerable)
     {
-        if (is_array($iterable)) {
-            $iterable = new ImmMap($iterable);
+        if (is_array($Enumerable)) {
+            $Enumerable = new ImmMap($Enumerable);
         }
 
-        return new LazyConcatIterable($this, $iterable);
+        return new LazyConcatIterable($this, $Enumerable);
     }
 
     public function first()

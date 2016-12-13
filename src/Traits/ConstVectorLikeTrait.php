@@ -2,7 +2,7 @@
 
 namespace Collections\Traits;
 
-use Collections\Iterable;
+use Collections\Enumerable;
 
 trait ConstVectorLikeTrait
 {
@@ -93,7 +93,7 @@ trait ConstVectorLikeTrait
     {
         $arr = [];
         foreach ($this as $k => $v) {
-            if ($v instanceof Iterable) {
+            if ($v instanceof Enumerable) {
                 $arr[] = $v->toArray();
             } else {
                 $arr[] = $v;

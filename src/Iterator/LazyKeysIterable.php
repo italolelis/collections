@@ -2,24 +2,24 @@
 
 namespace Collections\Iterator;
 
-use Collections\Iterable;
+use Collections\Enumerable;
 
-class LazyKeysIterable implements Iterable
+class LazyKeysIterable implements Enumerable
 {
     use LazyIterableTrait;
 
     /**
-     * @var Iterable
+     * @var Enumerable
      */
-    private $iterable;
+    private $Enumerable;
 
-    public function __construct($iterable)
+    public function __construct($Enumerable)
     {
-        $this->iterable = $iterable;
+        $this->Enumerable = $Enumerable;
     }
 
     public function getIterator()
     {
-        return new LazyKeysIterator($this->iterable->getIterator());
+        return new LazyKeysIterator($this->Enumerable->getIterator());
     }
 }

@@ -45,7 +45,7 @@ class Queue extends SplQueue implements QueueInterface, \JsonSerializable
     {
         $array = array();
         foreach ($this as $key => $value) {
-            if ($value instanceof Iterable) {
+            if ($value instanceof Enumerable) {
                 $array[$key] = $value->toArray();
             } else {
                 $array[$key] = $value;

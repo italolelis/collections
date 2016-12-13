@@ -11,7 +11,7 @@ class LazySliceKeyedIterable implements KeyedIterable
     /**
      * @var KeyedIterable
      */
-    private $iterable;
+    private $Enumerable;
 
     /**
      * @var int
@@ -23,15 +23,15 @@ class LazySliceKeyedIterable implements KeyedIterable
      */
     private $len;
 
-    public function __construct($iterable, $start, $len)
+    public function __construct($Enumerable, $start, $len)
     {
-        $this->iterable = $iterable;
+        $this->Enumerable = $Enumerable;
         $this->start = $start;
         $this->len = $len;
     }
 
     public function getIterator()
     {
-        return new LazySliceKeyedIterator($this->iterable->getIterator(), $this->start, $this->len);
+        return new LazySliceKeyedIterator($this->Enumerable->getIterator(), $this->start, $this->len);
     }
 }

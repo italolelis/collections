@@ -11,22 +11,22 @@ class LazyFilterWithKeyIterable implements KeyedIterable
     /**
      * @var KeyedIterable
      */
-    private $iterable;
+    private $Enumerable;
 
     /**
      * @var callable
      */
     private $fn;
 
-    public function __construct($iterable, $fn)
+    public function __construct($Enumerable, $fn)
     {
-        $this->iterable = $iterable;
+        $this->Enumerable = $Enumerable;
         $this->fn = $fn;
     }
 
     public function getIterator()
     {
         return
-            new LazyFilterWithKeyIterator($this->iterable->getIterator(), $this->fn);
+            new LazyFilterWithKeyIterator($this->Enumerable->getIterator(), $this->fn);
     }
 }

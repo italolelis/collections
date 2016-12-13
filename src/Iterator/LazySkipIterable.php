@@ -3,31 +3,31 @@
 namespace Collections\Iterator;
 
 
-use Collections\Iterable;
+use Collections\Enumerable;
 
-class LazySkipIterable implements Iterable
+class LazySkipIterable implements Enumerable
 {
     use LazyIterableTrait;
 
     /**
-     * @var Iterable
+     * @var Enumerable
      */
-    private $iterable;
+    private $Enumerable;
 
     /**
      * @var int
      */
     private $n;
 
-    public function __construct($iterable, $n)
+    public function __construct($Enumerable, $n)
     {
-        $this->iterable = $iterable;
+        $this->Enumerable = $Enumerable;
         $this->n = $n;
     }
 
     public function getIterator()
     {
-        return new LazySkipIterator($this->iterable->getIterator(), $this->n);
+        return new LazySkipIterator($this->Enumerable->getIterator(), $this->n);
     }
 }
 

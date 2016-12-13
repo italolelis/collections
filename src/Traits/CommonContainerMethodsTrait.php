@@ -7,7 +7,7 @@ use Collections\Generic\ComparerInterface;
 use Collections\Immutable\ImmVector;
 use Collections\Immutable\ImmMap;
 use Collections\Immutable\ImmSet;
-use Collections\Iterable;
+use Collections\Enumerable;
 use Collections\Iterator\LazyFilterIterable;
 use Collections\Iterator\LazyFilterKeyedIterable;
 use Collections\Iterator\LazyMapIterable;
@@ -103,7 +103,7 @@ trait CommonContainerMethodsTrait
     {
         $arr = [];
         foreach ($this as $value) {
-            if ($value instanceof Iterable) {
+            if ($value instanceof Enumerable) {
                 $arr[] = $value->toArray();
             } else {
                 $arr[] = $value;
@@ -130,7 +130,7 @@ trait CommonContainerMethodsTrait
     {
         $arr = [];
         foreach ($this as $key => $value) {
-            if ($value instanceof Iterable) {
+            if ($value instanceof Enumerable) {
                 $arr[$key] = $value->toArray();
             } else {
                 $arr[$key] = $value;
@@ -348,7 +348,7 @@ trait CommonContainerMethodsTrait
     {
         /** @var VectorInterface $results */
         $results = new static();
-        $this->each(function (Iterable $subArray) use ($results) {
+        $this->each(function (Enumerable $subArray) use ($results) {
             $subArray->each(function ($item) use ($results) {
                 $results->add($item);
             });
