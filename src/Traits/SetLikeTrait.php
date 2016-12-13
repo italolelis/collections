@@ -79,4 +79,17 @@ trait SetLikeTrait
 
         return $this;
     }
+
+    /**
+     * {@inheritDoc}
+     * @return $this
+     */
+    public function each(callable $callable)
+    {
+        foreach ($this as $v) {
+            $callable($v);
+        }
+
+        return $this;
+    }
 }

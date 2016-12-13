@@ -109,4 +109,17 @@ trait VectorLikeTrait
 //            $this->hacklib_expireAllIterators();
 //        }
     }
+
+    /**
+     * {@inheritDoc}
+     * @return $this
+     */
+    public function each(callable $callable)
+    {
+        foreach ($this as $v) {
+            $callable($v);
+        }
+
+        return $this;
+    }
 }
