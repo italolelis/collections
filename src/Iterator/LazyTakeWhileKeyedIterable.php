@@ -2,30 +2,30 @@
 
 namespace Collections\Iterator;
 
-use Collections\Iterable;
+use Collections\Enumerable;
 
-class LazyTakeWhileKeyedIterable implements Iterable
+class LazyTakeWhileKeyedIterable implements Enumerable
 {
     use LazyIterableTrait;
 
     /**
-     * @var Iterable
+     * @var Enumerable
      */
-    private $iterable;
+    private $Enumerable;
 
     /**
      * @var callable
      */
     private $fn;
 
-    public function __construct($iterable, $fn)
+    public function __construct($Enumerable, $fn)
     {
-        $this->iterable = $iterable;
+        $this->Enumerable = $Enumerable;
         $this->fn = $fn;
     }
 
     public function getIterator()
     {
-        return new LazyTakeWhileKeyedIterator($this->iterable->getIterator(), $this->fn);
+        return new LazyTakeWhileKeyedIterator($this->Enumerable->getIterator(), $this->fn);
     }
 }

@@ -11,21 +11,21 @@ class LazyTakeKeyedIterable implements KeyedIterable
     /**
      * @var KeyedIterable
      */
-    private $iterable;
+    private $Enumerable;
 
     /**
      * @var int
      */
     private $n;
 
-    public function __construct($iterable, $n)
+    public function __construct($Enumerable, $n)
     {
-        $this->iterable = $iterable;
+        $this->Enumerable = $Enumerable;
         $this->n = $n;
     }
 
     public function getIterator()
     {
-        return new LazyTakeKeyedIterator($this->iterable->getIterator(), $this->n);
+        return new LazyTakeKeyedIterator($this->Enumerable->getIterator(), $this->n);
     }
 }

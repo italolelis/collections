@@ -142,13 +142,13 @@ trait LazyKeyedIterableTrait
         return new LazySliceKeyedIterable($this, $start, $len);
     }
 
-    public function concat($iterable)
+    public function concat($Enumerable)
     {
-        if (is_array($iterable)) {
-            $iterable = new ImmMap($iterable);
+        if (is_array($Enumerable)) {
+            $Enumerable = new ImmMap($Enumerable);
         }
 
-        return new LazyConcatIterable($this, $iterable);
+        return new LazyConcatIterable($this, $Enumerable);
     }
 
     public function first()

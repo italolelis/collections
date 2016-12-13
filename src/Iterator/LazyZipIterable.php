@@ -2,19 +2,19 @@
 
 namespace Collections\Iterator;
 
-use Collections\Iterable;
+use Collections\Enumerable;
 
-class LazyZipIterable implements Iterable
+class LazyZipIterable implements Enumerable
 {
     use LazyIterableTrait;
 
     /**
-     * @var Iterable
+     * @var Enumerable
      */
     private $iterable1;
 
     /**
-     * @var Iterable
+     * @var Enumerable
      */
     private $iterable2;
 

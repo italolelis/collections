@@ -2,7 +2,7 @@
 
 namespace Collections\Traits;
 
-use Collections\Iterable;
+use Collections\Enumerable;
 
 trait ConstMapLikeTrait
 {
@@ -101,7 +101,7 @@ trait ConstMapLikeTrait
     {
         $arr = [];
         foreach ($this as $key => $value) {
-            if ($value instanceof Iterable) {
+            if ($value instanceof Enumerable) {
                 $arr[$key] = $value->toArray();
             } else {
                 $arr[$key] = $value;

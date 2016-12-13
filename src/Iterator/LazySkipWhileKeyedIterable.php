@@ -2,30 +2,30 @@
 
 namespace Collections\Iterator;
 
-use Collections\Iterable;
+use Collections\Enumerable;
 
-class LazySkipWhileKeyedIterable implements Iterable
+class LazySkipWhileKeyedIterable implements Enumerable
 {
     use LazyIterableTrait;
 
     /**
-     * @var Iterable
+     * @var Enumerable
      */
-    private $iterable;
+    private $Enumerable;
 
     /**
      * @var callable
      */
     private $fn;
 
-    public function __construct($iterable, $fn)
+    public function __construct($Enumerable, $fn)
     {
-        $this->iterable = $iterable;
+        $this->Enumerable = $Enumerable;
         $this->fn = $fn;
     }
 
     public function getIterator()
     {
-        return new LazySkipWhileKeyedIterator($this->iterable->getIterator(), $this->fn);
+        return new LazySkipWhileKeyedIterator($this->Enumerable->getIterator(), $this->fn);
     }
 }

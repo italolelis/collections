@@ -8,7 +8,7 @@
 
 namespace Tests\Collections;
 
-use Collections\Iterable;
+use Collections\Enumerable;
 use Collections\Map;
 use Collections\MapInterface;
 use Collections\Pair;

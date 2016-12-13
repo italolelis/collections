@@ -6,7 +6,7 @@ namespace Collections;
  * Interface KeyedIterable
  * @package Collections
  */
-interface KeyedIterable extends KeyedTraversable, Iterable
+interface KeyedIterable extends KeyedTraversable, Enumerable
 {
     /**
      * Returns an array with the keys from the current `KeyedIterable`.
@@ -21,9 +21,9 @@ interface KeyedIterable extends KeyedTraversable, Iterable
     public function toMap();
 
     /**
-     * Returns an `Iterable` containing the current `KeyedIterable`'s keys.
+     * Returns an `Enumerable` containing the current `KeyedIterable`'s keys.
      * Any values are discarded.
-     * @return VectorInterface - `Iterable` with the keys of the current `KeyedIterable`.
+     * @return VectorInterface - `Enumerable` with the keys of the current `KeyedIterable`.
      */
     public function keys();
 

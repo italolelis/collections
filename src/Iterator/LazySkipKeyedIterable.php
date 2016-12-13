@@ -11,21 +11,21 @@ class LazySkipKeyedIterable implements KeyedIterable
     /**
      * @var KeyedIterable
      */
-    private $iterable;
+    private $Enumerable;
 
     /**
      * @var int
      */
     private $n;
 
-    public function __construct($iterable, $n)
+    public function __construct($Enumerable, $n)
     {
-        $this->iterable = $iterable;
+        $this->Enumerable = $Enumerable;
         $this->n = $n;
     }
 
     public function getIterator()
     {
-        return new LazySkipKeyedIterator($this->iterable->getIterator(), $this->n);
+        return new LazySkipKeyedIterator($this->Enumerable->getIterator(), $this->n);
     }
 }
