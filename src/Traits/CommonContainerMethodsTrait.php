@@ -331,19 +331,6 @@ trait CommonContainerMethodsTrait
     }
 
     /**
-     * {@inheritDoc}
-     * @return $this
-     */
-    public function each(callable $callable)
-    {
-        foreach ($this as $v) {
-            $callable($v);
-        }
-
-        return $this;
-    }
-
-    /**
      * {@inheritdoc}
      */
     public function exists(callable $fn)

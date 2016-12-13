@@ -102,4 +102,17 @@ trait MapLikeTrait
 
         return $this;
     }
+
+    /**
+     * {@inheritDoc}
+     * @return $this
+     */
+    public function each(callable $callable)
+    {
+        foreach ($this as $k => $v) {
+            $callable($v, $k);
+        }
+
+        return $this;
+    }
 }
